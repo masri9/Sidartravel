@@ -38,27 +38,63 @@
     .cta:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(37,211,102,.5)}
     .cta svg{width:22px; height:22px; fill:#fff}
 
-    /* السلايدر بين الترحيب والخدمات */
-    .hero-slider{
-      position:relative; overflow:hidden; border-radius:18px;
-      height:260px; margin:16px 0 10px; box-shadow:var(--shadow); border:1px solid #eee;
-      background:#fff;
+    /* === السلايدر المطوّر === */
+    .hero-pro{
+      position:relative; overflow:hidden; border-radius:18px; margin:18px 0 10px;
+      border:1px solid #eee; box-shadow:var(--shadow); background:#000;
+      height: 52vw; max-height: 460px; min-height: 240px;
+      touch-action: pan-y;
     }
-    @media (min-width:720px){ .hero-slider{height:420px} }
-    .hero-slider .hslide{
-      position:absolute; inset:0; opacity:0; transition:opacity .6s ease; 
-      background-size:cover; background-position:center; 
+    .hero-track{
+      display:flex; width:100%; height:100%; will-change:transform;
     }
-    .hero-slider .hslide.active{opacity:1}
-    .hero-slider .overlay{
-      position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,.35), rgba(0,0,0,.08));
+    .hero-slide{
+      position:relative; flex:0 0 100%; width:100%; height:100%;
+      overflow:hidden;
     }
-    .hero-slider .dots{
-      position:absolute; left:50%; transform:translateX(-50%); bottom:10px; display:flex; gap:6px; z-index:2;
+    .hero-img{
+      position:absolute; inset:0; width:105%; height:105%; object-fit:cover; transform:translateZ(0) scale(1.02);
+      transition:transform .6s ease;
+      filter:contrast(1.05) saturate(1.05);
     }
-    .hero-slider .dot{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.6); cursor:pointer}
-    .hero-slider .dot.active{background:#fff}
+    .hero-slide.active .hero-img{ transform:scale(1.06); }
+    .hero-gradient{
+      position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55));
+      pointer-events:none;
+    }
+    .hero-caption{
+      position:absolute; inset-inline-start:16px; inset-block-end:16px;
+      max-width:min(92%, 560px);
+      background:rgba(255,255,255,.16);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border:1px solid rgba(255,255,255,.3);
+      border-radius:16px; padding:12px 14px; color:#fff;
+    }
+    .hero-caption h3{margin:0 0 4px; font-weight:800; font-size:20px}
+    .hero-caption p{margin:0 0 8px; font-size:14px; opacity:.95}
+    .hero-cta{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; background:linear-gradient(90deg,#2A70DC,#1f5dc2); color:#fff; text-decoration:none; font-weight:800}
+    .hero-cta svg{width:18px;height:18px;fill:#fff}
 
+    .hero-dots{
+      position:absolute; left:50%; transform:translateX(-50%); bottom:10px; display:flex; gap:6px; z-index:3;
+    }
+    .hero-dot{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.6); cursor:pointer}
+    .hero-dot.active{background:#fff}
+
+    .hero-arrow{
+      position:absolute; top:50%; transform:translateY(-50%); z-index:3;
+      width:40px; height:40px; border-radius:50%; border:1px solid rgba(255,255,255,.5);
+      background:rgba(0,0,0,.25); color:#fff; display:flex; align-items:center; justify-content:center;
+      cursor:pointer; transition:opacity .2s ease; backdrop-filter: blur(4px);
+    }
+    .hero-arrow:hover{background:rgba(0,0,0,.38)}
+    .hero-prev{inset-inline-start:10px}
+    .hero-next{inset-inline-end:10px}
+    .hero-arrow svg{width:20px;height:20px;fill:#fff}
+
+    /* أقسام الخدمات والودجت كما هي */
     .section-title{font-size:22px; margin:20px 0 10px}
     .services{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
     @media (min-width:720px){ .services{grid-template-columns:repeat(4,1fr)} }
@@ -104,16 +140,63 @@
       </a>
     </section>
 
-    <!-- سلايدر 3 صور -->
-    <section class="hero-slider" id="heroSlider" aria-label="بانل صور">
-      <div class="hslide active" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1400&auto=format&fit=crop');"></div>
-      <div class="hslide" style="background-image:url('https://images.unsplash.com/photo-1483683804023-6ccdb62f86ef?q=80&w=1400&auto=format&fit=crop');"></div>
-      <div class="hslide" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1400&auto=format&fit=crop');"></div>
-      <div class="overlay" aria-hidden="true"></div>
-      <div class="dots" id="heroDots">
-        <span class="dot active" data-i="0"></span>
-        <span class="dot" data-i="1"></span>
-        <span class="dot" data-i="2"></span>
+    <!-- السلايدر المتطور -->
+    <section class="hero-pro" id="heroPro" aria-label="عروض مميزة">
+      <div class="hero-track" id="heroTrack">
+        <!-- شريحة 1 -->
+        <article class="hero-slide active">
+          <img class="hero-img" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600&auto=format&fit=crop" alt="شاطئ استوائي" loading="eager" fetchpriority="high">
+          <div class="hero-gradient"></div>
+          <div class="hero-caption">
+            <h3>عطلة شتوية دافئة ☀️</h3>
+            <p>باقات مميزة لوجهات البحر — فنادق + طيران بأسعار منافسة.</p>
+            <a href="#widget-flight" class="hero-cta" id="ctaToFlights">
+              <svg viewBox="0 0 24 24"><path d="M2 16l20-7-9 8v5l-3-3-4 2 2-4-6-1z"/></svg>
+              تصفّح الرحلات
+            </a>
+          </div>
+        </article>
+        <!-- شريحة 2 -->
+        <article class="hero-slide">
+          <img class="hero-img" src="https://images.unsplash.com/photo-1483683804023-6ccdb62f86ef?q=80&w=1600&auto=format&fit=crop" alt="مدينة أوروبية" loading="lazy">
+          <div class="hero-gradient"></div>
+          <div class="hero-caption">
+            <h3>هروب حضري إلى أوروبا 🏙️</h3>
+            <p>مدن ساحرة، متاحف، وأسواق — خطط رحلتك خلال دقائق.</p>
+            <a href="#widget-esim" class="hero-cta" id="ctaToEsim">
+              <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3zM7 7h10v10H7z"/></svg>
+              فعّل eSIM الآن
+            </a>
+          </div>
+        </article>
+        <!-- شريحة 3 -->
+        <article class="hero-slide">
+          <img class="hero-img" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop" alt="جبال وطبيعة" loading="lazy">
+          <div class="hero-gradient"></div>
+          <div class="hero-caption">
+            <h3>مغامرات الطبيعة ⛰️</h3>
+            <p>استكشاف، أنشطة، وإقامات فريدة لمحبي المغامرة.</p>
+            <a href="#widget-flight" class="hero-cta" id="ctaToFlights2">
+              <svg viewBox="0 0 24 24"><path d="M2 16l20-7-9 8v5l-3-3-4 2 2-4-6-1z"/></svg>
+              احجز تذكرتك
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <!-- أسهم -->
+      <button class="hero-arrow hero-prev" id="heroPrev" aria-label="السابق">
+        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      </button>
+      <button class="hero-arrow hero-next" id="heroNext" aria-label="التالي">
+        <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </button>
+
+      <!-- نقاط -->
+      <div class="hero-dots" id="heroDots" role="tablist" aria-label="مؤشرات السلايدر">
+        <span class="hero-dot active" data-i="0" role="tab" aria-selected="true"></span>
+        <span class="hero-dot" data-i="1" role="tab" aria-selected="false"></span>
+        <span class="hero-dot" data-i="2" role="tab" aria-selected="false"></span>
       </div>
     </section>
 
@@ -193,26 +276,98 @@
     const waText = encodeURIComponent("مرحبًا، أريد الاستفسار عن باقات السفر ✈️");
     document.getElementById("wa-top").href = `${WA_BASE}${PHONE_NUMBER}?text=${waText}`;
 
-    // سلايدر الصور
+    // ===== سلايدر مطوّر =====
     (function(){
-      const slides = Array.from(document.querySelectorAll('.hero-slider .hslide'));
-      const dots = Array.from(document.querySelectorAll('#heroDots .dot'));
-      let i = 0, timer;
-      function show(n){
+      const track = document.getElementById('heroTrack');
+      const slides = Array.from(track.children);
+      const dots = Array.from(document.getElementById('heroDots').children);
+      const prev = document.getElementById('heroPrev');
+      const next = document.getElementById('heroNext');
+      const box  = document.getElementById('heroPro');
+
+      let i = 0, timer = null, isDown = false, startX = 0, deltaX = 0;
+
+      function go(n, user=false){
         i = (n + slides.length) % slides.length;
-        slides.forEach((s,idx)=>s.classList.toggle('active', idx===i));
-        dots.forEach((d,idx)=>d.classList.toggle('active', idx===i));
+        slides.forEach((s,idx)=> s.classList.toggle('active', idx===i));
+        dots.forEach((d,idx)=>{
+          d.classList.toggle('active', idx===i);
+          d.setAttribute('aria-selected', idx===i);
+        });
+        // Preload الصورة التالية
+        const nextIdx = (i+1) % slides.length;
+        const nextImg = slides[nextIdx].querySelector('img[loading="lazy"]');
+        if(nextImg && nextImg.dataset.preloaded!=="1"){
+          const tmp = new Image(); tmp.src = nextImg.src; nextImg.dataset.preloaded="1";
+        }
       }
-      function next(){ show(i+1); }
-      function start(){ timer = setInterval(next, 3000); }
-      function stop(){ clearInterval(timer); }
-      dots.forEach(d=>d.addEventListener('click', ()=>{ show(+d.dataset.i); stop(); start(); }));
-      document.getElementById('heroSlider').addEventListener('mouseenter', stop);
-      document.getElementById('heroSlider').addEventListener('mouseleave', start);
-      start();
+      function nextSlide(){ go(i+1); }
+      function start(){ stop(); timer = setInterval(nextSlide, 3000); }
+      function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+
+      // أزرار
+      prev.addEventListener('click', ()=>{ go(i-1,true); stop(); start(); });
+      next.addEventListener('click', ()=>{ go(i+1,true); stop(); start(); });
+      dots.forEach(d=> d.addEventListener('click', ()=>{ go(+d.dataset.i,true); stop(); start(); }));
+
+      // إيقاف عند المرور/استئناف
+      box.addEventListener('mouseenter', stop);
+      box.addEventListener('mouseleave', start);
+      document.addEventListener('visibilitychange', ()=> (document.hidden?stop():start()));
+
+      // سحب بالإصبع/الماوس
+      function onDown(x){ isDown=true; startX=x; deltaX=0; stop(); }
+      function onMove(x){
+        if(!isDown) return;
+        deltaX = x - startX;
+        track.style.transform = `translateX(${ -i*100 + (-deltaX/box.clientWidth)*100 }%)`;
+      }
+      function onUp(){
+        if(!isDown) return;
+        isDown=false; track.style.transform='';
+        if(Math.abs(deltaX) > box.clientWidth*0.15){
+          go(i + (deltaX<0?1:-1), true);
+        }
+        start();
+      }
+      box.addEventListener('mousedown', e=>onDown(e.clientX));
+      window.addEventListener('mousemove', e=>onMove(e.clientX));
+      window.addEventListener('mouseup', onUp);
+      box.addEventListener('touchstart', e=>onDown(e.touches[0].clientX), {passive:true});
+      box.addEventListener('touchmove', e=>onMove(e.touches[0].clientX), {passive:true});
+      box.addEventListener('touchend', onUp);
+
+      // بارالاكس خفيف
+      box.addEventListener('mousemove', (e)=>{
+        const rect = box.getBoundingClientRect();
+        const cx = (e.clientX - rect.left)/rect.width - .5;
+        const cy = (e.clientY - rect.top)/rect.height - .5;
+        const img = slides[i].querySelector('.hero-img');
+        img.style.transform = `translate(${cx*-6}px, ${cy*-4}px) scale(1.06)`;
+      });
+      box.addEventListener('mouseleave', ()=>{
+        const img = slides[i].querySelector('.hero-img');
+        img.style.transform = `scale(1.06)`;
+      });
+
+      // CTA يربط للأقسام (ويحمل الودجت الآن إذا لسه)
+      document.getElementById('ctaToFlights').addEventListener('click', (e)=>{
+        e.preventDefault();
+        openWidget('flight');
+      });
+      document.getElementById('ctaToFlights2').addEventListener('click', (e)=>{
+        e.preventDefault();
+        openWidget('flight');
+      });
+      document.getElementById('ctaToEsim').addEventListener('click', (e)=>{
+        e.preventDefault();
+        openWidget('esim');
+      });
+
+      start(); // ابدأ
     })();
 
-    // أدوات مساعدة للودجت
+    // ===== أدوات الودجت (نفس منطقك مع تحسينات بسيطة) =====
     function injectWidget(targetEl, srcUrl){
       const s = document.createElement('script');
       s.src = srcUrl; s.async = true; s.charset = 'utf-8';
@@ -222,7 +377,6 @@
     function showSection(sec){ sec.hidden = false; sec.setAttribute('aria-hidden','false'); sec.scrollIntoView({behavior:"smooth", block:"start"}); }
     function hideAll(){ hideSection(document.getElementById('widget-esim')); hideSection(document.getElementById('widget-flight')); }
 
-    // Lazy Load + واحد فقط يظهر
     let esimLoaded=false, flightLoaded=false;
     const ESIM_SRC   = "https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&powered_by=false&color_button=%232A70DCff&color_focused=%232A70DCFF&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23C4C4C4&border_radius=5&plain=true&no_labels=true&promo_id=8588&campaign_id=541";
     const FLIGHT_SRC = "https://trpwdg.com/content?currency=usd&trs=239791&shmarker=448045.Sidar&locale=en&stops=any&show_hotels=true&powered_by=false&border_radius=3&plain=true&color_button=%233480DAff&color_button_text=%23ffffff&promo_id=3414&campaign_id=111";
@@ -230,16 +384,20 @@
     const secESIM = document.getElementById('widget-esim');
     const secFLT  = document.getElementById('widget-flight');
 
-    document.getElementById("esimCard").addEventListener("click", ()=>{
+    function openWidget(which){
       hideAll();
-      if(!esimLoaded){ injectWidget(document.getElementById('tp-esim'), ESIM_SRC); esimLoaded=true; }
-      showSection(secESIM);
-    });
-    document.getElementById("flightCard").addEventListener("click", ()=>{
-      hideAll();
-      if(!flightLoaded){ injectWidget(document.getElementById('tp-flight'), FLIGHT_SRC); flightLoaded=true; }
-      showSection(secFLT);
-    });
+      if(which==='esim'){
+        if(!esimLoaded){ injectWidget(document.getElementById('tp-esim'), ESIM_SRC); esimLoaded=true; }
+        showSection(secESIM);
+      }else{
+        if(!flightLoaded){ injectWidget(document.getElementById('tp-flight'), FLIGHT_SRC); flightLoaded=true; }
+        showSection(secFLT);
+      }
+    }
+
+    document.getElementById("esimCard").addEventListener("click", ()=> openWidget('esim'));
+    document.getElementById("flightCard").addEventListener("click", ()=> openWidget('flight'));
+
     document.querySelectorAll('.widget-close').forEach(btn=>{
       btn.addEventListener('click', ()=>{
         const which = btn.dataset.close;
