@@ -36,33 +36,7 @@
     .welcome p{margin:0 0 14px; color:var(--ink-soft)}
     .cta{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 20px; border-radius:50px; background:linear-gradient(90deg, var(--whatsapp), #1ebe5b); color:#fff; font-weight:700; font-size:16px; box-shadow:0 10px 24px rgba(37,211,102,.35); text-decoration:none; transition:transform .2s, box-shadow .2s}
     .cta:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(37,211,102,.5)}
-    .cta svg{width:22px; height:22px; fill:#fff;}
-
-    /* بانر عريض بدون كرت */
-    .full-bleed{width:100vw; margin-inline:50%; transform:translateX(-50%);}
-    .hero-wide{
-      position:relative; overflow:hidden; margin:18px 0 10px;
-      height:50vw; max-height:520px; min-height:220px;
-      touch-action: pan-y; background:#000; border:none; box-shadow:none; border-radius:0;
-    }
-    .hero-track{display:flex; width:100%; height:100%; will-change:transform;}
-    .hero-slide{position:relative; flex:0 0 100%; width:100%; height:100%; overflow:hidden;}
-    .hero-img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform:translateZ(0) scale(1.03); transition:transform .6s ease; filter:contrast(1.05) saturate(1.05);}
-    .hero-slide.active .hero-img{ transform:scale(1.06);}
-    .hero-gradient{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.35) 65%, rgba(0,0,0,.55)); pointer-events:none;}
-    .hero-caption{position:absolute; inset-inline-start:18px; inset-block-end:18px; color:#fff; max-width:min(92%,640px); background:transparent;}
-    .hero-caption h3{margin:0 0 4px; font-weight:800; font-size:22px;}
-    .hero-caption p{margin:0 0 10px; font-size:14px; opacity:.95;}
-    .hero-cta{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; background:linear-gradient(90deg,#2A70DC,#1f5dc2); color:#fff; text-decoration:none; font-weight:800;}
-    .hero-cta svg{width:18px;height:18px;fill:#fff;}
-    .hero-arrow{position:absolute; top:50%; transform:translateY(-50%); z-index:3; width:42px; height:42px; border-radius:50%; border:1px solid rgba(255,255,255,.5); background:rgba(0,0,0,.25); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer;}
-    .hero-prev{inset-inline-start:12px;} .hero-next{inset-inline-end:12px;}
-    .hero-arrow svg{width:20px;height:20px;fill:#fff;}
-    .hero-dots{position:absolute; left:50%; transform:translateX(-50%); bottom:12px; display:flex; gap:6px; z-index:3;}
-    .hero-dot{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.6); cursor:pointer;}
-    .hero-dot.active{background:#fff;}
-
-    /* باقي الأقسام */
+    .cta svg{width:22px; height:22px; fill:#fff}
     .section-title{font-size:22px; margin:20px 0 10px}
     .services{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
     @media (min-width:720px){ .services{grid-template-columns:repeat(4,1fr)} }
@@ -74,11 +48,31 @@
     .card.link::after{content:""; position:absolute; inset:0; border-radius:16px; outline:2px solid transparent; transition:outline-color .18s}
     .card.link:hover::after{ outline-color: rgba(42,112,220,.25) }
 
+    /* أقسام الودجت */
+    .widget-wrap{position:relative}
+    .widget-section{
+      margin-top:18px; background:#fff; border:1px solid #eee; border-radius:var(--radius);
+      box-shadow:var(--shadow); padding:16px;
+    }
+    .widget-section[hidden]{display:none !important;}
+    .widget-section h3{margin:0 0 8px}
+    .widget-note{color:var(--ink-soft); font-size:14px; margin:0 0 10px}
+
+    /* زر الإغلاق */
+    .widget-close{
+      position:absolute; top:10px; inset-inline-end:10px;
+      border:none; background:#fff; color:#333; font-weight:800; line-height:1;
+      width:36px; height:36px; border-radius:50%;
+      box-shadow:0 6px 16px rgba(0,0,0,.15); cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      border:1px solid #eee;
+    }
+    .widget-close:hover{background:#f6f6f6}
     footer{text-align:center; color:#687793; font-size:14px; margin:28px 0 10px}
   </style>
 </head>
 <body>
-  <!-- خلفية منحنية -->
+  <!-- Blobs -->
   <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
 
   <div class="container">
@@ -89,96 +83,154 @@
       </div>
     </header>
 
-    <!-- ترحيب -->
+    <!-- بطاقة ترحيبية -->
     <section class="welcome">
       <h1>أهلاً وسهلاً بك في سيدار ترافل ✈️</h1>
       <p>نرتّب لك كل ما تحتاجه: فنادق، طيران، سيارات، eSIM، وأنشطة — بسهولة وسرعة.</p>
       <a id="wa-top" class="cta" href="#" rel="noopener noreferrer">
-        <!-- واتساب -->
+        <!-- أيقونة واتساب -->
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16.04 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.2 7l-1.4 5.2 5.3-1.4c1.9 1.1 4.1 1.7 6.4 1.7 6.6 0 12-5.4 12-12S22.6 3 16.04 3zm0 21.9c-2 0-3.9-.6-5.5-1.6l-.4-.2-3.1.8.8-3-.2-.4C6.7 19.1 6 17.1 6 15 6 9.9 10.9 5.9 16 5.9s10 4 10 9.1-4.9 9.1-9.96 9.1z"/><path d="M21.1 18.3c-.3-.2-1.6-.8-1.9-.9-.3-.1-.5-.2-.8.2s-.9.9-1.1 1.1c-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.6-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.5-.6.2-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.8-1.9-1.1-2.5-.3-.6-.6-.5-.8-.5h-.7c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.2 3.2c.1.2 2.1 3.2 5.1 4.4.7.3 1.2.5 1.6.6.7.2 1.4.2 1.9.1.6-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.3z"/></svg>
         <span>للتواصل</span>
       </a>
     </section>
-  </div>
 
-  <!-- بانر الصور بعرض الشاشة -->
-  <section class="hero-wide full-bleed" id="heroPro" aria-label="عروض">
-    <div class="hero-track" id="heroTrack">
-      <article class="hero-slide active">
-        <img class="hero-img" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600&auto=format&fit=crop" alt="شاطئ استوائي">
-        <div class="hero-gradient"></div>
-        <div class="hero-caption">
-          <h3>استمتع برحلات الصيف 🌴</h3>
-          <p>أفضل الوجهات الشاطئية حول العالم.</p>
-        </div>
-      </article>
-      <article class="hero-slide">
-        <img class="hero-img" src="https://images.unsplash.com/photo-1483683804023-6ccdb62f86ef?q=80&w=1600&auto=format&fit=crop" alt="مدينة أوروبية">
-        <div class="hero-gradient"></div>
-        <div class="hero-caption">
-          <h3>رحلات أوروبية ساحرة ✈️</h3>
-          <p>استكشف باريس، روما، وبرشلونة الآن.</p>
-        </div>
-      </article>
-      <article class="hero-slide">
-        <img class="hero-img" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop" alt="جبال">
-        <div class="hero-gradient"></div>
-        <div class="hero-caption">
-          <h3>مغامرات الطبيعة ⛰️</h3>
-          <p>استكشف الجبال والبحيرات الخلابة.</p>
-        </div>
-      </article>
-    </div>
-    <button class="hero-arrow hero-prev" id="heroPrev" aria-label="السابق">
-      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-    </button>
-    <button class="hero-arrow hero-next" id="heroNext" aria-label="التالي">
-      <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
-    </button>
-    <div class="hero-dots" id="heroDots">
-      <span class="hero-dot active" data-i="0"></span>
-      <span class="hero-dot" data-i="1"></span>
-      <span class="hero-dot" data-i="2"></span>
-    </div>
-  </section>
-
-  <div class="container">
+    <!-- الخدمات -->
     <h2 class="section-title">الخدمات التي نقدمها</h2>
     <section class="services">
-      <div class="card"><div class="icon">🏨</div><div>فنادق</div></div>
-      <div class="card link" id="flightCard"><div class="icon">✈️</div><div>تذاكر طيران</div></div>
-      <div class="card link" id="esimCard"><div class="icon">📶</div><div>بطاقات eSIM</div></div>
-      <div class="card"><div class="icon">🚗</div><div>تأجير سيارات</div></div>
+      <div class="card">
+        <div class="icon">🏨</div>
+        <div>حجوزات فنادق</div>
+        <small>أفضل العروض حول العالم</small>
+      </div>
+      <div class="card link" id="flightCard" title="أظهر أداة الطيران">
+        <div class="icon">✈️</div>
+        <div>تذاكر طيران</div>
+        <small>ابحث عن الرحلات الآن</small>
+      </div>
+      <div class="card">
+        <div class="icon">🚗</div>
+        <div>استئجار سيارات</div>
+        <small>خيارات اقتصادية وفاخرة</small>
+      </div>
+      <div class="card link" id="esimCard" title="أظهر أداة eSIM">
+        <div class="icon">📶</div>
+        <div>بطاقات eSIM</div>
+        <small>إنترنت دولي فوري — اضغط هنا</small>
+      </div>
+      <div class="card">
+        <div class="icon">🎟️</div>
+        <div>أنشطة وتذاكر</div>
+        <small>جولات ومدن ألعاب ومتاحف</small>
+      </div>
+      <div class="card">
+        <div class="icon">🕍</div>
+        <div>زيارات ومعالم</div>
+        <small>برامج مُخصّصة حسب ذوقك</small>
+      </div>
+      <div class="card">
+        <div class="icon">🛡️</div>
+        <div>تأمين سفر</div>
+        <small>راحة بالك معنا</small>
+      </div>
+      <div class="card">
+        <div class="icon">🎬</div>
+        <div>أماكن تصوير</div>
+        <small>لوكيشنات لمسلسلات وأفلام</small>
+      </div>
     </section>
 
-    <footer>© <span id="year"></span> جميع الحقوق محفوظة – SIDAR TRAVEL</footer>
+    <!-- منطقة الودجت (قسم واحد يظهر حسب الاختيار) -->
+    <div class="widget-wrap">
+      <!-- eSIM -->
+      <section id="widget-esim" class="widget-section" hidden aria-hidden="true">
+        <button class="widget-close" type="button" aria-label="إغلاق eSIM" data-close="esim">×</button>
+        <h3>اشترِ بطاقة eSIM الآن 📶</h3>
+        <p class="widget-note">اختر خطك المناسب وثبِّته فورًا. الدفع آمن والتفعيل خلال دقائق.</p>
+        <div id="tp-esim"></div>
+      </section>
+
+      <!-- Flight -->
+      <section id="widget-flight" class="widget-section" hidden aria-hidden="true">
+        <button class="widget-close" type="button" aria-label="إغلاق الطيران" data-close="flight">×</button>
+        <h3>ابحث عن تذاكر الطيران ✈️</h3>
+        <p class="widget-note">قارن الأسعار واحجز رحلتك بأفضل العروض.</p>
+        <div id="tp-flight"></div>
+      </section>
+    </div>
+
+    <footer>
+      © <span id="year"></span> جميع الحقوق محفوظة – SIDAR TRAVEL
+    </footer>
   </div>
 
   <script>
-    // واتساب
-    const PHONE_NUMBER="9725XXXXXXXX";
-    document.getElementById("wa-top").href=`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent("مرحبًا، أريد الاستفسار عن رحلة 🌍")}`;
+    // ===== واتساب =====
+    const PHONE_NUMBER = "9725XXXXXXXX"; // ضع رقمك بصيغة دولية بدون +
+    const WA_BASE = "https://wa.me/";
+    const waText = encodeURIComponent("مرحبًا، أريد الاستفسار عن باقات السفر ✈️");
+    document.getElementById("wa-top").href = `${WA_BASE}${PHONE_NUMBER}?text=${waText}`;
 
-    // سلايدر بانر
-    const slides=[...document.querySelectorAll('.hero-slide')];
-    const dots=[...document.querySelectorAll('.hero-dot')];
-    let i=0,timer;
-    const go=n=>{
-      i=(n+slides.length)%slides.length;
-      slides.forEach((s,idx)=>s.classList.toggle('active',idx===i));
-      dots.forEach((d,idx)=>d.classList.toggle('active',idx===i));
+    // ===== دوال مساعدة =====
+    function injectWidget(targetEl, srcUrl){
+      const s = document.createElement('script');
+      s.src = srcUrl;
+      s.async = true;
+      s.charset = 'utf-8';
+      targetEl.appendChild(s);
     }
-    const next=()=>go(i+1);
-    const prev=()=>go(i-1);
-    const start=()=>timer=setInterval(next,3000);
-    const stop=()=>clearInterval(timer);
-    document.getElementById('heroNext').onclick=()=>{next();stop();start();}
-    document.getElementById('heroPrev').onclick=()=>{prev();stop();start();}
-    dots.forEach(d=>d.onclick=()=>{go(+d.dataset.i);stop();start();});
-    document.getElementById('heroPro').onmouseenter=stop;
-    document.getElementById('heroPro').onmouseleave=start;
-    start();
-    document.getElementById("year").textContent=new Date().getFullYear();
+    function hideSection(sec){
+      sec.hidden = true;
+      sec.setAttribute('aria-hidden','true');
+    }
+    function showSection(sec){
+      sec.hidden = false;
+      sec.setAttribute('aria-hidden','false');
+      sec.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+    function hideAll(){
+      hideSection(document.getElementById('widget-esim'));
+      hideSection(document.getElementById('widget-flight'));
+    }
+
+    // ===== Lazy Load على الطلب + إظهار واحد فقط =====
+    let esimLoaded = false;
+    let flightLoaded = false;
+
+    const ESIM_SRC = "https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&powered_by=false&color_button=%232A70DCff&color_focused=%232A70DCFF&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23C4C4C4&border_radius=5&plain=true&no_labels=true&promo_id=8588&campaign_id=541";
+    const FLIGHT_SRC = "https://trpwdg.com/content?currency=usd&trs=239791&shmarker=448045.Sidar&locale=en&stops=any&show_hotels=true&powered_by=false&border_radius=3&plain=true&color_button=%233480DAff&color_button_text=%23ffffff&promo_id=3414&campaign_id=111";
+
+    const secESIM = document.getElementById('widget-esim');
+    const secFLT  = document.getElementById('widget-flight');
+
+    document.getElementById("esimCard").addEventListener("click", ()=>{
+      hideAll();
+      if(!esimLoaded){
+        injectWidget(document.getElementById('tp-esim'), ESIM_SRC);
+        esimLoaded = true;
+      }
+      showSection(secESIM);
+    });
+
+    document.getElementById("flightCard").addEventListener("click", ()=>{
+      hideAll();
+      if(!flightLoaded){
+        injectWidget(document.getElementById('tp-flight'), FLIGHT_SRC);
+        flightLoaded = true;
+      }
+      showSection(secFLT);
+    });
+
+    // زر الإغلاق ×
+    document.querySelectorAll('.widget-close').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const which = btn.dataset.close;
+        if(which === 'esim') hideSection(secESIM);
+        if(which === 'flight') hideSection(secFLT);
+      });
+    });
+
+    // سنة الفوتر
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
