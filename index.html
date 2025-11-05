@@ -40,7 +40,34 @@
       height:70px;
       width:auto;
       display:block;
+      animation:fadeInScale 1.3s ease;
     }
+    @keyframes fadeInScale {
+      from {opacity:0; transform:scale(0.7);}
+      to {opacity:1; transform:scale(1);}
+    }
+
+    /* ✅ بانر متحرك */
+    .hero-slider{
+      width:100%;
+      height:300px;
+      border-radius:20px;
+      overflow:hidden;
+      position:relative;
+      margin:20px auto 10px;
+      box-shadow:var(--shadow);
+    }
+    .hero-slider img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      position:absolute;
+      inset:0;
+      opacity:0;
+      transition:opacity 1s ease-in-out;
+    }
+    .hero-slider img.active{opacity:1;}
+
     .welcome{background:var(--card); border:1px solid #eee; border-radius:var(--radius); box-shadow:var(--shadow); padding:18px; margin:14px auto; max-width:760px; text-align:center}
     .welcome h1{margin:4px 0 6px; font-size:28px}
     .welcome p{margin:0 0 14px; color:var(--ink-soft)}
@@ -57,6 +84,8 @@
     .card.link{cursor:pointer; position:relative}
     .card.link::after{content:""; position:absolute; inset:0; border-radius:16px; outline:2px solid transparent; transition:outline-color .18s}
     .card.link:hover::after{ outline-color: rgba(42,112,220,.25) }
+
+    /* الودجتات */
     .widget-wrap{position:relative}
     .widget-section{
       position:relative;
@@ -72,27 +101,50 @@
       display:flex; align-items:center; justify-content:center; border:1px solid #eee;
     }
     .widget-close:hover{background:#f6f6f6}
+
+    /* ✅ قسم التقييمات */
+    .testimonials{
+      margin:40px auto 20px;
+      background:rgba(255,255,255,0.85);
+      border-radius:20px;
+      padding:20px;
+      box-shadow:var(--shadow);
+      text-align:center;
+    }
+    .testimonial{
+      display:none;
+      animation:fadeIn 1s ease;
+    }
+    .testimonial.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);}}
+    .testimonial p{font-size:16px; color:var(--ink-soft); margin:0;}
+    .testimonial strong{display:block; margin-top:8px; color:var(--ink); font-weight:700;}
+
     footer{text-align:center; color:#687793; font-size:14px; margin:28px 0 10px}
   </style>
 </head>
 <body>
-  <!-- خلفيات -->
   <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
-
   <div class="container">
-    <!-- ✅ شعار فقط -->
+    <!-- الشعار -->
     <header>
       <div class="logo">
         <img src="logo.PNG" alt="الشعار">
       </div>
     </header>
 
+    <!-- ✅ بانر متحرك -->
+    <div class="hero-slider" id="heroSlider">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" class="active" alt="شاطئ استوائي">
+      <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=1200&q=80" alt="مدينة ليلية">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="منظر طبيعي">
+    </div>
+
     <section class="welcome">
       <h1>مرحبًا بك في سيدار ترافل 🌍</h1>
       <p>نوفّر لك حلول السفر الحديثة: eSIM، تذاكر طيران، سيارات، وأماكن تصوير المسلسلات.</p>
       <a id="wa-top" class="cta" href="#">
-        <!-- واتساب -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16.04 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.2 7l-1.4 5.2 5.3-1.4c1.9 1.1 4.1 1.7 6.4 1.7 6.6 0 12-5.4 12-12S22.6 3 16.04 3z"/><path d="M21.1 18.3c-.3-.2-1.6-.8-1.9-.9-.3-.1-.5-.2-.8.2s-.9.9-1.1 1.1-.4.2-.7.1c-.3-.2-1.3-.5-2.4-1.6-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.8-.9c.1-.2.1-.4 0-.6l-1.1-2.5c-.3-.6-.6-.5-.8-.5h-.7c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.2 3.2c.1.2 2.1 3.2 5.1 4.4.7.3 1.2.5 1.6.6.7.2 1.4.2 1.9.1.6-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.3z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16.04 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.2 7l-1.4 5.2 5.3-1.4c1.9 1.1 4.1 1.7 6.4 1.7 6.6 0 12-5.4 12-12S22.6 3 16.04 3z"/></svg>
         <span>تواصل معنا</span>
       </a>
     </section>
@@ -112,19 +164,16 @@
         <h3>بطاقات eSIM</h3>
         <div id="tp-esim"></div>
       </section>
-
       <section id="widget-flight" class="widget-section" hidden>
         <button class="widget-close" data-close="flight">×</button>
         <h3>تذاكر الطيران</h3>
         <div id="tp-flight"></div>
       </section>
-
       <section id="widget-film" class="widget-section" hidden>
         <button class="widget-close" data-close="film">×</button>
         <h3>أماكن تصوير المسلسلات</h3>
         <p>📍 إسطنبول، كابادوكيا، وادي رم، صقلية...</p>
       </section>
-
       <section id="widget-car" class="widget-section" hidden>
         <button class="widget-close" data-close="car">×</button>
         <h3>تأجير السيارات 🚗</h3>
@@ -132,13 +181,42 @@
       </section>
     </div>
 
+    <!-- ✅ قسم التقييمات -->
+    <div class="testimonials" id="testimonials">
+      <h2 class="section-title">آراء عملائنا</h2>
+      <div class="testimonial active">
+        <p>“خدمة ممتازة جدًا وسرعة في الرد، أنصح بالتعامل معهم!”</p>
+        <strong>— أحمد من دبي</strong>
+      </div>
+      <div class="testimonial">
+        <p>“حجزت رحلتي بسهولة وكل شيء كان منظم، شكرًا سيدار!”</p>
+        <strong>— ليلى من عمّان</strong>
+      </div>
+      <div class="testimonial">
+        <p>“خدمة eSIM كانت رائعة في السفر، شكرًا على المساعدة.”</p>
+        <strong>— فهد من الرياض</strong>
+      </div>
+    </div>
+
     <footer>© <span id="year"></span> جميع الحقوق محفوظة – SIDAR TRAVEL</footer>
   </div>
 
   <script>
+    // واتساب
     const PHONE="9725XXXXXXXX";
     document.getElementById("wa-top").href=`https://wa.me/${PHONE}?text=${encodeURIComponent("مرحبًا، أريد الاستفسار عن الخدمات ✈️")}`;
 
+    // تبديل صور البانر
+    const slides=document.querySelectorAll('#heroSlider img');
+    let i=0;
+    setInterval(()=>{slides[i].classList.remove('active');i=(i+1)%slides.length;slides[i].classList.add('active');},4000);
+
+    // التقييمات
+    const testimonials=document.querySelectorAll('#testimonials .testimonial');
+    let j=0;
+    setInterval(()=>{testimonials[j].classList.remove('active');j=(j+1)%testimonials.length;testimonials[j].classList.add('active');},5000);
+
+    // الودجتات
     const hideAll=()=>document.querySelectorAll('.widget-section').forEach(s=>s.hidden=true);
     const show=id=>{hideAll();const el=document.getElementById(id);el.hidden=false;el.scrollIntoView({behavior:'smooth'});}
     const inject=(target,src)=>{if(target.dataset.loaded)return;const s=document.createElement('script');s.src=src;s.async=true;s.charset='utf-8';target.appendChild(s);target.dataset.loaded=true;}
