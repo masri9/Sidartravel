@@ -7,15 +7,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
     :root{
-      --blue:#2A70DC;      /* أزرق أساسي */
-      --orange:#FF7A1A;    /* برتقالي */
-      --yellow:#FFE895;    /* أصفر فاتح */
-      --ink:#0f1320;       /* نص داكن */
-      --ink-soft:#51607c;  /* نص خافت */
-      --white:#ffffff;
-      --card:#ffffffdd;
-      --radius:18px;
-      --shadow:0 12px 30px rgba(0,0,0,.15);
+      --blue:#2A70DC; --orange:#FF7A1A; --yellow:#FFE895;
+      --ink:#0f1320; --ink-soft:#51607c; --white:#ffffff;
+      --card:#ffffffdd; --radius:18px; --shadow:0 12px 30px rgba(0,0,0,.15);
       --whatsapp:#25D366;
     }
     *{box-sizing:border-box}
@@ -26,82 +20,42 @@
         radial-gradient(800px 500px at 15% -10%, rgba(255,232,149,.6), rgba(255,232,149,0) 60%),
         radial-gradient(900px 600px at 100% 0%, rgba(42,112,220,.25), rgba(42,112,220,0) 70%),
         linear-gradient(180deg, #fff 0%, #FFF7E6 60%, #FFF 100%);
-      min-height:100svh;
-      overflow-x:hidden;
+      min-height:100svh; overflow-x:hidden;
     }
-    .blob{
-      position:fixed; z-index:-1; filter:blur(20px); opacity:.6; transform:rotate(8deg);
-    }
+    .blob{position:fixed; z-index:-1; filter:blur(20px); opacity:.6; transform:rotate(8deg)}
     .blob.b1{ top:-120px; left:-140px; width:380px; height:380px; background:radial-gradient(circle, var(--yellow), rgba(255,232,149,0)); border-radius:42% 58% 57% 43%/56% 45% 55% 44%;}
     .blob.b2{ top:-90px; right:-160px; width:420px; height:420px; background:radial-gradient(circle, rgba(42,112,220,.25), rgba(42,112,220,0)); border-radius:58% 42% 40% 60%/50% 52% 48% 50%;}
     .blob.b3{ bottom:-140px; left:20%; width:520px; height:520px; background:radial-gradient(circle, rgba(255,122,26,.22), rgba(255,122,26,0)); border-radius:40% 60% 62% 38%/45% 55% 50% 50%;}
-
     .container{max-width:1080px; margin:auto; padding:20px}
-    header{ text-align:center; padding:28px 0 12px }
-    .logo{
-      display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border-radius:999px;
-      background:rgba(255,255,255,.75); box-shadow:var(--shadow); border:1px solid #eee;
-    }
+    header{text-align:center; padding:28px 0 12px}
+    .logo{display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border-radius:999px; background:rgba(255,255,255,.75); box-shadow:var(--shadow); border:1px solid #eee}
     .logo img{height:40px;width:auto;display:block}
     .logo .title{font-weight:800; letter-spacing:.4px}
-
-    .welcome{
-      background:var(--card); border:1px solid #eee; border-radius:var(--radius);
-      box-shadow:var(--shadow); padding:18px; margin:14px auto; max-width:760px;
-      text-align:center;
-    }
+    .welcome{background:var(--card); border:1px solid #eee; border-radius:var(--radius); box-shadow:var(--shadow); padding:18px; margin:14px auto; max-width:760px; text-align:center}
     .welcome h1{margin:4px 0 6px; font-size:28px}
     .welcome p{margin:0 0 14px; color:var(--ink-soft)}
-    
-    /* زر واتساب */
-    .cta{
-      display:inline-flex; align-items:center; justify-content:center; gap:8px;
-      padding:12px 20px; border-radius:50px;
-      background:linear-gradient(90deg, var(--whatsapp), #1ebe5b);
-      color:#fff; font-weight:700; font-size:16px;
-      box-shadow:0 10px 24px rgba(37,211,102,.35);
-      text-decoration:none; transition:transform .2s ease, box-shadow .2s ease;
-    }
-    .cta:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(37,211,102,.5);}
-    .cta svg{width:22px; height:22px; fill:#fff;}
-
+    .cta{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 20px; border-radius:50px; background:linear-gradient(90deg, var(--whatsapp), #1ebe5b); color:#fff; font-weight:700; font-size:16px; box-shadow:0 10px 24px rgba(37,211,102,.35); text-decoration:none; transition:transform .2s, box-shadow .2s}
+    .cta:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(37,211,102,.5)}
+    .cta svg{width:22px; height:22px; fill:#fff}
     .section-title{font-size:22px; margin:20px 0 10px}
-    .services{
-      display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
-    }
+    .services{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
     @media (min-width:720px){ .services{grid-template-columns:repeat(4,1fr)} }
-    .card{
-      background:#fff; border:1px solid #eee; border-radius:16px; padding:16px; min-height:120px;
-      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; text-align:center;
-      transition:transform .18s ease, box-shadow .18s ease; cursor:default;
-    }
+    .card{background:#fff; border:1px solid #eee; border-radius:16px; padding:16px; min-height:120px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; text-align:center; transition:transform .18s, box-shadow .18s}
     .card:hover{ transform:translateY(-4px); box-shadow:var(--shadow) }
     .icon{font-size:28px}
     .card small{color:var(--ink-soft)}
-
-    .card.link{ cursor:pointer; position:relative; }
-    .card.link::after{
-      content:""; position:absolute; inset:0; border-radius:16px; outline:2px solid transparent; transition:outline-color .18s ease;
-    }
-    .card.link:hover::after{ outline-color: rgba(42,112,220,.25); }
-
-    /* قسم الودجت */
-    .widget-section{
-      margin-top:18px;
-      background:#fff; border:1px solid #eee; border-radius:var(--radius);
-      box-shadow:var(--shadow); padding:16px;
-    }
+    .card.link{cursor:pointer; position:relative}
+    .card.link::after{content:""; position:absolute; inset:0; border-radius:16px; outline:2px solid transparent; transition:outline-color .18s}
+    .card.link:hover::after{ outline-color: rgba(42,112,220,.25) }
+    .widget-section{margin-top:18px; background:#fff; border:1px solid #eee; border-radius:var(--radius); box-shadow:var(--shadow); padding:16px}
     .widget-section h3{margin:0 0 8px}
     .widget-note{color:var(--ink-soft); font-size:14px; margin:0 0 10px}
-
-    footer{ text-align:center; color:#687793; font-size:14px; margin:28px 0 10px }
+    footer{text-align:center; color:#687793; font-size:14px; margin:28px 0 10px}
   </style>
 </head>
 <body>
   <!-- Blobs -->
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <div class="blob b3"></div>
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
 
   <div class="container">
     <header>
@@ -115,11 +69,9 @@
     <section class="welcome">
       <h1>أهلاً وسهلاً بك في سيدار ترافل ✈️</h1>
       <p>نرتّب لك كل ما تحتاجه: فنادق، طيران، سيارات، eSIM، وأنشطة — بسهولة وسرعة.</p>
-      <a id="wa-top" class="cta" href="#" rel="noopener">
-        <!-- أيقونة واتساب SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-          <path d="M16.04 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.2 7l-1.4 5.2 5.3-1.4c1.9 1.1 4.1 1.7 6.4 1.7 6.6 0 12-5.4 12-12S22.6 3 16.04 3zm0 21.9c-2 0-3.9-.6-5.5-1.6l-.4-.2-3.1.8.8-3-.2-.4C6.7 19.1 6 17.1 6 15 6 9.9 10.9 5.9 16 5.9s10 4 10 9.1-4.9 9.1-9.96 9.1z"/><path d="M21.1 18.3c-.3-.2-1.6-.8-1.9-.9-.3-.1-.5-.2-.8.2s-.9.9-1.1 1.1c-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.6-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.5-.6.2-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.8-1.9-1.1-2.5-.3-.6-.6-.5-.8-.5h-.7c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.2 3.2c.1.2 2.1 3.2 5.1 4.4.7.3 1.2.5 1.6.6.7.2 1.4.2 1.9.1.6-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.3z"/>
-        </svg>
+      <a id="wa-top" class="cta" href="#" rel="noopener noreferrer">
+        <!-- أيقونة واتساب -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16.04 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.2 7l-1.4 5.2 5.3-1.4c1.9 1.1 4.1 1.7 6.4 1.7 6.6 0 12-5.4 12-12S22.6 3 16.04 3zm0 21.9c-2 0-3.9-.6-5.5-1.6l-.4-.2-3.1.8.8-3-.2-.4C6.7 19.1 6 17.1 6 15 6 9.9 10.9 5.9 16 5.9s10 4 10 9.1-4.9 9.1-9.96 9.1z"/><path d="M21.1 18.3c-.3-.2-1.6-.8-1.9-.9-.3-.1-.5-.2-.8.2s-.9.9-1.1 1.1c-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.6-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.5-.6.2-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.8-1.9-1.1-2.5-.3-.6-.6-.5-.8-.5h-.7c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.2 3.2c.1.2 2.1 3.2 5.1 4.4.7.3 1.2.5 1.6.6.7.2 1.4.2 1.9.1.6-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.3z"/></svg>
         <span>للتواصل</span>
       </a>
     </section>
@@ -132,10 +84,10 @@
         <div>حجوزات فنادق</div>
         <small>أفضل العروض حول العالم</small>
       </div>
-      <div class="card">
+      <div class="card link" id="flightCard" title="انتقال إلى قسم الطيران">
         <div class="icon">✈️</div>
         <div>تذاكر طيران</div>
-        <small>شبكة وجهات واسعة</small>
+        <small>ابحث عن الرحلات الآن</small>
       </div>
       <div class="card">
         <div class="icon">🚗</div>
@@ -173,9 +125,14 @@
     <section id="widget-esim" class="widget-section">
       <h3>اشترِ بطاقة eSIM الآن 📶</h3>
       <p class="widget-note">اختر خطك المناسب وثبِّته فورًا. الدفع آمن والتفعيل خلال دقائق.</p>
+      <div id="tp-esim"></div>
+    </section>
 
-      <!-- Travelpayouts Widget (كما أرسلت تمامًا) -->
-      <script async src="https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&powered_by=false&color_button=%232A70DCff&color_focused=%232A70DCFF&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23C4C4C4&border_radius=5&plain=true&no_labels=true&promo_id=8588&campaign_id=541" charset="utf-8"></script>
+    <!-- قسم الودجت (الطيران) -->
+    <section id="widget-flight" class="widget-section">
+      <h3>ابحث عن تذاكر الطيران ✈️</h3>
+      <p class="widget-note">قارن الأسعار واحجز رحلتك بأفضل العروض.</p>
+      <div id="tp-flight"></div>
     </section>
 
     <footer>
@@ -184,17 +141,38 @@
   </div>
 
   <script>
+    // ===== إعداد واتساب =====
     const PHONE_NUMBER = "9725XXXXXXXX"; // ضع رقمك بصيغة دولية بدون +
     const WA_BASE = "https://wa.me/";
     const waText = encodeURIComponent("مرحبًا، أريد الاستفسار عن باقات السفر ✈️");
     document.getElementById("wa-top").href = `${WA_BASE}${PHONE_NUMBER}?text=${waText}`;
 
-    // عند الضغط على eSIM → انزل إلى قسم الودجت
+    // ===== قفز إلى أقسام الودجت =====
     document.getElementById("esimCard").addEventListener("click", ()=>{
       document.getElementById("widget-esim").scrollIntoView({behavior:"smooth", block:"start"});
     });
+    document.getElementById("flightCard").addEventListener("click", ()=>{
+      document.getElementById("widget-flight").scrollIntoView({behavior:"smooth", block:"start"});
+    });
 
-    // تحديث السنة تلقائيًا
+    // ===== تحميل ودجت Travelpayouts ديناميكيًا =====
+    function injectWidget(targetEl, srcUrl){
+      const s = document.createElement('script');
+      s.src = srcUrl;
+      s.async = true;
+      s.charset = 'utf-8';
+      targetEl.appendChild(s);
+    }
+
+    // eSIM widget
+    const ESIM_SRC = "https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&powered_by=false&color_button=%232A70DCff&color_focused=%232A70DCFF&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23C4C4C4&border_radius=5&plain=true&no_labels=true&promo_id=8588&campaign_id=541";
+    injectWidget(document.getElementById('tp-esim'), ESIM_SRC);
+
+    // Flight widget
+    const FLIGHT_SRC = "https://trpwdg.com/content?currency=usd&trs=239791&shmarker=448045.Sidar&locale=en&stops=any&show_hotels=true&powered_by=false&border_radius=3&plain=true&color_button=%233480DAff&color_button_text=%23ffffff&promo_id=3414&campaign_id=111";
+    injectWidget(document.getElementById('tp-flight'), FLIGHT_SRC);
+
+    // ===== سنة الفوتر =====
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
