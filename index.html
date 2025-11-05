@@ -48,13 +48,14 @@
     .card.link::after{content:""; position:absolute; inset:0; border-radius:16px; outline:2px solid transparent; transition:outline-color .18s}
     .card.link:hover::after{ outline-color: rgba(42,112,220,.25) }
 
-    /* أقسام الودجت */
+    /* الودجتات */
     .widget-wrap{position:relative}
     .widget-section{
+      position:relative; /* مهم لزر الإغلاق */
       margin-top:18px; background:#fff; border:1px solid #eee; border-radius:var(--radius);
       box-shadow:var(--shadow); padding:16px;
     }
-    .widget-section[hidden]{display:none !important;}
+    .widget-section[hidden]{display:none!important;}
     .widget-section h3{margin:0 0 8px}
     .widget-note{color:var(--ink-soft); font-size:14px; margin:0 0 10px}
     .widget-close{
@@ -62,8 +63,7 @@
       border:none; background:#fff; color:#333; font-weight:800; line-height:1;
       width:36px; height:36px; border-radius:50%;
       box-shadow:0 6px 16px rgba(0,0,0,.15); cursor:pointer;
-      display:flex; align-items:center; justify-content:center;
-      border:1px solid #eee;
+      display:flex; align-items:center; justify-content:center; border:1px solid #eee;
     }
     .widget-close:hover{background:#f6f6f6}
     footer{text-align:center; color:#687793; font-size:14px; margin:28px 0 10px}
@@ -85,6 +85,7 @@
       <h1>مرحبًا بك في سيدار ترافل 🌍</h1>
       <p>نوفّر لك حلول السفر الحديثة: eSIM، تذاكر طيران، سيارات، وأماكن تصوير المسلسلات.</p>
       <a id="wa-top" class="cta" href="#">
+        <!-- واتساب -->
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16.04 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.2 7l-1.4 5.2 5.3-1.4c1.9 1.1 4.1 1.7 6.4 1.7 6.6 0 12-5.4 12-12S22.6 3 16.04 3z"/><path d="M21.1 18.3c-.3-.2-1.6-.8-1.9-.9-.3-.1-.5-.2-.8.2s-.9.9-1.1 1.1-.4.2-.7.1c-.3-.2-1.3-.5-2.4-1.6-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.8-.9c.1-.2.1-.4 0-.6l-1.1-2.5c-.3-.6-.6-.5-.8-.5h-.7c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.2 3.2c.1.2 2.1 3.2 5.1 4.4.7.3 1.2.5 1.6.6.7.2 1.4.2 1.9.1.6-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.3z"/></svg>
         <span>تواصل معنا</span>
       </a>
@@ -93,36 +94,44 @@
     <h2 class="section-title">الخدمات الحالية</h2>
     <section class="services">
       <div class="card link" id="esimCard"><div class="icon">📶</div><div>بطاقات eSIM</div><small>إنترنت دولي فوري</small></div>
-      <div class="card link" id="flightCard"><div class="icon">✈️</div><div>تذاكر الطيران</div><small>ابحث عن أفضل الأسعار</small></div>
+      <div class="card link" id="flightCard"><div class="icon">✈️</div><div>تذاكر الطيران</div><small>أفضل الأسعار</small></div>
       <div class="card link" id="filmCard"><div class="icon">🎬</div><div>أماكن تصوير</div><small>لوكيشنات لمسلسلات وأفلام</small></div>
-      <div class="card link" id="carCard"><div class="icon">🚗</div><div>تأجير سيارات</div><small>خدمات عالمية بأسعار ممتازة</small></div>
+      <div class="card link" id="carCard"><div class="icon">🚗</div><div>تأجير سيارات</div><small>شركاء عالميون</small></div>
     </section>
 
+    <!-- الودجتات -->
     <div class="widget-wrap">
-      <section id="widget-esim" class="widget-section" hidden>
-        <button class="widget-close" data-close="esim">×</button>
+      <section id="widget-esim" class="widget-section" hidden aria-hidden="true">
+        <button class="widget-close" type="button" aria-label="إغلاق eSIM" data-close="esim">×</button>
         <h3>بطاقات eSIM</h3>
+        <p class="widget-note">ثبّت بطاقتك الرقمية خلال دقائق.</p>
         <div id="tp-esim"></div>
       </section>
 
-      <section id="widget-flight" class="widget-section" hidden>
-        <button class="widget-close" data-close="flight">×</button>
+      <section id="widget-flight" class="widget-section" hidden aria-hidden="true">
+        <button class="widget-close" type="button" aria-label="إغلاق الطيران" data-close="flight">×</button>
         <h3>تذاكر الطيران</h3>
+        <p class="widget-note">قارن واحجز رحلتك بأفضل العروض.</p>
         <div id="tp-flight"></div>
       </section>
 
-      <section id="widget-film" class="widget-section" hidden>
-        <button class="widget-close" data-close="film">×</button>
+      <section id="widget-film" class="widget-section" hidden aria-hidden="true">
+        <button class="widget-close" type="button" aria-label="إغلاق أماكن التصوير" data-close="film">×</button>
         <h3>أماكن تصوير المسلسلات</h3>
-        <p class="widget-note">تعرف على أفضل المواقع السياحية التي تُستخدم لتصوير أشهر المسلسلات.</p>
-        <p>📍 إسطنبول، كابادوكيا، وادي رم، صقلية، وجبال الألب.</p>
+        <p class="widget-note">تعرف على مواقع تصوير مشهورة ونرتّب لك زيارة لها.</p>
+        <ul style="margin:6px 0 0; padding:0 18px;">
+          <li>إسطنبول – أحياء تاريخية وسواحل</li>
+          <li>كابادوكيا – منطاد وصخور مدهشة</li>
+          <li>وادي رم – صحراء سينمائية</li>
+          <li>صقلية – جزر وعمارة كلاسيكية</li>
+        </ul>
       </section>
 
-      <section id="widget-car" class="widget-section" hidden>
-        <button class="widget-close" data-close="car">×</button>
-        <h3>تأجير السيارات</h3>
-        <p class="widget-note">نقدّم خدمة تأجير سيارات بالتعاون مع شركات عالمية بأسعار تنافسية.</p>
-        <p>🚗 اختر وجهتك واحجز سيارتك المثالية بكل سهولة.</p>
+      <section id="widget-car" class="widget-section" hidden aria-hidden="true">
+        <button class="widget-close" type="button" aria-label="إغلاق السيارات" data-close="car">×</button>
+        <h3>تأجير السيارات 🚗</h3>
+        <p class="widget-note">إختر سيارتك المناسبة بسهولة.</p>
+        <div id="tp-car"></div>
       </section>
     </div>
 
@@ -130,27 +139,67 @@
   </div>
 
   <script>
-    // رقم واتساب
-    const PHONE="9725XXXXXXXX";
-    document.getElementById("wa-top").href=`https://wa.me/${PHONE}?text=${encodeURIComponent("مرحبًا، أريد الاستفسار عن الخدمات ✈️")}`;
+    // واتساب
+    (function(){
+      const PHONE="9725XXXXXXXX";
+      const a=document.getElementById("wa-top");
+      if(a) a.href=`https://wa.me/${PHONE}?text=${encodeURIComponent("مرحبًا، أريد الاستفسار عن الخدمات ✈️")}`;
+    })();
 
-    // دوال عامة
-    const hideAll=()=>document.querySelectorAll('.widget-section').forEach(s=>s.hidden=true);
-    const show=id=>{hideAll(); const el=document.getElementById(id); el.hidden=false; el.scrollIntoView({behavior:'smooth'});};
+    // أدوات عامة
+    const hideAll = () => document.querySelectorAll('.widget-section').forEach(s => s.hidden = true);
+    const show = (id) => {
+      hideAll();
+      const el = document.getElementById(id);
+      if(el){ el.hidden = false; el.setAttribute('aria-hidden','false'); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+    };
 
-    // تحميل ودجتات السفر
-    const inject=(target,src)=>{const s=document.createElement('script'); s.src=src; s.async=true; target.appendChild(s);}
-    let esimLoaded=false, flightLoaded=false;
-    const ESIM_SRC="https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&powered_by=false&color_button=%232A70DCff&promo_id=8588&campaign_id=541";
-    const FLIGHT_SRC="https://trpwdg.com/content?currency=usd&trs=239791&shmarker=448045.Sidar&locale=en&promo_id=3414&campaign_id=111";
+    // حقن سكريبت الودجت مرة واحدة فقط
+    const inject = (target, src) => {
+      if(!target || target.dataset.loaded) return;
+      const s = document.createElement('script');
+      s.src = src; s.async = true; s.charset = 'utf-8';
+      s.onload = ()=> target.dataset.loaded = "1";
+      target.appendChild(s);
+    };
 
-    document.getElementById("esimCard").onclick=()=>{show('widget-esim'); if(!esimLoaded){inject(document.getElementById('tp-esim'),ESIM_SRC);esimLoaded=true;}};
-    document.getElementById("flightCard").onclick=()=>{show('widget-flight'); if(!flightLoaded){inject(document.getElementById('tp-flight'),FLIGHT_SRC);flightLoaded=true;}};
-    document.getElementById("filmCard").onclick=()=>show('widget-film');
-    document.getElementById("carCard").onclick=()=>show('widget-car');
+    // روابط الودجتس (كما زوّدتني)
+    const ESIM_SRC   = "https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&powered_by=false&color_button=%232A70DCff&color_focused=%232A70DCFF&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23C4C4C4&border_radius=5&plain=true&no_labels=true&promo_id=8588&campaign_id=541";
+    const FLIGHT_SRC = "https://trpwdg.com/content?currency=usd&trs=239791&shmarker=448045.Sidar&locale=en&stops=any&show_hotels=true&powered_by=false&border_radius=3&plain=true&color_button=%233480DAff&color_button_text=%23ffffff&promo_id=3414&campaign_id=111";
+    const CAR_SRC    = "https://trpwdg.com/content?trs=273484&shmarker=448045.Sidar&locale=en&powered_by=true&campaign_id=172&promo_id=4850";
 
-    document.querySelectorAll('.widget-close').forEach(btn=>btn.onclick=()=>hideAll());
-    document.getElementById("year").textContent=new Date().getFullYear();
+    // عناصر DOM
+    const tpEsim  = document.getElementById('tp-esim');
+    const tpFlight= document.getElementById('tp-flight');
+    const tpCar   = document.getElementById('tp-car');
+
+    // بطاقات الخدمات
+    const btnEsim   = document.getElementById('esimCard');
+    const btnFlight = document.getElementById('flightCard');
+    const btnFilm   = document.getElementById('filmCard');
+    const btnCar    = document.getElementById('carCard');
+
+    // أحداث الضغط
+    if(btnEsim) btnEsim.addEventListener('click', ()=>{ show('widget-esim'); inject(tpEsim, ESIM_SRC); });
+    if(btnFlight) btnFlight.addEventListener('click', ()=>{ show('widget-flight'); inject(tpFlight, FLIGHT_SRC); });
+    if(btnFilm) btnFilm.addEventListener('click', ()=>{ show('widget-film'); });
+    if(btnCar) btnCar.addEventListener('click', ()=>{ show('widget-car'); inject(tpCar, CAR_SRC); });
+
+    // أزرار الإغلاق
+    document.querySelectorAll('.widget-close').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const which = btn.dataset.close;
+        if(which) {
+          const el = document.getElementById('widget-' + which);
+          if(el) el.hidden = true;
+        } else {
+          hideAll();
+        }
+      });
+    });
+
+    // سنة الفوتر
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
