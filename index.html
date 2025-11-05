@@ -7,161 +7,178 @@
 <meta name="color-scheme" content="light dark" />
 <style>
   :root{
-    /* عدّل لون العلامة ليطابق الشعار */
-    --brand: #111111;         /* غامق أنيق افتراضي؛ غيّره ليناسب شعارك */
-    --brand-ink: #ffffff;     /* لون النص فوق شريط العلامة */
-    --bg: #0c0d10;
-    --fg: #f6f7fb;
-    --muted:#c7cbd6;
-    --line:#1b1e25;
-    --card:#12141a;
+    /* عدّل هالقيم لتطابق ألوان شعارك */
+    --brand: #1f3a5f;        /* لون الشريط الأول (ربع الصفحة العلوي) */
+    --brand-ink: #ffffff;    /* لون النص فوق الشريط */
+    --bg1: #e9eef6;          /* بداية تدرّج الخلفية العام */
+    --bg2: #cfd9e8;          /* نهاية تدرّج الخلفية العام */
+    --fg: #10131a;           /* لون النص الأساسي الداكن */
+    --muted:#49566b;         /* نص ثانوي */
+    --line:#dbe3ef;          /* حدود خفيفة */
+    --card:#ffffff;
     --radius:14px;
-    --shadow: 0 14px 40px rgba(0,0,0,.45);
+    --shadow: 0 14px 40px rgba(0,0,0,.12);
   }
   *{box-sizing:border-box}
-  html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:"Tajawal",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial}
+  html,body{margin:0;padding:0;background:linear-gradient(180deg,var(--bg1),var(--bg2));color:var(--fg);font-family:"Tajawal",ui-sans-serif,system-ui}
   img{max-width:100%;display:block}
+
+  /* فقاعات خلفية بسيطة */
+  .bubbles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .bubbles span{
+    position:absolute; bottom:-120px; width:18px; height:18px; border-radius:50%;
+    background:rgba(255,255,255,.28); box-shadow:0 6px 18px rgba(0,0,0,.08);
+    animation:rise var(--t,18s) linear infinite; filter:blur(0.3px);
+  }
+  .bubbles span:nth-child(odd){ background:rgba(255,255,255,.34) }
+  @keyframes rise { to { transform: translateY(-120vh) translateX(var(--x,0)); opacity:.15 } }
+  @media (prefers-reduced-motion: reduce){ .bubbles{display:none} }
 
   /* Splash */
   .splash{
-    position:fixed; inset:0; background:var(--bg); display:grid; place-items:center;
-    z-index:9999; transition:opacity .35s ease, visibility .35s ease;
+    position:fixed; inset:0; background:linear-gradient(180deg,var(--bg1),var(--bg2));
+    display:grid; place-items:center; z-index:9999; transition:opacity .35s ease, visibility .35s ease;
   }
   .splash.is-hide{opacity:0; visibility:hidden}
-  .splash img{height:86px; width:auto; filter:drop-shadow(0 6px 22px rgba(0,0,0,.5)); transform:scale(.96); animation:pop .9s ease both}
+  .splash img{height:86px; width:auto; transform:scale(.96); animation:pop .9s ease both; filter:drop-shadow(0 8px 24px rgba(0,0,0,.12))}
   @keyframes pop{from{opacity:0; transform:scale(.9)} to{opacity:1; transform:scale(1)}}
 
   /* Header */
-  .header{
-    position:sticky; top:0; z-index:1000;
-    background:rgba(12,13,16,.6); backdrop-filter:blur(10px) saturate(1.2);
-    border-bottom:1px solid var(--line);
-  }
-  .header__in{height:78px; display:flex; align-items:center; justify-content:center}
-  .logo{height:42px; width:auto}
+  .header{position:sticky; top:0; z-index:1000; background:rgba(255,255,255,.6); backdrop-filter:blur(10px) saturate(1.2); border-bottom:1px solid var(--line)}
+  .header__in{height:74px; display:flex; align-items:center; justify-content:center}
+  .logo{height:44px; width:auto}
+  @media (max-width:560px){.header__in{height:64px}.logo{height:38px}}
 
-  @media (max-width:560px){.header__in{height:68px}.logo{height:36px}}
-
-  /* Brand quarter (Top bar) */
+  /* Brand quarter (Top band) */
   .brandBand{
-    background:var(--brand); color:var(--brand-ink);
-    padding:42px 16px 48px; text-align:center;
+    position:relative; z-index:1;
+    background:
+      repeating-linear-gradient(135deg, rgba(255,255,255,.06) 0 12px, rgba(255,255,255,.12) 12px 24px),
+      var(--brand);
+    color:var(--brand-ink);
+    padding:44px 16px 52px; text-align:center; border-bottom:1px solid rgba(0,0,0,.06);
+    box-shadow: 0 18px 40px rgba(0,0,0,.08) inset;
   }
   .wrap{max-width:1040px; margin:0 auto; padding:0 16px}
   .title{font-size:clamp(26px,4.6vw,40px); font-weight:800; letter-spacing:.2px; margin:0}
-  .subtitle{opacity:.9; margin:10px auto 18px; font-size:clamp(14px,2vw,17px); max-width:760px}
+  .subtitle{opacity:.95; margin:10px auto 18px; font-size:clamp(14px,2vw,17px); max-width:760px}
 
   /* CTA buttons */
   .row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
   .btn{
     display:inline-flex; align-items:center; justify-content:center; gap:10px;
     min-width:200px; padding:14px 18px; border-radius:12px; font-weight:800;
-    border:1px solid rgba(255,255,255,.25); color:#fff;
-    background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-    transition:transform .15s ease, box-shadow .15s ease;
+    border:1px solid rgba(0,0,0,.08); color:#0f1320;
+    background:#fff; transition:transform .15s ease, box-shadow .15s ease;
+    box-shadow: 0 6px 18px rgba(31,58,95,.15);
   }
-  .btn:hover{transform:translateY(-1px); box-shadow:0 8px 26px rgba(0,0,0,.35)}
-  .btn.primary{background:#ffffff; color:#111; border-color:#ffffff}
+  .btn:hover{transform:translateY(-1px); box-shadow:0 10px 26px rgba(31,58,95,.22)}
+  .btn.invert{background:transparent; color:#fff; border-color:rgba(255,255,255,.7)}
   .btn svg{margin-left:2px}
 
-  /* Reveal sections */
+  /* Sections */
   .section{padding:26px 0}
   .divider{height:1px; background:var(--line); margin:18px 0}
 
-  /* Landmark feature image */
+  /* Full-bleed (الصورة تملأ العرض كله) */
+  .fullbleed{position:relative; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw; width:100vw}
   .feature{
-    border:1px solid var(--line); border-radius:16px; overflow:hidden;
-    background:#0f1116; box-shadow:var(--shadow);
-    transform:translateY(16px); opacity:0; transition:opacity .45s ease, transform .45s ease;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    box-shadow:var(--shadow); background:#fff;
   }
-  .feature.is-on{opacity:1; transform:translateY(0)}
-  .feature__img{display:block; width:100%; height:min(56vh, 520px); object-fit:cover}
-  .feature__caption{padding:12px 14px; font-size:14px; color:#e5e7ef; opacity:.9}
+  .feature__img{display:block; width:100vw; height:min(64vh, 640px); object-fit:cover}
+  .feature__caption{max-width:1040px; margin:0 auto; padding:12px 16px; font-size:14px; color:#2b3342; opacity:.9}
 
   /* Services grid */
-  .grid{
-    display:grid; gap:14px; grid-template-columns: repeat(5, 1fr);
-  }
+  .grid{display:grid; gap:14px; grid-template-columns: repeat(5, 1fr)}
   @media (max-width:900px){.grid{grid-template-columns: repeat(3, 1fr)}}
   @media (max-width:560px){.grid{grid-template-columns: repeat(2, 1fr)}}
-
   .card{
     border:1px solid var(--line); border-radius:14px; background:var(--card);
     padding:16px; display:flex; align-items:center; gap:12px; cursor:pointer;
     transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
   }
-  .card:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(0,0,0,.35); border-color:#232732}
+  .card:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(0,0,0,.08); border-color:#c6d4e8}
   .ico{
-    width:46px; height:46px; display:grid; place-items:center;
-    border-radius:12px; background:#0e1117; border:1px solid #1e222b; flex-shrink:0;
+    width:46px; height:46px; display:grid; place-items:center; border-radius:12px;
+    background:linear-gradient(180deg,#f6f9ff,#e9f0ff); border:1px solid #dbe3ef; color:#1f3a5f; font-size:22px; flex-shrink:0;
   }
-  .card__title{font-weight:800}
-  .card__desc{font-size:13px; opacity:.8}
+  .card__title{font-weight:800; color:#0f1320}
+  .card__desc{font-size:13px; color:#3a455a}
 
-  /* Modal (طلب عرض) */
-  .modal{position:fixed; inset:0; z-index:2000; display:none; align-items:center; justify-content:center; padding:20px; background:rgba(0,0,0,.55)}
+  /* Modal */
+  .modal{position:fixed; inset:0; z-index:2000; display:none; align-items:center; justify-content:center; padding:20px; background:rgba(0,0,0,.35)}
   .modal[aria-hidden="false"]{display:flex}
-  .dialog{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04)); border:1px solid rgba(255,255,255,.14); color:var(--fg); border-radius:16px; box-shadow:var(--shadow); width:100%; max-width:760px; outline:none}
+  .dialog{background:#fff; color:#0f1320; border-radius:16px; box-shadow:0 18px 50px rgba(0,0,0,.18); width:100%; max-width:760px; outline:none; border:1px solid var(--line)}
   .dialog__head{display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid var(--line)}
-  .dialog__body{padding:16px 18px 18px}
   .dialog__title{font-weight:800}
-  .dialog__close{background:transparent; color:var(--fg); border:1px solid rgba(255,255,255,.2); border-radius:10px; padding:8px 12px; cursor:pointer}
+  .dialog__close{background:#f3f6fb; color:#0f1320; border:1px solid var(--line); border-radius:10px; padding:8px 12px; cursor:pointer}
+  .dialog__body{padding:16px 18px 18px}
   .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
   @media (max-width:640px){.grid2{grid-template-columns:1fr}}
   .field{display:grid; gap:8px; margin-bottom:12px}
-  .label{font-size:13px; font-weight:800}
-  .input,.select,.textarea{width:100%; border:1px solid rgba(255,255,255,.18); border-radius:12px; padding:12px; background:rgba(18,20,26,.7); color:var(--fg); outline:none}
+  .label{font-size:13px; font-weight:800; color:#0f1320}
+  .input,.select,.textarea{width:100%; border:1px solid #dbe3ef; border-radius:12px; padding:12px; background:#fff; color:#0f1320; outline:none}
   .textarea{min-height:110px; resize:vertical}
   .actions{display:flex; gap:12px; justify-content:flex-start; padding:0 2px 4px}
-  .btn.ghost{background:transparent}
 </style>
 </head>
 <body>
 
-  <!-- Splash (الشعار بالمنتصف عند بداية التحميل) -->
+  <!-- فقاعات الخلفية -->
+  <div class="bubbles" aria-hidden="true">
+    <!-- تنويع بالحجم والزمن والمكان -->
+    <span style="left:8%;  --t:22s; --x:-20px;"></span>
+    <span style="left:18%; --t:18s; --x:10px;"></span>
+    <span style="left:28%; --t:26s; --x:-8px;"></span>
+    <span style="left:38%; --t:20s; --x:16px;"></span>
+    <span style="left:48%; --t:24s; --x:-14px;"></span>
+    <span style="left:58%; --t:19s; --x:18px;"></span>
+    <span style="left:68%; --t:23s; --x:-16px;"></span>
+    <span style="left:78%; --t:21s; --x:14px;"></span>
+    <span style="left:88%; --t:25s; --x:-10px;"></span>
+  </div>
+
+  <!-- Splash -->
   <div class="splash" id="splash">
     <img src="logo.PNG" alt="SIDAR Logo" />
   </div>
 
-  <!-- Header: الشعار صغير بالمنتصف -->
+  <!-- Header -->
   <header class="header" role="banner">
     <div class="header__in">
       <img src="logo.PNG" alt="SIDAR" class="logo" />
     </div>
   </header>
 
-  <!-- الربع الأول: شريط لون متناسق مع الشعار + ترحيب + أزرار -->
+  <!-- الربع الأول: لون متناسق مع الشعار + ترحيب + أزرار -->
   <section class="brandBand">
     <div class="wrap">
       <h1 class="title">أهلًا بك في SIDAR للسياحة والسفر</h1>
       <p class="subtitle">نرتّب رحلتك من أول فكرة حتى العودة — ببساطة، وضوح، واحترافية.</p>
       <div class="row">
-        <a id="waBtn" class="btn" rel="noopener" target="_blank" aria-label="التحدث عبر واتساب">
+        <a id="waBtn" class="btn invert" rel="noopener" target="_blank" aria-label="التحدث عبر واتساب">
           <!-- أيقونة واتساب -->
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M20.5 3.5A11 11 0 0 0 3.1 17.3L2 22l4.8-1.2A11 11 0 1 0 20.5 3.5ZM12 20a8 8 0 0 1-4.1-1.1L7.2 19l-2.3.6.6-2.3-.1-.7A8 8 0 1 1 12 20Zm4.7-5.5c-.2-.1-1.2-.6-1.4-.7s-.3-.1-.5.1-.6.7-.8.8-.3.1-.5 0a6.6 6.6 0 0 1-1.9-1.2 7 7 0 0 1-1.4-1.8c-.2-.3 0-.4.1-.5l.4-.5c.1-.2.2-.3.2-.5s0-.3 0-.4c0-.1-.5-1.2-.7-1.6s-.4-.4-.6-.4h-.4a.8.8 0 0 0-.6.3 2.6 2.6 0 0 0-.8 2c0 1 .7 1.9.8 2.1a9.9 9.9 0 0 0 3.7 3.9c.4.2 1.5.6 2 .7a3.3 3.3 0 0 0 2-.1c.5-.1 1.2-.6 1.4-1.1s.2-1 .1-1.1-.2-.2-.4-.3Z" fill="currentColor"/>
           </svg>
           تحدّث عبر واتساب
         </a>
-        <button id="openOffer" class="btn primary" aria-haspopup="dialog" aria-controls="offerModal">طلب عرض</button>
+        <button id="openOffer" class="btn">طلب عرض</button>
       </div>
     </div>
   </section>
 
+  <!-- صورة معلم Full-Width تغطي العرض بالكامل -->
+  <section class="fullbleed feature" aria-label="معلم سياحي">
+    <img class="feature__img" src="images/landmark.jpg" alt="معلم سياحي" loading="lazy" />
+    <div class="feature__caption">يمكنك استبدال الصورة بإسطنبول / تايلاند / دبي — المهم تكون عالية الجودة وتملى العرض كله.</div>
+  </section>
+
   <main class="wrap">
-    <!-- عند التمرير: صورة معلم سياحي (بدّل المسار للصورة التي تريد) -->
-    <section class="section">
-      <article class="feature" id="landmark">
-        <img class="feature__img" src="images/istanbul.jpg" alt="معلم سياحي" loading="lazy" />
-        <div class="feature__caption">لقطة من إسطنبول — يمكنك استبدال الصورة بدبي/تايلاند/…</div>
-      </article>
-    </section>
-
-    <div class="divider" aria-hidden="true"></div>
-
     <!-- خدمات: eSIM، أنشطة، فنادق، طيران، سيارات -->
     <section class="section" aria-labelledby="svcTitle">
-      <h2 id="svcTitle" style="margin:0 0 12px; font-size:18px; font-weight:800">خدماتنا</h2>
+      <h2 id="svcTitle" style="margin:0 0 12px; font-size:18px; font-weight:800; color:#0f1320">خدماتنا</h2>
       <div class="grid">
         <div class="card" onclick="alert('eSIM: شرائح رقمية للسفر — قريبًا ربط مباشر')">
           <div class="ico">📶</div>
@@ -195,16 +212,16 @@
           <div class="ico">🚘</div>
           <div>
             <div class="card__title">سيارات</div>
-            <div class="card__desc">تأجير سهل بأسعار مناسبة</div>
+            <div class="card__desc">تأجير سهل وأسعار مناسبة</div>
           </div>
         </div>
       </div>
     </section>
 
-    <div style="height:18vh" aria-hidden="true"></div>
+    <div style="height:14vh" aria-hidden="true"></div>
   </main>
 
-  <!-- Modal: طلب عرض خاص -->
+  <!-- Modal: طلب عرض -->
   <div id="offerModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="offerTitle">
     <div class="dialog" role="document" tabindex="-1">
       <div class="dialog__head">
@@ -254,8 +271,8 @@
             <textarea id="notes" name="notes" class="textarea" placeholder="ملاحظاتك…"></textarea>
           </div>
           <div class="actions">
-            <button type="submit" class="btn primary">إرسال</button>
-            <button type="button" class="btn ghost" id="cancelOffer">إلغاء</button>
+            <button type="submit" class="btn">إرسال</button>
+            <button type="button" class="btn" id="cancelOffer" style="background:#f3f6fb">إلغاء</button>
           </div>
         </form>
       </div>
@@ -265,7 +282,7 @@
 <script>
   // Splash hide
   window.addEventListener('load', ()=> {
-    setTimeout(()=> document.getElementById('splash').classList.add('is-hide'), 350);
+    setTimeout(()=> document.getElementById('splash').classList.add('is-hide'), 300);
   });
 
   // WhatsApp button
@@ -305,16 +322,7 @@
     kidsField.style.display = e.target.value === 'نعم' ? 'block' : 'none';
   });
 
-  // Landmark reveal on scroll
-  const landmark = document.getElementById('landmark');
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(en=>{
-      if(en.isIntersecting){ landmark.classList.add('is-on'); io.unobserve(landmark); }
-    });
-  }, {threshold: .15});
-  io.observe(landmark);
-
-  // Submit (basic summary – بدون ميزانية)
+  // Submit (ملخص بسيط — بدون ميزانية)
   form.addEventListener('submit', (e)=>{
     e.preventDefault();
     const d = new FormData(form);
