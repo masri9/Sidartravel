@@ -19,6 +19,7 @@
       --whatsapp:#25D366;
     }
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth;}
     body{
       margin:0; font-family:"Tajawal",system-ui,-apple-system,Segoe UI,Roboto; color:var(--ink);
       background:
@@ -84,6 +85,15 @@
     }
     .card.link:hover::after{ outline-color: rgba(42,112,220,.25); }
 
+    /* قسم الودجت */
+    .widget-section{
+      margin-top:18px;
+      background:#fff; border:1px solid #eee; border-radius:var(--radius);
+      box-shadow:var(--shadow); padding:16px;
+    }
+    .widget-section h3{margin:0 0 8px}
+    .widget-note{color:var(--ink-soft); font-size:14px; margin:0 0 10px}
+
     footer{ text-align:center; color:#687793; font-size:14px; margin:28px 0 10px }
   </style>
 </head>
@@ -132,7 +142,7 @@
         <div>استئجار سيارات</div>
         <small>خيارات اقتصادية وفاخرة</small>
       </div>
-      <div class="card link" id="esimCard" title="انتقال إلى صفحة eSIM">
+      <div class="card link" id="esimCard" title="انتقال إلى قسم eSIM">
         <div class="icon">📶</div>
         <div>بطاقات eSIM</div>
         <small>إنترنت دولي فوري — اضغط هنا</small>
@@ -159,6 +169,15 @@
       </div>
     </section>
 
+    <!-- قسم الودجت (eSIM) -->
+    <section id="widget-esim" class="widget-section">
+      <h3>اشترِ بطاقة eSIM الآن 📶</h3>
+      <p class="widget-note">اختر خطك المناسب وثبِّته فورًا. الدفع آمن والتفعيل خلال دقائق.</p>
+
+      <!-- Travelpayouts Widget (كما أرسلت تمامًا) -->
+      <script async src="https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&powered_by=false&color_button=%232A70DCff&color_focused=%232A70DCFF&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23C4C4C4&border_radius=5&plain=true&no_labels=true&promo_id=8588&campaign_id=541" charset="utf-8"></script>
+    </section>
+
     <footer>
       © <span id="year"></span> جميع الحقوق محفوظة – SIDAR TRAVEL
     </footer>
@@ -170,9 +189,9 @@
     const waText = encodeURIComponent("مرحبًا، أريد الاستفسار عن باقات السفر ✈️");
     document.getElementById("wa-top").href = `${WA_BASE}${PHONE_NUMBER}?text=${waText}`;
 
-    // عند الضغط على eSIM
+    // عند الضغط على eSIM → انزل إلى قسم الودجت
     document.getElementById("esimCard").addEventListener("click", ()=>{
-      window.location.href = "esim.html";
+      document.getElementById("widget-esim").scrollIntoView({behavior:"smooth", block:"start"});
     });
 
     // تحديث السنة تلقائيًا
