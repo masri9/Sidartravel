@@ -4,41 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SIDAR TRAVEL — صفحة الهبوط</title>
-
-  <!-- SEO -->
-  <meta name="description" content="سيدار ترافل: eSIM، تذاكر طيران، تأجير سيارات، دعم سريع عبر واتساب. احجز رحلتك بسهولة الآن.">
-  <meta name="theme-color" content="#2A70DC">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="SIDAR TRAVEL – احجز رحلتك بسهولة" />
-  <meta property="og:description" content="eSIM، تذاكر طيران، سيارات. دعم واتساب 24/7." />
-  <meta property="og:image" content="https://example.com/og.jpg" />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="ar_AR" />
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <!-- Icons / Performance -->
-  <link rel="icon" href="/favicon.ico">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://trpwdg.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet" />
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"TravelAgency",
-    "name":"SIDAR TRAVEL",
-    "url":"https://sidar.travel",
-    "telephone":"+9725XXXXXXXX",
-    "image":"https://example.com/og.jpg",
-    "address":{"@type":"PostalAddress","addressLocality":"Tel Aviv","addressCountry":"IL"},
-    "sameAs":["https://instagram.com/yourpage","https://www.tiktok.com/@yourpage"]
-  }
-  </script>
-
   <style>
     :root{
       --blue:#2A70DC; --orange:#FF7A1A; --yellow:#FFE895;
@@ -48,7 +14,8 @@
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth;}
-    body{margin:0; font-family:"Tajawal",system-ui; color:var(--ink);
+    body{
+      margin:0; font-family:"Tajawal",system-ui; color:var(--ink);
       background:
         radial-gradient(800px 500px at 15% -10%, rgba(255,232,149,.6), rgba(255,232,149,0) 60%),
         radial-gradient(900px 600px at 100% 0%, rgba(42,112,220,.25), rgba(42,112,220,0) 70%),
@@ -86,41 +53,61 @@
     .widget[hidden]{display:none!important}
     .close{position:absolute; top:10px; inset-inline-end:10px; border:none; background:#fff; width:32px; height:32px; border-radius:50%; font-weight:700; cursor:pointer}
 
-    .testimonials{margin:40px auto 12px; background:#ffffffcc; border-radius:20px; padding:20px; box-shadow:var(--shadow); text-align:center}
-    .testimonial{display:none}
-    .testimonial.active{display:block}
-    .testimonial p{margin:0}
-    .rating{color:#FFB400; font-size:16px; letter-spacing:1px; margin-top:6px}
-
-    /* Add review form */
-    .add-review{background:#fff; border:1px solid #eee; border-radius:18px; box-shadow:var(--shadow); padding:16px; margin:14px 0 24px}
-    .add-review form{display:grid; grid-template-columns:1fr; gap:10px}
-    @media(min-width:720px){ .add-review form{grid-template-columns:repeat(2,1fr)} }
-    .add-review input, .add-review select, .add-review textarea{
-      width:100%; padding:12px 14px; border-radius:12px; border:1px solid #e3e6ee; background:#fff; font-family:inherit; font-size:15px
+    /* ===== Testimonials Carousel ===== */
+    .testimonials{
+      margin:40px auto 20px;
+      background:#ffffffcc;
+      border-radius:20px;
+      padding:20px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
     }
-    .add-review textarea{grid-column:1/-1; min-height:90px; resize:vertical}
-    .add-review .actions{grid-column:1/-1; display:flex; gap:10px; flex-wrap:wrap}
-    .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 18px; border-radius:12px; border:none; cursor:pointer; font-weight:800}
-    .btn-primary{background:#2A70DC; color:#fff}
-    .btn-ghost{background:#f2f5ff; color:#1f3a7a}
+    .scrollbar{
+      display:flex;
+      gap:16px;
+      overflow-x:auto;
+      scroll-behavior:smooth;
+      scrollbar-width:none;
+    }
+    .scrollbar::-webkit-scrollbar{display:none;}
+    .scrollbar .item{
+      flex:0 0 260px;
+      background:#fff;
+      border:1px solid #eee;
+      border-radius:14px;
+      box-shadow:0 8px 16px rgba(0,0,0,.08);
+      padding:14px;
+      text-align:center;
+      transition:transform .2s;
+    }
+    .scrollbar .item:hover{transform:translateY(-4px);}
+    .scrollbar .rating{color:#FFB400;font-size:16px;letter-spacing:1px;margin:6px 0;}
+    .scrollbar strong{display:block;margin-top:6px;color:#1f2937;font-weight:700;}
+    .scrollbar small{color:#64748b;}
 
-    /* Admin panel */
-    .admin-panel{position:fixed; inset:0; background:rgba(0,0,0,.4); display:none; align-items:center; justify-content:center; z-index:1000}
-    .admin-box{background:#fff; width:min(720px,92vw); max-height:88vh; overflow:auto; border-radius:16px; box-shadow:var(--shadow); padding:16px}
-    .admin-title{margin:0 0 10px}
-    .admin-pending .item{border:1px solid #eee; border-radius:12px; padding:10px; margin-bottom:10px}
-    .admin-actions{display:flex; gap:8px; margin-top:8px}
-    .badge-soft{display:inline-block; padding:4px 8px; background:#fcfdff; border:1px solid #e9edf6; color:#33415c; border-radius:999px; font-size:12px}
-    .hidden{display:none!important}
-
-    .social .icons{display:flex; gap:10px; justify-content:center; margin-top:10px}
-    .social a{display:inline-flex; width:44px; height:44px; align-items:center; justify-content:center; border-radius:50%; border:1px solid #ddd; box-shadow:var(--shadow); text-decoration:none; font-size:20px}
-
-    .faq{background:#fff; border:1px solid #eee; border-radius:18px; box-shadow:var(--shadow); padding:16px; margin:20px 0}
-    .faq details{border:1px solid #eef1f6; border-radius:12px; padding:12px 14px; margin-bottom:10px; background:#fcfdff}
-
-    footer{text-align:center; color:#687793; font-size:14px; margin:28px 0 10px}
+    footer{
+      text-align:center;
+      color:#687793;
+      font-size:14px;
+      margin:28px 0 10px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+    }
+    .social-footer{
+      display:flex;
+      gap:14px;
+      justify-content:center;
+    }
+    .social-footer a img{
+      width:28px;
+      height:28px;
+      transition:transform .2s ease;
+    }
+    .social-footer a:hover img{
+      transform:scale(1.15);
+    }
 
     .floatbar{position:fixed; inset-inline:12px; bottom:12px; display:flex; gap:10px;
       background:#ffffffcc; backdrop-filter:blur(6px); border:1px solid #eee; border-radius:999px; padding:8px; box-shadow:var(--shadow); z-index:50}
@@ -128,7 +115,7 @@
     .floatbar .wa{background:linear-gradient(90deg, var(--whatsapp), #1ebe5b); color:#fff}
     .floatbar .call{background:#f6f9ff; color:#1f3a7a}
     .floatbar .book{background:#fff; color:#1f3a7a}
-    @media(min-width:920px){.floatbar{display:none}}
+    @media (min-width:920px){ .floatbar{display:none} }
   </style>
 </head>
 <body>
@@ -165,86 +152,35 @@
       <h3>بطاقات eSIM 🌐</h3>
       <div id="tp-esim"></div>
     </section>
-
     <section id="widget-flight" class="widget" hidden>
       <button class="close" data-close>×</button>
       <h3>تذاكر الطيران ✈️</h3>
       <div id="tp-flight"></div>
     </section>
-
     <section id="widget-car" class="widget" hidden>
       <button class="close" data-close>×</button>
       <h3>تأجير السيارات 🚗</h3>
       <div id="tp-car"></div>
     </section>
 
-    <!-- Testimonials (published) -->
+    <!-- Testimonials Carousel -->
     <div class="testimonials" id="testimonials">
       <h2 class="section-title">آراء عملائنا</h2>
-      <!-- ديناميكي عبر JS -->
-      <div id="testimonialsList">
-        <!-- سيتم حقن الآراء المنشورة هنا -->
-      </div>
+      <div class="scrollbar" id="testimonialsScroller"></div>
     </div>
 
-    <!-- Add Review (user submits; goes to pending) -->
-    <section class="add-review" id="addReview">
-      <h2 class="section-title">أضِف رأيك</h2>
-      <form id="reviewForm" novalidate>
-        <input type="text" id="rName" placeholder="الاسم الكامل" required>
-        <input type="text" id="rCity" placeholder="المدينة / الدولة (اختياري)">
-        <input type="text" id="rTrip" placeholder="الوجهة / البرنامج (اختياري)">
-        <select id="rRating" required>
-          <option value="">التقييم (1-5)</option>
-          <option>5</option><option>4</option><option>3</option><option>2</option><option>1</option>
-        </select>
-        <textarea id="rText" placeholder="اكتب رأيك (10 أحرف على الأقل)" required></textarea>
-        <div class="actions">
-          <button type="submit" class="btn btn-primary">إرسال المراجعة للموافقة</button>
-          <button type="reset" class="btn btn-ghost">مسح</button>
-          <span id="reviewMsg" class="badge-soft"></span>
-        </div>
-      </form>
-      <p class="badge-soft" style="margin-top:8px">✔️ سيتم نشر رأيك بعد مراجعته من الإدارة.</p>
-      <button id="manageReviews" class="hidden" type="button">إدارة الآراء</button>
-    </section>
-
-    <!-- Admin Panel (hidden until Shift+M + PIN) -->
-    <div class="admin-panel" id="adminPanel" aria-hidden="true">
-      <div class="admin-box">
-        <h3 class="admin-title">إدارة آراء العملاء</h3>
-        <div style="margin-bottom:10px">
-          <span class="badge-soft" id="countsBadge">—</span>
-        </div>
-        <h4>بانتظار الموافقة</h4>
-        <div class="admin-pending" id="pendingList"></div>
-        <hr>
-        <h4>منشور</h4>
-        <div class="admin-published" id="publishedList"></div>
-        <div style="text-align:end; margin-top:10px">
-          <button class="btn btn-ghost" id="closeAdmin">إغلاق</button>
-        </div>
+    <!-- Footer -->
+    <footer>
+      <p>© <span id="year"></span> جميع الحقوق محفوظة – SIDAR TRAVEL</p>
+      <div class="social-footer">
+        <a href="https://instagram.com/yourpage" target="_blank" aria-label="Instagram">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+        </a>
+        <a href="https://tiktok.com/@yourpage" target="_blank" aria-label="TikTok">
+          <img src="https://cdn-icons-png.flaticon.com/512/3046/3046120.png" alt="TikTok">
+        </a>
       </div>
-    </div>
-
-    <!-- Social -->
-    <section class="social">
-      <h2 class="section-title">تابعنا</h2>
-      <div class="icons">
-        <a href="https://instagram.com/yourpage" aria-label="Instagram">📸</a>
-        <a href="https://tiktok.com/@yourpage" aria-label="TikTok">🎵</a>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="faq">
-      <h2 class="section-title">الأسئلة الشائعة</h2>
-      <details><summary>هل يمكن الحجز بدون دفع فوري؟</summary><p>نعم، حسب سياسة المزود.</p></details>
-      <details><summary>كيف أستخدم بطاقة eSIM؟</summary><p>يُرسل لك QR بعد الدفع لتفعيلها فورًا.</p></details>
-      <details><summary>هل الأسعار ثابتة؟</summary><p>تختلف حسب الموسم والعروض.</p></details>
-    </section>
-
-    <footer>© <span id="year"></span> جميع الحقوق محفوظة – SIDAR TRAVEL</footer>
+    </footer>
   </div>
 
   <!-- Float Bar -->
@@ -255,200 +191,55 @@
   </div>
 
   <script>
-    /*************** إعدادات عامة ***************/
     const PHONE="9725XXXXXXXX";
     const PHONE_CALL="+9725XXXXXXXX";
-    const baseWA = (text)=>`https://wa.me/${PHONE}?text=${encodeURIComponent(text+"\\n\\nutm_source=landing&utm_medium=whatsapp&utm_campaign=lead")}`;
+    const baseWA=(t)=>`https://wa.me/${PHONE}?text=${encodeURIComponent(t)}`;
 
-    // ودجات Travelpayouts
-    const ESIM_SRC="https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&powered_by=false&promo_id=8588&campaign_id=541";
-    const FLIGHT_SRC="https://trpwdg.com/content?currency=usd&trs=239791&shmarker=448045.Sidar&locale=en&promo_id=3414&campaign_id=111";
-    const CAR_SRC="https://trpwdg.com/content?trs=273484&shmarker=448045.Sidar&locale=en&powered_by=true&campaign_id=172&promo_id=4850";
-
-    // إدارة الآراء (PIN)
-    const ADMIN_PIN = "2468"; // ← غيّرها
-
-    /*************** CTA / بانر ***************/
     const waTop=document.getElementById("wa-top");
     const fbWa=document.getElementById("fb-wa");
     const fbCall=document.getElementById("fb-call");
-    if(waTop) waTop.href=baseWA("مرحبًا، أريد الاستفسار عن الخدمات ✈️");
-    if(fbWa) fbWa.href=baseWA("مرحبًا، أريد التحدث الآن 👋");
-    if(fbCall) fbCall.href=`tel:${PHONE_CALL}`;
+    if(waTop)waTop.href=baseWA("مرحبًا، أريد الاستفسار عن الخدمات ✈️");
+    if(fbWa)fbWa.href=baseWA("مرحبًا، أريد التحدث الآن 👋");
+    if(fbCall)fbCall.href=`tel:${PHONE_CALL}`;
 
     const slides=document.querySelectorAll('#heroSlider img');let i=0;
     setInterval(()=>{slides[i].classList.remove('active');i=(i+1)%slides.length;slides[i].classList.add('active');},4000);
 
-    /*************** ودجات الخدمات ***************/
     const hideAllWidgets=()=>document.querySelectorAll('.widget').forEach(w=>w.hidden=true);
-    const inject=(el,src)=>{ if(el.dataset.loaded) return; const s=document.createElement('script'); s.src=src; s.async=true; s.charset='utf-8'; el.appendChild(s); el.dataset.loaded=1; };
-    const showWidget=(id,src)=>{ hideAllWidgets(); const w=document.getElementById(id); if(w){ w.hidden=false; w.scrollIntoView({behavior:'smooth'}); const tp=w.querySelector('div'); inject(tp,src);} };
-
-    document.getElementById('esimCard').onclick=()=>showWidget('widget-esim',ESIM_SRC);
-    document.getElementById('flightCard').onclick=()=>showWidget('widget-flight',FLIGHT_SRC);
-    document.getElementById('carCard').onclick=()=>showWidget('widget-car',CAR_SRC);
+    const inject=(el,src)=>{if(el.dataset.loaded)return;const s=document.createElement('script');s.src=src;s.async=true;s.charset='utf-8';el.appendChild(s);el.dataset.loaded=1;};
+    const showWidget=(id,src)=>{hideAllWidgets();const w=document.getElementById(id);if(w){w.hidden=false;w.scrollIntoView({behavior:'smooth'});const tp=w.querySelector('div');inject(tp,src);}};
+    document.getElementById('esimCard').onclick=()=>showWidget('widget-esim',"https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&promo_id=8588&campaign_id=541");
+    document.getElementById('flightCard').onclick=()=>showWidget('widget-flight',"https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&promo_id=3414&campaign_id=111");
+    document.getElementById('carCard').onclick=()=>showWidget('widget-car',"https://trpwdg.com/content?trs=273484&shmarker=448045.Sidar&locale=en&promo_id=4850");
     document.querySelectorAll('.close').forEach(btn=>btn.onclick=hideAllWidgets);
 
-    /*************** نظام آراء العملاء (بدون باك-إند) ***************/
-    const LS_PUB = 'sidar_reviews_published';
-    const LS_PEN = 'sidar_reviews_pending';
-
-    function load(key, fallback){ try{ return JSON.parse(localStorage.getItem(key)) || fallback; }catch(_){ return fallback; } }
-    function save(key, value){ localStorage.setItem(key, JSON.stringify(value)); }
-
-    // آراء ابتدائية (لمّا ما يكون في منشور)
-    const seed = [
-      {name:"أحمد", city:"دبي", trip:"إسطنبول", rating:5, text:"خدمة ممتازة جدًا وسرعة في الرد!", ts: Date.now()-86400000*3},
-      {name:"ليلى", city:"عمّان", trip:"أنطاليا", rating:5, text:"رحلتي كانت منظمة جدًا، شكرًا سيدار.", ts: Date.now()-86400000*2},
-      {name:"فهد", city:"الرياض", trip:"باريس", rating:4, text:"تجربة رائعة وأسعار مناسبة.", ts: Date.now()-86400000}
+    // ===== Testimonials carousel =====
+    const published=[
+      {name:"أحمد",city:"دبي",trip:"إسطنبول",rating:5,text:"خدمة ممتازة جدًا وسرعة في الرد!"},
+      {name:"ليلى",city:"عمّان",trip:"أنطاليا",rating:5,text:"رحلتي كانت منظمة جدًا، شكرًا سيدار."},
+      {name:"فهد",city:"الرياض",trip:"باريس",rating:4,text:"تجربة رائعة وأسعار مناسبة."}
     ];
-
-    let published = load(LS_PUB, []);
-    if(!published.length){ published = seed; save(LS_PUB, published); }
-    let pending = load(LS_PEN, []);
-
-    // عرض المنشور في قسم testimonials (سلايدر بسيط)
-    const listEl = document.getElementById('testimonialsList');
     function renderPublished(){
-      listEl.innerHTML = '';
-      if(!published.length){ listEl.innerHTML = '<p class="muted">لا توجد آراء منشورة بعد.</p>'; return; }
-      published.forEach((rv, idx)=>{
-        const item = document.createElement('div');
-        item.className = 'testimonial' + (idx===0 ? ' active' : '');
-        const stars = '★'.repeat(rv.rating) + '☆'.repeat(5-rv.rating);
-        const meta = [rv.name, rv.city, rv.trip].filter(Boolean).join(' • ');
-        item.innerHTML = `<p>${rv.text}</p><div class="rating" aria-label="التقييم">${stars}</div><strong style="display:block;margin-top:6px">${meta}</strong>`;
-        listEl.appendChild(item);
+      const scroller=document.getElementById('testimonialsScroller');
+      scroller.innerHTML='';
+      published.forEach(rv=>{
+        const item=document.createElement('div');
+        item.className='item';
+        const stars='★'.repeat(rv.rating)+'☆'.repeat(5-rv.rating);
+        const meta=[rv.name,rv.city,rv.trip].filter(Boolean).join(' • ');
+        item.innerHTML=`<p>${rv.text}</p><div class="rating">${stars}</div><strong>${meta}</strong>`;
+        scroller.appendChild(item);
       });
-      // دوّار
-      const tEls = listEl.querySelectorAll('.testimonial');
-      let j=0; setInterval(()=>{ if(!tEls.length) return; tEls[j].classList.remove('active'); j=(j+1)%tEls.length; tEls[j].classList.add('active'); }, 5000);
+      let scrollPos=0;
+      setInterval(()=>{
+        if(scroller.scrollWidth<=scroller.clientWidth)return;
+        scrollPos+=270;
+        if(scrollPos>=scroller.scrollWidth)scrollPos=0;
+        scroller.scrollTo({left:scrollPos,behavior:'smooth'});
+      },4000);
     }
     renderPublished();
 
-    // نموذج إضافة رأي (يروح للمعلّقة pending)
-    const form = document.getElementById('reviewForm');
-    const msg  = document.getElementById('reviewMsg');
-    form.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const name  = document.getElementById('rName').value.trim();
-      const city  = document.getElementById('rCity').value.trim();
-      const trip  = document.getElementById('rTrip').value.trim();
-      const rating= parseInt(document.getElementById('rRating').value,10);
-      const text  = document.getElementById('rText').value.trim();
-
-      if(!name || !text || !rating || text.length < 10){
-        msg.textContent = '↘️ الرجاء ملء الحقول المطلوبة (الاسم، التقييم، تعليق ≥ 10 أحرف).';
-        return;
-      }
-      pending.push({name, city, trip, rating, text, ts: Date.now()});
-      save(LS_PEN, pending);
-      form.reset();
-      msg.textContent = '✅ تم استلام رأيك. سيتم مراجعته خلال وقت قصير.';
-      setTimeout(()=>msg.textContent='', 4000);
-    });
-
-    /*************** لوحة الإدارة (مخفية) ***************/
-    const adminPanel = document.getElementById('adminPanel');
-    const pendingList= document.getElementById('pendingList');
-    const publishedList= document.getElementById('publishedList');
-    const countsBadge= document.getElementById('countsBadge');
-    const closeAdmin = document.getElementById('closeAdmin');
-
-    function renderAdmin(){
-      countsBadge.textContent = `بانتظار: ${pending.length} · منشور: ${published.length}`;
-      // pending
-      pendingList.innerHTML = '';
-      if(!pending.length){ pendingList.innerHTML = '<p class="muted">لا يوجد عناصر بانتظار الموافقة.</p>'; }
-      pending.forEach((rv, idx)=>{
-        const div = document.createElement('div');
-        div.className = 'item';
-        const stars = '★'.repeat(rv.rating) + '☆'.repeat(5-rv.rating);
-        div.innerHTML = `
-          <div><strong>${rv.name}</strong> <span class="badge-soft">${rv.city || '—'}</span> <span class="badge-soft">${rv.trip || '—'}</span></div>
-          <div class="rating" style="margin:6px 0">${stars}</div>
-          <div>${rv.text}</div>
-          <div class="admin-actions">
-            <button class="btn btn-primary" data-approve="${idx}">نشر</button>
-            <button class="btn btn-ghost" data-reject="${idx}">رفض</button>
-          </div>`;
-        pendingList.appendChild(div);
-      });
-
-      // published
-      publishedList.innerHTML = '';
-      if(!published.length){ publishedList.innerHTML = '<p class="muted">لا يوجد آراء منشورة.</p>'; }
-      published.forEach((rv, idx)=>{
-        const div = document.createElement('div');
-        div.className = 'item';
-        const stars = '★'.repeat(rv.rating) + '☆'.repeat(5-rv.rating);
-        div.innerHTML = `
-          <div><strong>${rv.name}</strong> <span class="badge-soft">${rv.city || '—'}</span> <span class="badge-soft">${rv.trip || '—'}</span></div>
-          <div class="rating" style="margin:6px 0">${stars}</div>
-          <div>${rv.text}</div>
-          <div class="admin-actions">
-            <button class="btn btn-ghost" data-unpublish="${idx}">إلغاء النشر</button>
-          </div>`;
-        publishedList.appendChild(div);
-      });
-
-      // events
-      pendingList.querySelectorAll('[data-approve]').forEach(btn=>{
-        btn.onclick = ()=>{
-          const idx = parseInt(btn.dataset.approve,10);
-          published.push(pending[idx]);
-          pending.splice(idx,1);
-          save(LS_PUB, published); save(LS_PEN, pending);
-          renderAdmin(); renderPublished();
-        };
-      });
-      pendingList.querySelectorAll('[data-reject]').forEach(btn=>{
-        btn.onclick = ()=>{
-          const idx = parseInt(btn.dataset.reject,10);
-          pending.splice(idx,1);
-          save(LS_PEN, pending);
-          renderAdmin();
-        };
-      });
-      publishedList.querySelectorAll('[data-unpublish]').forEach(btn=>{
-        btn.onclick = ()=>{
-          const idx = parseInt(btn.dataset.unpublish,10);
-          pending.push(published[idx]);
-          published.splice(idx,1);
-          save(LS_PUB, published); save(LS_PEN, pending);
-          renderAdmin(); renderPublished();
-        };
-      });
-    }
-
-    function openAdmin(){
-      adminPanel.style.display='flex';
-      adminPanel.setAttribute('aria-hidden','false');
-      renderAdmin();
-    }
-    function closeAdminFn(){
-      adminPanel.style.display='none';
-      adminPanel.setAttribute('aria-hidden','true');
-    }
-    closeAdmin.onclick = closeAdminFn;
-
-    // Shortcut: Shift + M → يطلب PIN
-    document.addEventListener('keydown', (e)=>{
-      if(e.shiftKey && e.key.toLowerCase()==='m'){
-        const pin = prompt('أدخل رمز الإدارة (PIN):');
-        if(pin === ADMIN_PIN){ openAdmin(); }
-        else if(pin!==null){ alert('الرمز غير صحيح'); }
-      }
-    });
-
-    // زر مخفي (احتياطي)
-    const manageBtn = document.getElementById('manageReviews');
-    manageBtn.onclick = ()=>{
-      const pin = prompt('أدخل رمز الإدارة (PIN):');
-      if(pin === ADMIN_PIN){ openAdmin(); } else { alert('الرمز غير صحيح'); }
-    };
-
-    /*************** سنة الفوتر ***************/
     document.getElementById("year").textContent=new Date().getFullYear();
   </script>
 </body>
