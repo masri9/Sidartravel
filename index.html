@@ -48,6 +48,7 @@
     .card.link::after{content:""; position:absolute; inset:0; border-radius:16px; outline:2px solid transparent; transition:outline-color .18s}
     .card.link:hover::after{ outline-color: rgba(42,112,220,.25) }
     .widget-section{margin-top:18px; background:#fff; border:1px solid #eee; border-radius:var(--radius); box-shadow:var(--shadow); padding:16px}
+    .widget-section[hidden]{display:none !important;} /* إخفاء أنيق */
     .widget-section h3{margin:0 0 8px}
     .widget-note{color:var(--ink-soft); font-size:14px; margin:0 0 10px}
     footer{text-align:center; color:#687793; font-size:14px; margin:28px 0 10px}
@@ -84,7 +85,7 @@
         <div>حجوزات فنادق</div>
         <small>أفضل العروض حول العالم</small>
       </div>
-      <div class="card link" id="flightCard" title="انتقال إلى قسم الطيران">
+      <div class="card link" id="flightCard" title="أظهر أداة الطيران">
         <div class="icon">✈️</div>
         <div>تذاكر طيران</div>
         <small>ابحث عن الرحلات الآن</small>
@@ -94,7 +95,7 @@
         <div>استئجار سيارات</div>
         <small>خيارات اقتصادية وفاخرة</small>
       </div>
-      <div class="card link" id="esimCard" title="انتقال إلى قسم eSIM">
+      <div class="card link" id="esimCard" title="أظهر أداة eSIM">
         <div class="icon">📶</div>
         <div>بطاقات eSIM</div>
         <small>إنترنت دولي فوري — اضغط هنا</small>
@@ -121,15 +122,15 @@
       </div>
     </section>
 
-    <!-- قسم الودجت (eSIM) -->
-    <section id="widget-esim" class="widget-section">
+    <!-- قسم الودجت (eSIM) — مخفي مبدئيًا -->
+    <section id="widget-esim" class="widget-section" hidden aria-hidden="true">
       <h3>اشترِ بطاقة eSIM الآن 📶</h3>
       <p class="widget-note">اختر خطك المناسب وثبِّته فورًا. الدفع آمن والتفعيل خلال دقائق.</p>
       <div id="tp-esim"></div>
     </section>
 
-    <!-- قسم الودجت (الطيران) -->
-    <section id="widget-flight" class="widget-section">
+    <!-- قسم الودجت (الطيران) — مخفي مبدئيًا -->
+    <section id="widget-flight" class="widget-section" hidden aria-hidden="true">
       <h3>ابحث عن تذاكر الطيران ✈️</h3>
       <p class="widget-note">قارن الأسعار واحجز رحلتك بأفضل العروض.</p>
       <div id="tp-flight"></div>
@@ -141,21 +142,13 @@
   </div>
 
   <script>
-    // ===== إعداد واتساب =====
+    // ===== واتساب =====
     const PHONE_NUMBER = "9725XXXXXXXX"; // ضع رقمك بصيغة دولية بدون +
     const WA_BASE = "https://wa.me/";
     const waText = encodeURIComponent("مرحبًا، أريد الاستفسار عن باقات السفر ✈️");
     document.getElementById("wa-top").href = `${WA_BASE}${PHONE_NUMBER}?text=${waText}`;
 
-    // ===== قفز إلى أقسام الودجت =====
-    document.getElementById("esimCard").addEventListener("click", ()=>{
-      document.getElementById("widget-esim").scrollIntoView({behavior:"smooth", block:"start"});
-    });
-    document.getElementById("flightCard").addEventListener("click", ()=>{
-      document.getElementById("widget-flight").scrollIntoView({behavior:"smooth", block:"start"});
-    });
-
-    // ===== تحميل ودجت Travelpayouts ديناميكيًا =====
+    // ===== أدوات مساعدة =====
     function injectWidget(targetEl, srcUrl){
       const s = document.createElement('script');
       s.src = srcUrl;
@@ -163,14 +156,36 @@
       s.charset = 'utf-8';
       targetEl.appendChild(s);
     }
+    function showSection(sec){
+      sec.hidden = false;
+      sec.setAttribute('aria-hidden','false');
+      sec.scrollIntoView({behavior:"smooth", block:"start"});
+    }
 
-    // eSIM widget
+    // ===== إعداد التحميل عند الطلب (Lazy Load on Click) =====
+    let esimLoaded = false;
+    let flightLoaded = false;
+
     const ESIM_SRC = "https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&powered_by=false&color_button=%232A70DCff&color_focused=%232A70DCFF&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23C4C4C4&border_radius=5&plain=true&no_labels=true&promo_id=8588&campaign_id=541";
-    injectWidget(document.getElementById('tp-esim'), ESIM_SRC);
-
-    // Flight widget
     const FLIGHT_SRC = "https://trpwdg.com/content?currency=usd&trs=239791&shmarker=448045.Sidar&locale=en&stops=any&show_hotels=true&powered_by=false&border_radius=3&plain=true&color_button=%233480DAff&color_button_text=%23ffffff&promo_id=3414&campaign_id=111";
-    injectWidget(document.getElementById('tp-flight'), FLIGHT_SRC);
+
+    document.getElementById("esimCard").addEventListener("click", ()=>{
+      const sec = document.getElementById("widget-esim");
+      if(!esimLoaded){
+        injectWidget(document.getElementById('tp-esim'), ESIM_SRC);
+        esimLoaded = true;
+      }
+      showSection(sec);
+    });
+
+    document.getElementById("flightCard").addEventListener("click", ()=>{
+      const sec = document.getElementById("widget-flight");
+      if(!flightLoaded){
+        injectWidget(document.getElementById('tp-flight'), FLIGHT_SRC);
+        flightLoaded = true;
+      }
+      showSection(sec);
+    });
 
     // ===== سنة الفوتر =====
     document.getElementById("year").textContent = new Date().getFullYear();
