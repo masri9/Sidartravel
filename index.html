@@ -47,10 +47,27 @@
     .card.link{cursor:pointer; position:relative}
     .card.link::after{content:""; position:absolute; inset:0; border-radius:16px; outline:2px solid transparent; transition:outline-color .18s}
     .card.link:hover::after{ outline-color: rgba(42,112,220,.25) }
-    .widget-section{margin-top:18px; background:#fff; border:1px solid #eee; border-radius:var(--radius); box-shadow:var(--shadow); padding:16px}
-    .widget-section[hidden]{display:none !important;} /* إخفاء أنيق */
+
+    /* أقسام الودجت */
+    .widget-wrap{position:relative}
+    .widget-section{
+      margin-top:18px; background:#fff; border:1px solid #eee; border-radius:var(--radius);
+      box-shadow:var(--shadow); padding:16px;
+    }
+    .widget-section[hidden]{display:none !important;}
     .widget-section h3{margin:0 0 8px}
     .widget-note{color:var(--ink-soft); font-size:14px; margin:0 0 10px}
+
+    /* زر الإغلاق */
+    .widget-close{
+      position:absolute; top:10px; inset-inline-end:10px;
+      border:none; background:#fff; color:#333; font-weight:800; line-height:1;
+      width:36px; height:36px; border-radius:50%;
+      box-shadow:0 6px 16px rgba(0,0,0,.15); cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      border:1px solid #eee;
+    }
+    .widget-close:hover{background:#f6f6f6}
     footer{text-align:center; color:#687793; font-size:14px; margin:28px 0 10px}
   </style>
 </head>
@@ -122,19 +139,24 @@
       </div>
     </section>
 
-    <!-- قسم الودجت (eSIM) — مخفي مبدئيًا -->
-    <section id="widget-esim" class="widget-section" hidden aria-hidden="true">
-      <h3>اشترِ بطاقة eSIM الآن 📶</h3>
-      <p class="widget-note">اختر خطك المناسب وثبِّته فورًا. الدفع آمن والتفعيل خلال دقائق.</p>
-      <div id="tp-esim"></div>
-    </section>
+    <!-- منطقة الودجت (قسم واحد يظهر حسب الاختيار) -->
+    <div class="widget-wrap">
+      <!-- eSIM -->
+      <section id="widget-esim" class="widget-section" hidden aria-hidden="true">
+        <button class="widget-close" type="button" aria-label="إغلاق eSIM" data-close="esim">×</button>
+        <h3>اشترِ بطاقة eSIM الآن 📶</h3>
+        <p class="widget-note">اختر خطك المناسب وثبِّته فورًا. الدفع آمن والتفعيل خلال دقائق.</p>
+        <div id="tp-esim"></div>
+      </section>
 
-    <!-- قسم الودجت (الطيران) — مخفي مبدئيًا -->
-    <section id="widget-flight" class="widget-section" hidden aria-hidden="true">
-      <h3>ابحث عن تذاكر الطيران ✈️</h3>
-      <p class="widget-note">قارن الأسعار واحجز رحلتك بأفضل العروض.</p>
-      <div id="tp-flight"></div>
-    </section>
+      <!-- Flight -->
+      <section id="widget-flight" class="widget-section" hidden aria-hidden="true">
+        <button class="widget-close" type="button" aria-label="إغلاق الطيران" data-close="flight">×</button>
+        <h3>ابحث عن تذاكر الطيران ✈️</h3>
+        <p class="widget-note">قارن الأسعار واحجز رحلتك بأفضل العروض.</p>
+        <div id="tp-flight"></div>
+      </section>
+    </div>
 
     <footer>
       © <span id="year"></span> جميع الحقوق محفوظة – SIDAR TRAVEL
@@ -148,7 +170,7 @@
     const waText = encodeURIComponent("مرحبًا، أريد الاستفسار عن باقات السفر ✈️");
     document.getElementById("wa-top").href = `${WA_BASE}${PHONE_NUMBER}?text=${waText}`;
 
-    // ===== أدوات مساعدة =====
+    // ===== دوال مساعدة =====
     function injectWidget(targetEl, srcUrl){
       const s = document.createElement('script');
       s.src = srcUrl;
@@ -156,38 +178,58 @@
       s.charset = 'utf-8';
       targetEl.appendChild(s);
     }
+    function hideSection(sec){
+      sec.hidden = true;
+      sec.setAttribute('aria-hidden','true');
+    }
     function showSection(sec){
       sec.hidden = false;
       sec.setAttribute('aria-hidden','false');
       sec.scrollIntoView({behavior:"smooth", block:"start"});
     }
+    function hideAll(){
+      hideSection(document.getElementById('widget-esim'));
+      hideSection(document.getElementById('widget-flight'));
+    }
 
-    // ===== إعداد التحميل عند الطلب (Lazy Load on Click) =====
+    // ===== Lazy Load على الطلب + إظهار واحد فقط =====
     let esimLoaded = false;
     let flightLoaded = false;
 
     const ESIM_SRC = "https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&powered_by=false&color_button=%232A70DCff&color_focused=%232A70DCFF&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23C4C4C4&border_radius=5&plain=true&no_labels=true&promo_id=8588&campaign_id=541";
     const FLIGHT_SRC = "https://trpwdg.com/content?currency=usd&trs=239791&shmarker=448045.Sidar&locale=en&stops=any&show_hotels=true&powered_by=false&border_radius=3&plain=true&color_button=%233480DAff&color_button_text=%23ffffff&promo_id=3414&campaign_id=111";
 
+    const secESIM = document.getElementById('widget-esim');
+    const secFLT  = document.getElementById('widget-flight');
+
     document.getElementById("esimCard").addEventListener("click", ()=>{
-      const sec = document.getElementById("widget-esim");
+      hideAll();
       if(!esimLoaded){
         injectWidget(document.getElementById('tp-esim'), ESIM_SRC);
         esimLoaded = true;
       }
-      showSection(sec);
+      showSection(secESIM);
     });
 
     document.getElementById("flightCard").addEventListener("click", ()=>{
-      const sec = document.getElementById("widget-flight");
+      hideAll();
       if(!flightLoaded){
         injectWidget(document.getElementById('tp-flight'), FLIGHT_SRC);
         flightLoaded = true;
       }
-      showSection(sec);
+      showSection(secFLT);
     });
 
-    // ===== سنة الفوتر =====
+    // زر الإغلاق ×
+    document.querySelectorAll('.widget-close').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const which = btn.dataset.close;
+        if(which === 'esim') hideSection(secESIM);
+        if(which === 'flight') hideSection(secFLT);
+      });
+    });
+
+    // سنة الفوتر
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
