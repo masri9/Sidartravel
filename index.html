@@ -37,6 +37,28 @@
     .cta{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 20px; border-radius:50px; background:linear-gradient(90deg, var(--whatsapp), #1ebe5b); color:#fff; font-weight:700; font-size:16px; box-shadow:0 10px 24px rgba(37,211,102,.35); text-decoration:none; transition:transform .2s, box-shadow .2s}
     .cta:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(37,211,102,.5)}
     .cta svg{width:22px; height:22px; fill:#fff}
+
+    /* السلايدر بين الترحيب والخدمات */
+    .hero-slider{
+      position:relative; overflow:hidden; border-radius:18px;
+      height:260px; margin:16px 0 10px; box-shadow:var(--shadow); border:1px solid #eee;
+      background:#fff;
+    }
+    @media (min-width:720px){ .hero-slider{height:420px} }
+    .hero-slider .hslide{
+      position:absolute; inset:0; opacity:0; transition:opacity .6s ease; 
+      background-size:cover; background-position:center; 
+    }
+    .hero-slider .hslide.active{opacity:1}
+    .hero-slider .overlay{
+      position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,.35), rgba(0,0,0,.08));
+    }
+    .hero-slider .dots{
+      position:absolute; left:50%; transform:translateX(-50%); bottom:10px; display:flex; gap:6px; z-index:2;
+    }
+    .hero-slider .dot{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.6); cursor:pointer}
+    .hero-slider .dot.active{background:#fff}
+
     .section-title{font-size:22px; margin:20px 0 10px}
     .services{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
     @media (min-width:720px){ .services{grid-template-columns:repeat(4,1fr)} }
@@ -48,26 +70,14 @@
     .card.link::after{content:""; position:absolute; inset:0; border-radius:16px; outline:2px solid transparent; transition:outline-color .18s}
     .card.link:hover::after{ outline-color: rgba(42,112,220,.25) }
 
-    /* أقسام الودجت */
     .widget-wrap{position:relative}
-    .widget-section{
-      margin-top:18px; background:#fff; border:1px solid #eee; border-radius:var(--radius);
-      box-shadow:var(--shadow); padding:16px;
-    }
+    .widget-section{margin-top:18px; background:#fff; border:1px solid #eee; border-radius:var(--radius); box-shadow:var(--shadow); padding:16px}
     .widget-section[hidden]{display:none !important;}
     .widget-section h3{margin:0 0 8px}
     .widget-note{color:var(--ink-soft); font-size:14px; margin:0 0 10px}
-
-    /* زر الإغلاق */
-    .widget-close{
-      position:absolute; top:10px; inset-inline-end:10px;
-      border:none; background:#fff; color:#333; font-weight:800; line-height:1;
-      width:36px; height:36px; border-radius:50%;
-      box-shadow:0 6px 16px rgba(0,0,0,.15); cursor:pointer;
-      display:flex; align-items:center; justify-content:center;
-      border:1px solid #eee;
-    }
+    .widget-close{position:absolute; top:10px; inset-inline-end:10px; border:none; background:#fff; color:#333; font-weight:800; width:36px; height:36px; border-radius:50%; box-shadow:0 6px 16px rgba(0,0,0,.15); cursor:pointer; display:flex; align-items:center; justify-content:center; border:1px solid #eee}
     .widget-close:hover{background:#f6f6f6}
+
     footer{text-align:center; color:#687793; font-size:14px; margin:28px 0 10px}
   </style>
 </head>
@@ -92,6 +102,19 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16.04 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.2 7l-1.4 5.2 5.3-1.4c1.9 1.1 4.1 1.7 6.4 1.7 6.6 0 12-5.4 12-12S22.6 3 16.04 3zm0 21.9c-2 0-3.9-.6-5.5-1.6l-.4-.2-3.1.8.8-3-.2-.4C6.7 19.1 6 17.1 6 15 6 9.9 10.9 5.9 16 5.9s10 4 10 9.1-4.9 9.1-9.96 9.1z"/><path d="M21.1 18.3c-.3-.2-1.6-.8-1.9-.9-.3-.1-.5-.2-.8.2s-.9.9-1.1 1.1c-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.6-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.5-.6.2-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.8-1.9-1.1-2.5-.3-.6-.6-.5-.8-.5h-.7c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.2 3.2c.1.2 2.1 3.2 5.1 4.4.7.3 1.2.5 1.6.6.7.2 1.4.2 1.9.1.6-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.3z"/></svg>
         <span>للتواصل</span>
       </a>
+    </section>
+
+    <!-- سلايدر 3 صور -->
+    <section class="hero-slider" id="heroSlider" aria-label="بانل صور">
+      <div class="hslide active" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1400&auto=format&fit=crop');"></div>
+      <div class="hslide" style="background-image:url('https://images.unsplash.com/photo-1483683804023-6ccdb62f86ef?q=80&w=1400&auto=format&fit=crop');"></div>
+      <div class="hslide" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1400&auto=format&fit=crop');"></div>
+      <div class="overlay" aria-hidden="true"></div>
+      <div class="dots" id="heroDots">
+        <span class="dot active" data-i="0"></span>
+        <span class="dot" data-i="1"></span>
+        <span class="dot" data-i="2"></span>
+      </div>
     </section>
 
     <!-- الخدمات -->
@@ -139,7 +162,7 @@
       </div>
     </section>
 
-    <!-- منطقة الودجت (قسم واحد يظهر حسب الاختيار) -->
+    <!-- منطقة الودجت -->
     <div class="widget-wrap">
       <!-- eSIM -->
       <section id="widget-esim" class="widget-section" hidden aria-hidden="true">
@@ -164,39 +187,44 @@
   </div>
 
   <script>
-    // ===== واتساب =====
-    const PHONE_NUMBER = "9725XXXXXXXX"; // ضع رقمك بصيغة دولية بدون +
+    // واتساب
+    const PHONE_NUMBER = "9725XXXXXXXX";
     const WA_BASE = "https://wa.me/";
     const waText = encodeURIComponent("مرحبًا، أريد الاستفسار عن باقات السفر ✈️");
     document.getElementById("wa-top").href = `${WA_BASE}${PHONE_NUMBER}?text=${waText}`;
 
-    // ===== دوال مساعدة =====
+    // سلايدر الصور
+    (function(){
+      const slides = Array.from(document.querySelectorAll('.hero-slider .hslide'));
+      const dots = Array.from(document.querySelectorAll('#heroDots .dot'));
+      let i = 0, timer;
+      function show(n){
+        i = (n + slides.length) % slides.length;
+        slides.forEach((s,idx)=>s.classList.toggle('active', idx===i));
+        dots.forEach((d,idx)=>d.classList.toggle('active', idx===i));
+      }
+      function next(){ show(i+1); }
+      function start(){ timer = setInterval(next, 3000); }
+      function stop(){ clearInterval(timer); }
+      dots.forEach(d=>d.addEventListener('click', ()=>{ show(+d.dataset.i); stop(); start(); }));
+      document.getElementById('heroSlider').addEventListener('mouseenter', stop);
+      document.getElementById('heroSlider').addEventListener('mouseleave', start);
+      start();
+    })();
+
+    // أدوات مساعدة للودجت
     function injectWidget(targetEl, srcUrl){
       const s = document.createElement('script');
-      s.src = srcUrl;
-      s.async = true;
-      s.charset = 'utf-8';
+      s.src = srcUrl; s.async = true; s.charset = 'utf-8';
       targetEl.appendChild(s);
     }
-    function hideSection(sec){
-      sec.hidden = true;
-      sec.setAttribute('aria-hidden','true');
-    }
-    function showSection(sec){
-      sec.hidden = false;
-      sec.setAttribute('aria-hidden','false');
-      sec.scrollIntoView({behavior:"smooth", block:"start"});
-    }
-    function hideAll(){
-      hideSection(document.getElementById('widget-esim'));
-      hideSection(document.getElementById('widget-flight'));
-    }
+    function hideSection(sec){ sec.hidden = true; sec.setAttribute('aria-hidden','true'); }
+    function showSection(sec){ sec.hidden = false; sec.setAttribute('aria-hidden','false'); sec.scrollIntoView({behavior:"smooth", block:"start"}); }
+    function hideAll(){ hideSection(document.getElementById('widget-esim')); hideSection(document.getElementById('widget-flight')); }
 
-    // ===== Lazy Load على الطلب + إظهار واحد فقط =====
-    let esimLoaded = false;
-    let flightLoaded = false;
-
-    const ESIM_SRC = "https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&powered_by=false&color_button=%232A70DCff&color_focused=%232A70DCFF&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23C4C4C4&border_radius=5&plain=true&no_labels=true&promo_id=8588&campaign_id=541";
+    // Lazy Load + واحد فقط يظهر
+    let esimLoaded=false, flightLoaded=false;
+    const ESIM_SRC   = "https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&powered_by=false&color_button=%232A70DCff&color_focused=%232A70DCFF&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23C4C4C4&border_radius=5&plain=true&no_labels=true&promo_id=8588&campaign_id=541";
     const FLIGHT_SRC = "https://trpwdg.com/content?currency=usd&trs=239791&shmarker=448045.Sidar&locale=en&stops=any&show_hotels=true&powered_by=false&border_radius=3&plain=true&color_button=%233480DAff&color_button_text=%23ffffff&promo_id=3414&campaign_id=111";
 
     const secESIM = document.getElementById('widget-esim');
@@ -204,28 +232,19 @@
 
     document.getElementById("esimCard").addEventListener("click", ()=>{
       hideAll();
-      if(!esimLoaded){
-        injectWidget(document.getElementById('tp-esim'), ESIM_SRC);
-        esimLoaded = true;
-      }
+      if(!esimLoaded){ injectWidget(document.getElementById('tp-esim'), ESIM_SRC); esimLoaded=true; }
       showSection(secESIM);
     });
-
     document.getElementById("flightCard").addEventListener("click", ()=>{
       hideAll();
-      if(!flightLoaded){
-        injectWidget(document.getElementById('tp-flight'), FLIGHT_SRC);
-        flightLoaded = true;
-      }
+      if(!flightLoaded){ injectWidget(document.getElementById('tp-flight'), FLIGHT_SRC); flightLoaded=true; }
       showSection(secFLT);
     });
-
-    // زر الإغلاق ×
     document.querySelectorAll('.widget-close').forEach(btn=>{
       btn.addEventListener('click', ()=>{
         const which = btn.dataset.close;
-        if(which === 'esim') hideSection(secESIM);
-        if(which === 'flight') hideSection(secFLT);
+        if(which==='esim') hideSection(secESIM);
+        if(which==='flight') hideSection(secFLT);
       });
     });
 
