@@ -18,6 +18,8 @@
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Icons / Performance -->
   <link rel="icon" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://trpwdg.com" crossorigin>
@@ -53,6 +55,7 @@
         linear-gradient(180deg, #fff 0%, var(--bg) 60%, #FFF 100%);
     }
     .container{max-width:1080px; margin:auto; padding:20px}
+
     header{text-align:center; padding:28px 0 12px}
     .logo{display:inline-block; padding:12px; background:rgba(255,255,255,.8);
       border-radius:50%; border:1px solid #eee; box-shadow:var(--shadow);}
@@ -83,15 +86,40 @@
     .widget[hidden]{display:none!important}
     .close{position:absolute; top:10px; inset-inline-end:10px; border:none; background:#fff; width:32px; height:32px; border-radius:50%; font-weight:700; cursor:pointer}
 
-    .testimonials{margin:40px auto 20px; background:#ffffffcc; border-radius:20px; padding:20px; box-shadow:var(--shadow); text-align:center}
+    .testimonials{margin:40px auto 12px; background:#ffffffcc; border-radius:20px; padding:20px; box-shadow:var(--shadow); text-align:center}
     .testimonial{display:none}
     .testimonial.active{display:block}
+    .testimonial p{margin:0}
+    .rating{color:#FFB400; font-size:16px; letter-spacing:1px; margin-top:6px}
+
+    /* Add review form */
+    .add-review{background:#fff; border:1px solid #eee; border-radius:18px; box-shadow:var(--shadow); padding:16px; margin:14px 0 24px}
+    .add-review form{display:grid; grid-template-columns:1fr; gap:10px}
+    @media(min-width:720px){ .add-review form{grid-template-columns:repeat(2,1fr)} }
+    .add-review input, .add-review select, .add-review textarea{
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid #e3e6ee; background:#fff; font-family:inherit; font-size:15px
+    }
+    .add-review textarea{grid-column:1/-1; min-height:90px; resize:vertical}
+    .add-review .actions{grid-column:1/-1; display:flex; gap:10px; flex-wrap:wrap}
+    .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 18px; border-radius:12px; border:none; cursor:pointer; font-weight:800}
+    .btn-primary{background:#2A70DC; color:#fff}
+    .btn-ghost{background:#f2f5ff; color:#1f3a7a}
+
+    /* Admin panel */
+    .admin-panel{position:fixed; inset:0; background:rgba(0,0,0,.4); display:none; align-items:center; justify-content:center; z-index:1000}
+    .admin-box{background:#fff; width:min(720px,92vw); max-height:88vh; overflow:auto; border-radius:16px; box-shadow:var(--shadow); padding:16px}
+    .admin-title{margin:0 0 10px}
+    .admin-pending .item{border:1px solid #eee; border-radius:12px; padding:10px; margin-bottom:10px}
+    .admin-actions{display:flex; gap:8px; margin-top:8px}
+    .badge-soft{display:inline-block; padding:4px 8px; background:#fcfdff; border:1px solid #e9edf6; color:#33415c; border-radius:999px; font-size:12px}
+    .hidden{display:none!important}
 
     .social .icons{display:flex; gap:10px; justify-content:center; margin-top:10px}
     .social a{display:inline-flex; width:44px; height:44px; align-items:center; justify-content:center; border-radius:50%; border:1px solid #ddd; box-shadow:var(--shadow); text-decoration:none; font-size:20px}
 
     .faq{background:#fff; border:1px solid #eee; border-radius:18px; box-shadow:var(--shadow); padding:16px; margin:20px 0}
     .faq details{border:1px solid #eef1f6; border-radius:12px; padding:12px 14px; margin-bottom:10px; background:#fcfdff}
+
     footer{text-align:center; color:#687793; font-size:14px; margin:28px 0 10px}
 
     .floatbar{position:fixed; inset-inline:12px; bottom:12px; display:flex; gap:10px;
@@ -150,13 +178,56 @@
       <div id="tp-car"></div>
     </section>
 
+    <!-- Testimonials (published) -->
     <div class="testimonials" id="testimonials">
       <h2 class="section-title">آراء عملائنا</h2>
-      <div class="testimonial active"><p>“خدمة ممتازة جدًا وسرعة في الرد!”</p><strong>— أحمد، دبي</strong></div>
-      <div class="testimonial"><p>“رحلتي كانت منظمة جدًا، شكرًا سيدار.”</p><strong>— ليلى، عمّان</strong></div>
-      <div class="testimonial"><p>“أفضل تجربة سفر على الإطلاق.”</p><strong>— فهد، الرياض</strong></div>
+      <!-- ديناميكي عبر JS -->
+      <div id="testimonialsList">
+        <!-- سيتم حقن الآراء المنشورة هنا -->
+      </div>
     </div>
 
+    <!-- Add Review (user submits; goes to pending) -->
+    <section class="add-review" id="addReview">
+      <h2 class="section-title">أضِف رأيك</h2>
+      <form id="reviewForm" novalidate>
+        <input type="text" id="rName" placeholder="الاسم الكامل" required>
+        <input type="text" id="rCity" placeholder="المدينة / الدولة (اختياري)">
+        <input type="text" id="rTrip" placeholder="الوجهة / البرنامج (اختياري)">
+        <select id="rRating" required>
+          <option value="">التقييم (1-5)</option>
+          <option>5</option><option>4</option><option>3</option><option>2</option><option>1</option>
+        </select>
+        <textarea id="rText" placeholder="اكتب رأيك (10 أحرف على الأقل)" required></textarea>
+        <div class="actions">
+          <button type="submit" class="btn btn-primary">إرسال المراجعة للموافقة</button>
+          <button type="reset" class="btn btn-ghost">مسح</button>
+          <span id="reviewMsg" class="badge-soft"></span>
+        </div>
+      </form>
+      <p class="badge-soft" style="margin-top:8px">✔️ سيتم نشر رأيك بعد مراجعته من الإدارة.</p>
+      <button id="manageReviews" class="hidden" type="button">إدارة الآراء</button>
+    </section>
+
+    <!-- Admin Panel (hidden until Shift+M + PIN) -->
+    <div class="admin-panel" id="adminPanel" aria-hidden="true">
+      <div class="admin-box">
+        <h3 class="admin-title">إدارة آراء العملاء</h3>
+        <div style="margin-bottom:10px">
+          <span class="badge-soft" id="countsBadge">—</span>
+        </div>
+        <h4>بانتظار الموافقة</h4>
+        <div class="admin-pending" id="pendingList"></div>
+        <hr>
+        <h4>منشور</h4>
+        <div class="admin-published" id="publishedList"></div>
+        <div style="text-align:end; margin-top:10px">
+          <button class="btn btn-ghost" id="closeAdmin">إغلاق</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social -->
     <section class="social">
       <h2 class="section-title">تابعنا</h2>
       <div class="icons">
@@ -165,6 +236,7 @@
       </div>
     </section>
 
+    <!-- FAQ -->
     <section class="faq">
       <h2 class="section-title">الأسئلة الشائعة</h2>
       <details><summary>هل يمكن الحجز بدون دفع فوري؟</summary><p>نعم، حسب سياسة المزود.</p></details>
@@ -183,14 +255,20 @@
   </div>
 
   <script>
+    /*************** إعدادات عامة ***************/
     const PHONE="9725XXXXXXXX";
     const PHONE_CALL="+9725XXXXXXXX";
     const baseWA = (text)=>`https://wa.me/${PHONE}?text=${encodeURIComponent(text+"\\n\\nutm_source=landing&utm_medium=whatsapp&utm_campaign=lead")}`;
 
+    // ودجات Travelpayouts
     const ESIM_SRC="https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&powered_by=false&promo_id=8588&campaign_id=541";
     const FLIGHT_SRC="https://trpwdg.com/content?currency=usd&trs=239791&shmarker=448045.Sidar&locale=en&promo_id=3414&campaign_id=111";
     const CAR_SRC="https://trpwdg.com/content?trs=273484&shmarker=448045.Sidar&locale=en&powered_by=true&campaign_id=172&promo_id=4850";
 
+    // إدارة الآراء (PIN)
+    const ADMIN_PIN = "2468"; // ← غيّرها
+
+    /*************** CTA / بانر ***************/
     const waTop=document.getElementById("wa-top");
     const fbWa=document.getElementById("fb-wa");
     const fbCall=document.getElementById("fb-call");
@@ -201,24 +279,176 @@
     const slides=document.querySelectorAll('#heroSlider img');let i=0;
     setInterval(()=>{slides[i].classList.remove('active');i=(i+1)%slides.length;slides[i].classList.add('active');},4000);
 
-    const tEls=document.querySelectorAll('#testimonials .testimonial');let j=0;
-    setInterval(()=>{tEls[j].classList.remove('active');j=(j+1)%tEls.length;tEls[j].classList.add('active');},5000);
-
-    const hideAll=()=>document.querySelectorAll('.widget').forEach(w=>w.hidden=true);
-    const inject=(el,src)=>{if(el.dataset.loaded)return;const s=document.createElement('script');s.src=src;s.async=true;s.charset='utf-8';el.appendChild(s);el.dataset.loaded=1;};
-    const showWidget=(id,src)=>{
-      hideAll();
-      const w=document.getElementById(id);
-      if(w){w.hidden=false;w.scrollIntoView({behavior:'smooth'});}
-      const tp=w.querySelector('div');
-      inject(tp,src);
-    };
+    /*************** ودجات الخدمات ***************/
+    const hideAllWidgets=()=>document.querySelectorAll('.widget').forEach(w=>w.hidden=true);
+    const inject=(el,src)=>{ if(el.dataset.loaded) return; const s=document.createElement('script'); s.src=src; s.async=true; s.charset='utf-8'; el.appendChild(s); el.dataset.loaded=1; };
+    const showWidget=(id,src)=>{ hideAllWidgets(); const w=document.getElementById(id); if(w){ w.hidden=false; w.scrollIntoView({behavior:'smooth'}); const tp=w.querySelector('div'); inject(tp,src);} };
 
     document.getElementById('esimCard').onclick=()=>showWidget('widget-esim',ESIM_SRC);
     document.getElementById('flightCard').onclick=()=>showWidget('widget-flight',FLIGHT_SRC);
     document.getElementById('carCard').onclick=()=>showWidget('widget-car',CAR_SRC);
-    document.querySelectorAll('.close').forEach(btn=>btn.onclick=hideAll);
+    document.querySelectorAll('.close').forEach(btn=>btn.onclick=hideAllWidgets);
 
+    /*************** نظام آراء العملاء (بدون باك-إند) ***************/
+    const LS_PUB = 'sidar_reviews_published';
+    const LS_PEN = 'sidar_reviews_pending';
+
+    function load(key, fallback){ try{ return JSON.parse(localStorage.getItem(key)) || fallback; }catch(_){ return fallback; } }
+    function save(key, value){ localStorage.setItem(key, JSON.stringify(value)); }
+
+    // آراء ابتدائية (لمّا ما يكون في منشور)
+    const seed = [
+      {name:"أحمد", city:"دبي", trip:"إسطنبول", rating:5, text:"خدمة ممتازة جدًا وسرعة في الرد!", ts: Date.now()-86400000*3},
+      {name:"ليلى", city:"عمّان", trip:"أنطاليا", rating:5, text:"رحلتي كانت منظمة جدًا، شكرًا سيدار.", ts: Date.now()-86400000*2},
+      {name:"فهد", city:"الرياض", trip:"باريس", rating:4, text:"تجربة رائعة وأسعار مناسبة.", ts: Date.now()-86400000}
+    ];
+
+    let published = load(LS_PUB, []);
+    if(!published.length){ published = seed; save(LS_PUB, published); }
+    let pending = load(LS_PEN, []);
+
+    // عرض المنشور في قسم testimonials (سلايدر بسيط)
+    const listEl = document.getElementById('testimonialsList');
+    function renderPublished(){
+      listEl.innerHTML = '';
+      if(!published.length){ listEl.innerHTML = '<p class="muted">لا توجد آراء منشورة بعد.</p>'; return; }
+      published.forEach((rv, idx)=>{
+        const item = document.createElement('div');
+        item.className = 'testimonial' + (idx===0 ? ' active' : '');
+        const stars = '★'.repeat(rv.rating) + '☆'.repeat(5-rv.rating);
+        const meta = [rv.name, rv.city, rv.trip].filter(Boolean).join(' • ');
+        item.innerHTML = `<p>${rv.text}</p><div class="rating" aria-label="التقييم">${stars}</div><strong style="display:block;margin-top:6px">${meta}</strong>`;
+        listEl.appendChild(item);
+      });
+      // دوّار
+      const tEls = listEl.querySelectorAll('.testimonial');
+      let j=0; setInterval(()=>{ if(!tEls.length) return; tEls[j].classList.remove('active'); j=(j+1)%tEls.length; tEls[j].classList.add('active'); }, 5000);
+    }
+    renderPublished();
+
+    // نموذج إضافة رأي (يروح للمعلّقة pending)
+    const form = document.getElementById('reviewForm');
+    const msg  = document.getElementById('reviewMsg');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name  = document.getElementById('rName').value.trim();
+      const city  = document.getElementById('rCity').value.trim();
+      const trip  = document.getElementById('rTrip').value.trim();
+      const rating= parseInt(document.getElementById('rRating').value,10);
+      const text  = document.getElementById('rText').value.trim();
+
+      if(!name || !text || !rating || text.length < 10){
+        msg.textContent = '↘️ الرجاء ملء الحقول المطلوبة (الاسم، التقييم، تعليق ≥ 10 أحرف).';
+        return;
+      }
+      pending.push({name, city, trip, rating, text, ts: Date.now()});
+      save(LS_PEN, pending);
+      form.reset();
+      msg.textContent = '✅ تم استلام رأيك. سيتم مراجعته خلال وقت قصير.';
+      setTimeout(()=>msg.textContent='', 4000);
+    });
+
+    /*************** لوحة الإدارة (مخفية) ***************/
+    const adminPanel = document.getElementById('adminPanel');
+    const pendingList= document.getElementById('pendingList');
+    const publishedList= document.getElementById('publishedList');
+    const countsBadge= document.getElementById('countsBadge');
+    const closeAdmin = document.getElementById('closeAdmin');
+
+    function renderAdmin(){
+      countsBadge.textContent = `بانتظار: ${pending.length} · منشور: ${published.length}`;
+      // pending
+      pendingList.innerHTML = '';
+      if(!pending.length){ pendingList.innerHTML = '<p class="muted">لا يوجد عناصر بانتظار الموافقة.</p>'; }
+      pending.forEach((rv, idx)=>{
+        const div = document.createElement('div');
+        div.className = 'item';
+        const stars = '★'.repeat(rv.rating) + '☆'.repeat(5-rv.rating);
+        div.innerHTML = `
+          <div><strong>${rv.name}</strong> <span class="badge-soft">${rv.city || '—'}</span> <span class="badge-soft">${rv.trip || '—'}</span></div>
+          <div class="rating" style="margin:6px 0">${stars}</div>
+          <div>${rv.text}</div>
+          <div class="admin-actions">
+            <button class="btn btn-primary" data-approve="${idx}">نشر</button>
+            <button class="btn btn-ghost" data-reject="${idx}">رفض</button>
+          </div>`;
+        pendingList.appendChild(div);
+      });
+
+      // published
+      publishedList.innerHTML = '';
+      if(!published.length){ publishedList.innerHTML = '<p class="muted">لا يوجد آراء منشورة.</p>'; }
+      published.forEach((rv, idx)=>{
+        const div = document.createElement('div');
+        div.className = 'item';
+        const stars = '★'.repeat(rv.rating) + '☆'.repeat(5-rv.rating);
+        div.innerHTML = `
+          <div><strong>${rv.name}</strong> <span class="badge-soft">${rv.city || '—'}</span> <span class="badge-soft">${rv.trip || '—'}</span></div>
+          <div class="rating" style="margin:6px 0">${stars}</div>
+          <div>${rv.text}</div>
+          <div class="admin-actions">
+            <button class="btn btn-ghost" data-unpublish="${idx}">إلغاء النشر</button>
+          </div>`;
+        publishedList.appendChild(div);
+      });
+
+      // events
+      pendingList.querySelectorAll('[data-approve]').forEach(btn=>{
+        btn.onclick = ()=>{
+          const idx = parseInt(btn.dataset.approve,10);
+          published.push(pending[idx]);
+          pending.splice(idx,1);
+          save(LS_PUB, published); save(LS_PEN, pending);
+          renderAdmin(); renderPublished();
+        };
+      });
+      pendingList.querySelectorAll('[data-reject]').forEach(btn=>{
+        btn.onclick = ()=>{
+          const idx = parseInt(btn.dataset.reject,10);
+          pending.splice(idx,1);
+          save(LS_PEN, pending);
+          renderAdmin();
+        };
+      });
+      publishedList.querySelectorAll('[data-unpublish]').forEach(btn=>{
+        btn.onclick = ()=>{
+          const idx = parseInt(btn.dataset.unpublish,10);
+          pending.push(published[idx]);
+          published.splice(idx,1);
+          save(LS_PUB, published); save(LS_PEN, pending);
+          renderAdmin(); renderPublished();
+        };
+      });
+    }
+
+    function openAdmin(){
+      adminPanel.style.display='flex';
+      adminPanel.setAttribute('aria-hidden','false');
+      renderAdmin();
+    }
+    function closeAdminFn(){
+      adminPanel.style.display='none';
+      adminPanel.setAttribute('aria-hidden','true');
+    }
+    closeAdmin.onclick = closeAdminFn;
+
+    // Shortcut: Shift + M → يطلب PIN
+    document.addEventListener('keydown', (e)=>{
+      if(e.shiftKey && e.key.toLowerCase()==='m'){
+        const pin = prompt('أدخل رمز الإدارة (PIN):');
+        if(pin === ADMIN_PIN){ openAdmin(); }
+        else if(pin!==null){ alert('الرمز غير صحيح'); }
+      }
+    });
+
+    // زر مخفي (احتياطي)
+    const manageBtn = document.getElementById('manageReviews');
+    manageBtn.onclick = ()=>{
+      const pin = prompt('أدخل رمز الإدارة (PIN):');
+      if(pin === ADMIN_PIN){ openAdmin(); } else { alert('الرمز غير صحيح'); }
+    };
+
+    /*************** سنة الفوتر ***************/
     document.getElementById("year").textContent=new Date().getFullYear();
   </script>
 </body>
