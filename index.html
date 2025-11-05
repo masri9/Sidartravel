@@ -1,30 +1,29 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SIDAR Travel – صفحة هبوط</title>
-  <meta name="description" content="SIDAR Travel: باقات سفر، وجهات مختارة، eSIM، سيارات، أنشطة وزيارات مواقع تصوير. تواصل فوري عبر واتساب.">
-  <link rel="icon" href="logo.PNG" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>SIDAR Travel – باقات جاهزة</title>
+  <meta name="description" content="SIDAR Travel: باقات جاهزة، تواصل واتساب فوري، تقييمات، وساعات العمل.">
+  <link rel="icon" href="logo.PNG"/>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
-
   <style>
     :root{
-      /* ألوان مستوحاة من الشعار */
       --blue:#1f78c8; --teal:#15c1d6; --green:#1dbf73;
       --yellow:#ffcf33; --orange:#ff8a33;
       --ink:#0b1020; --muted:#5b677a; --stroke:#e6e8f0;
-      --rad:20px; --shadow:0 12px 40px rgba(0,0,0,.14);
+      --rad:20px; --shadow:0 12px 36px rgba(0,0,0,.12);
     }
     *{box-sizing:border-box}
     html,body{margin:0;scroll-behavior:smooth}
     body{font-family:'Cairo',system-ui,sans-serif;color:var(--ink);background:#fff;overflow-x:hidden}
 
-    /* خلفية aurora */
+    /* خلفية ناعمة منسجمة مع الشعار */
     .bg{position:fixed; inset:-20% -20% 0 -20%; z-index:-3;
-      background: radial-gradient(60% 60% at 100% 0%, rgba(255,202,88,.40) 0%, transparent 60%),
-                  radial-gradient(60% 60% at 0% 100%, rgba(31,120,200,.35) 0%, transparent 60%),
-                  linear-gradient(120deg, #eaf6ff 0%, #ffffff 35%, #faffe9 100%);
+      background:
+        radial-gradient(60% 60% at 100% 0%, rgba(255,202,88,.40) 0%, transparent 60%),
+        radial-gradient(60% 60% at 0% 100%, rgba(31,120,200,.35) 0%, transparent 60%),
+        linear-gradient(120deg, #eaf6ff 0%, #ffffff 35%, #faffe9 100%);
       filter:saturate(1.04);
     }
     .aurora{position:fixed; inset:-40%; z-index:-2; opacity:.55;
@@ -34,63 +33,59 @@
         radial-gradient(30% 30% at 85% 60%, rgba(255,138,51,.45), transparent 60%);
       filter: blur(50px); animation: float 18s ease-in-out infinite alternate;
     }
-    @keyframes float{from{transform:translate(0,0) rotate(0)}to{transform:translate(4%,-3%) rotate(6deg)}}
-    .container{width:min(1200px,92%);margin-inline:auto}
+    @keyframes float{from{transform:translate(0,0)}to{transform:translate(4%,-3%)}}
 
-    /* الهيدر */
-    .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.78);backdrop-filter:blur(12px);border-bottom:1px solid var(--stroke)}
-    .nav-inner{display:flex;align-items:center;justify-content:flex-end;gap:12px;padding:10px 0}
-    .brand img{width:60px;height:60px;object-fit:contain;background:#fff;border:1px solid var(--stroke);border-radius:16px;padding:8px;box-shadow:var(--shadow)}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:14px;border:1px solid var(--stroke);background:#fff;font-weight:800;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.06)}
-    .btn--whats{color:#0a8f5b;border-color:#0a8f5b;background:#eafff3}
-    .btn--solid{border-color:transparent;background:linear-gradient(135deg,var(--yellow),var(--orange));color:#0b1020}
-
-    /* هيرو */
-    header{margin:28px 0}
-    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:stretch}
-    @media (max-width:900px){.hero{grid-template-columns:1fr}}
-    .card{background:#ffffffc9;border:1px solid var(--stroke);border-radius:var(--rad);box-shadow:var(--shadow);overflow:hidden}
-    .hero-card{padding:26px}
-    .kicker{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border:1px solid var(--stroke);border-radius:999px;background:#fff;color:#3b4a66;font-size:13px}
-    h1{margin:10px 0 8px;font-size:clamp(28px,4.6vw,48px);line-height:1.1}
-    .grad{background:linear-gradient(90deg,var(--blue),var(--teal),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
-    .sub{color:var(--muted);font-size:clamp(15px,1.6vw,18px)}
-    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-
-    .scene{position:relative;min-height:260px;background:radial-gradient(120% 120% at 50% 10%, #ffffff 0%, #f7fbff 60%, transparent 61%);overflow:hidden}
-    .orb{position:absolute; border-radius:50%; filter:blur(6px); opacity:.85}
-    .orb--1{width:120px;height:120px;background:var(--blue);right:18%;top:20%;animation:drift 9s infinite ease-in-out}
-    .orb--2{width:90px;height:90px;background:var(--green);right:8%;bottom:18%;animation:drift 10s infinite ease-in-out reverse}
-    .orb--3{width:150px;height:150px;background:var(--orange);left:10%;bottom:8%;animation:drift 12s infinite ease-in-out}
-    @keyframes drift{from{transform:translateY(0)}50%{transform:translateY(-10px)}to{transform:translateY(0)}}
-
-    /* أقسام */
+    .container{width:min(1100px,92%);margin-inline:auto}
     section{margin:26px 0}
-    h2{margin:0 0 10px;font-size:clamp(22px,3.6vw,32px)}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    @media (max-width:900px){.grid{grid-template-columns:1fr 1fr}}
-    @media (max-width:600px){.grid{grid-template-columns:1fr}}
-    .dest{border:1px solid var(--stroke);border-radius:16px;overflow:hidden;background:#fff;transition:.35s transform}
-    .dest:hover{transform:translateY(-4px)}
-    .dest__img{aspect-ratio:16/10;object-fit:cover}
-    .dest__body{padding:12px}
-    .chip{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--stroke);background:#f7fbff;font-size:13px;color:#38506a}
+    h2{margin:0 0 12px;font-size:clamp(22px,3.4vw,30px)}
+    .sub{color:var(--muted)}
 
-    .service{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--stroke);border-radius:14px;padding:14px;background:#fff;transition:.3s transform}
-    .service:hover{transform:translateY(-2px)}
+    /* هيدر: الشعار يمين + واتساب يسار */
+    .nav{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.8);backdrop-filter:blur(10px);border-bottom:1px solid var(--stroke)}
+    .nav-inner{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;padding:10px 0}
+    .brand{justify-self:end}
+    .brand img{width:62px;height:62px;object-fit:contain;background:#fff;border:1px solid var(--stroke);border-radius:16px;padding:8px;box-shadow:var(--shadow)}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:12px;border:1px solid var(--stroke);background:#fff;font-weight:800;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+    .btn--whats{color:#0a8f5b;border-color:#0a8f5b;background:#eafff3;justify-self:start}
 
-    /* نموذج واتساب */
-    .form{display:grid;gap:10px}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    @media (max-width:720px){.row{grid-template-columns:1fr}}
-    input,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--stroke);background:#fff;color:var(--ink)}
-    textarea{min-height:110px;resize:vertical}
+    /* رسالة ترحيبية + زر واحد */
+    .welcome{background:#ffffffcc;border:1px solid var(--stroke);border-radius:var(--rad);box-shadow:var(--shadow);padding:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .btn--solid{border-color:transparent;background:linear-gradient(135deg,var(--yellow),var(--orange));color:#0b1020;font-weight:800}
 
-    /* تقييمات */
-    .review{border:1px solid var(--stroke);border-radius:12px;padding:14px;background:#fff}
-    .stars{color:#f6b800;font-size:18px}
+    /* شبكة الأيقونات: صفّين، كل صف أيقونتين */
+    .packs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media (max-width:700px){.packs{grid-template-columns:1fr}}
+    .pack{
+      position:relative;display:flex;align-items:center;gap:12px;
+      padding:16px;border-radius:22px;background:#fff;border:1px solid var(--stroke);box-shadow:var(--shadow);
+      isolation:isolate; overflow:hidden;
+    }
+    .pack::before{
+      content:""; position:absolute; inset:-30% auto auto -30%; width:180px; height:180px; border-radius:50%;
+      background: conic-gradient(from 120deg, var(--blue), var(--teal), var(--green), var(--yellow), var(--orange));
+      filter: blur(20px); opacity:.18; z-index:-1;
+    }
+    .icon{
+      width:72px;height:72px;border-radius:20px;display:grid;place-items:center;font-size:32px;
+      background: radial-gradient(circle at 30% 30%, #fff, #eef6ff);
+      border:1px solid var(--stroke); box-shadow:0 8px 18px rgba(0,0,0,.07)
+    }
+    .pack h3{margin:0 0 4px;font-size:20px}
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--stroke);background:#f7fbff;font-size:13px;color:#38506a}
 
-    footer{padding:28px 0;text-align:center;color:#445066}
+    /* شريط التقييمات المتحرك */
+    .reel{display:flex;gap:12px;overflow:hidden;mask-image:linear-gradient(to left, transparent, #000 10%, #000 90%, transparent)}
+    .badge{flex:0 0 auto;border:1px solid var(--stroke);border-radius:999px;padding:10px 14px;background:#fff}
+    .marquee{display:flex;gap:12px;animation:scroll 26s linear infinite}
+    @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    /* ساعات العمل */
+    .hours{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:700px){.hours{grid-template-columns:1fr}}
+    .hour-card{background:#ffffffcc;border:1px solid var(--stroke);border-radius:16px;box-shadow:var(--shadow);padding:14px}
+    .hour-card b{display:inline-block;min-width:110px}
+
+    footer{padding:26px 0;text-align:center;color:#445066}
   </style>
 </head>
 <body>
@@ -99,172 +94,126 @@
 
   <!-- إعدادات سريعة -->
   <script>
-    window.COMPANY_NAME = "SIDAR Travel";          // اسم الشركة
-    window.BUSINESS_PHONE = "972500000000";        // ضع رقم واتساب بدون +
-    window.REVIEWS_URL = "https://g.page/r/YOUR";  // رابط التقييمات (اختياري)
-    window.WELCOME_TEXT = "أهلاً وسهلاً بكم في SIDAR Travel — رحلات لا تُنسى بأسعار مريحة!";
+    window.COMPANY_NAME   = "SIDAR Travel";          // اسم الشركة
+    window.BUSINESS_PHONE = "972500000000";          // رقم واتساب (بدون +)
+    window.WELCOME_TEXT   = "أهلاً وسهلاً بكم في SIDAR Travel — اختَر وجهتك ونحن نرتّب كل شيء.";
   </script>
 
-  <!-- هيدر -->
+  <!-- الهيدر -->
   <nav class="nav">
     <div class="container nav-inner">
-      <a class="brand" href="#top" title="SIDAR Travel">
-        <img src="logo.PNG" alt="SIDAR Travel" onerror="this.style.display='none'">
+      <a class="brand" href="#top" title="الصفحة الرئيسية">
+        <img id="logoImg" src="logo.PNG" alt="SIDAR Travel">
       </a>
-      <a id="whatsTop" class="btn btn--whats" target="_blank" rel="noopener">واتساب</a>
+      <a id="btnWhatsTop" class="btn btn--whats" target="_blank" rel="noopener">واتساب</a>
     </div>
   </nav>
 
-  <!-- هيرو -->
-  <header id="top" class="container">
-    <div class="hero">
-      <div class="card hero-card">
-        <span class="kicker">✈️ عروض سفر مختارة</span>
-        <h1>سافر مع <span class="grad">SIDAR Travel</span> — فندق + طيران + أنشطة في مكان واحد</h1>
-        <p class="sub">احجز رحلتك الآن مع دعم واتساب الفوري وخيارات مخصصة لميزانيتك — إسطنبول، شرم الشيخ، دبي، تايلاند والمزيد.</p>
-        <div class="actions">
-          <a id="whatsHero" class="btn btn--solid" target="_blank" rel="noopener">تحدث الآن عبر واتساب</a>
-          <a href="#quote" class="btn">اطلب عرض خاص</a>
-        </div>
+  <main class="container">
+    <!-- رسالة ترحيبية + زر واحد -->
+    <section>
+      <div class="welcome">
+        <p id="welcomeText" class="sub" style="margin:0;font-weight:700;color:#2a3446">
+          أهلاً وسهلاً بكم في SIDAR Travel — اختَر وجهتك ونحن نرتّب كل شيء.
+        </p>
+        <a id="btnQuote" href="#packs" class="btn btn--solid">طلب عرض معيّن</a>
       </div>
-      <aside class="card scene" aria-hidden="true">
-        <div class="orb orb--1"></div>
-        <div class="orb orb--2"></div>
-        <div class="orb orb--3"></div>
-      </aside>
-    </div>
-  </header>
+    </section>
 
-  <!-- وجهاتنا -->
-  <section class="container">
-    <div class="card" style="padding:20px">
-      <h2>وجهاتنا الخاصة</h2>
-      <div class="grid" style="margin-top:12px">
-        <article class="dest">
-          <img class="dest__img" src="https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1200&auto=format&fit=crop" alt="إسطنبول">
-          <div class="dest__body"><h3 style="margin:0 0 6px">إسطنبول</h3><span class="chip">تاريخ وثقافة</span></div>
+    <!-- الباقات الجاهزة (صفّين × أيقونتين) -->
+    <section id="packs">
+      <h2>باقاتنا الجاهزة</h2>
+      <p class="sub">اختر حافيلوت/باقات جاهزة: تصميم جميل بترتيب أيقونتين في كل صف.</p>
+      <div class="packs" style="margin-top:10px">
+        <!-- صف 1 -->
+        <article class="pack">
+          <div class="icon">🕌</div>
+          <div>
+            <h3>إسطنبول</h3>
+            <div class="tag">مدينة التاريخ • 5 ليالٍ</div>
+          </div>
         </article>
-        <article class="dest">
-          <img class="dest__img" src="https://images.unsplash.com/photo-1530569673472-307dc17b2f74?q=80&w=1200&auto=format&fit=crop" alt="شرم الشيخ">
-          <div class="dest__body"><h3 style="margin:0 0 6px">شرم الشيخ</h3><span class="chip">بحر وراحة</span></div>
+        <article class="pack">
+          <div class="icon">🏖️</div>
+          <div>
+            <h3>شرم الشيخ</h3>
+            <div class="tag">منتجعات وبحار • 4 ليالٍ</div>
+          </div>
         </article>
-        <article class="dest">
-          <img class="dest__img" src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=1200&auto=format&fit=crop" alt="دبي">
-          <div class="dest__body"><h3 style="margin:0 0 6px">دبي</h3><span class="chip">تسوّق وترفيه</span></div>
+        <!-- صف 2 -->
+        <article class="pack">
+          <div class="icon">🏙️</div>
+          <div>
+            <h3>دبي</h3>
+            <div class="tag">تسوّق وترفيه • 4 ليالٍ</div>
+          </div>
+        </article>
+        <article class="pack">
+          <div class="icon">🌴</div>
+          <div>
+            <h3>بوكيت</h3>
+            <div class="tag">طبيعة وأنشطة • 6 ليالٍ</div>
+          </div>
         </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- الخدمات -->
-  <section class="container">
-    <div class="card" style="padding:20px">
-      <h2>الخدمات</h2>
-      <div class="grid" style="margin-top:12px">
-        <div class="service"><strong>eSIM</strong><span class="sub"> — باقات إنترنت فورية أثناء سفرك.</span></div>
-        <div class="service"><strong>استئجار سيارة</strong><span class="sub"> — اقتصادية وفاخرة مع تأمين.</span></div>
-        <div class="service"><strong>أنشطة سياحية</strong><span class="sub"> — رحلات بحرية، سفاري، تذاكر معالم.</span></div>
-        <div class="service"><strong>زيارات مواقع تصوير</strong><span class="sub"> — جولات لأماكن تصوير المسلسلات.</span></div>
-        <div class="service"><strong>تأمين سفر</strong><span class="sub"> — خطط تناسب ميزانيتك.</span></div>
-        <div class="service"><strong>مساعدة تأشيرات</strong><span class="sub"> — إرشاد وتجهيز مستندات.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- نموذج طلب عرض خاص -->
-  <section id="quote" class="container">
-    <div class="card" style="padding:20px">
-      <h2>طلب عرض خاص</h2>
-      <p class="sub">اكتب تفاصيل رحلتك لنجهز لك أفضل عرض، ويرسل مباشرة عبر واتساب.</p>
-      <form class="form" id="quoteForm">
-        <div class="row">
-          <label>الوجهة
-            <input name="dest" placeholder="مثال: إسطنبول" required>
-          </label>
-          <label>عدد الأيام
-            <input name="days" type="number" min="1" placeholder="5" required>
-          </label>
+    <!-- شريط تقييمات متحرك -->
+    <section>
+      <h2>قالوا عنّا</h2>
+      <div class="reel" dir="ltr">
+        <div class="marquee">
+          <div class="badge">★★★★★ خدمة سريعة وحجز مرتب</div>
+          <div class="badge">★★★★★ أسعار رائعة + دعم واتساب فوري</div>
+          <div class="badge">★★★★☆ تجربة مريحة ومنظمة</div>
+          <div class="badge">★★★★★ أفضل مكتب سافرت معه</div>
+          <div class="badge">★★★★★ رحلة خيالية وتنظيم ممتاز</div>
+          <!-- نسخة ثانية لاستمرارية الحركة -->
+          <div class="badge">★★★★★ خدمة سريعة وحجز مرتب</div>
+          <div class="badge">★★★★★ أسعار رائعة + دعم واتساب فوري</div>
+          <div class="badge">★★★★☆ تجربة مريحة ومنظمة</div>
+          <div class="badge">★★★★★ أفضل مكتب سافرت معه</div>
+          <div class="badge">★★★★★ رحلة خيالية وتنظيم ممتاز</div>
         </div>
-        <div class="row">
-          <label>عدد البالغين
-            <input name="adults" type="number" min="1" placeholder="2" required>
-          </label>
-          <label>التاريخ
-            <input name="date" type="text" placeholder="10–15 يناير / مرن">
-          </label>
-        </div>
-        <div class="row">
-          <label>الميزانية (₪)
-            <input name="budget" type="number" min="0" placeholder="3000">
-          </label>
-          <label>الأطفال/الأعمار
-            <input name="kids" type="text" placeholder="لا يوجد / طفلان (3 و7)">
-          </label>
-        </div>
-        <label>ملاحظات إضافية
-          <textarea name="notes" placeholder="فئة الفندق، نوع الغرفة، تفضيلات…"></textarea>
-        </label>
-        <button class="btn btn--solid" type="submit">إرسال عبر واتساب</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- تقييمات -->
-  <section class="container">
-    <div class="card" style="padding:20px">
-      <h2>تقييمات عملائنا</h2>
-      <div class="grid" style="margin-top:12px">
-        <div class="review"><div class="stars">★★★★★</div><div class="sub">تنظيم ممتاز وخدمة سريعة!</div></div>
-        <div class="review"><div class="stars">★★★★☆</div><div class="sub">تعامل رائع وأسعار مناسبة.</div></div>
-        <div class="review"><div class="stars">★★★★★</div><div class="sub">الرحلة كانت خرافية بكل التفاصيل.</div></div>
       </div>
-      <div style="margin-top:12px">
-        <a id="reviewsBtn" class="btn" target="_blank" rel="noopener">شاهد كل التقييمات</a>
+    </section>
+
+    <!-- ساعات العمل -->
+    <section>
+      <h2>ساعات العمل</h2>
+      <div class="hours">
+        <div class="hour-card"><b>الأحد – الخميس:</b> 09:00 – 19:00</div>
+        <div class="hour-card"><b>الجمعة:</b> 09:00 – 14:00</div>
+        <div class="hour-card"><b>السبت:</b> إجازة</div>
+        <div class="hour-card"><b>دعم واتساب:</b> 24/7 للحالات العاجلة</div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- ترحيب سفلي -->
-  <section class="container">
-    <div class="card" style="padding:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-      <h3 id="welcomeText" class="sub" style="font-weight:800;color:#2a3446;margin:0">مرحبًا بكم في SIDAR Travel</h3>
-      <a href="#quote" class="btn btn--solid">اطلب عرضك الآن</a>
-    </div>
-  </section>
-
-  <!-- زر واتساب عائم -->
-  <a id="waFloat" class="btn btn--whats" style="position:fixed;inset:auto 16px 16px auto;z-index:60" target="_blank" rel="noopener">واتساب</a>
-
-  <footer class="container"><small>© <span id="year"></span> SIDAR Travel</small></footer>
+  <footer class="container">
+    <small>© <span id="year"></span> <b id="brandName">SIDAR Travel</b></small>
+  </footer>
 
   <script>
-    const name = window.COMPANY_NAME || "شركة السياحة";
-    const phone = window.BUSINESS_PHONE || "972500000000";
-    const reviewsUrl = window.REVIEWS_URL || "#";
-    const welcome = window.WELCOME_TEXT || ("أهلاً وسهلاً بكم في " + name + "!");
+    // إعدادات
+    const COMPANY_NAME = window.COMPANY_NAME || "شركة السياحة";
+    const PHONE        = window.BUSINESS_PHONE || "972500000000";
+    const WELCOME      = window.WELCOME_TEXT || ("أهلاً وسهلاً بكم في " + COMPANY_NAME);
 
+    // نصوص ديناميكية
+    document.getElementById('brandName').textContent = COMPANY_NAME;
+    document.getElementById('welcomeText').textContent = WELCOME;
     document.getElementById('year').textContent = new Date().getFullYear();
-    document.getElementById('welcomeText').textContent = welcome;
-    document.getElementById('reviewsBtn').href = reviewsUrl;
 
-    const waLink = `https://wa.me/${phone}?text=${encodeURIComponent("مرحبًا " + name + "، أود التحدث بخصوص الحجز.")}`;
-    ['waFloat','whatsTop','whatsHero'].forEach(id => { const a=document.getElementById(id); if(a) a.href = waLink; });
+    // روابط واتساب
+    const msg = encodeURIComponent(`مرحبًا ${COMPANY_NAME}\nأريد طلب عرض معيّن.`);
+    const wa = `https://wa.me/${PHONE}?text=${msg}`;
+    document.getElementById('btnWhatsTop').href = wa;
+    document.getElementById('btnQuote').href = wa;
 
-    // إرسال النموذج إلى واتساب
-    document.getElementById('quoteForm').addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const d = new FormData(e.target);
-      const msg =
-        `مرحبًا ${name}%0A` +
-        `الوجهة: ${encodeURIComponent(d.get('dest')||'') }%0A` +
-        `عدد الأيام: ${encodeURIComponent(d.get('days')||'') }%0A` +
-        `البالغون: ${encodeURIComponent(d.get('adults')||'') }%0A` +
-        `التاريخ: ${encodeURIComponent(d.get('date')||'مرن') }%0A` +
-        `الميزانية: ${encodeURIComponent(d.get('budget')||'-') } ₪%0A` +
-        `الأطفال/الأعمار: ${encodeURIComponent(d.get('kids')||'لا يوجد') }%0A` +
-        `ملاحظات: ${encodeURIComponent(d.get('notes')||'-') }`;
-      window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
-    });
+    // دعم اسم الشعار المصغّر: لو logo.PNG غير موجود جرّب logo.png
+    const logo = document.getElementById('logoImg');
+    logo.addEventListener('error', ()=>{ logo.src = 'logo.png'; }, {once:true});
   </script>
 </body>
 </html>
