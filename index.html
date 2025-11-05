@@ -1,287 +1,145 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SIDAR TRAVEL – الصفحة الرسمية</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SIDAR TRAVEL — صفحة الهبوط</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --bg-dark: #0e1a2b;
-      --gold: #d4af37;
-      --gold-light: #ffeb99;
-      --text-light: #f4f4f4;
-      --text-muted: #a0a7b4;
-      --card-bg: rgba(255, 255, 255, 0.08);
-      --radius: 16px;
-      --shadow: 0 10px 30px rgba(0,0,0,.25);
-      --whatsapp:#25D366;
+    :root{
+      --blue:#2A70DC; --orange:#FF7A1A; --yellow:#FFE895;
+      --ink:#0f1320; --ink-soft:#51607c; --white:#ffffff;
+      --card:#ffffffdd; --radius:18px; --shadow:0 12px 30px rgba(0,0,0,.15);
+      --whatsapp:#25D366; --bg:#FFF7E6;
     }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;}
+    body{
+      margin:0; font-family:"Tajawal",system-ui,-apple-system,Segoe UI,Roboto; color:var(--ink);
+      background:
+        radial-gradient(800px 500px at 15% -10%, rgba(255,232,149,.6), rgba(255,232,149,0) 60%),
+        radial-gradient(900px 600px at 100% 0%, rgba(42,112,220,.25), rgba(42,112,220,0) 70%),
+        linear-gradient(180deg, #fff 0%, var(--bg) 60%, #FFF 100%);
+      min-height:100svh; overflow-x:hidden;
+    }
+    .container{max-width:1080px; margin:auto; padding:20px}
+    header{text-align:center; padding:28px 0 12px}
+    .logo{display:inline-block; padding:12px; background:rgba(255,255,255,.8);
+      border-radius:50%; border:1px solid #eee; box-shadow:var(--shadow);}
+    .logo img{height:70px;width:auto;display:block;animation:fadeInScale 1.1s ease}
+    @keyframes fadeInScale{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
 
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Tajawal", sans-serif;
-      background: radial-gradient(circle at top left, #1d3557, #0e1a2b);
-      color: var(--text-light);
-      overflow-x: hidden;
-    }
+    .hero-slider{width:100%; height:300px; border-radius:20px; overflow:hidden; position:relative; margin:20px auto 10px; box-shadow:var(--shadow)}
+    .hero-slider img{width:100%; height:100%; object-fit:cover; position:absolute; inset:0; opacity:0; transition:opacity 1s ease}
+    .hero-slider img.active{opacity:1;}
 
-    header {
-      text-align: center;
-      padding: 40px 0 20px;
-    }
-    .logo img {
-      width: 120px;
-      height: auto;
-      filter: drop-shadow(0 5px 10px rgba(0,0,0,.4));
-    }
+    .welcome{background:var(--card); border:1px solid #eee; border-radius:var(--radius); box-shadow:var(--shadow); padding:18px; margin:14px auto; max-width:760px; text-align:center}
+    .welcome h1{margin:4px 0 6px; font-size:28px}
+    .welcome p{margin:0 0 14px; color:var(--ink-soft)}
 
-    .welcome {
-      text-align: center;
-      max-width: 800px;
-      margin: 20px auto;
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 25px;
-      backdrop-filter: blur(10px);
-      animation: fadeIn 1s ease;
-    }
-    .welcome h1 {
-      color: var(--gold);
-      font-size: 30px;
-      margin-bottom: 10px;
-    }
-    .welcome p {
-      color: var(--text-muted);
-      font-size: 17px;
-      margin-bottom: 18px;
-    }
+    .cta{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 20px; border-radius:50px; background:linear-gradient(90deg, var(--whatsapp), #1ebe5b); color:#fff; font-weight:700; font-size:16px; box-shadow:0 10px 24px rgba(37,211,102,.35); text-decoration:none; transition:transform .2s, box-shadow .2s}
+    .cta:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(37,211,102,.5)}
+    .cta svg{width:22px; height:22px; fill:#fff}
 
-    .cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(90deg, var(--whatsapp), #1ebe5b);
-      color: white;
-      padding: 12px 22px;
-      border-radius: 40px;
-      text-decoration: none;
-      font-weight: 700;
-      transition: 0.3s;
-      box-shadow: 0 8px 18px rgba(37,211,102,0.4);
-    }
-    .cta:hover { transform: translateY(-3px); }
+    .section-title{font-size:22px; margin:20px 0 10px}
+    .muted{color:var(--ink-soft)}
 
-    /* بانر الصور */
-    .banner {
-      width: 100%;
-      height: 280px;
-      overflow: hidden;
-      border-radius: var(--radius);
-      margin: 30px 0;
-      position: relative;
-      box-shadow: var(--shadow);
-    }
-    .banner img {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-    .banner img.active { opacity: 1; }
+    .services{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+    @media (min-width:720px){ .services{grid-template-columns:repeat(4,1fr)} }
+    .card{background:#fff; border:1px solid #eee; border-radius:16px; padding:16px; min-height:120px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; text-align:center; transition:transform .18s, box-shadow .18s}
+    .card:hover{ transform:translateY(-4px); box-shadow:var(--shadow) }
+    .icon{font-size:28px}
+    .card small{color:var(--ink-soft)}
+    .card.link{cursor:pointer; position:relative}
+    .card.link::after{content:""; position:absolute; inset:0; border-radius:16px; outline:2px solid transparent; transition:outline-color .18s}
+    .card.link:hover::after{ outline-color: rgba(42,112,220,.25) }
 
-    /* الخدمات */
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin: 30px 0;
-    }
-    .card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      text-align: center;
-      padding: 20px;
-      box-shadow: var(--shadow);
-      transition: transform .3s ease;
-      cursor: pointer;
-    }
-    .card:hover { transform: translateY(-6px); }
-    .icon { font-size: 34px; color: var(--gold); }
-    .card small { color: var(--text-muted); }
+    .widget-section{position:relative; margin-top:18px; background:#fff; border:1px solid #eee; border-radius:var(--radius); box-shadow:var(--shadow); padding:16px}
+    .widget-section[hidden]{display:none!important;}
+    .widget-close{position:absolute; top:10px; inset-inline-end:10px; border:none; background:#fff; color:#333; font-weight:800; line-height:1; width:36px; height:36px; border-radius:50%; box-shadow:0 6px 16px rgba(0,0,0,.15); cursor:pointer; display:flex; align-items:center; justify-content:center; border:1px solid #eee}
+    .widget-close:hover{background:#f6f6f6}
 
-    /* تابعنا */
-    .follow {
-      text-align: center;
-      margin: 50px 0 30px;
-    }
-    .follow h2 {
-      color: var(--gold);
-      font-size: 24px;
-    }
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      margin-top: 10px;
-    }
-    .socials a {
-      width: 45px;
-      height: 45px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--card-bg);
-      border-radius: 50%;
-      color: var(--gold);
-      font-size: 22px;
-      text-decoration: none;
-      transition: background .3s;
-    }
-    .socials a:hover { background: var(--gold); color: var(--bg-dark); }
+    .testimonials{margin:40px auto 20px; background:rgba(255,255,255,0.85); border-radius:20px; padding:20px; box-shadow:var(--shadow); text-align:center}
+    .testimonial{display:none; animation:fadeIn 1s ease}
+    .testimonial.active{display:block}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+    .testimonial p{font-size:16px; color:var(--ink-soft); margin:0}
+    .testimonial strong{display:block; margin-top:8px; color:var(--ink); font-weight:700}
 
-    /* آراء العملاء */
-    .reviews {
-      margin: 50px 0;
-    }
-    .reviews h2 {
-      text-align: center;
-      color: var(--gold);
-      margin-bottom: 20px;
-    }
-    .review-box {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 20px;
-      margin: 10px auto;
-      max-width: 750px;
-      box-shadow: var(--shadow);
-    }
-    .review-box p { color: var(--text-muted); margin-bottom: 8px; }
-    .review-box strong { color: var(--gold); }
+    .social .icons{display:flex; gap:10px; justify-content:center; margin-top:10px}
+    .social a{display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:50%; background:#fff; border:1px solid #e6e6e6; box-shadow:var(--shadow); text-decoration:none; font-size:20px}
+    .social a:hover{transform:translateY(-2px)}
 
-    /* الأسئلة الشائعة */
-    .faq {
-      margin: 50px auto;
-      max-width: 800px;
-    }
-    .faq h2 { text-align: center; color: var(--gold); margin-bottom: 16px; }
-    details {
-      background: var(--card-bg);
-      padding: 15px 18px;
-      margin: 10px 0;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    summary {
-      font-weight: 600;
-      font-size: 17px;
-    }
-    details[open] summary { color: var(--gold); }
-    details p { color: var(--text-muted); margin-top: 8px; }
+    .faq{background:#fff; border:1px solid #eee; border-radius:18px; box-shadow:var(--shadow); padding:16px; margin:20px 0}
+    .faq details{border:1px solid #eef1f6; border-radius:12px; padding:12px 14px; margin-bottom:10px; background:#fcfdff}
+    .faq summary{cursor:pointer; font-weight:800}
+    .faq p{margin:8px 0 0; color:var(--ink-soft)}
 
-    /* الخريطة */
-    .map {
-      text-align: center;
-      margin: 60px 0;
-    }
-    .map iframe {
-      width: 100%;
-      height: 350px;
-      border: none;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
+    .map{margin:20px 0; border-radius:18px; overflow:hidden; box-shadow:var(--shadow); border:1px solid #eee}
+    .map iframe{width:100%; height:300px; border:0}
 
-    footer {
-      text-align: center;
-      padding: 25px 10px;
-      font-size: 14px;
-      color: var(--text-muted);
-      border-top: 1px solid rgba(255,255,255,0.1);
-      margin-top: 50px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    footer{text-align:center; color:#687793; font-size:14px; margin:28px 0 10px}
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="logo.png" alt="SIDAR Logo">
+  <div class="container">
+    <header>
+      <div class="logo"><img src="logo.PNG" alt="الشعار"></div>
+    </header>
+
+    <div class="hero-slider" id="heroSlider">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80" class="active">
+      <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=1400&q=80">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80">
     </div>
-  </header>
 
-  <section class="banner">
-    <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1" class="active" alt="travel1">
-    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="travel2">
-    <img src="https://images.unsplash.com/photo-1511739001486-6bfe10ce785f" alt="travel3">
-  </section>
+    <section class="welcome">
+      <h1>مرحبًا بك في سيدار ترافل 🌍</h1>
+      <p>نوفّر لك حلول السفر الحديثة: eSIM، تذاكر طيران، سيارات، وأماكن تصوير المسلسلات.</p>
+      <a id="wa-top" class="cta" href="#">💬 تواصل معنا</a>
+    </section>
 
-  <section class="welcome">
-    <h1>مرحبًا بك في سيدار ترافل ✈️</h1>
-    <p>نوفر لك حلول السفر الحديثة: eSIM، تذاكر طيران، سيارات، وأنشطة عالمية بخدمة فاخرة.</p>
-    <a class="cta" href="#">💬 تواصل عبر واتساب</a>
-  </section>
+    <h2 class="section-title">الخدمات الحالية</h2>
+    <section class="services">
+      <div class="card link" id="esimCard"><div class="icon">📶</div><div>بطاقات eSIM</div></div>
+      <div class="card link" id="flightCard"><div class="icon">✈️</div><div>تذاكر الطيران</div></div>
+      <div class="card link" id="filmCard"><div class="icon">🎬</div><div>أماكن تصوير</div></div>
+      <div class="card link" id="carCard"><div class="icon">🚗</div><div>تأجير سيارات</div></div>
+    </section>
 
-  <section class="services">
-    <div class="card"><div class="icon">📶</div><div>بطاقات eSIM</div><small>إنترنت فوري في أي دولة</small></div>
-    <div class="card"><div class="icon">✈️</div><div>تذاكر طيران</div><small>أفضل الأسعار العالمية</small></div>
-    <div class="card"><div class="icon">🚗</div><div>تأجير سيارات</div><small>شركاء عالميون موثوقون</small></div>
-    <div class="card"><div class="icon">🎬</div><div>أماكن تصوير</div><small>رحلات مخصصة لعشاق الدراما</small></div>
-  </section>
-
-  <section class="follow">
-    <h2>تابعنا على المنصات 🌐</h2>
-    <div class="socials">
-      <a href="#" title="Instagram">📸</a>
-      <a href="#" title="TikTok">🎵</a>
+    <div class="testimonials" id="testimonials">
+      <h2 class="section-title">آراء عملائنا</h2>
+      <div class="testimonial active"><p>“خدمة ممتازة جدًا وسرعة في الرد!”</p><strong>— أحمد من دبي</strong></div>
+      <div class="testimonial"><p>“رحلتي كانت منظمة جدًا، شكرًا سيدار.”</p><strong>— ليلى من عمّان</strong></div>
+      <div class="testimonial"><p>“أفضل تجربة سفر على الإطلاق.”</p><strong>— فهد من الرياض</strong></div>
     </div>
-  </section>
 
-  <section class="reviews">
-    <h2>آراء عملائنا 💬</h2>
-    <div class="review-box"><p>"تجربة ممتازة وخدمة سريعة جدًا!"</p><strong>- أحمد من دبي</strong></div>
-    <div class="review-box"><p>"أفضل شركة تعاملت معها لحجز الرحلات"</p><strong>- سارة من الرياض</strong></div>
-    <div class="review-box"><p>"سهولة في التعامل وأسعار مميزة"</p><strong>- يوسف من عمّان</strong></div>
-  </section>
+    <section class="social">
+      <h2 class="section-title">تابعنا</h2>
+      <div class="icons">
+        <a href="#">📸</a>
+        <a href="#">🎵</a>
+      </div>
+    </section>
 
-  <section class="faq">
-    <h2>الأسئلة الشائعة ❓</h2>
-    <details><summary>هل يمكن حجز الرحلة بدون دفع فوري؟</summary><p>نعم، بعض الرحلات تتيح الحجز المسبق بدون دفع فوري وفق سياسة الشركة.</p></details>
-    <details><summary>هل بطاقات eSIM تعمل في كل الدول؟</summary><p>نعمل مع مزودي خدمة عالميين يغطيون أكثر من 180 دولة حول العالم.</p></details>
-    <details><summary>كيف يمكنني التواصل مع الدعم؟</summary><p>عبر زر واتساب أو صفحة التواصل الرسمية الخاصة بسيدار ترافل.</p></details>
-  </section>
+    <section class="faq">
+      <h2 class="section-title">الأسئلة الشائعة</h2>
+      <details><summary>هل يمكن الحجز بدون دفع فوري؟</summary><p>نعم، حسب سياسة المزود.</p></details>
+      <details><summary>كيف أستخدم بطاقة eSIM؟</summary><p>يُرسل لك QR للتفعيل بعد الدفع.</p></details>
+      <details><summary>هل الأسعار ثابتة؟</summary><p>تتغير حسب المواسم والعروض.</p></details>
+    </section>
 
-  <section class="map">
-    <h2 style="color:var(--gold);">موقعنا 🗺️</h2>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.048154032602!2d35.2137!3d31.7717!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502d7e2f43d1cb9%3A0x2a1bbef21a0!2z2KfZhNiq2KfZhSDYp9mE2YXZgQ!5e0!3m2!1sar!2s!4v00000000000"></iframe>
-  </section>
+    <div class="map">
+      <iframe src="https://www.google.com/maps?q=Tel+Aviv&output=embed"></iframe>
+    </div>
 
-  <footer>
-    © <span id="year"></span> جميع الحقوق محفوظة – SIDAR TRAVEL
-  </footer>
+    <footer>© <span id="year"></span> جميع الحقوق محفوظة – SIDAR TRAVEL</footer>
+  </div>
 
   <script>
-    // تغيير الصور كل 3 ثوانٍ
-    let current = 0;
-    const slides = document.querySelectorAll('.banner img');
-    setInterval(() => {
-      slides[current].classList.remove('active');
-      current = (current + 1) % slides.length;
-      slides[current].classList.add('active');
-    }, 3000);
-    document.getElementById("year").textContent = new Date().getFullYear();
+    const slides=document.querySelectorAll('#heroSlider img');let i=0;
+    setInterval(()=>{slides[i].classList.remove('active');i=(i+1)%slides.length;slides[i].classList.add('active');},4000);
+    document.getElementById("year").textContent=new Date().getFullYear();
   </script>
 </body>
 </html>
