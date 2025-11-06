@@ -16,12 +16,24 @@
     html{scroll-behavior:smooth;}
     body{
       margin:0; font-family:"Tajawal",system-ui,-apple-system,Segoe UI,Roboto; color:var(--ink);
-      background:
-        radial-gradient(800px 500px at 15% -10%, rgba(255,232,149,.6), rgba(255,232,149,0) 60%),
-        radial-gradient(900px 600px at 100% 0%, rgba(42,112,220,.25), rgba(42,112,220,0) 70%),
-        linear-gradient(180deg, #fff 0%, var(--bg) 60%, #FFF 100%);
       min-height:100svh; overflow-x:hidden;
+      background:linear-gradient(180deg, #fff 0%, var(--bg) 60%, #FFF 100%);
     }
+
+    /* الخلفية المتحركة */
+    .bg-blobs{position:fixed; inset:0; overflow:hidden; z-index:-1;}
+    .blob{
+      position:absolute; filter:blur(60px); opacity:.35; border-radius:50%;
+      animation:float 40s ease-in-out infinite;
+    }
+    .b1{width:500px;height:500px;left:-100px;top:-100px;background:#2A70DC;}
+    .b2{width:600px;height:600px;right:-150px;top:-50px;background:#FF7A1A;}
+    .b3{width:550px;height:550px;left:40%;bottom:-150px;background:#FFE895;}
+    @keyframes float{
+      0%,100%{transform:translateY(0) translateX(0);}
+      50%{transform:translateY(-40px) translateX(40px);}
+    }
+
     .container{max-width:1080px; margin:auto; padding:20px}
 
     /* الشعار */
@@ -36,7 +48,7 @@
     .hero-slider img.active{opacity:1;}
     @media(max-width:720px){.hero-slider{height:240px}}
 
-    /* بطاقة التعريف المطوّرة */
+    /* بطاقة التعريف */
     .welcome.pro{
       max-width: 860px;
       padding: 20px;
@@ -89,7 +101,7 @@
     .card:hover{transform:translateY(-4px); box-shadow:var(--shadow)}
     .icon{font-size:28px}
 
-    /* شريط آراء العملاء (يمين ← يسار) */
+    /* شريط آراء العملاء */
     .reviews-ticker{margin: 30px 0;text-align:center;}
     .ticker-wrap{
       width:100%;overflow:hidden;background:#ffffffcc;border:1px solid #eee;
@@ -111,29 +123,34 @@
     .follow-us .icons a:hover{transform:translateY(-3px)}
     .follow-us .icons img{width:26px;height:26px}
 
-    /* الفوتر */
     footer{text-align:center;color:#687793;font-size:14px;margin:28px 0 10px}
   </style>
 </head>
 <body>
+  <!-- الخلفية المتحركة -->
+  <div class="bg-blobs">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
+
   <div class="container">
 
     <!-- الشعار -->
     <header>
       <div class="logo">
-        <!-- تأكد أن ملف logo.PNG موجود بجانب هذا الملف -->
         <img src="logo.PNG" alt="شعار سيدار ترافل">
       </div>
     </header>
 
-    <!-- سلايدر الهيرو -->
+    <!-- سلايدر -->
     <div class="hero-slider" id="heroSlider">
       <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80" class="active" alt="شاطئ">
       <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=1400&q=80" alt="مدينة">
       <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80" alt="طبيعة">
     </div>
 
-    <!-- بطاقة تعريف مطوّرة -->
+    <!-- بطاقة تعريف -->
     <section class="welcome pro">
       <div class="w-head">
         <img src="logo.PNG" alt="SIDAR" class="w-logo" />
@@ -172,7 +189,7 @@
       <div class="card"><div class="icon">🎬</div><div>أماكن تصوير</div></div>
     </section>
 
-    <!-- شريط آراء العملاء -->
+    <!-- آراء العملاء -->
     <section class="reviews-ticker">
       <h2 class="section-title">آراء عملائنا</h2>
       <div class="ticker-wrap">
@@ -206,17 +223,16 @@
   </div>
 
   <script>
-    // إعداد رقم واتساب (عدّل الرقم)
     const PHONE="9725XXXXXXXX";
     const baseWA=(t)=>`https://wa.me/${PHONE}?text=${encodeURIComponent(t)}`;
     const waTop=document.getElementById("wa-top");
     if(waTop) waTop.href=baseWA("مرحبًا، أريد الاستفسار عن الخدمات ✈️");
 
-    // سلايدر الهيرو
+    // سلايدر
     const slides=document.querySelectorAll('#heroSlider img');let i=0;
     setInterval(()=>{slides[i].classList.remove('active');i=(i+1)%slides.length;slides[i].classList.add('active');},4000);
 
-    // تأثير كتابة لعنوان البطاقة
+    // تأثير الكتابة
     (function(){
       const el=document.getElementById('typedTitle');if(!el)return;
       const full=el.textContent.trim();let j=0;el.textContent='';
@@ -224,7 +240,6 @@
       requestAnimationFrame(tick);
     })();
 
-    // سنة الفوتر
     document.getElementById("year").textContent=new Date().getFullYear();
   </script>
 </body>
