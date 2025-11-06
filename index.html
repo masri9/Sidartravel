@@ -1,225 +1,146 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SIDAR TRAVEL — صفحة الهبوط</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
     :root{
-      --blue:#0074D9;     /* أزرق الشعار */
-      --orange:#FF7A1A;   /* برتقالي */
-      --yellow:#FFE45C;   /* أصفر فاتح */
-      --green:#00C389;    /* أخضر تركوازي */
-      --white:#ffffff;
-      --ink:#0f1320;
-      --whatsapp:#25D366;
-      --shadow:0 10px 24px rgba(0,0,0,.25);
+      --blue:#2A70DC; --orange:#FF7A1A; --yellow:#FFE895;
+      --ink:#0f1320; --ink-soft:#51607c; --white:#ffffff;
+      --card:#ffffffdd; --radius:18px; --shadow:0 12px 30px rgba(0,0,0,.15);
+      --whatsapp:#25D366; --bg:#FFF7E6;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;}
     body{
-      font-family:"Tajawal",system-ui;
-      color:var(--ink);
-      min-height:100vh;
-      overflow-x:hidden;
-      position:relative;
+      margin:0; font-family:"Tajawal",system-ui,-apple-system,Segoe UI,Roboto; color:var(--ink);
+      /* ← الخلفية الأصلية كما كانت */
+      background:
+        radial-gradient(800px 500px at 15% -10%, rgba(255,232,149,.6), rgba(255,232,149,0) 60%),
+        radial-gradient(900px 600px at 100% 0%, rgba(42,112,220,.25), rgba(42,112,220,0) 70%),
+        linear-gradient(180deg, #fff 0%, var(--bg) 60%, #FFF 100%);
+      min-height:100svh; overflow-x:hidden; position:relative;
     }
 
-    /* 🌊 خلفية متحركة بألوان الشعار */
-    .animated-bg{
-      position:fixed;
-      inset:0;
-      z-index:-2;
-      background:linear-gradient(270deg,var(--blue),var(--orange),var(--yellow),var(--green));
-      background-size:800% 800%;
-      animation:gradientShift 15s ease infinite;
+    /* Blobs ثابتة (كما قبل) */
+    .blob{position:fixed; z-index:-1; filter:blur(20px); opacity:.6; transform:rotate(8deg)}
+    .blob.b1{ top:-120px; left:-140px; width:380px; height:380px; background:radial-gradient(circle, var(--yellow), rgba(255,232,149,0)); border-radius:42% 58% 57% 43%/56% 45% 55% 44%;}
+    .blob.b2{ top:-90px; right:-160px; width:420px; height:420px; background:radial-gradient(circle, rgba(42,112,220,.25), rgba(42,112,220,0)); border-radius:58% 42% 40% 60%/50% 52% 48% 50%;}
+    .blob.b3{ bottom:-140px; left:20%; width:520px; height:520px; background:radial-gradient(circle, rgba(255,122,26,.22), rgba(255,122,26,0)); border-radius:40% 60% 62% 38%/45% 55% 50% 50%;}
+
+    /* 👇 أنيميشن خلفي جديد: شريط أمواج فاتح أسفل الصفحة */
+    .wave-bg{
+      pointer-events:none;
+      position:fixed; left:0; right:0; bottom:0;
+      height:260px; z-index:-1; overflow:hidden;
+      mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,.7), rgba(0,0,0,0));
+      -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,.7), rgba(0,0,0,0));
     }
-    @keyframes gradientShift{
-      0%{background-position:0% 50%;}
-      50%{background-position:100% 50%;}
-      100%{background-position:0% 50%;}
+    .wave{
+      position:absolute; left:-50%; width:200%; height:140px; border-radius:40%;
+      opacity:.35; filter:blur(0.3px);
+      background: linear-gradient(180deg, #fff, #eaf3ff);
+      animation: waveMove 22s linear infinite;
+    }
+    .wave.w2{ bottom:40px; opacity:.28; background:linear-gradient(180deg,#ffffff,#e3f0ff); animation-duration:28s; }
+    .wave.w3{ bottom:80px; opacity:.22; background:linear-gradient(180deg,#ffffff,#d9ebff); animation-duration:34s; }
+    @keyframes waveMove{
+      0%{ transform: translateX(0); }
+      100%{ transform: translateX(50%); }
     }
 
-    /* موج شفاف فوق الخلفية */
-    .overlay-wave{
-      position:fixed;
-      inset:0;
-      background:url('https://www.transparenttextures.com/patterns/wavecut.png');
-      opacity:0.08;
-      mix-blend-mode:overlay;
-      z-index:-1;
-    }
+    .container{max-width:1080px; margin:auto; padding:20px}
 
-    /* المحتوى العام */
-    .container{
-      max-width:1080px;
-      margin:auto;
-      padding:20px;
-      text-align:center;
-      position:relative;
-      z-index:2;
+    /* Header / Logo */
+    header{text-align:center; padding:28px 0 12px}
+    .logo{
+      display:inline-block; padding:12px; background:rgba(255,255,255,.8);
+      border-radius:50%; border:1px solid #eee; box-shadow:var(--shadow);
     }
+    .logo img{height:70px;width:auto;display:block}
 
-    /* شعار متحرك */
-    header{margin:30px 0 20px}
-    .logo img{
-      height:110px;
-      width:auto;
-      display:block;
-      margin:auto;
-      animation:float 4s ease-in-out infinite;
-    }
-    @keyframes float{
-      0%,100%{transform:translateY(0);}
-      50%{transform:translateY(-6px);}
-    }
+    /* Hero Slider */
+    .hero-slider{width:100%; height:300px; border-radius:20px; overflow:hidden; position:relative; margin:20px auto 10px; box-shadow:var(--shadow)}
+    .hero-slider img{width:100%; height:100%; object-fit:cover; position:absolute; inset:0; opacity:0; transition:opacity 1s ease}
+    .hero-slider img.active{opacity:1;}
 
-    /* ترحيب */
-    .welcome{
-      background:rgba(255,255,255,.8);
-      border-radius:22px;
-      box-shadow:var(--shadow);
-      padding:20px;
-      max-width:760px;
-      margin:0 auto 30px;
-      backdrop-filter:blur(5px);
-    }
-    .welcome h1{margin:6px 0;font-size:28px;color:var(--ink);}
-    .welcome p{margin:0 0 14px; color:#374151;}
-    .cta{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:12px 26px;
-      border-radius:50px;
-      background:linear-gradient(90deg,var(--whatsapp),#1ebe5b);
-      color:#fff;
-      font-weight:700;
-      text-decoration:none;
-      box-shadow:0 10px 24px rgba(37,211,102,.35);
-      transition:transform .2s ease;
-    }
-    .cta:hover{transform:translateY(-3px);}
+    /* Welcome */
+    .welcome{background:var(--card); border:1px solid #eee; border-radius:var(--radius); box-shadow:var(--shadow); padding:18px; margin:14px auto; max-width:760px; text-align:center}
+    .welcome h1{margin:4px 0 6px; font-size:28px}
+    .welcome p{margin:0 0 14px; color:var(--ink-soft)}
 
-    /* الخدمات */
-    .section-title{font-size:24px;margin:30px 0 14px;color:#fff;text-shadow:0 1px 5px rgba(0,0,0,.25);}
-    .services{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-      gap:16px;
-    }
-    .card{
-      background:#fff;
-      border-radius:18px;
-      padding:20px;
-      box-shadow:var(--shadow);
-      transition:transform .25s;
-      cursor:pointer;
-    }
-    .card:hover{transform:translateY(-5px);}
-    .icon{font-size:34px;margin-bottom:8px;}
-    .card small{color:#6b7280;}
+    /* WhatsApp CTA */
+    .cta{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 20px; border-radius:50px; background:linear-gradient(90deg, var(--whatsapp), #1ebe5b); color:#fff; font-weight:700; font-size:16px; box-shadow:0 10px 24px rgba(37,211,102,.35); text-decoration:none; transition:transform .2s, box-shadow .2s}
+    .cta:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(37,211,102,.5)}
+    .cta svg{width:22px; height:22px; fill:#fff}
 
-    /* آراء العملاء (شريط متحرك) */
-    .reviews{
-      margin:40px auto 20px;
-      text-align:center;
-    }
-    .reviews .bar{
-      width:100%;
-      overflow:hidden;
-      background:rgba(255,255,255,.85);
-      border-radius:14px;
-      border:1px solid #eee;
-      box-shadow:var(--shadow);
-      padding:10px 0;
-    }
-    .reviews .scroll{
-      display:inline-block;
-      white-space:nowrap;
-      animation:scroll-left 28s linear infinite;
-    }
-    .review-item{
-      display:inline-block;
-      margin-inline:40px;
-      font-size:15px;
-      color:#1f2937;
-      white-space:nowrap;
-    }
-    @keyframes scroll-left{
-      0%{transform:translateX(100%);}
-      100%{transform:translateX(-100%);}
-    }
+    .section-title{font-size:22px; margin:26px 0 10px; text-align:center}
+    .muted{color:var(--ink-soft)}
 
-    /* تابعنا */
-    .social{
-      text-align:center;
-      margin:40px 0 10px;
-    }
-    .social span{
-      display:block;
-      margin-bottom:10px;
-      font-weight:700;
-      color:#fff;
-      text-shadow:0 1px 4px rgba(0,0,0,.3);
-    }
-    .social .icons{
-      display:flex;
-      gap:18px;
-      justify-content:center;
-    }
-    .social .icons a{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:52px;
-      height:52px;
-      border-radius:50%;
-      background:#fff;
-      border:1px solid #ddd;
-      box-shadow:0 4px 12px rgba(0,0,0,.1);
-      transition:.2s;
-    }
-    .social .icons a:hover{transform:translateY(-3px);}
-    .social .icons img{width:28px;height:28px;}
+    /* Services */
+    .services{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px}
+    .card{background:#fff; border:1px solid #eee; border-radius:16px; padding:18px; text-align:center; box-shadow:var(--shadow); transition:.25s; cursor:pointer}
+    .card:hover{ transform:translateY(-4px); }
+    .icon{font-size:32px;margin-bottom:6px}
+    .card small{color:var(--ink-soft)}
 
-    footer{
-      text-align:center;
-      color:#fff;
-      font-size:14px;
-      margin:28px 0 10px;
-      text-shadow:0 1px 6px rgba(0,0,0,.25);
-    }
+    /* Reviews ticker */
+    .reviews{margin:30px auto 10px;text-align:center}
+    .bar{width:100%;overflow:hidden;background:rgba(255,255,255,.9);border-radius:14px;border:1px solid #eee;box-shadow:var(--shadow);padding:10px 0}
+    .scroll{display:inline-block;white-space:nowrap;animation:scroll-left 28s linear infinite}
+    .review-item{display:inline-block;margin-inline:40px;font-size:15px;color:#1f2937;white-space:nowrap}
+    @keyframes scroll-left{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
+
+    /* Social */
+    .social{text-align:center;margin:36px 0 10px}
+    .social span{display:block;margin-bottom:10px;font-weight:700;color:#2A70DC}
+    .icons{display:flex;gap:18px;justify-content:center}
+    .icons a{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;background:#fff;border:1px solid #ddd;box-shadow:0 4px 12px rgba(0,0,0,.07);transition:.2s}
+    .icons a:hover{transform:translateY(-3px)}
+    .icons img{width:26px;height:26px}
+
+    footer{text-align:center;color:#687793;font-size:14px;margin:24px 0}
   </style>
 </head>
-
 <body>
+  <!-- الخلفية الأصلية -->
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <!-- الأنيميشن الخلفي الجديد (أمواج) -->
+  <div class="wave-bg">
+    <div class="wave"></div>
+    <div class="wave w2"></div>
+    <div class="wave w3"></div>
+  </div>
 
-  <!-- 🌈 الخلفية المتحركة -->
-  <div class="animated-bg"></div>
-  <div class="overlay-wave"></div>
-
-  <!-- المحتوى -->
   <div class="container">
-
-    <!-- الشعار -->
+    <!-- Logo -->
     <header>
       <div class="logo">
-        <img src="7487FBDD-2F6F-42F1-B02E-DA3E86200568.png" alt="شعار SIDAR TRAVEL">
+        <img src="logo.PNG" alt="الشعار">
       </div>
     </header>
 
-    <!-- بطاقة ترحيب -->
+    <!-- Hero Slider -->
+    <div class="hero-slider" id="heroSlider">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80" class="active" alt="شاطئ">
+      <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=1400&q=80" alt="مدينة">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80" alt="طبيعة">
+    </div>
+
+    <!-- Welcome -->
     <section class="welcome">
-      <h1>مرحبًا بك في <strong>SIDAR TRAVEL</strong> 🌴</h1>
-      <p>ألوان الصيف والسفر تلتقي هنا — استكشف وجهتك القادمة معنا بكل سهولة وراحة.</p>
-      <a href="https://wa.me/9725XXXXXXXX" class="cta">💬 تواصل عبر واتساب</a>
+      <h1>مرحبًا بك في سيدار ترافل 🌍</h1>
+      <p>نوفّر حلول السفر الحديثة: eSIM، تذاكر طيران، سيارات، وأماكن تصوير المسلسلات.</p>
+      <a id="wa-top" class="cta" href="#">
+        <!-- أيقونة واتساب -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16.04 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.2 7l-1.4 5.2 5.3-1.4c1.9 1.1 4.1 1.7 6.4 1.7 6.6 0 12-5.4 12-12S22.6 3 16.04 3z"/><path d="M21.1 18.3c-.3-.2-1.6-.8-1.9-.9-.3-.1-.5-.2-.8.2s-.9.9-1.1 1.1-.4.2-.7.1c-.3-.2-1.3-.5-2.4-1.6-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.8-.9c.1-.2.1-.4 0-.6l-1.1-2.5c-.3-.6-.6-.5-.8-.5h-.7c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.2 3.2c.1.2 2.1 3.2 5.1 4.4.7.3 1.2.5 1.6.6.7.2 1.4.2 1.9.1.6-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.3z"/></svg>
+        <span>تواصل معنا</span>
+      </a>
     </section>
 
-    <!-- الخدمات -->
+    <!-- Services -->
     <h2 class="section-title">الخدمات الحالية</h2>
     <section class="services">
       <div class="card"><div class="icon">📶</div><div>بطاقات eSIM</div><small>إنترنت دولي فوري</small></div>
@@ -228,13 +149,13 @@
       <div class="card"><div class="icon">🎬</div><div>أماكن تصوير</div><small>مواقع شهيرة للمسلسلات</small></div>
     </section>
 
-    <!-- آراء العملاء -->
+    <!-- Reviews ticker -->
     <section class="reviews">
       <h2 class="section-title">آراء عملائنا</h2>
       <div class="bar">
         <div class="scroll">
           <span class="review-item">⭐️⭐️⭐️⭐️⭐️ أحمد من دبي: تجربة رائعة وخدمة ممتازة!</span>
-          <span class="review-item">⭐️⭐️⭐️⭐️⭐️ ليلى من عمان: كل شيء كان منظم وسهل 👌</span>
+          <span class="review-item">⭐️⭐️⭐️⭐️⭐️ ليلى من عمّان: كل شيء كان منظم وسهل 👌</span>
           <span class="review-item">⭐️⭐️⭐️⭐️⭐️ فهد من الرياض: دعم سريع وأسعار ممتازة 💬</span>
           <span class="review-item">⭐️⭐️⭐️⭐️ رامي من حيفا: شكراً سيدار على الرحلة المثالية ✈️</span>
           <span class="review-item">⭐️⭐️⭐️⭐️⭐️ نورا من جدة: سرعة في الرد والتواصل 💚</span>
@@ -242,9 +163,9 @@
       </div>
     </section>
 
-    <!-- تابعنا -->
+    <!-- Social -->
     <section class="social">
-      <span>تابعنا على السوشيال ميديا</span>
+      <span>تابعنا</span>
       <div class="icons">
         <a href="https://instagram.com/yourpage" target="_blank" aria-label="Instagram">
           <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
@@ -255,16 +176,24 @@
       </div>
     </section>
 
-    <!-- تذييل -->
+    <!-- Footer -->
     <footer>
       © <span id="year"></span> جميع الحقوق محفوظة – SIDAR TRAVEL
     </footer>
-
   </div>
 
+  <!-- تفعيل الأزرار والشرائح -->
   <script>
+    // واتساب
+    const PHONE="9725XXXXXXXX";
+    document.getElementById("wa-top").href = `https://wa.me/${PHONE}?text=${encodeURIComponent("مرحبًا، أريد الاستفسار عن الخدمات ✈️")}`;
+
+    // سلايدر
+    const slides=document.querySelectorAll('#heroSlider img');let i=0;
+    setInterval(()=>{slides[i].classList.remove('active');i=(i+1)%slides.length;slides[i].classList.add('active');},4000);
+
+    // سنة الفوتر
     document.getElementById("year").textContent=new Date().getFullYear();
   </script>
-
 </body>
 </html>
