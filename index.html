@@ -23,106 +23,94 @@
     }
     .container{max-width:1080px; margin:auto; padding:20px}
 
+    /* Logo */
     header{text-align:center; padding:28px 0 12px}
     .logo{display:inline-block; padding:12px; background:rgba(255,255,255,.8);
       border-radius:50%; border:1px solid #eee; box-shadow:var(--shadow);}
     .logo img{height:70px;width:auto;display:block}
 
+    /* Hero Slider */
     .hero-slider{width:100%; height:360px; border-radius:20px; overflow:hidden; position:relative; margin:20px auto; box-shadow:var(--shadow)}
     .hero-slider img{width:100%; height:100%; object-fit:cover; position:absolute; inset:0; opacity:0; transition:opacity 1s ease}
     .hero-slider img.active{opacity:1;}
     @media(max-width:720px){.hero-slider{height:240px}}
 
-    .welcome{background:var(--card); border:1px solid #eee; border-radius:var(--radius); box-shadow:var(--shadow); padding:18px; margin:14px auto; max-width:760px; text-align:center}
-    .cta{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 20px;
+    /* Welcome PRO */
+    .welcome.pro{
+      max-width: 860px;
+      padding: 20px;
+      margin: 16px auto;
+      background:
+        linear-gradient(#ffffffcc, #ffffffcc) padding-box,
+        linear-gradient(135deg, #2A70DC, #FF7A1A, #FFE895) border-box;
+      border: 1px solid transparent;
+      border-radius: 22px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.12);
+      backdrop-filter: blur(6px);
+      text-align:center;
+    }
+    .w-head{display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap}
+    .w-logo{width:56px; height:56px; object-fit:contain; border-radius:14px; background:#fff; border:1px solid #eee; padding:6px}
+    .w-sub{margin:4px 0 0; color:var(--ink-soft)}
+    .w-badge{
+      background:#0f1320; color:#fff; font-weight:800; font-size:12px;
+      padding:8px 10px; border-radius:999px; box-shadow:0 8px 18px rgba(0,0,0,.18)
+    }
+    .w-chips{
+      display:flex; gap:8px; flex-wrap:wrap; margin:12px 0 10px; justify-content:center;
+    }
+    .w-chips span{
+      background:#fff; border:1px solid #e9eef6; color:#334155;
+      padding:8px 12px; border-radius:999px; font-size:13px; box-shadow:0 6px 12px rgba(0,0,0,.06)
+    }
+    .w-actions{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:6px}
+    .cta{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 20px;
       border-radius:50px; background:linear-gradient(90deg, var(--whatsapp), #1ebe5b);
-      color:#fff; font-weight:700; box-shadow:0 10px 24px rgba(37,211,102,.35);
-      text-decoration:none; transition:transform .2s ease, box-shadow .2s ease}
-    .cta:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(37,211,102,.5)}
+      color:#fff; font-weight:700; text-decoration:none; transition:.2s;
+    }
+    .cta:hover{transform:translateY(-3px)}
+    .cta.ghost{
+      background:#f6f9ff; color:#1f3a7a; box-shadow:none; border:1px solid #e3eafc;
+    }
+    .w-stats{
+      margin-top:12px; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; text-align:center
+    }
+    .w-stats strong{display:block; font-size:22px}
+    .w-stats small{color:#6b7a99}
+    @media(max-width:720px){.w-head{justify-content:center}.w-badge{order:3}}
 
-    .section-title{font-size:22px; margin:20px 0 10px; text-align:center;}
-
+    /* Sections */
+    .section-title{text-align:center; font-size:22px; margin:20px 0 10px}
     .services{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
     @media(min-width:720px){.services{grid-template-columns:repeat(4,1fr)}}
     .card{background:#fff; border:1px solid #eee; border-radius:16px; padding:16px; text-align:center; cursor:pointer; transition:.2s}
     .card:hover{transform:translateY(-4px); box-shadow:var(--shadow)}
     .icon{font-size:28px}
 
-    .widget{margin-top:18px; background:#fff; border:1px solid #eee; border-radius:var(--radius); box-shadow:var(--shadow); padding:16px; position:relative}
-    .widget[hidden]{display:none!important}
-    .close{position:absolute; top:10px; inset-inline-end:10px; border:none; background:#fff; width:32px; height:32px; border-radius:50%; font-weight:700; cursor:pointer}
-
-    /* ===== شريط آراء العملاء ===== */
-    .reviews-ticker{
-      margin: 30px 0;
-      text-align: center;
-    }
+    /* Reviews ticker */
+    .reviews-ticker{margin: 30px 0;text-align:center;}
     .ticker-wrap{
-      width: 100%;
-      overflow: hidden;
-      background: #ffffffcc;
-      border: 1px solid #eee;
-      border-radius: 14px;
-      box-shadow: var(--shadow);
-      padding: 8px 0;
-      direction: rtl;
+      width:100%;overflow:hidden;background:#ffffffcc;border:1px solid #eee;
+      border-radius:14px;box-shadow:var(--shadow);padding:8px 0;direction:rtl;
     }
-    .ticker{
-      display: inline-block;
-      white-space: nowrap;
-      animation: scroll-left 25s linear infinite;
-    }
-    .ticker-item{
-      display: inline-block;
-      margin-inline: 40px;
-      font-size: 15px;
-      color: #1f2937;
-    }
-    @keyframes scroll-left {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-    .ticker-wrap:hover .ticker {
-      animation-play-state: paused;
-    }
+    .ticker{display:inline-block;white-space:nowrap;animation:scroll-left 25s linear infinite;}
+    .ticker-item{display:inline-block;margin-inline:40px;font-size:15px;color:#1f2937;}
+    @keyframes scroll-left {0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
+    .ticker-wrap:hover .ticker{animation-play-state:paused;}
 
-    /* ===== Follow-us bar ===== */
-    .follow-us{
-      position:relative;
-      z-index:5;
-      background:#fff;
-      border-top:1px solid #eee;
-      border-bottom:1px solid #eee;
-      box-shadow:0 -4px 16px rgba(0,0,0,.05);
-      border-radius:18px;
-      margin:20px 0;
-      padding:10px 0;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:6px;
-    }
-    .follow-us span{font-weight:700;color:#2A70DC;font-size:15px}
-    .follow-us .icons{display:flex; gap:18px}
+    /* Follow Us */
+    .follow-us{text-align:center;margin:20px 0;}
+    .follow-us span{font-weight:700;color:#2A70DC;font-size:15px;display:block;margin-bottom:8px}
+    .follow-us .icons{display:flex;gap:18px;justify-content:center}
     .follow-us .icons a{
-      display:inline-flex; align-items:center; justify-content:center;
-      width:44px; height:44px; border-radius:50%;
-      background:#fff; border:1px solid #ddd; box-shadow:0 4px 12px rgba(0,0,0,.05);
-      transition:transform .2s ease;
+      display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;
+      background:#fff;border:1px solid #ddd;box-shadow:0 4px 12px rgba(0,0,0,.05);transition:transform .2s;
     }
     .follow-us .icons a:hover{transform:translateY(-3px)}
     .follow-us .icons img{width:26px;height:26px}
 
-    /* Float bar */
-    .floatbar{position:fixed; inset-inline:12px; bottom:12px; display:flex; gap:10px;
-      background:#ffffffcc; backdrop-filter:blur(6px); border:1px solid #eee; border-radius:999px; padding:8px; box-shadow:var(--shadow); z-index:50}
-    .floatbar a{display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; text-decoration:none; font-weight:700}
-    .floatbar .wa{background:linear-gradient(90deg, var(--whatsapp), #1ebe5b); color:#fff}
-    .floatbar .call{background:#f6f9ff; color:#1f3a7a}
-    .floatbar .book{background:#fff; color:#1f3a7a}
-    @media (min-width:920px){ .floatbar{display:none} }
-
-    footer{text-align:center; color:#687793; font-size:14px; margin:28px 0 10px}
+    footer{text-align:center;color:#687793;font-size:14px;margin:28px 0 10px}
   </style>
 </head>
 <body>
@@ -133,40 +121,40 @@
     <!-- Hero Slider -->
     <div class="hero-slider" id="heroSlider">
       <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80" class="active" alt="شاطئ">
-      <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=1400&q=80" alt="مدينة" loading="lazy">
-      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80" alt="طبيعة" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=1400&q=80" alt="مدينة">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80" alt="طبيعة">
     </div>
 
-    <!-- Welcome -->
-    <section class="welcome">
-      <h1>مرحبًا بك في سيدار ترافل 🌍</h1>
-      <p>نوفّر لك حلول السفر الحديثة: eSIM، تذاكر طيران، سيارات، وأماكن تصوير المسلسلات.</p>
-      <a id="wa-top" class="cta" href="#">💬 تواصل معنا</a>
+    <!-- Welcome Card -->
+    <section class="welcome pro">
+      <div class="w-head">
+        <img src="logo.PNG" alt="SIDAR" class="w-logo" />
+        <div>
+          <h1 id="typedTitle">مرحبًا بك في سيدار ترافل 🌍</h1>
+          <p class="w-sub">نوفّر حلول سفر ذكية: eSIM • طيران • سيارات — بخدمة سريعة ودفع آمن.</p>
+        </div>
+        <span class="w-badge">موثوق ⭐️⭐️⭐️⭐️⭐️</span>
+      </div>
+      <div class="w-chips">
+        <span>📶 eSIM فوري</span><span>✈️ تذاكر مخفّضة</span><span>🚗 سيارات بدون كفالة</span><span>💬 دعم واتساب</span>
+      </div>
+      <div class="w-actions">
+        <a id="wa-top" class="cta">💬 تواصل واتساب</a>
+        <a class="cta ghost" href="#services">استعرض خدماتنا</a>
+      </div>
+      <div class="w-stats">
+        <div><strong>50+</strong><small>وجهة</small></div>
+        <div><strong>24/7</strong><small>دعم</small></div>
+        <div><strong>5 دقائق</strong><small>متوسط الرد</small></div>
+      </div>
     </section>
 
     <!-- Services -->
     <h2 class="section-title">الخدمات الحالية</h2>
-    <section class="services">
+    <section class="services" id="services">
       <div class="card" id="esimCard"><div class="icon">📶</div><div>بطاقات eSIM</div></div>
       <div class="card" id="flightCard"><div class="icon">✈️</div><div>تذاكر طيران</div></div>
       <div class="card" id="carCard"><div class="icon">🚗</div><div>تأجير سيارات</div></div>
-    </section>
-
-    <!-- Widgets -->
-    <section id="widget-esim" class="widget" hidden>
-      <button class="close" data-close>×</button>
-      <h3>بطاقات eSIM 🌐</h3>
-      <div id="tp-esim"></div>
-    </section>
-    <section id="widget-flight" class="widget" hidden>
-      <button class="close" data-close>×</button>
-      <h3>تذاكر الطيران ✈️</h3>
-      <div id="tp-flight"></div>
-    </section>
-    <section id="widget-car" class="widget" hidden>
-      <button class="close" data-close>×</button>
-      <h3>تأجير السيارات 🚗</h3>
-      <div id="tp-car"></div>
     </section>
 
     <!-- Reviews ticker -->
@@ -183,7 +171,7 @@
       </div>
     </section>
 
-    <!-- Follow-us -->
+    <!-- Follow Us -->
     <div class="follow-us">
       <span>تابعنا</span>
       <div class="icons">
@@ -196,42 +184,28 @@
       </div>
     </div>
 
-    <!-- Footer -->
     <footer>
       <p>© <span id="year"></span> جميع الحقوق محفوظة – SIDAR TRAVEL</p>
     </footer>
   </div>
 
-  <!-- Float Bar -->
-  <div class="floatbar">
-    <a class="wa" id="fb-wa">💬 واتساب</a>
-    <a class="call" id="fb-call">📞 اتصال</a>
-    <a class="book" href="#top">⬆️ للأعلى</a>
-  </div>
-
   <script>
-    const PHONE="9725XXXXXXXX";        
-    const PHONE_CALL="+9725XXXXXXXX";  
+    const PHONE="9725XXXXXXXX";
     const baseWA=(t)=>`https://wa.me/${PHONE}?text=${encodeURIComponent(t)}`;
-
     const waTop=document.getElementById("wa-top");
-    const fbWa=document.getElementById("fb-wa");
-    const fbCall=document.getElementById("fb-call");
-    if(waTop)waTop.href=baseWA("مرحبًا، أريد الاستفسار عن الخدمات ✈️");
-    if(fbWa)fbWa.href=baseWA("مرحبًا، أريد التحدث الآن 👋");
-    if(fbCall)fbCall.href=`tel:${PHONE_CALL}`;
+    if(waTop) waTop.href=baseWA("مرحبًا، أريد الاستفسار عن الخدمات ✈️");
 
+    // slider
     const slides=document.querySelectorAll('#heroSlider img');let i=0;
     setInterval(()=>{slides[i].classList.remove('active');i=(i+1)%slides.length;slides[i].classList.add('active');},4000);
 
-    const hideAllWidgets=()=>document.querySelectorAll('.widget').forEach(w=>w.hidden=true);
-    const inject=(el,src)=>{if(el.dataset.loaded)return;const s=document.createElement('script');s.src=src;s.async=true;s.charset='utf-8';el.appendChild(s);el.dataset.loaded=1;};
-    const showWidget=(id,src)=>{hideAllWidgets();const w=document.getElementById(id);if(w){w.hidden=false;w.scrollIntoView({behavior:'smooth'});const tp=w.querySelector('div');inject(tp,src);}};
-
-    document.getElementById('esimCard').onclick=()=>showWidget('widget-esim',"https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&promo_id=8588&campaign_id=541");
-    document.getElementById('flightCard').onclick=()=>showWidget('widget-flight',"https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&promo_id=3414&campaign_id=111");
-    document.getElementById('carCard').onclick=()=>showWidget('widget-car',"https://trpwdg.com/content?trs=273484&shmarker=448045.Sidar&locale=en&promo_id=4850");
-    document.querySelectorAll('.close').forEach(btn=>btn.onclick=hideAllWidgets);
+    // typing effect
+    (function(){
+      const el=document.getElementById('typedTitle');if(!el)return;
+      const full=el.textContent.trim();let j=0;el.textContent='';
+      const tick=()=>{el.textContent=full.slice(0,++j);if(j<full.length)requestAnimationFrame(tick);}
+      requestAnimationFrame(tick);
+    })();
 
     document.getElementById("year").textContent=new Date().getFullYear();
   </script>
