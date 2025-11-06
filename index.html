@@ -85,6 +85,7 @@
     .scrollbar strong{display:block;margin-top:6px;color:#1f2937;font-weight:700;}
     .scrollbar small{color:#64748b;}
 
+    /* Footer */
     footer{
       text-align:center;
       color:#687793;
@@ -95,20 +96,35 @@
       align-items:center;
       gap:8px;
     }
-    .social-footer{
+
+    /* ===== Follow-us bar (above floatbar) ===== */
+    .follow-us{
+      position:relative;
+      z-index:5;
+      background:#fff;
+      border-top:1px solid #eee;
+      border-bottom:1px solid #eee;
+      box-shadow:0 -4px 16px rgba(0,0,0,.05);
+      border-radius:18px;
+      margin:20px 0;
+      padding:10px 0;
       display:flex;
-      gap:14px;
-      justify-content:center;
+      flex-direction:column;
+      align-items:center;
+      gap:6px;
     }
-    .social-footer a img{
-      width:28px;
-      height:28px;
+    .follow-us span{font-weight:700;color:#2A70DC;font-size:15px}
+    .follow-us .icons{display:flex; gap:18px}
+    .follow-us .icons a{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:44px; height:44px; border-radius:50%;
+      background:#fff; border:1px solid #ddd; box-shadow:0 4px 12px rgba(0,0,0,.05);
       transition:transform .2s ease;
     }
-    .social-footer a:hover img{
-      transform:scale(1.15);
-    }
+    .follow-us .icons a:hover{transform:translateY(-3px)}
+    .follow-us .icons img{width:26px;height:26px}
 
+    /* Float bar */
     .floatbar{position:fixed; inset-inline:12px; bottom:12px; display:flex; gap:10px;
       background:#ffffffcc; backdrop-filter:blur(6px); border:1px solid #eee; border-radius:999px; padding:8px; box-shadow:var(--shadow); z-index:50}
     .floatbar a{display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; text-decoration:none; font-weight:700}
@@ -120,14 +136,17 @@
 </head>
 <body>
   <div class="container">
+    <!-- Logo -->
     <header><div class="logo"><img src="logo.PNG" alt="شعار سيدار ترافل"></div></header>
 
+    <!-- Hero Slider -->
     <div class="hero-slider" id="heroSlider">
       <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80" class="active" alt="شاطئ">
       <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=1400&q=80" alt="مدينة" loading="lazy">
       <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80" alt="طبيعة" loading="lazy">
     </div>
 
+    <!-- Welcome -->
     <section class="welcome">
       <h1>مرحبًا بك في سيدار ترافل 🌍</h1>
       <p>نوفّر لك حلول السفر الحديثة: eSIM، تذاكر طيران، سيارات، وأماكن تصوير المسلسلات.</p>
@@ -139,6 +158,7 @@
       </div>
     </section>
 
+    <!-- Services -->
     <h2 class="section-title">الخدمات الحالية</h2>
     <section class="services">
       <div class="card" id="esimCard"><div class="icon">📶</div><div>بطاقات eSIM</div></div>
@@ -169,10 +189,15 @@
       <div class="scrollbar" id="testimonialsScroller"></div>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer (rights only) -->
     <footer>
       <p>© <span id="year"></span> جميع الحقوق محفوظة – SIDAR TRAVEL</p>
-      <div class="social-footer">
+    </footer>
+
+    <!-- Follow-us bar (before floatbar) -->
+    <div class="follow-us">
+      <span>تابعنا</span>
+      <div class="icons">
         <a href="https://instagram.com/yourpage" target="_blank" aria-label="Instagram">
           <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
         </a>
@@ -180,7 +205,7 @@
           <img src="https://cdn-icons-png.flaticon.com/512/3046/3046120.png" alt="TikTok">
         </a>
       </div>
-    </footer>
+    </div>
   </div>
 
   <!-- Float Bar -->
@@ -191,8 +216,9 @@
   </div>
 
   <script>
-    const PHONE="9725XXXXXXXX";
-    const PHONE_CALL="+9725XXXXXXXX";
+    /* ===== إعدادات تواصل ===== */
+    const PHONE="9725XXXXXXXX";        // ← ضع رقمك الدولي بدون +
+    const PHONE_CALL="+9725XXXXXXXX";  // ← نفس الرقم لكن مع +
     const baseWA=(t)=>`https://wa.me/${PHONE}?text=${encodeURIComponent(t)}`;
 
     const waTop=document.getElementById("wa-top");
@@ -202,18 +228,21 @@
     if(fbWa)fbWa.href=baseWA("مرحبًا، أريد التحدث الآن 👋");
     if(fbCall)fbCall.href=`tel:${PHONE_CALL}`;
 
+    /* ===== سلايدر الهيرو ===== */
     const slides=document.querySelectorAll('#heroSlider img');let i=0;
     setInterval(()=>{slides[i].classList.remove('active');i=(i+1)%slides.length;slides[i].classList.add('active');},4000);
 
+    /* ===== الودجتس: إظهار/إخفاء + حقن مرة واحدة ===== */
     const hideAllWidgets=()=>document.querySelectorAll('.widget').forEach(w=>w.hidden=true);
     const inject=(el,src)=>{if(el.dataset.loaded)return;const s=document.createElement('script');s.src=src;s.async=true;s.charset='utf-8';el.appendChild(s);el.dataset.loaded=1;};
     const showWidget=(id,src)=>{hideAllWidgets();const w=document.getElementById(id);if(w){w.hidden=false;w.scrollIntoView({behavior:'smooth'});const tp=w.querySelector('div');inject(tp,src);}};
+
     document.getElementById('esimCard').onclick=()=>showWidget('widget-esim',"https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&promo_id=8588&campaign_id=541");
     document.getElementById('flightCard').onclick=()=>showWidget('widget-flight',"https://trpwdg.com/content?trs=239791&shmarker=448045.Sidar&locale=en&promo_id=3414&campaign_id=111");
     document.getElementById('carCard').onclick=()=>showWidget('widget-car',"https://trpwdg.com/content?trs=273484&shmarker=448045.Sidar&locale=en&promo_id=4850");
     document.querySelectorAll('.close').forEach(btn=>btn.onclick=hideAllWidgets);
 
-    // ===== Testimonials carousel =====
+    /* ===== آراء العملاء كشريط متحرك ===== */
     const published=[
       {name:"أحمد",city:"دبي",trip:"إسطنبول",rating:5,text:"خدمة ممتازة جدًا وسرعة في الرد!"},
       {name:"ليلى",city:"عمّان",trip:"أنطاليا",rating:5,text:"رحلتي كانت منظمة جدًا، شكرًا سيدار."},
@@ -240,6 +269,7 @@
     }
     renderPublished();
 
+    /* ===== سنة الفوتر ===== */
     document.getElementById("year").textContent=new Date().getFullYear();
   </script>
 </body>
