@@ -1,246 +1,104 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>SIDAR TRAVEL — صفحة الهبوط</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --blue:#2A70DC; --orange:#FF7A1A; --yellow:#FFE895;
-      --ink:#0f1320; --ink-soft:#51607c; --white:#ffffff;
-      --card:#ffffffdd; --radius:22px; --shadow:0 12px 30px rgba(0,0,0,.15);
-      --whatsapp:#25D366; --bg:#FFF7E6;
+      --blue:#2A70DC; --light:#E6F3FF; --white:#ffffff;
+      --ink:#0f1320; --whatsapp:#25D366;
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth;}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
     body{
-      margin:0; font-family:"Tajawal",system-ui,-apple-system,Segoe UI,Roboto; color:var(--ink);
-      min-height:100svh; overflow-x:hidden;
-      background:linear-gradient(180deg, #fff 0%, var(--bg) 60%, #FFF 100%);
+      font-family:"Tajawal",system-ui;
+      color:var(--ink);
+      overflow-x:hidden;
+      min-height:100vh;
+      position:relative;
+      background:var(--light);
     }
 
-    /* الخلفية المتحركة */
-    .bg-blobs{position:fixed; inset:0; overflow:hidden; z-index:-1;}
-    .blob{
-      position:absolute; filter:blur(60px); opacity:.35; border-radius:50%;
-      animation:float 40s ease-in-out infinite;
+    /* 🌊 خلفية الموج */
+    .waves{
+      position:fixed;
+      bottom:0;
+      left:0;
+      width:100%;
+      height:100%;
+      z-index:-1;
+      overflow:hidden;
+      background:linear-gradient(180deg,#ffffff,#dcecff,#b0d8ff);
     }
-    .b1{width:500px;height:500px;left:-100px;top:-100px;background:#2A70DC;}
-    .b2{width:600px;height:600px;right:-150px;top:-50px;background:#FF7A1A;}
-    .b3{width:550px;height:550px;left:40%;bottom:-150px;background:#FFE895;}
-    @keyframes float{
-      0%,100%{transform:translateY(0) translateX(0);}
-      50%{transform:translateY(-40px) translateX(40px);}
+    .wave{
+      position:absolute;
+      width:200%;
+      height:200px;
+      background:rgba(255,255,255,.8);
+      border-radius:43%;
+      opacity:0.7;
+      animation:waveMove 10s linear infinite;
+    }
+    .wave:nth-child(1){
+      bottom:0;left:-50%;
+      background:rgba(255,255,255,.8);
+      animation-duration:18s;
+    }
+    .wave:nth-child(2){
+      bottom:20px;left:-60%;
+      background:rgba(42,112,220,.15);
+      animation-duration:25s;
+    }
+    .wave:nth-child(3){
+      bottom:40px;left:-40%;
+      background:rgba(42,112,220,.25);
+      animation-duration:30s;
+    }
+    @keyframes waveMove{
+      0%{transform:translateX(0);}
+      100%{transform:translateX(50%);}
     }
 
-    .container{max-width:1080px; margin:auto; padding:20px}
-
-    /* الشعار */
-    header{text-align:center; padding:28px 0 12px}
-    .logo{display:inline-block; padding:12px; background:rgba(255,255,255,.85);
-      border-radius:50%; border:1px solid #eee; box-shadow:var(--shadow);}
-    .logo img{height:70px;width:auto;display:block}
-
-    /* سلايدر الهيرو */
-    .hero-slider{width:100%; height:360px; border-radius:20px; overflow:hidden; position:relative; margin:20px auto; box-shadow:var(--shadow)}
-    .hero-slider img{width:100%; height:100%; object-fit:cover; position:absolute; inset:0; opacity:0; transition:opacity 1s ease}
-    .hero-slider img.active{opacity:1;}
-    @media(max-width:720px){.hero-slider{height:240px}}
-
-    /* بطاقة التعريف */
-    .welcome.pro{
-      max-width: 860px;
-      padding: 20px;
-      margin: 16px auto;
-      background:
-        linear-gradient(#ffffffcc, #ffffffcc) padding-box,
-        linear-gradient(135deg, #2A70DC, #FF7A1A, #FFE895) border-box;
-      border: 1px solid transparent;
-      border-radius: var(--radius);
-      box-shadow: 0 16px 40px rgba(0,0,0,.12);
-      backdrop-filter: blur(6px);
-      text-align:center;
-    }
-    .w-head{display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap}
-    .w-logo{width:56px; height:56px; object-fit:contain; border-radius:14px; background:#fff; border:1px solid #eee; padding:6px}
-    .w-sub{margin:4px 0 0; color:var(--ink-soft)}
-    .w-badge{
-      background:#0f1320; color:#fff; font-weight:800; font-size:12px;
-      padding:8px 10px; border-radius:999px; box-shadow:0 8px 18px rgba(0,0,0,.18)
-    }
-    .w-chips{
-      display:flex; gap:8px; flex-wrap:wrap; margin:12px 0 10px; justify-content:center;
-    }
-    .w-chips span{
-      background:#fff; border:1px solid #e9eef6; color:#334155;
-      padding:8px 12px; border-radius:999px; font-size:13px; box-shadow:0 6px 12px rgba(0,0,0,.06)
-    }
-    .w-actions{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:6px}
+    /* باقي التصميم الأساسي */
+    .container{max-width:960px;margin:auto;padding:20px;text-align:center;position:relative;z-index:2}
+    header{margin:20px 0}
+    .logo img{height:80px;width:auto}
+    h1{font-size:28px;margin:10px 0}
+    p{color:#4b5563}
     .cta{
-      display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 20px;
-      border-radius:50px; background:linear-gradient(90deg, var(--whatsapp), #1ebe5b);
-      color:#fff; font-weight:700; text-decoration:none; transition:.2s;
+      display:inline-block;
+      margin-top:12px;
+      padding:12px 22px;
+      border-radius:50px;
+      background:linear-gradient(90deg,var(--whatsapp),#1ebe5b);
+      color:#fff;font-weight:700;text-decoration:none;
+      box-shadow:0 8px 20px rgba(37,211,102,.35);
+      transition:.2s;
     }
     .cta:hover{transform:translateY(-3px)}
-    .cta.ghost{
-      background:#f6f9ff; color:#1f3a7a; box-shadow:none; border:1px solid #e3eafc;
-    }
-    .w-stats{
-      margin-top:12px; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; text-align:center
-    }
-    .w-stats strong{display:block; font-size:22px}
-    .w-stats small{color:#6b7a99}
-    @media(max-width:720px){.w-head{justify-content:center}.w-badge{order:3}}
-
-    /* الخدمات */
-    .section-title{text-align:center; font-size:22px; margin:20px 0 10px}
-    .services{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
-    @media(min-width:720px){.services{grid-template-columns:repeat(4,1fr)}}
-    .card{background:#fff; border:1px solid #eee; border-radius:16px; padding:16px; text-align:center; cursor:pointer; transition:.2s}
-    .card:hover{transform:translateY(-4px); box-shadow:var(--shadow)}
-    .icon{font-size:28px}
-
-    /* شريط آراء العملاء */
-    .reviews-ticker{margin: 30px 0;text-align:center;}
-    .ticker-wrap{
-      width:100%;overflow:hidden;background:#ffffffcc;border:1px solid #eee;
-      border-radius:14px;box-shadow:var(--shadow);padding:8px 0;direction:rtl;
-    }
-    .ticker{display:inline-block;white-space:nowrap;animation:scroll-left 25s linear infinite;}
-    .ticker-item{display:inline-block;margin-inline:40px;font-size:15px;color:#1f2937;}
-    @keyframes scroll-left {0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
-    .ticker-wrap:hover .ticker{animation-play-state:paused;}
-
-    /* تابعنا */
-    .follow-us{text-align:center;margin:20px 0;}
-    .follow-us span{font-weight:700;color:#2A70DC;font-size:15px;display:block;margin-bottom:8px}
-    .follow-us .icons{display:flex;gap:18px;justify-content:center}
-    .follow-us .icons a{
-      display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;
-      background:#fff;border:1px solid #ddd;box-shadow:0 4px 12px rgba(0,0,0,.05);transition:transform .2s;
-    }
-    .follow-us .icons a:hover{transform:translateY(-3px)}
-    .follow-us .icons img{width:26px;height:26px}
-
-    footer{text-align:center;color:#687793;font-size:14px;margin:28px 0 10px}
   </style>
 </head>
 <body>
+
   <!-- الخلفية المتحركة -->
-  <div class="bg-blobs">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
+  <div class="waves">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
   </div>
 
+  <!-- المحتوى -->
   <div class="container">
-
-    <!-- الشعار -->
-    <header>
-      <div class="logo">
-        <img src="logo.PNG" alt="شعار سيدار ترافل">
-      </div>
+    <header class="logo">
+      <img src="logo.PNG" alt="شعار سيدار">
     </header>
-
-    <!-- سلايدر -->
-    <div class="hero-slider" id="heroSlider">
-      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80" class="active" alt="شاطئ">
-      <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=1400&q=80" alt="مدينة">
-      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80" alt="طبيعة">
-    </div>
-
-    <!-- بطاقة تعريف -->
-    <section class="welcome pro">
-      <div class="w-head">
-        <img src="logo.PNG" alt="SIDAR" class="w-logo" />
-        <div>
-          <h1 id="typedTitle">مرحبًا بك في سيدار ترافل 🌍</h1>
-          <p class="w-sub">نوفّر حلول سفر ذكية: eSIM • طيران • سيارات — بخدمة سريعة ودفع آمن.</p>
-        </div>
-        <span class="w-badge">موثوق ⭐️⭐️⭐️⭐️⭐️</span>
-      </div>
-
-      <div class="w-chips">
-        <span>📶 eSIM فوري</span>
-        <span>✈️ تذاكر مخفّضة</span>
-        <span>🚗 سيارات بدون كفالة</span>
-        <span>💬 دعم واتساب</span>
-      </div>
-
-      <div class="w-actions">
-        <a id="wa-top" class="cta" href="#">💬 تواصل واتساب</a>
-        <a class="cta ghost" href="#services">استعرض خدماتنا</a>
-      </div>
-
-      <div class="w-stats">
-        <div><strong>50+</strong><small>وجهة</small></div>
-        <div><strong>24/7</strong><small>دعم</small></div>
-        <div><strong>5 دقائق</strong><small>متوسط الرد</small></div>
-      </div>
-    </section>
-
-    <!-- الخدمات -->
-    <h2 class="section-title">الخدمات الحالية</h2>
-    <section class="services" id="services">
-      <div class="card"><div class="icon">📶</div><div>بطاقات eSIM</div></div>
-      <div class="card"><div class="icon">✈️</div><div>تذاكر طيران</div></div>
-      <div class="card"><div class="icon">🚗</div><div>تأجير سيارات</div></div>
-      <div class="card"><div class="icon">🎬</div><div>أماكن تصوير</div></div>
-    </section>
-
-    <!-- آراء العملاء -->
-    <section class="reviews-ticker">
-      <h2 class="section-title">آراء عملائنا</h2>
-      <div class="ticker-wrap">
-        <div class="ticker">
-          <div class="ticker-item">⭐️⭐️⭐️⭐️⭐️ أحمد من دبي: خدمة ممتازة وسريعة جدًا!</div>
-          <div class="ticker-item">⭐️⭐️⭐️⭐️⭐️ ليلى من عمّان: حجز منظم وسهل 👌</div>
-          <div class="ticker-item">⭐️⭐️⭐️⭐️ فهد من الرياض: تجربة رائعة وأسعار ممتازة</div>
-          <div class="ticker-item">⭐️⭐️⭐️⭐️⭐️ نورا من جدة: فريق متعاون ودعم سريع 💬</div>
-          <div class="ticker-item">⭐️⭐️⭐️⭐️ رامي من حيفا: كل شيء كان سلس ومرتب ✈️</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- تابعنا -->
-    <div class="follow-us">
-      <span>تابعنا</span>
-      <div class="icons">
-        <a href="https://instagram.com/yourpage" target="_blank" aria-label="Instagram">
-          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
-        </a>
-        <a href="https://tiktok.com/@yourpage" target="_blank" aria-label="TikTok">
-          <img src="https://cdn-icons-png.flaticon.com/512/3046/3046120.png" alt="TikTok">
-        </a>
-      </div>
-    </div>
-
-    <!-- الفوتر -->
-    <footer>
-      © <span id="year"></span> جميع الحقوق محفوظة – SIDAR TRAVEL
-    </footer>
+    <h1>مرحبًا بك في <strong>SIDAR TRAVEL</strong> 🌊</h1>
+    <p>رحلات، باقات، واتصال دائم — نوصلك للعالم بخطوات بسيطة.</p>
+    <a href="https://wa.me/9725XXXXXXXX" class="cta">💬 تواصل عبر واتساب</a>
   </div>
 
-  <script>
-    const PHONE="9725XXXXXXXX";
-    const baseWA=(t)=>`https://wa.me/${PHONE}?text=${encodeURIComponent(t)}`;
-    const waTop=document.getElementById("wa-top");
-    if(waTop) waTop.href=baseWA("مرحبًا، أريد الاستفسار عن الخدمات ✈️");
-
-    // سلايدر
-    const slides=document.querySelectorAll('#heroSlider img');let i=0;
-    setInterval(()=>{slides[i].classList.remove('active');i=(i+1)%slides.length;slides[i].classList.add('active');},4000);
-
-    // تأثير الكتابة
-    (function(){
-      const el=document.getElementById('typedTitle');if(!el)return;
-      const full=el.textContent.trim();let j=0;el.textContent='';
-      const tick=()=>{el.textContent=full.slice(0,++j);if(j<full.length)requestAnimationFrame(tick);}
-      requestAnimationFrame(tick);
-    })();
-
-    document.getElementById("year").textContent=new Date().getFullYear();
-  </script>
 </body>
 </html>
