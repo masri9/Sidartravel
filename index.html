@@ -50,7 +50,7 @@
   /* البطاقة الترحيبية (زجاجية) */
   .welcome.pro{
     width:min(85vw, 700px);
-    padding:24px;
+    padding:28px 24px;
     background:linear-gradient(145deg, rgba(255,255,255,0.60), rgba(255,255,255,0.35));
     backdrop-filter: blur(12px);
     border:1px solid rgba(255,255,255,0.40);
@@ -59,21 +59,17 @@
     text-align:center; animation:fadeIn .9s ease both;
   }
   @keyframes fadeIn{from{opacity:0; transform:scale(.96)} to{opacity:1; transform:scale(1)}}
-  .w-head{display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap}
+  .w-head{display:flex; gap:14px; align-items:center; justify-content:center; flex-wrap:wrap}
   .w-logo{width:56px; height:56px; object-fit:contain; border-radius:14px; background:#fff; border:1px solid #eee; padding:6px}
-  .w-sub{margin:4px 0 0; color:var(--ink-soft)}
-  /* .w-badge حُذفت من الـ HTML بناءً على طلبك */
-  .w-chips{display:flex; gap:8px; flex-wrap:wrap; margin:12px 0 10px; justify-content:center}
-  .w-chips span{background:#fff; border:1px solid #e9eef6; color:#334155; padding:8px 12px; border-radius:999px; font-size:13px; box-shadow:0 6px 12px rgba(0,0,0,.06)}
-  .w-actions{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:6px}
+  .w-sub{margin:6px 0 0; color:var(--ink-soft)}
+  .w-actions{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:14px}
   .cta{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 20px; border-radius:50px;
        background:linear-gradient(90deg, #25D366, #1ebe5b); color:#fff; font-weight:700; text-decoration:none; transition:.2s; box-shadow:0 8px 20px rgba(37,211,102,.25)}
   .cta:hover{transform:translateY(-3px)}
   .cta.ghost{background:#f6f9ff; color:#1f3a7a; box-shadow:none; border:1px solid #e3eafc}
-  .w-stats{margin-top:12px; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; text-align:center}
+  .w-stats{margin-top:18px; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; text-align:center}
   .w-stats strong{display:block; font-size:22px}
   .w-stats small{color:#6b7a99}
-  @media(max-width:720px){.w-head{justify-content:center}}
 
   /* الأيقونات الطافية تحت البطاقة */
   .floaters-below{position:relative; width:100%; display:flex; justify-content:center; gap:40px; margin-top:26px; z-index:5;}
@@ -102,7 +98,7 @@
 <!-- جسيمات -->
 <canvas id="bgfx"></canvas>
 
-<!-- مسارات الطيران (مع تعريف تدرّج داخل كل SVG) -->
+<!-- مسارات الطيران -->
 <div class="paths">
   <svg class="p-left" viewBox="0 0 660 300">
     <defs>
@@ -129,24 +125,15 @@
   </svg>
 </div>
 
-<!-- البطاقة الترحيبية في الوسط -->
+<!-- البطاقة الترحيبية -->
 <div class="center">
   <section class="welcome pro">
     <div class="w-head">
-      <!-- تأكد من وجود logo.PNG بجانب الملف -->
       <img src="logo.PNG" alt="SIDAR" class="w-logo" />
       <div>
         <h1 id="typedTitle">مرحبًا بك في سيدار ترافل 🌍</h1>
         <p class="w-sub">نوفّر حلول سفر ذكية: eSIM • طيران • سيارات — بخدمة سريعة ودفع آمن.</p>
       </div>
-      <!-- تمت إزالة شارة موثوق والنجم -->
-    </div>
-
-    <div class="w-chips">
-      <span>📶 eSIM فوري</span>
-      <span>✈️ تذاكر مخفّضة</span>
-      <span>🚗 سيارات بدون كفالة</span>
-      <span>💬 دعم واتساب</span>
     </div>
 
     <div class="w-actions">
@@ -160,7 +147,6 @@
       <div><strong>5 دقائق</strong><small>متوسط الرد</small></div>
     </div>
 
-    <!-- الأيقونات أسفل البطاقة -->
     <div class="floaters-below">
       <div class="badge b1" title="eSIM">
         <svg viewBox="0 0 64 64"><rect x="10" y="8" rx="6" ry="6" width="44" height="48" fill="#00C7B7"/><rect x="16" y="18" width="16" height="14" fill="#fff" opacity=".9"/></svg>
@@ -181,7 +167,7 @@
 <footer>© <span id="year"></span> SIDAR TRAVEL</footer>
 
 <script>
-/* ===== جسيمات Canvas الخفيفة ===== */
+/* ===== جسيمات Canvas ===== */
 const c=document.getElementById('bgfx'),ctx=c.getContext('2d');let w,h,particles;
 function resize(){w=c.width=innerWidth;h=c.height=innerHeight;make()}
 function make(){
@@ -202,12 +188,12 @@ function draw(){
 resize();draw();addEventListener('resize',resize);
 
 /* ===== واتساب ===== */
-const PHONE="9725XXXXXXXX"; // عدّل رقمك (بدون +)
+const PHONE="9725XXXXXXXX";
 const baseWA=(t)=>`https://wa.me/${PHONE}?text=${encodeURIComponent(t)}`;
 const waTop=document.getElementById("wa-top");
 if(waTop) waTop.href=baseWA("مرحبًا، أريد الاستفسار عن الخدمات ✈️");
 
-/* ===== كتابة عنوان البطاقة تدريجيًا ===== */
+/* ===== كتابة تدريجية ===== */
 (function(){
   const el=document.getElementById('typedTitle');if(!el)return;
   const full=el.textContent.trim();let j=0;el.textContent='';
