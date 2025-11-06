@@ -3,26 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SIDAR TRAVEL — Intro + Pro Welcome Card</title>
+<title>SIDAR TRAVEL — بطاقة ترحيب مع خلفية حيّة</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --blue:#2A70DC; --orange:#FF7A1A; --yellow:#FFE895; --green:#00C7B7;
     --ink:#0f1320; --ink-soft:#51607c;
-    --shadow:0 12px 30px rgba(0,0,0,.15);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%;overflow:hidden}
+  html,body{min-height:100%}
   body{
     font-family:"Tajawal",system-ui; color:var(--ink); position:relative;
     background:
       radial-gradient(800px 500px at 15% -10%, rgba(255,232,149,.6), rgba(255,232,149,0) 60%),
       radial-gradient(900px 600px at 100% 0%, rgba(42,112,220,.25), rgba(42,112,220,0) 70%),
       linear-gradient(180deg, #fff 0%, #FFF7E6 60%, #FFF 100%);
+    overflow-x:hidden;
   }
 
-  /* الخلفية المتموجة */
-  .wave-bg{position:absolute; inset-inline:0; bottom:0; height:260px; pointer-events:none; z-index:0;
+  /* أمواج خلفية أسفل الصفحة */
+  .wave-bg{position:fixed; inset-inline:0; bottom:0; height:260px; pointer-events:none; z-index:0;
     mask-image:linear-gradient(to top,rgba(0,0,0,1),rgba(0,0,0,.5),transparent)}
   .wave{position:absolute; left:-50%; width:200%; height:140px; border-radius:40%;
     opacity:.25; background:linear-gradient(180deg,#ffffff,#e8f2ff); animation:waveMove 24s linear infinite}
@@ -30,23 +30,22 @@
   .wave.w3{bottom:80px; opacity:.15; animation-duration:34s}
   @keyframes waveMove{to{transform:translateX(50%)}}
 
-  /* جسيمات */
+  /* جسيمات خفيفة */
   #bgfx{position:fixed; inset:0; z-index:-1; background:transparent}
 
-  /* مسارات الطيران */
-  .paths{position:absolute; inset:0; z-index:2; pointer-events:none}
+  /* مسارات الطيران (تم إصلاح الـgradient بتعريفه داخل كل SVG) */
+  .paths{position:fixed; inset:0; z-index:2; pointer-events:none}
   .paths svg{position:absolute; width:50vw; max-width:680px}
   .p-left{left:-5vw; top:25vh; transform:rotate(6deg)}
   .p-right{right:-5vw; bottom:10vh; transform:rotate(-4deg)}
-  .dash{fill:none; stroke:url(#grad); stroke-width:2.4; stroke-linecap:round;
-    stroke-dasharray:6 12; animation:dash 3s linear infinite}
+  .dash{fill:none; stroke-width:2.4; stroke-linecap:round; stroke-dasharray:6 12; animation:dash 3s linear infinite}
   @keyframes dash{to{stroke-dashoffset:-36}}
   .airplane{offset-path:path("M 10,150 C 200,10 420,260 650,120"); offset-rotate:auto; animation:fly 11s linear infinite}
   .airplane2{offset-path:path("M 10,220 C 200,260 380,120 640,200"); offset-rotate:auto; animation:fly 13s linear infinite reverse}
   @keyframes fly{to{offset-distance:100%}}
 
-  /* تموضع البطاقة في الوسط */
-  .center{position:absolute; inset:0; display:grid; place-items:center; z-index:10; padding:20px}
+  /* تموضع البطاقة */
+  .center{position:relative; z-index:10; padding:36px 20px 80px; display:grid; place-items:center}
 
   /* البطاقة الترحيبية (زجاجية) */
   .welcome.pro{
@@ -76,8 +75,8 @@
   .w-stats small{color:#6b7a99}
   @media(max-width:720px){.w-head{justify-content:center}.w-badge{order:3}}
 
-  /* الأيقونات الطافية (الآن تحت البطاقة) */
-  .floaters-below{position:relative; width:100%; display:flex; justify-content:center; gap:40px; margin-top:30px; z-index:5;}
+  /* الأيقونات الطافية تحت البطاقة */
+  .floaters-below{position:relative; width:100%; display:flex; justify-content:center; gap:40px; margin-top:26px; z-index:5;}
   .badge{width:60px; height:60px; border-radius:16px; display:grid; place-items:center;
     background:linear-gradient(180deg,#ffffffcc,#ffffff77); border:1px solid #ffffffaa;
     box-shadow:0 8px 22px rgba(0,0,0,.1); animation:float 5.2s ease-in-out infinite}
@@ -88,7 +87,7 @@
   .b4{animation-delay:1.8s}
   @keyframes float{50%{transform:translateY(-8px)}}
 
-  footer{position:fixed; inset-inline:0; bottom:6px; text-align:center; font-size:13px; color:#6b7a99; z-index:20}
+  footer{position:relative; text-align:center; font-size:13px; color:#6b7a99; z-index:20; padding:10px 0 18px}
 </style>
 </head>
 <body>
@@ -103,28 +102,38 @@
 <!-- جسيمات -->
 <canvas id="bgfx"></canvas>
 
-<!-- مسارات الطيران -->
+<!-- مسارات الطيران (مع تعريف تدرّج داخل كل SVG) -->
 <div class="paths">
   <svg class="p-left" viewBox="0 0 660 300">
-    <defs><linearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#00C7B7"/><stop offset="1" stop-color="#2A70DC"/></linearGradient></defs>
-    <path d="M 10,150 C 200,10 420,260 650,120" class="dash"/>
+    <defs>
+      <linearGradient id="gradLeft" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#00C7B7"/><stop offset="1" stop-color="#2A70DC"/>
+      </linearGradient>
+    </defs>
+    <path d="M 10,150 C 200,10 420,260 650,120" class="dash" stroke="url(#gradLeft)"/>
     <g class="airplane">
       <svg viewBox="0 0 64 64" width="22" height="22"><path fill="#2A70DC" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/></svg>
     </g>
   </svg>
+
   <svg class="p-right" viewBox="0 0 660 300">
-    <path d="M 10,220 C 200,260 380,120 640,200" class="dash"/>
+    <defs>
+      <linearGradient id="gradRight" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#2A70DC"/><stop offset="1" stop-color="#00C7B7"/>
+      </linearGradient>
+    </defs>
+    <path d="M 10,220 C 200,260 380,120 640,200" class="dash" stroke="url(#gradRight)"/>
     <g class="airplane2">
       <svg viewBox="0 0 64 64" width="22" height="22"><path fill="#FF7A1A" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/></svg>
     </g>
   </svg>
 </div>
 
-<!-- البطاقة الترحيبية -->
+<!-- البطاقة الترحيبية في الوسط -->
 <div class="center">
   <section class="welcome pro">
     <div class="w-head">
+      <!-- تأكد من وجود logo.PNG بجانب الملف -->
       <img src="logo.PNG" alt="SIDAR" class="w-logo" />
       <div>
         <h1 id="typedTitle">مرحبًا بك في سيدار ترافل 🌍</h1>
@@ -153,12 +162,19 @@
 
     <!-- الأيقونات أسفل البطاقة -->
     <div class="floaters-below">
-      <div class="badge b1"><svg viewBox="0 0 64 64"><rect x="10" y="8" rx="6" ry="6" width="44" height="48" fill="#00C7B7"/><rect x="16" y="18" width="16" height="14" fill="#fff" opacity=".9"/></svg></div>
-      <div class="badge b2"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="#FFE895"/><path d="M20 28l6-2 2 3 4-1 3 2 5-1 2 3-4 4-6 1-4-2-4 1-4-6z" fill="#fff" opacity=".85"/></svg></div>
-      <div class="badge b3"><svg viewBox="0 0 64 64"><rect x="10" y="22" width="36" height="22" rx="6" fill="#FF7A1A"/><polygon points="46,26 58,22 58,44 46,40" fill="#FF7A1A"/><circle cx="28" cy="33" r="6" fill="#fff" opacity=".9"/></svg></div>
-      <div class="badge b4"><svg viewBox="0 0 64 64"><path d="M10 28h8a4 4 0 1 0 0 8h-8v10h44V36h-8a4 4 0 1 1 0-8h8V18H10z" fill="#2A70DC"/><rect x="20" y="22" width="20" height="20" rx="4" fill="#fff" opacity=".9"/></svg></div>
+      <div class="badge b1" title="eSIM">
+        <svg viewBox="0 0 64 64"><rect x="10" y="8" rx="6" ry="6" width="44" height="48" fill="#00C7B7"/><rect x="16" y="18" width="16" height="14" fill="#fff" opacity=".9"/></svg>
+      </div>
+      <div class="badge b2" title="Globe">
+        <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="#FFE895"/><path d="M20 28l6-2 2 3 4-1 3 2 5-1 2 3-4 4-6 1-4-2-4 1-4-6z" fill="#fff" opacity=".85"/></svg>
+      </div>
+      <div class="badge b3" title="Camera">
+        <svg viewBox="0 0 64 64"><rect x="10" y="22" width="36" height="22" rx="6" fill="#FF7A1A"/><polygon points="46,26 58,22 58,44 46,40" fill="#FF7A1A"/><circle cx="28" cy="33" r="6" fill="#fff" opacity=".9"/></svg>
+      </div>
+      <div class="badge b4" title="Ticket">
+        <svg viewBox="0 0 64 64"><path d="M10 28h8a4 4 0 1 0 0 8h-8v10h44V36h-8a4 4 0 1 1 0-8h8V18H10z" fill="#2A70DC"/><rect x="20" y="22" width="20" height="20" rx="4" fill="#fff" opacity=".9"/></svg>
+      </div>
     </div>
-
   </section>
 </div>
 
@@ -169,7 +185,7 @@
 const c=document.getElementById('bgfx'),ctx=c.getContext('2d');let w,h,particles;
 function resize(){w=c.width=innerWidth;h=c.height=innerHeight;make()}
 function make(){
-  const n=Math.min(120,Math.floor(w*h/14000));
+  const n=Math.min(110,Math.floor(w*h/16000));
   particles=Array.from({length:n},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+0.5}))
 }
 function draw(){
@@ -179,19 +195,19 @@ function draw(){
     if(p.x<0||p.x>w)p.vx*=-1;
     if(p.y<0||p.y>h)p.vy*=-1;
     ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle='rgba(42,112,220,0.28)';ctx.fill();
+    ctx.fillStyle='rgba(42,112,220,0.26)';ctx.fill();
   }
   requestAnimationFrame(draw);
 }
 resize();draw();addEventListener('resize',resize);
 
 /* ===== واتساب ===== */
-const PHONE="9725XXXXXXXX"; 
+const PHONE="9725XXXXXXXX"; // عدّل رقمك (بدون +)
 const baseWA=(t)=>`https://wa.me/${PHONE}?text=${encodeURIComponent(t)}`;
 const waTop=document.getElementById("wa-top");
 if(waTop) waTop.href=baseWA("مرحبًا، أريد الاستفسار عن الخدمات ✈️");
 
-/* ===== كتابة عنوان البطاقة بشكل تدريجي ===== */
+/* ===== كتابة عنوان البطاقة تدريجيًا ===== */
 (function(){
   const el=document.getElementById('typedTitle');if(!el)return;
   const full=el.textContent.trim();let j=0;el.textContent='';
