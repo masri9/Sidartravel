@@ -1,89 +1,131 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SIDAR TRAVEL — صفحة الهبوط</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet" />
 
   <style>
     :root{
-      --blue:#2A70DC; --light:#E6F3FF; --white:#ffffff;
-      --ink:#0f1320; --whatsapp:#25D366;
+      --blue:#2A70DC; --orange:#FF7A1A; --yellow:#FFE895;
+      --ink:#0f1320; --ink-soft:#51607c; --white:#ffffff;
+      --card:#ffffffdd; --radius:20px; --shadow:0 12px 30px rgba(0,0,0,.15);
+      --whatsapp:#25D366; --bg:#EAF3FF;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;}
     body{
-      font-family:"Tajawal",system-ui;
-      color:var(--ink);
-      overflow-x:hidden;
-      min-height:100vh;
-      position:relative;
-      background:var(--light);
+      margin:0; font-family:"Tajawal",system-ui; color:var(--ink);
+      background:var(--bg);
+      overflow-x:hidden; min-height:100vh; position:relative;
     }
 
     /* 🌊 خلفية الموج */
     .waves{
       position:fixed;
-      bottom:0;
-      left:0;
-      width:100%;
-      height:100%;
-      z-index:-1;
-      overflow:hidden;
-      background:linear-gradient(180deg,#ffffff,#dcecff,#b0d8ff);
+      bottom:0; left:0;
+      width:100%; height:100%;
+      z-index:-1; overflow:hidden;
+      background:linear-gradient(180deg,#ffffff,#e6f4ff,#b8ddff);
     }
     .wave{
       position:absolute;
-      width:200%;
-      height:200px;
-      background:rgba(255,255,255,.8);
+      width:200%; height:200px;
       border-radius:43%;
-      opacity:0.7;
-      animation:waveMove 10s linear infinite;
+      opacity:.6;
+      animation:waveMove 22s linear infinite;
     }
-    .wave:nth-child(1){
-      bottom:0;left:-50%;
-      background:rgba(255,255,255,.8);
-      animation-duration:18s;
-    }
-    .wave:nth-child(2){
-      bottom:20px;left:-60%;
-      background:rgba(42,112,220,.15);
-      animation-duration:25s;
-    }
-    .wave:nth-child(3){
-      bottom:40px;left:-40%;
-      background:rgba(42,112,220,.25);
-      animation-duration:30s;
-    }
+    .wave:nth-child(1){bottom:0;left:-50%;background:rgba(255,255,255,.8);animation-duration:20s;}
+    .wave:nth-child(2){bottom:40px;left:-60%;background:rgba(42,112,220,.1);animation-duration:25s;}
+    .wave:nth-child(3){bottom:80px;left:-70%;background:rgba(42,112,220,.2);animation-duration:30s;}
     @keyframes waveMove{
       0%{transform:translateX(0);}
       100%{transform:translateX(50%);}
     }
 
-    /* باقي التصميم الأساسي */
-    .container{max-width:960px;margin:auto;padding:20px;text-align:center;position:relative;z-index:2}
-    header{margin:20px 0}
-    .logo img{height:80px;width:auto}
-    h1{font-size:28px;margin:10px 0}
-    p{color:#4b5563}
+    .container{max-width:1080px; margin:auto; padding:20px; position:relative; z-index:2;}
+
+    /* شعار */
+    header{text-align:center; padding:28px 0 12px}
+    .logo img{height:80px;width:auto;display:block;margin:auto;animation:fadeIn 1.2s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+    /* البطاقة */
+    .welcome{
+      background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+      padding:18px; margin:14px auto; max-width:760px; text-align:center;
+      border:1px solid #eee; backdrop-filter:blur(4px);
+    }
+    .welcome h1{margin:6px 0;font-size:28px;}
+    .welcome p{margin:0 0 14px; color:var(--ink-soft);}
     .cta{
-      display:inline-block;
-      margin-top:12px;
-      padding:12px 22px;
-      border-radius:50px;
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:12px 22px; border-radius:50px;
       background:linear-gradient(90deg,var(--whatsapp),#1ebe5b);
-      color:#fff;font-weight:700;text-decoration:none;
-      box-shadow:0 8px 20px rgba(37,211,102,.35);
+      color:#fff; font-weight:700; text-decoration:none;
+      box-shadow:0 10px 24px rgba(37,211,102,.35);
+      transition:transform .2s ease;
+    }
+    .cta:hover{transform:translateY(-3px);}
+
+    /* الخدمات */
+    .section-title{text-align:center;font-size:22px;margin:26px 0 10px;}
+    .services{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
+    .card{
+      background:#fff;border:1px solid #eee;border-radius:16px;padding:18px;
+      text-align:center;box-shadow:var(--shadow);transition:.25s;cursor:pointer;
+    }
+    .card:hover{transform:translateY(-4px);}
+    .icon{font-size:32px;margin-bottom:6px;}
+    .card small{color:var(--ink-soft);}
+
+    /* آراء العملاء (شريط متحرك) */
+    .reviews{
+      margin:30px auto 10px;
+      text-align:center;
+    }
+    .reviews .bar{
+      width:100%;overflow:hidden;background:rgba(255,255,255,.85);
+      border-radius:14px;border:1px solid #eee;box-shadow:var(--shadow);
+      padding:10px 0;
+    }
+    .reviews .scroll{
+      display:inline-block;white-space:nowrap;
+      animation:scroll-left 28s linear infinite;
+    }
+    .review-item{
+      display:inline-block;margin-inline:40px;font-size:15px;
+      color:#1f2937;white-space:nowrap;
+    }
+    @keyframes scroll-left{
+      0%{transform:translateX(100%);}
+      100%{transform:translateX(-100%);}
+    }
+
+    /* تابعنا */
+    .social{
+      text-align:center;margin:40px 0 10px;
+    }
+    .social span{display:block;margin-bottom:10px;font-weight:700;color:#2A70DC;}
+    .social .icons{display:flex;gap:18px;justify-content:center;}
+    .social .icons a{
+      display:inline-flex;align-items:center;justify-content:center;
+      width:46px;height:46px;border-radius:50%;
+      background:#fff;border:1px solid #ddd;
+      box-shadow:0 4px 12px rgba(0,0,0,.07);
       transition:.2s;
     }
-    .cta:hover{transform:translateY(-3px)}
+    .social .icons a:hover{transform:translateY(-3px);}
+    .social .icons img{width:26px;height:26px;}
+
+    footer{text-align:center;color:#687793;font-size:14px;margin:24px 0;}
   </style>
 </head>
+
 <body>
 
-  <!-- الخلفية المتحركة -->
+  <!-- 🌊 خلفية الموج -->
   <div class="waves">
     <div class="wave"></div>
     <div class="wave"></div>
@@ -92,13 +134,64 @@
 
   <!-- المحتوى -->
   <div class="container">
-    <header class="logo">
-      <img src="logo.PNG" alt="شعار سيدار">
+
+    <header>
+      <div class="logo">
+        <img src="logo.PNG" alt="شعار سيدار ترافل">
+      </div>
     </header>
-    <h1>مرحبًا بك في <strong>SIDAR TRAVEL</strong> 🌊</h1>
-    <p>رحلات، باقات، واتصال دائم — نوصلك للعالم بخطوات بسيطة.</p>
-    <a href="https://wa.me/9725XXXXXXXX" class="cta">💬 تواصل عبر واتساب</a>
+
+    <!-- بطاقة ترحيب -->
+    <section class="welcome">
+      <h1>مرحبًا بك في <strong>SIDAR TRAVEL</strong> 🌊</h1>
+      <p>نوصلك إلى العالم بخدماتنا الذكية — حجوزات، سيارات، eSIM، وأكثر.</p>
+      <a href="https://wa.me/9725XXXXXXXX" class="cta">💬 تواصل عبر واتساب</a>
+    </section>
+
+    <!-- الخدمات -->
+    <h2 class="section-title">الخدمات الحالية</h2>
+    <section class="services">
+      <div class="card"><div class="icon">📶</div><div>بطاقات eSIM</div><small>إنترنت دولي فوري</small></div>
+      <div class="card"><div class="icon">✈️</div><div>تذاكر الطيران</div><small>أفضل الأسعار</small></div>
+      <div class="card"><div class="icon">🚗</div><div>تأجير سيارات</div><small>خيارات فاخرة واقتصادية</small></div>
+      <div class="card"><div class="icon">🎬</div><div>أماكن تصوير</div><small>مواقع شهيرة للمسلسلات</small></div>
+    </section>
+
+    <!-- آراء العملاء -->
+    <section class="reviews">
+      <h2 class="section-title">آراء عملائنا</h2>
+      <div class="bar">
+        <div class="scroll">
+          <span class="review-item">⭐️⭐️⭐️⭐️⭐️ أحمد من دبي: تجربة رائعة وخدمة ممتازة!</span>
+          <span class="review-item">⭐️⭐️⭐️⭐️⭐️ ليلى من عمان: كل شيء كان منظم وسهل 👌</span>
+          <span class="review-item">⭐️⭐️⭐️⭐️⭐️ فهد من الرياض: دعم سريع وأسعار ممتازة 💬</span>
+          <span class="review-item">⭐️⭐️⭐️⭐️ رامي من حيفا: شكراً سيدار على الرحلة المثالية ✈️</span>
+          <span class="review-item">⭐️⭐️⭐️⭐️⭐️ نورا من جدة: سرعة في الرد والتواصل 💚</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- تابعنا -->
+    <section class="social">
+      <span>تابعنا على السوشيال ميديا</span>
+      <div class="icons">
+        <a href="https://instagram.com/yourpage" target="_blank" aria-label="Instagram">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+        </a>
+        <a href="https://tiktok.com/@yourpage" target="_blank" aria-label="TikTok">
+          <img src="https://cdn-icons-png.flaticon.com/512/3046/3046120.png" alt="TikTok">
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> جميع الحقوق محفوظة – SIDAR TRAVEL
+    </footer>
   </div>
 
+  <script>
+    // تحديث السنة تلقائيًا
+    document.getElementById("year").textContent=new Date().getFullYear();
+  </script>
 </body>
 </html>
