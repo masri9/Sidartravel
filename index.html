@@ -77,7 +77,7 @@
     border-radius:22px;
     box-shadow:0 8px 28px rgba(42,112,220,0.22);
     text-align:center; animation:fadeIn .9s ease both;
-    margin-top:-20px; /* لتقترب البطاقة من الشعار */
+    margin-top:-20px;
   }
   @keyframes fadeIn{from{opacity:0; transform:scale(.96)} to{opacity:1; transform:scale(1)}}
   .w-sub{margin:6px 0 0; color:var(--ink-soft)}
@@ -87,7 +87,11 @@
        background:linear-gradient(90deg, #25D366, #1ebe5b); color:#fff; font-weight:700; text-decoration:none; transition:.2s; box-shadow:0 8px 20px rgba(37,211,102,.25)}
   .cta:hover{transform:translateY(-3px)}
   .cta.ghost{background:#f6f9ff; color:#1f3a7a; box-shadow:none; border:1px solid #e3eafc}
-  .w-stats{margin-top:18px; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; text-align:center}
+
+  /* الإحصاءات (خانتان) */
+  .w-stats{
+    margin-top:18px; display:grid; grid-template-columns:repeat(2,1fr); gap:10px; text-align:center
+  }
   .w-stats strong{display:block; font-size:22px}
   .w-stats small{color:#6b7a99}
 
@@ -129,15 +133,18 @@
       <h1 id="typedTitle">مرحبًا بك في سيدار ترافل 🌍</h1>
       <p class="w-sub">نوفّر حلول سفر ذكية: eSIM • طيران • سيارات — بخدمة سريعة ودفع آمن.</p>
       <div class="tagline">✨ وجهتك تبدأ معنا – رحلات، اتصالات، وراحة بال!</div>
+
       <div class="w-actions">
         <a id="wa-top" class="cta" href="#">💬 تواصل واتساب</a>
         <a class="cta ghost" href="#!" title="استعرض الخدمات لاحقًا">استعرض خدماتنا</a>
       </div>
+
+      <!-- إحصاءات: إبقاء الدعم 24/7 + متوسط الرد = 10 دقائق -->
       <div class="w-stats">
-        <div><strong>50+</strong><small>وجهة</small></div>
         <div><strong>24/7</strong><small>دعم</small></div>
-        <div><strong>5 دقائق</strong><small>متوسط الرد</small></div>
+        <div><strong>10 دقائق</strong><small>متوسط الرد</small></div>
       </div>
+
       <div class="floaters-below">
         <div class="badge b1" title="eSIM"><svg viewBox="0 0 64 64"><rect x="10" y="8" rx="6" ry="6" width="44" height="48" fill="#00C7B7"/><rect x="16" y="18" width="16" height="14" fill="#fff" opacity=".9"/></svg></div>
         <div class="badge b2" title="Globe"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="#FFE895"/><path d="M20 28l6-2 2 3 4-1 3 2 5-1 2 3-4 4-6 1-4-2-4 1-4-6z" fill="#fff" opacity=".85"/></svg></div>
