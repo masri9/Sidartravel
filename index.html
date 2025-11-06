@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SIDAR TRAVEL — صفحة ترحيب أنيقة</title>
+<title>SIDAR TRAVEL — ترحيب وخدمات</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -44,28 +44,13 @@
   .airplane2{offset-path:path("M 10,220 C 200,260 380,120 640,200"); offset-rotate:auto; animation:fly 13s linear infinite reverse}
   @keyframes fly{to{offset-distance:100%}}
 
-  /* الشعار العلوي (مرفوع وأصلي بدون تدوير) */
-  .logo-top{
-    position:relative;
-    z-index:15;
-    display:flex;
-    justify-content:center;
-    margin-top:8px;         /* رفعه للأعلى */
-    animation:fadeDown .9s ease both;
-  }
-  .logo-top img{
-    width:160px;            /* تحكم بالحجم كما تحب */
-    height:auto;
-    border-radius:0;        /* بدون دائرة */
-    background:transparent; /* بدون خلفية */
-    padding:0;              /* بدون حواف */
-    box-shadow:none;        /* بدون ظل */
-    image-rendering:auto;
-  }
+  /* الشعار أعلى */
+  .logo-top{position:relative; z-index:15; display:flex; justify-content:center; margin-top:8px; animation:fadeDown .9s ease both}
+  .logo-top img{width:160px; height:auto; border-radius:0; background:transparent; padding:0; box-shadow:none}
   @keyframes fadeDown{from{opacity:0; transform:translateY(-20px)}to{opacity:1; transform:translateY(0)}}
 
   /* البطاقة */
-  .center{position:relative; z-index:10; padding:14px 20px 80px; display:grid; place-items:center}
+  .center{position:relative; z-index:10; padding:14px 20px 40px; display:grid; place-items:center}
   .welcome.pro{
     width:min(85vw, 700px);
     padding:32px 24px 28px;
@@ -75,7 +60,6 @@
     border-radius:22px;
     box-shadow:0 8px 28px rgba(42,112,220,0.22);
     text-align:center; animation:fadeIn .9s ease both;
-    margin-top:0;
   }
   @keyframes fadeIn{from{opacity:0; transform:scale(.96)} to{opacity:1; transform:scale(1)}}
   .w-sub{margin:6px 0 0; color:var(--ink-soft)}
@@ -86,15 +70,41 @@
   .cta:hover{transform:translateY(-3px)}
   .cta.ghost{background:#f6f9ff; color:#1f3a7a; box-shadow:none; border:1px solid #e3eafc}
 
-  /* الإحصاءات (خانتان) */
-  .w-stats{
-    margin-top:18px; display:grid; grid-template-columns:repeat(2,1fr); gap:10px; text-align:center
-  }
+  /* الإحصاءات */
+  .w-stats{margin-top:18px; display:grid; grid-template-columns:repeat(2,1fr); gap:10px; text-align:center}
   .w-stats strong{display:block; font-size:22px}
   .w-stats small{color:#6b7a99}
 
-  /* الأيقونات الطافية */
-  .floaters-below{position:relative; width:100%; display:flex; justify-content:center; gap:40px; margin-top:26px; z-index:5;}
+  /* عنوان خدماتنا + أيقونات طافية حوله */
+  .services-head{position:relative; text-align:center; margin:22px 0 8px}
+  .services-head h3{font-size:18px; color:#1f3a7a}
+  .orbit{position:absolute; inset:0; pointer-events:none}
+  .orb{position:absolute; width:26px; height:26px; display:grid; place-items:center; filter:drop-shadow(0 4px 8px rgba(0,0,0,.15))}
+  .orb svg{width:26px;height:26px}
+  .o1{left:50%; top:-8px; transform:translateX(-50%); animation:f1 5s ease-in-out infinite}
+  .o2{left:12%; top:8px; animation:f2 6s ease-in-out infinite}
+  .o3{right:12%; top:8px; animation:f3 6s ease-in-out infinite reverse}
+  @keyframes f1{50%{transform:translate(-50%, -6px)}}
+  @keyframes f2{50%{transform:translateY(-6px)}}
+  @keyframes f3{50%{transform:translateY(-6px)}}
+
+  /* سكة الخدمات المتحركة (Marquee) */
+  .rail-wrap{position:relative; z-index:9; width:100%; overflow:hidden; padding:6px 0; margin-bottom:14px}
+  .rail{display:flex; gap:14px; width:max-content; animation:scrollX 22s linear infinite}
+  .rail:hover{animation-play-state:paused}
+  @keyframes scrollX{from{transform:translateX(100%)} to{transform:translateX(-100%)}}
+
+  .chip{
+    display:inline-flex; align-items:center; gap:8px; padding:10px 14px;
+    border-radius:999px; background:#fff; border:1px solid #e6ecf7;
+    box-shadow:0 8px 18px rgba(0,0,0,.06); font-weight:700; color:#1f2d5c; white-space:nowrap;
+    cursor:pointer; transition:transform .2s, box-shadow .2s;
+  }
+  .chip:hover{transform:translateY(-3px); box-shadow:0 10px 20px rgba(0,0,0,.10)}
+  .chip .emoji{font-size:18px}
+
+  /* الأيقونات تحت البطاقة (ابقيناها) */
+  .floaters-below{position:relative; width:100%; display:flex; justify-content:center; gap:40px; margin-top:10px; z-index:5;}
   .badge{width:60px; height:60px; border-radius:16px; display:grid; place-items:center;
     background:linear-gradient(180deg,#ffffffcc,#ffffff77); border:1px solid #ffffffaa;
     box-shadow:0 8px 22px rgba(0,0,0,.1); animation:float 5.2s ease-in-out infinite}
@@ -120,9 +130,8 @@
   <svg class="p-right" viewBox="0 0 660 300"><defs><linearGradient id="gradRight" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2A70DC"/><stop offset="1" stop-color="#00C7B7"/></linearGradient></defs><path d="M 10,220 C 200,260 380,120 640,200" class="dash" stroke="url(#gradRight)"/><g class="airplane2"><svg viewBox="0 0 64 64" width="22" height="22"><path fill="#FF7A1A" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/></svg></g></svg>
 </div>
 
-<!-- الشعار أعلى البطاقة (بدون تدوير) -->
+<!-- الشعار أعلى -->
 <div class="logo-top">
-  <!-- تأكد أن ملف logo.PNG موجود بجانب الملف -->
   <img src="logo.PNG" alt="SIDAR Logo">
 </div>
 
@@ -135,15 +144,15 @@
 
       <div class="w-actions">
         <a id="wa-top" class="cta" href="#">💬 تواصل واتساب</a>
-        <a class="cta ghost" href="#!" title="استعرض الخدمات لاحقًا">استعرض خدماتنا</a>
+        <a class="cta ghost" href="#services-rail" title="استعرض خدماتنا">استعرض خدماتنا</a>
       </div>
 
-      <!-- فقط دعم 24/7 ومتوسط الرد 10 دقائق -->
       <div class="w-stats">
         <div><strong>24/7</strong><small>دعم</small></div>
         <div><strong>10 دقائق</strong><small>متوسط الرد</small></div>
       </div>
 
+      <!-- أيقونات أسفل البطاقة (اختيارية) -->
       <div class="floaters-below">
         <div class="badge b1" title="eSIM"><svg viewBox="0 0 64 64"><rect x="10" y="8" rx="6" ry="6" width="44" height="48" fill="#00C7B7"/><rect x="16" y="18" width="16" height="14" fill="#fff" opacity=".9"/></svg></div>
         <div class="badge b2" title="Globe"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="#FFE895"/><path d="M20 28l6-2 2 3 4-1 3 2 5-1 2 3-4 4-6 1-4-2-4 1-4-6z" fill="#fff" opacity=".85"/></svg></div>
@@ -151,6 +160,36 @@
         <div class="badge b4" title="Ticket"><svg viewBox="0 0 64 64"><path d="M10 28h8a4 4 0 1 0 0 8h-8v10h44V36h-8a4 4 0 1 1 0-8h8V18H10z" fill="#2A70DC"/><rect x="20" y="22" width="20" height="20" rx="4" fill="#fff" opacity=".9"/></svg></div>
       </div>
   </section>
+
+  <!-- عنوان خدماتنا مع أيقونات طافية -->
+  <div class="services-head" id="services-rail">
+    <h3>خدماتنا</h3>
+    <div class="orbit" aria-hidden="true">
+      <div class="orb o1"><svg viewBox="0 0 64 64"><path fill="#2A70DC" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/></svg></div>
+      <div class="orb o2"><svg viewBox="0 0 64 64"><rect x="10" y="8" rx="6" ry="6" width="44" height="48" fill="#00C7B7"/></svg></div>
+      <div class="orb o3"><svg viewBox="0 0 64 64"><rect x="8" y="20" width="36" height="20" rx="6" fill="#FF7A1A"/></svg></div>
+    </div>
+  </div>
+
+  <!-- سكة الخدمات المتحركة -->
+  <div class="rail-wrap">
+    <div class="rail" id="rail">
+      <!-- نكرر العناصر مرتين لتمرير لا نهائي سلس -->
+      <button class="chip" data-svc="esim"><span class="emoji">📶</span> eSIM دولي</button>
+      <button class="chip" data-svc="flights"><span class="emoji">✈️</span> تذاكر طيران</button>
+      <button class="chip" data-svc="cars"><span class="emoji">🚗</span> تأجير سيارات</button>
+      <button class="chip" data-svc="hotels"><span class="emoji">🏨</span> حجوزات فنادق</button>
+      <button class="chip" data-svc="activities"><span class="emoji">🎟️</span> أنشطة وتذاكر</button>
+      <button class="chip" data-svc="support"><span class="emoji">💬</span> استشارة سريعة</button>
+
+      <button class="chip" data-svc="esim"><span class="emoji">📶</span> eSIM دولي</button>
+      <button class="chip" data-svc="flights"><span class="emoji">✈️</span> تذاكر طيران</button>
+      <button class="chip" data-svc="cars"><span class="emoji">🚗</span> تأجير سيارات</button>
+      <button class="chip" data-svc="hotels"><span class="emoji">🏨</span> حجوزات فنادق</button>
+      <button class="chip" data-svc="activities"><span class="emoji">🎟️</span> أنشطة وتذاكر</button>
+      <button class="chip" data-svc="support"><span class="emoji">💬</span> استشارة سريعة</button>
+    </div>
+  </div>
 </div>
 
 <footer>© <span id="year"></span> SIDAR TRAVEL</footer>
@@ -164,17 +203,32 @@ function draw(){ctx.clearRect(0,0,w,h);for(const p of particles){p.x+=p.vx;p.y+=
 resize();draw();addEventListener('resize',resize);
 
 /* واتساب */
-const PHONE="9725XXXXXXXX";
+const PHONE="9725XXXXXXXX"; // عدّل
 const baseWA=(t)=>`https://wa.me/${PHONE}?text=${encodeURIComponent(t)}`;
 document.getElementById("wa-top").href=baseWA("مرحبًا، أريد الاستفسار عن الخدمات ✈️");
 
 /* كتابة تدريجية */
-(function(){
-  const el=document.getElementById('typedTitle');if(!el)return;
-  const full=el.textContent.trim();let j=0;el.textContent='';
-  const tick=()=>{el.textContent=full.slice(0,++j);if(j<full.length)requestAnimationFrame(tick);}
-  requestAnimationFrame(tick);
-})();
+(function(){const el=document.getElementById('typedTitle');if(!el)return;
+  const full=el.textContent.trim();let j=0;el.textContent='';const tick=()=>{el.textContent=full.slice(0,++j);if(j<full.length)requestAnimationFrame(tick)};requestAnimationFrame(tick);})();
+
+/* نقر عناصر الرول → افتح واتساب مع رسالة حسب الخدمة */
+const msgs={
+  esim:"مرحبًا، أريد شراء eSIM لرحلتي 🌍",
+  flights:"مرحبًا، أريد حجز تذاكر طيران ✈️",
+  cars:"مرحبًا، أريد حجز سيارة إيجار 🚗",
+  hotels:"مرحبًا، أحتاج عرض فنادق 🏨",
+  activities:"مرحبًا، أود تذاكر/أنشطة سياحية 🎟️",
+  support:"مرحبًا، أحتاج استشارة سريعة 💬"
+};
+document.querySelectorAll('.chip').forEach(ch=>{
+  ch.addEventListener('click',()=>{
+    const key=ch.dataset.svc;
+    const text=msgs[key]||"مرحبًا";
+    window.open(baseWA(text),'_blank');
+  });
+});
+
+/* سنة الفوتر */
 document.getElementById("year").textContent=new Date().getFullYear();
 </script>
 </body>
