@@ -33,18 +33,6 @@
   /* جسيمات */
   #bgfx{position:fixed; inset:0; z-index:-1; background:transparent}
 
-  /* الأيقونات الطافية */
-  .floaters{position:absolute; inset:0; pointer-events:none; z-index:3}
-  .badge{position:absolute; width:60px; height:60px; border-radius:16px; display:grid; place-items:center;
-    background:linear-gradient(180deg,#ffffffcc,#ffffff77); border:1px solid #ffffffaa;
-    box-shadow:0 8px 22px rgba(0,0,0,.1); animation:float 5.2s ease-in-out infinite}
-  .badge svg{width:32px; height:32px}
-  .b1{top:12%; left:8%; animation-delay:.2s}
-  .b2{top:24%; right:12%; animation-delay:.7s}
-  .b3{bottom:16%; left:10%; animation-delay:1.3s}
-  .b4{bottom:10%; right:8%; animation-delay:1.8s}
-  @keyframes float{50%{transform:translateY(-8px)}}
-
   /* مسارات الطيران */
   .paths{position:absolute; inset:0; z-index:2; pointer-events:none}
   .paths svg{position:absolute; width:50vw; max-width:680px}
@@ -60,7 +48,7 @@
   /* تموضع البطاقة في الوسط */
   .center{position:absolute; inset:0; display:grid; place-items:center; z-index:10; padding:20px}
 
-  /* البطاقة الترحيبية (زجاجية أخف لتظهر الخلفية) */
+  /* البطاقة الترحيبية (زجاجية) */
   .welcome.pro{
     width:min(85vw, 700px);
     padding:24px;
@@ -88,7 +76,18 @@
   .w-stats small{color:#6b7a99}
   @media(max-width:720px){.w-head{justify-content:center}.w-badge{order:3}}
 
-  /* فوتر صغير */
+  /* الأيقونات الطافية (الآن تحت البطاقة) */
+  .floaters-below{position:relative; width:100%; display:flex; justify-content:center; gap:40px; margin-top:30px; z-index:5;}
+  .badge{width:60px; height:60px; border-radius:16px; display:grid; place-items:center;
+    background:linear-gradient(180deg,#ffffffcc,#ffffff77); border:1px solid #ffffffaa;
+    box-shadow:0 8px 22px rgba(0,0,0,.1); animation:float 5.2s ease-in-out infinite}
+  .badge svg{width:32px; height:32px}
+  .b1{animation-delay:.2s}
+  .b2{animation-delay:.7s}
+  .b3{animation-delay:1.3s}
+  .b4{animation-delay:1.8s}
+  @keyframes float{50%{transform:translateY(-8px)}}
+
   footer{position:fixed; inset-inline:0; bottom:6px; text-align:center; font-size:13px; color:#6b7a99; z-index:20}
 </style>
 </head>
@@ -122,22 +121,6 @@
   </svg>
 </div>
 
-<!-- أيقونات طافية -->
-<div class="floaters">
-  <div class="badge b1" title="eSIM">
-    <svg viewBox="0 0 64 64"><rect x="10" y="8" rx="6" ry="6" width="44" height="48" fill="#00C7B7"/><rect x="16" y="18" width="16" height="14" fill="#fff" opacity=".9"/></svg>
-  </div>
-  <div class="badge b2" title="Globe">
-    <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="#FFE895"/><path d="M20 28l6-2 2 3 4-1 3 2 5-1 2 3-4 4-6 1-4-2-4 1-4-6z" fill="#fff" opacity=".85"/></svg>
-  </div>
-  <div class="badge b3" title="Camera">
-    <svg viewBox="0 0 64 64"><rect x="10" y="22" width="36" height="22" rx="6" fill="#FF7A1A"/><polygon points="46,26 58,22 58,44 46,40" fill="#FF7A1A"/><circle cx="28" cy="33" r="6" fill="#fff" opacity=".9"/></svg>
-  </div>
-  <div class="badge b4" title="Ticket">
-    <svg viewBox="0 0 64 64"><path d="M10 28h8a4 4 0 1 0 0 8h-8v10h44V36h-8a4 4 0 1 1 0-8h8V18H10z" fill="#2A70DC"/><rect x="20" y="22" width="20" height="20" rx="4" fill="#fff" opacity=".9"/></svg>
-  </div>
-</div>
-
 <!-- البطاقة الترحيبية -->
 <div class="center">
   <section class="welcome pro">
@@ -167,6 +150,15 @@
       <div><strong>24/7</strong><small>دعم</small></div>
       <div><strong>5 دقائق</strong><small>متوسط الرد</small></div>
     </div>
+
+    <!-- الأيقونات أسفل البطاقة -->
+    <div class="floaters-below">
+      <div class="badge b1"><svg viewBox="0 0 64 64"><rect x="10" y="8" rx="6" ry="6" width="44" height="48" fill="#00C7B7"/><rect x="16" y="18" width="16" height="14" fill="#fff" opacity=".9"/></svg></div>
+      <div class="badge b2"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="#FFE895"/><path d="M20 28l6-2 2 3 4-1 3 2 5-1 2 3-4 4-6 1-4-2-4 1-4-6z" fill="#fff" opacity=".85"/></svg></div>
+      <div class="badge b3"><svg viewBox="0 0 64 64"><rect x="10" y="22" width="36" height="22" rx="6" fill="#FF7A1A"/><polygon points="46,26 58,22 58,44 46,40" fill="#FF7A1A"/><circle cx="28" cy="33" r="6" fill="#fff" opacity=".9"/></svg></div>
+      <div class="badge b4"><svg viewBox="0 0 64 64"><path d="M10 28h8a4 4 0 1 0 0 8h-8v10h44V36h-8a4 4 0 1 1 0-8h8V18H10z" fill="#2A70DC"/><rect x="20" y="22" width="20" height="20" rx="4" fill="#fff" opacity=".9"/></svg></div>
+    </div>
+
   </section>
 </div>
 
@@ -194,7 +186,7 @@ function draw(){
 resize();draw();addEventListener('resize',resize);
 
 /* ===== واتساب ===== */
-const PHONE="9725XXXXXXXX"; // ← ضع رقمك الدولي بدون +
+const PHONE="9725XXXXXXXX"; 
 const baseWA=(t)=>`https://wa.me/${PHONE}?text=${encodeURIComponent(t)}`;
 const waTop=document.getElementById("wa-top");
 if(waTop) waTop.href=baseWA("مرحبًا، أريد الاستفسار عن الخدمات ✈️");
