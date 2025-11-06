@@ -39,10 +39,9 @@
       color:#fff; font-weight:700; box-shadow:0 10px 24px rgba(37,211,102,.35);
       text-decoration:none; transition:transform .2s ease, box-shadow .2s ease}
     .cta:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(37,211,102,.5)}
-    .trust{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:12px}
-    .badge{background:#fff; border:1px dashed #d8deeb; border-radius:999px; padding:8px 12px; font-size:13px; font-weight:700; color:#33415c}
 
-    .section-title{font-size:22px; margin:20px 0 10px}
+    .section-title{font-size:22px; margin:20px 0 10px; text-align:center;}
+
     .services{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
     @media(min-width:720px){.services{grid-template-columns:repeat(4,1fr)}}
     .card{background:#fff; border:1px solid #eee; border-radius:16px; padding:16px; text-align:center; cursor:pointer; transition:.2s}
@@ -53,51 +52,41 @@
     .widget[hidden]{display:none!important}
     .close{position:absolute; top:10px; inset-inline-end:10px; border:none; background:#fff; width:32px; height:32px; border-radius:50%; font-weight:700; cursor:pointer}
 
-    /* ===== Testimonials Carousel ===== */
-    .testimonials{
-      margin:40px auto 20px;
-      background:#ffffffcc;
-      border-radius:20px;
-      padding:20px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
+    /* ===== شريط آراء العملاء ===== */
+    .reviews-ticker{
+      margin: 30px 0;
+      text-align: center;
     }
-    .scrollbar{
-      display:flex;
-      gap:16px;
-      overflow-x:auto;
-      scroll-behavior:smooth;
-      scrollbar-width:none;
+    .ticker-wrap{
+      width: 100%;
+      overflow: hidden;
+      background: #ffffffcc;
+      border: 1px solid #eee;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 8px 0;
+      direction: rtl;
     }
-    .scrollbar::-webkit-scrollbar{display:none;}
-    .scrollbar .item{
-      flex:0 0 260px;
-      background:#fff;
-      border:1px solid #eee;
-      border-radius:14px;
-      box-shadow:0 8px 16px rgba(0,0,0,.08);
-      padding:14px;
-      text-align:center;
-      transition:transform .2s;
+    .ticker{
+      display: inline-block;
+      white-space: nowrap;
+      animation: scroll-left 25s linear infinite;
     }
-    .scrollbar .item:hover{transform:translateY(-4px);}
-    .scrollbar .rating{color:#FFB400;font-size:16px;letter-spacing:1px;margin:6px 0;}
-    .scrollbar strong{display:block;margin-top:6px;color:#1f2937;font-weight:700;}
-    .scrollbar small{color:#64748b;}
-
-    /* Footer */
-    footer{
-      text-align:center;
-      color:#687793;
-      font-size:14px;
-      margin:28px 0 10px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:8px;
+    .ticker-item{
+      display: inline-block;
+      margin-inline: 40px;
+      font-size: 15px;
+      color: #1f2937;
+    }
+    @keyframes scroll-left {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    .ticker-wrap:hover .ticker {
+      animation-play-state: paused;
     }
 
-    /* ===== Follow-us bar (above floatbar) ===== */
+    /* ===== Follow-us bar ===== */
     .follow-us{
       position:relative;
       z-index:5;
@@ -132,6 +121,8 @@
     .floatbar .call{background:#f6f9ff; color:#1f3a7a}
     .floatbar .book{background:#fff; color:#1f3a7a}
     @media (min-width:920px){ .floatbar{display:none} }
+
+    footer{text-align:center; color:#687793; font-size:14px; margin:28px 0 10px}
   </style>
 </head>
 <body>
@@ -151,11 +142,6 @@
       <h1>مرحبًا بك في سيدار ترافل 🌍</h1>
       <p>نوفّر لك حلول السفر الحديثة: eSIM، تذاكر طيران، سيارات، وأماكن تصوير المسلسلات.</p>
       <a id="wa-top" class="cta" href="#">💬 تواصل معنا</a>
-      <div class="trust">
-        <span class="badge">🔒 دفع آمن</span>
-        <span class="badge">💬 دعم 24/7</span>
-        <span class="badge">↩️ إلغاء مرن</span>
-      </div>
     </section>
 
     <!-- Services -->
@@ -183,18 +169,21 @@
       <div id="tp-car"></div>
     </section>
 
-    <!-- Testimonials Carousel -->
-    <div class="testimonials" id="testimonials">
+    <!-- Reviews ticker -->
+    <section class="reviews-ticker">
       <h2 class="section-title">آراء عملائنا</h2>
-      <div class="scrollbar" id="testimonialsScroller"></div>
-    </div>
+      <div class="ticker-wrap">
+        <div class="ticker">
+          <div class="ticker-item">⭐️⭐️⭐️⭐️⭐️ أحمد من دبي: خدمة ممتازة وسريعة جدًا!</div>
+          <div class="ticker-item">⭐️⭐️⭐️⭐️⭐️ ليلى من عمّان: حجز منظم وسهل 👌</div>
+          <div class="ticker-item">⭐️⭐️⭐️⭐️ فهد من الرياض: تجربة رائعة وأسعار ممتازة</div>
+          <div class="ticker-item">⭐️⭐️⭐️⭐️⭐️ نورا من جدة: فريق متعاون ودعم سريع 💬</div>
+          <div class="ticker-item">⭐️⭐️⭐️⭐️ رامي من حيفا: كل شيء كان سلس ومرتب ✈️</div>
+        </div>
+      </div>
+    </section>
 
-    <!-- Footer (rights only) -->
-    <footer>
-      <p>© <span id="year"></span> جميع الحقوق محفوظة – SIDAR TRAVEL</p>
-    </footer>
-
-    <!-- Follow-us bar (before floatbar) -->
+    <!-- Follow-us -->
     <div class="follow-us">
       <span>تابعنا</span>
       <div class="icons">
@@ -206,6 +195,11 @@
         </a>
       </div>
     </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>© <span id="year"></span> جميع الحقوق محفوظة – SIDAR TRAVEL</p>
+    </footer>
   </div>
 
   <!-- Float Bar -->
@@ -216,9 +210,8 @@
   </div>
 
   <script>
-    /* ===== إعدادات تواصل ===== */
-    const PHONE="9725XXXXXXXX";        // ← ضع رقمك الدولي بدون +
-    const PHONE_CALL="+9725XXXXXXXX";  // ← نفس الرقم لكن مع +
+    const PHONE="9725XXXXXXXX";        
+    const PHONE_CALL="+9725XXXXXXXX";  
     const baseWA=(t)=>`https://wa.me/${PHONE}?text=${encodeURIComponent(t)}`;
 
     const waTop=document.getElementById("wa-top");
@@ -228,11 +221,9 @@
     if(fbWa)fbWa.href=baseWA("مرحبًا، أريد التحدث الآن 👋");
     if(fbCall)fbCall.href=`tel:${PHONE_CALL}`;
 
-    /* ===== سلايدر الهيرو ===== */
     const slides=document.querySelectorAll('#heroSlider img');let i=0;
     setInterval(()=>{slides[i].classList.remove('active');i=(i+1)%slides.length;slides[i].classList.add('active');},4000);
 
-    /* ===== الودجتس: إظهار/إخفاء + حقن مرة واحدة ===== */
     const hideAllWidgets=()=>document.querySelectorAll('.widget').forEach(w=>w.hidden=true);
     const inject=(el,src)=>{if(el.dataset.loaded)return;const s=document.createElement('script');s.src=src;s.async=true;s.charset='utf-8';el.appendChild(s);el.dataset.loaded=1;};
     const showWidget=(id,src)=>{hideAllWidgets();const w=document.getElementById(id);if(w){w.hidden=false;w.scrollIntoView({behavior:'smooth'});const tp=w.querySelector('div');inject(tp,src);}};
@@ -242,34 +233,6 @@
     document.getElementById('carCard').onclick=()=>showWidget('widget-car',"https://trpwdg.com/content?trs=273484&shmarker=448045.Sidar&locale=en&promo_id=4850");
     document.querySelectorAll('.close').forEach(btn=>btn.onclick=hideAllWidgets);
 
-    /* ===== آراء العملاء كشريط متحرك ===== */
-    const published=[
-      {name:"أحمد",city:"دبي",trip:"إسطنبول",rating:5,text:"خدمة ممتازة جدًا وسرعة في الرد!"},
-      {name:"ليلى",city:"عمّان",trip:"أنطاليا",rating:5,text:"رحلتي كانت منظمة جدًا، شكرًا سيدار."},
-      {name:"فهد",city:"الرياض",trip:"باريس",rating:4,text:"تجربة رائعة وأسعار مناسبة."}
-    ];
-    function renderPublished(){
-      const scroller=document.getElementById('testimonialsScroller');
-      scroller.innerHTML='';
-      published.forEach(rv=>{
-        const item=document.createElement('div');
-        item.className='item';
-        const stars='★'.repeat(rv.rating)+'☆'.repeat(5-rv.rating);
-        const meta=[rv.name,rv.city,rv.trip].filter(Boolean).join(' • ');
-        item.innerHTML=`<p>${rv.text}</p><div class="rating">${stars}</div><strong>${meta}</strong>`;
-        scroller.appendChild(item);
-      });
-      let scrollPos=0;
-      setInterval(()=>{
-        if(scroller.scrollWidth<=scroller.clientWidth)return;
-        scrollPos+=270;
-        if(scrollPos>=scroller.scrollWidth)scrollPos=0;
-        scroller.scrollTo({left:scrollPos,behavior:'smooth'});
-      },4000);
-    }
-    renderPublished();
-
-    /* ===== سنة الفوتر ===== */
     document.getElementById("year").textContent=new Date().getFullYear();
   </script>
 </body>
