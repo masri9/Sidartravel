@@ -30,17 +30,20 @@
     display:flex;
     justify-content:center;
     margin-top:12px;
-    animation:fadeDown .9s ease both;
+    animation:fadeZoom 1.2s ease both;
   }
   .logo-top img{
-    width:180px;
+    width:240px; /* ← كبرنا الشعار */
     height:auto;
     border-radius:0;
     background:transparent;
     padding:0;
     box-shadow:none;
   }
-  @keyframes fadeDown{from{opacity:0; transform:translateY(-20px)}to{opacity:1; transform:translateY(0)}}
+  @keyframes fadeZoom{
+    0%{opacity:0; transform:scale(.8) translateY(-20px);}
+    100%{opacity:1; transform:scale(1) translateY(0);}
+  }
 
   /* البطاقة */
   .center{position:relative; z-index:10; padding:14px 20px 40px; display:grid; place-items:center}
