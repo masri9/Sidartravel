@@ -9,39 +9,32 @@
   :root{
     --blue:#2A70DC; --orange:#FF7A1A; --yellow:#FFE895; --green:#00C7B7;
     --ink:#0f1320; --ink-soft:#51607c;
-    --bg-blue:#EAF4FF; --bg-peach:#FFE9DD; --bg-mint:#E9FFF6;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{min-height:100%}
   body{
     font-family:"Tajawal",system-ui; color:var(--ink); position:relative;
     background:
-      radial-gradient(900px 520px at 12% -8%, var(--bg-peach) 0%, rgba(255,233,221,0) 60%),
-      radial-gradient(1000px 600px at 108% 0%, rgba(42,112,220,0.18) 0%, rgba(42,112,220,0) 65%),
-      radial-gradient(800px 480px at 70% 15%, var(--bg-mint) 0%, rgba(233,255,246,0) 60%),
-      linear-gradient(180deg, #FFFFFF 0%, var(--bg-blue) 55%, #FFFFFF 100%);
+      radial-gradient(800px 500px at 15% -10%, rgba(255,232,149,.6), rgba(255,232,149,0) 60%),
+      radial-gradient(900px 600px at 100% 0%, rgba(42,112,220,.25), rgba(42,112,220,0) 70%),
+      linear-gradient(180deg, #fff 0%, #FFF7E6 60%, #FFF 100%);
     overflow-x:hidden;
   }
 
-  /* أمواج القاع */
-  .wave-bg{
-    position:fixed; inset-inline:0; bottom:0; height:260px; pointer-events:none; z-index:0;
+  /* أمواج خلفية أسفل الصفحة */
+  .wave-bg{position:fixed; inset-inline:0; bottom:0; height:260px; pointer-events:none; z-index:0;
     -webkit-mask-image:linear-gradient(to top,rgba(0,0,0,1),rgba(0,0,0,.5),transparent);
-            mask-image:linear-gradient(to top,rgba(0,0,0,1),rgba(0,0,0,.5),transparent);
-  }
-  .wave{
-    position:absolute; left:-50%; width:200%; height:140px; border-radius:40%;
-    opacity:.28; background:linear-gradient(180deg,var(--bg-blue), #ffffff);
-    animation:waveMove 24s linear infinite;
-  }
-  .wave.w2{bottom:40px; opacity:.22; background:linear-gradient(180deg,var(--bg-peach), #ffffff); animation-duration:28s;}
-  .wave.w3{bottom:80px; opacity:.20; background:linear-gradient(180deg,var(--bg-mint), #ffffff); animation-duration:34s;}
+            mask-image:linear-gradient(to top,rgba(0,0,0,1),rgba(0,0,0,.5),transparent)}
+  .wave{position:absolute; left:-50%; width:200%; height:140px; border-radius:40%;
+    opacity:.25; background:linear-gradient(180deg,#ffffff,#e8f2ff); animation:waveMove 24s linear infinite}
+  .wave.w2{bottom:40px; opacity:.18; animation-duration:28s}
+  .wave.w3{bottom:80px; opacity:.15; animation-duration:34s}
   @keyframes waveMove{to{transform:translateX(50%)}}
 
-  /* جسيمات */
+  /* جسيمات خفيفة */
   #bgfx{position:fixed; inset:0; z-index:-1; background:transparent}
 
-  /* خطوط الطيران */
+  /* مسارات الطيران (مع تعريف التدرّجات داخل كل SVG) */
   .paths{position:fixed; inset:0; z-index:2; pointer-events:none}
   .paths svg{position:absolute; width:50vw; max-width:680px}
   .p-left{left:-5vw; top:25vh; transform:rotate(6deg)}
@@ -49,60 +42,56 @@
   .dash{fill:none; stroke-width:2.4; stroke-linecap:round; stroke-dasharray:6 12; animation:dash 3s linear infinite}
   @keyframes dash{to{stroke-dashoffset:-36}}
 
-  /* طائرات صغيرة تتحرك على المسار باستخدام offset-path */
-  .plane, .plane2{
-    width:22px; height:22px; position:absolute; top:0; left:0; z-index:3;
-    offset-rotate:auto;
-  }
-  .plane{animation:fly1 11s linear infinite;}
-  .plane2{animation:fly2 13s linear infinite reverse;}
-  @keyframes fly1{to{offset-distance:100%}}
-  @keyframes fly2{to{offset-distance:100%}}
-
-  /* الشعار */
+  /* الشعار أعلى البطاقة (بدون تدوير) */
   .logo-top{
-    position:relative; z-index:15; display:flex; justify-content:center;
-    margin-top:8px; animation:fadeDown .9s ease both;
+    position:relative;
+    z-index:15;
+    display:flex;
+    justify-content:center;
+    margin-top:8px;
+    animation:fadeDown .9s ease both;
   }
-  .logo-top img{width:160px; height:auto; border-radius:0; background:transparent; padding:0; box-shadow:none}
+  .logo-top img{
+    width:160px; height:auto; border-radius:0; background:transparent; padding:0; box-shadow:none;
+  }
   @keyframes fadeDown{from{opacity:0; transform:translateY(-20px)}to{opacity:1; transform:translateY(0)}}
 
-  /* البطاقة */
+  /* تموضع البطاقة */
   .center{position:relative; z-index:10; padding:14px 20px 80px; display:grid; place-items:center}
+
+  /* البطاقة الترحيبية (زجاجية) */
   .welcome.pro{
     width:min(85vw, 700px);
     padding:32px 24px 28px;
-    background:linear-gradient(145deg, rgba(255,255,255,0.62), rgba(255,255,255,0.36));
-    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
-    border:1px solid rgba(255,255,255,0.45);
+    background:linear-gradient(145deg, rgba(255,255,255,0.60), rgba(255,255,255,0.35));
+    backdrop-filter: blur(12px);
+    border:1px solid rgba(255,255,255,0.40);
     border-radius:22px;
-    box-shadow:0 8px 28px rgba(42,112,220,0.18);
-    text-align:center; animation:fadeIn .9s ease both; margin-top:0;
+    box-shadow:0 8px 28px rgba(42,112,220,0.22);
+    text-align:center; animation:fadeIn .9s ease both;
+    margin-top:0;
   }
   @keyframes fadeIn{from{opacity:0; transform:scale(.96)} to{opacity:1; transform:scale(1)}}
   .w-sub{margin:6px 0 0; color:var(--ink-soft)}
   .tagline{margin:12px 0; font-weight:600; color:#2A70DC; font-size:16px}
   .w-actions{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:14px}
-  .cta{
-    display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 20px; border-radius:50px;
-    background:linear-gradient(90deg, #25D366, #1ebe5b); color:#fff; font-weight:700; text-decoration:none; transition:.2s;
-    box-shadow:0 8px 20px rgba(37,211,102,.22)
-  }
+  .cta{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 20px; border-radius:50px;
+       background:linear-gradient(90deg, #25D366, #1ebe5b); color:#fff; font-weight:700; text-decoration:none; transition:.2s; box-shadow:0 8px 20px rgba(37,211,102,.25)}
   .cta:hover{transform:translateY(-3px)}
   .cta.ghost{background:#f6f9ff; color:#1f3a7a; box-shadow:none; border:1px solid #e3eafc}
 
-  /* الإحصاءات */
-  .w-stats{margin-top:18px; display:grid; grid-template-columns:repeat(2,1fr); gap:10px; text-align:center}
+  /* الإحصاءات (خانتان) */
+  .w-stats{
+    margin-top:18px; display:grid; grid-template-columns:repeat(2,1fr); gap:10px; text-align:center
+  }
   .w-stats strong{display:block; font-size:22px}
   .w-stats small{color:#6b7a99}
 
-  /* أيقونات طفّافة */
+  /* الأيقونات الطافية تحت البطاقة */
   .floaters-below{position:relative; width:100%; display:flex; justify-content:center; gap:40px; margin-top:26px; z-index:5;}
-  .badge{
-    width:60px; height:60px; border-radius:16px; display:grid; place-items:center;
-    background:linear-gradient(180deg,#ffffffcc,#ffffff80); border:1px solid #ffffffb5;
-    box-shadow:0 8px 22px rgba(0,0,0,.08); animation:float 5.2s ease-in-out infinite
-  }
+  .badge{width:60px; height:60px; border-radius:16px; display:grid; place-items:center;
+    background:linear-gradient(180deg,#ffffffcc,#ffffff77); border:1px solid #ffffffaa;
+    box-shadow:0 8px 22px rgba(0,0,0,.1); animation:float 5.2s ease-in-out infinite}
   .badge svg{width:32px; height:32px}
   .b1{animation-delay:.2s}
   .b2{animation-delay:.7s}
@@ -116,51 +105,41 @@
 <body>
 
 <!-- أمواج -->
-<div class="wave-bg">
-  <div class="wave"></div>
-  <div class="wave w2"></div>
-  <div class="wave w3"></div>
-</div>
+<div class="wave-bg"><div class="wave"></div><div class="wave w2"></div><div class="wave w3"></div></div>
 
-<!-- جسيمات خفيفة -->
+<!-- جسيمات -->
 <canvas id="bgfx"></canvas>
 
-<!-- مسارات الطيران + تعريفات المسار لأجل offset-path -->
+<!-- مسارات الطيران (التدرّج ضمن كل SVG) -->
 <div class="paths">
-  <!-- اليسار -->
-  <svg class="p-left" viewBox="0 0 660 300" preserveAspectRatio="none">
+  <svg class="p-left" viewBox="0 0 660 300">
     <defs>
       <linearGradient id="gradLeft" x1="0" y1="0" x2="1" y2="0">
         <stop offset="0" stop-color="#00C7B7"/><stop offset="1" stop-color="#2A70DC"/>
       </linearGradient>
-      <!-- نفس المسار كـ <path> و أيضاً كـ <path> مخفي لاستخراج d في CSS -->
-      <path id="pathLeft" d="M 10,150 C 200,10 420,260 650,120"></path>
     </defs>
-    <use href="#pathLeft" class="dash" stroke="url(#gradLeft)"></use>
+    <path d="M 10,150 C 200,10 420,260 650,120" class="dash" stroke="url(#gradLeft)"/>
+    <g class="airplane">
+      <svg viewBox="0 0 64 64" width="22" height="22"><path fill="#2A70DC" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/></svg>
+    </g>
   </svg>
 
-  <!-- اليمين -->
-  <svg class="p-right" viewBox="0 0 660 300" preserveAspectRatio="none">
+  <svg class="p-right" viewBox="0 0 660 300">
     <defs>
       <linearGradient id="gradRight" x1="0" y1="0" x2="1" y2="0">
         <stop offset="0" stop-color="#2A70DC"/><stop offset="1" stop-color="#00C7B7"/>
       </linearGradient>
-      <path id="pathRight" d="M 10,220 C 200,260 380,120 640,200"></path>
     </defs>
-    <use href="#pathRight" class="dash" stroke="url(#gradRight)"></use>
+    <path d="M 10,220 C 200,260 380,120 640,200" class="dash" stroke="url(#gradRight)"/>
+    <g class="airplane2">
+      <svg viewBox="0 0 64 64" width="22" height="22"><path fill="#FF7A1A" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/></svg>
+    </g>
   </svg>
 </div>
 
-<!-- طائرتان كـ DIVs تُحرّك بالـ offset-path (يُضبط في السكربت) -->
-<div class="plane" aria-hidden="true">
-  <svg viewBox="0 0 64 64" width="22" height="22"><path fill="#2A70DC" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/></svg>
-</div>
-<div class="plane2" aria-hidden="true">
-  <svg viewBox="0 0 64 64" width="22" height="22"><path fill="#FF7A1A" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/></svg>
-</div>
-
-<!-- الشعار -->
+<!-- الشعار أعلى البطاقة -->
 <div class="logo-top">
+  <!-- تأكد أن ملف logo.PNG موجود بجانب الملف -->
   <img src="logo.PNG" alt="SIDAR Logo">
 </div>
 
@@ -176,13 +155,13 @@
         <a class="cta ghost" href="#!" title="استعرض الخدمات لاحقًا">استعرض خدماتنا</a>
       </div>
 
-      <!-- دعم 24/7 + متوسط الرد 10 دقائق -->
+      <!-- فقط دعم 24/7 ومتوسط الرد 10 دقائق -->
       <div class="w-stats">
         <div><strong>24/7</strong><small>دعم</small></div>
         <div><strong>10 دقائق</strong><small>متوسط الرد</small></div>
       </div>
 
-      <!-- أيقونات طفّافة -->
+      <!-- الأيقونات أسفل البطاقة -->
       <div class="floaters-below">
         <div class="badge b1" title="eSIM">
           <svg viewBox="0 0 64 64"><rect x="10" y="8" rx="6" ry="6" width="44" height="48" fill="#00C7B7"/><rect x="16" y="18" width="16" height="14" fill="#fff" opacity=".9"/></svg>
@@ -203,55 +182,36 @@
 <footer>© <span id="year"></span> SIDAR TRAVEL</footer>
 
 <script>
-/* ===== جسيمات خفيفة على Canvas ===== */
-const c=document.getElementById('bgfx'),ctx=c.getContext('2d');let w,h,particles=[];
-function resize(){w=c.width=window.innerWidth;h=c.height=window.innerHeight;make();}
+/* ===== جسيمات Canvas الخفيفة ===== */
+const c=document.getElementById('bgfx'),ctx=c.getContext('2d');let w,h,particles;
+function resize(){w=c.width=innerWidth;h=c.height=innerHeight;make()}
 function make(){
   const n=Math.min(110,Math.floor(w*h/16000));
-  particles=Array.from({length:n},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+0.5}));
+  particles=Array.from({length:n},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+0.5}))
 }
 function draw(){
   ctx.clearRect(0,0,w,h);
   for(const p of particles){
-    p.x+=p.vx; p.y+=p.vy;
+    p.x+=p.vx;p.y+=p.vy;
     if(p.x<0||p.x>w)p.vx*=-1;
     if(p.y<0||p.y>h)p.vy*=-1;
-    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle='rgba(42,112,220,0.22)'; ctx.fill();
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle='rgba(42,112,220,0.26)';ctx.fill();
   }
   requestAnimationFrame(draw);
 }
-resize(); draw(); window.addEventListener('resize',resize);
-
-/* ===== ربط الطائرات بالمسارات عبر offset-path ===== */
-(function attachPlanes(){
-  const leftPath   = document.getElementById('pathLeft');
-  const rightPath  = document.getElementById('pathRight');
-  const plane1     = document.querySelector('.plane');
-  const plane2     = document.querySelector('.plane2');
-
-  if(leftPath && plane1){
-    const d = leftPath.getAttribute('d');
-    plane1.style.offsetPath = `path('${d}')`;
-    plane1.style.webkitOffsetPath = `path('${d}')`;
-  }
-  if(rightPath && plane2){
-    const d2 = rightPath.getAttribute('d');
-    plane2.style.offsetPath = `path('${d2}')`;
-    plane2.style.webkitOffsetPath = `path('${d2}')`;
-  }
-})();
+resize();draw();addEventListener('resize',resize);
 
 /* ===== واتساب ===== */
 const PHONE="9725XXXXXXXX"; // عدّل الرقم (بدون +)
 const baseWA=(t)=>`https://wa.me/${PHONE}?text=${encodeURIComponent(t)}`;
 document.getElementById("wa-top").href=baseWA("مرحبًا، أريد الاستفسار عن الخدمات ✈️");
 
-/* ===== كتابة تدريجية للعنوان ===== */
+/* ===== كتابة عنوان البطاقة تدريجيًا ===== */
 (function(){
-  const el=document.getElementById('typedTitle'); if(!el) return;
-  const full=el.textContent.trim(); let j=0; el.textContent='';
-  const tick=()=>{ el.textContent=full.slice(0,++j); if(j<full.length) requestAnimationFrame(tick); };
+  const el=document.getElementById('typedTitle');if(!el)return;
+  const full=el.textContent.trim();let j=0;el.textContent='';
+  const tick=()=>{el.textContent=full.slice(0,++j); if(j<full.length) requestAnimationFrame(tick);}
   requestAnimationFrame(tick);
 })();
 
