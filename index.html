@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SIDAR TRAVEL — صفحة الهبوط</title>
+<title>SIDAR TRAVEL — صفحة ترحيب أنيقة</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -21,7 +21,7 @@
     overflow-x:hidden;
   }
 
-  /* الأمواج */
+  /* أمواج خلفية */
   .wave-bg{position:fixed; inset-inline:0; bottom:0; height:260px; pointer-events:none; z-index:0;
     mask-image:linear-gradient(to top,rgba(0,0,0,1),rgba(0,0,0,.5),transparent)}
   .wave{position:absolute; left:-50%; width:200%; height:140px; border-radius:40%;
@@ -33,7 +33,7 @@
   /* جسيمات */
   #bgfx{position:fixed; inset:0; z-index:-1; background:transparent}
 
-  /* مسارات الطيران */
+  /* خطوط الطيران */
   .paths{position:fixed; inset:0; z-index:2; pointer-events:none}
   .paths svg{position:absolute; width:50vw; max-width:680px}
   .p-left{left:-5vw; top:25vh; transform:rotate(6deg)}
@@ -44,13 +44,28 @@
   .airplane2{offset-path:path("M 10,220 C 200,260 380,120 640,200"); offset-rotate:auto; animation:fly 13s linear infinite reverse}
   @keyframes fly{to{offset-distance:100%}}
 
-  /* الشعار */
-  .logo-top{position:relative; z-index:15; display:flex; justify-content:center; margin-top:12px; animation:fadeDown .9s ease both}
-  .logo-top img{width:180px; height:auto}
+  /* الشعار العلوي (مرفوع وأصلي بدون تدوير) */
+  .logo-top{
+    position:relative;
+    z-index:15;
+    display:flex;
+    justify-content:center;
+    margin-top:8px;         /* رفعه للأعلى */
+    animation:fadeDown .9s ease both;
+  }
+  .logo-top img{
+    width:160px;            /* تحكم بالحجم كما تحب */
+    height:auto;
+    border-radius:0;        /* بدون دائرة */
+    background:transparent; /* بدون خلفية */
+    padding:0;              /* بدون حواف */
+    box-shadow:none;        /* بدون ظل */
+    image-rendering:auto;
+  }
   @keyframes fadeDown{from{opacity:0; transform:translateY(-20px)}to{opacity:1; transform:translateY(0)}}
 
   /* البطاقة */
-  .center{position:relative; z-index:10; padding:14px 20px 28px; display:grid; place-items:center}
+  .center{position:relative; z-index:10; padding:14px 20px 80px; display:grid; place-items:center}
   .welcome.pro{
     width:min(85vw, 700px);
     padding:32px 24px 28px;
@@ -60,6 +75,7 @@
     border-radius:22px;
     box-shadow:0 8px 28px rgba(42,112,220,0.22);
     text-align:center; animation:fadeIn .9s ease both;
+    margin-top:0;
   }
   @keyframes fadeIn{from{opacity:0; transform:scale(.96)} to{opacity:1; transform:scale(1)}}
   .w-sub{margin:6px 0 0; color:var(--ink-soft)}
@@ -69,102 +85,73 @@
        background:linear-gradient(90deg, #25D366, #1ebe5b); color:#fff; font-weight:700; text-decoration:none; transition:.2s; box-shadow:0 8px 20px rgba(37,211,102,.25)}
   .cta:hover{transform:translateY(-3px)}
   .cta.ghost{background:#f6f9ff; color:#1f3a7a; box-shadow:none; border:1px solid #e3eafc}
-  .w-stats{margin-top:18px; display:grid; grid-template-columns:repeat(2,1fr); gap:10px; text-align:center}
+
+  /* الإحصاءات (خانتان) */
+  .w-stats{
+    margin-top:18px; display:grid; grid-template-columns:repeat(2,1fr); gap:10px; text-align:center
+  }
   .w-stats strong{display:block; font-size:22px}
   .w-stats small{color:#6b7a99}
 
-  /* شريط الخدمات */
-  .services-ribbon{
-    position:relative; margin:26px auto 8px; width:min(100%, 980px);
-    background:#ffffffcc; backdrop-filter:blur(8px);
-    border:1px solid #eef2ff; border-radius:16px; box-shadow:0 12px 26px rgba(0,0,0,.08);
-    overflow:hidden; padding:10px 0;
-  }
-  .services-track{
-    display:flex; gap:14px; align-items:center; white-space:nowrap;
-    will-change:transform; animation:sv-marquee 22s linear infinite;
-    padding-inline:12px;
-  }
-  .services-ribbon:hover .services-track{ animation-play-state:paused; }
-  @keyframes sv-marquee { from{ transform:translateX(0) } to{ transform:translateX(-50%) } }
-
-  .svc-pill{
-    display:inline-flex; align-items:center; gap:8px;
-    padding:10px 14px; border-radius:999px; cursor:pointer;
-    background:#fff; border:1px solid #e6ecf7; color:#1f3a7a; font-weight:700;
-    box-shadow:0 6px 14px rgba(0,0,0,.06); transition:transform .18s, box-shadow .18s, background .18s;
-  }
-  .svc-pill:hover{ transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.10) }
-  .svc-pill .ico{font-size:18px; line-height:1}
-  .svc-title{
-    position:absolute; inset-inline-start:10px; inset-block-start:10px;
-    background:#2A70DC; color:#fff; font-size:12px; font-weight:800;
-    padding:6px 10px; border-radius:999px; box-shadow:0 8px 18px rgba(42,112,220,.28);
-    z-index:3;
-  }
+  /* الأيقونات الطافية */
+  .floaters-below{position:relative; width:100%; display:flex; justify-content:center; gap:40px; margin-top:26px; z-index:5;}
+  .badge{width:60px; height:60px; border-radius:16px; display:grid; place-items:center;
+    background:linear-gradient(180deg,#ffffffcc,#ffffff77); border:1px solid #ffffffaa;
+    box-shadow:0 8px 22px rgba(0,0,0,.1); animation:float 5.2s ease-in-out infinite}
+  .badge svg{width:32px; height:32px}
+  .b1{animation-delay:.2s}
+  .b2{animation-delay:.7s}
+  .b3{animation-delay:1.3s}
+  .b4{animation-delay:1.8s}
+  @keyframes float{50%{transform:translateY(-8px)}}
 
   footer{position:relative; text-align:center; font-size:13px; color:#6b7a99; z-index:20; padding:10px 0 18px}
 </style>
 </head>
 <body>
 
-<!-- الأمواج -->
+<!-- أمواج -->
 <div class="wave-bg"><div class="wave"></div><div class="wave w2"></div><div class="wave w3"></div></div>
 <canvas id="bgfx"></canvas>
 
-<!-- الطائرات -->
+<!-- مسارات الطيران -->
 <div class="paths">
-  <svg class="p-left" viewBox="0 0 660 300">
-    <defs><linearGradient id="gradLeft" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#00C7B7"/><stop offset="1" stop-color="#2A70DC"/></linearGradient></defs>
-    <path d="M 10,150 C 200,10 420,260 650,120" class="dash" stroke="url(#gradLeft)"/>
-    <g class="airplane"><svg viewBox="0 0 64 64" width="22" height="22"><path fill="#2A70DC" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/></svg></g>
-  </svg>
-  <svg class="p-right" viewBox="0 0 660 300">
-    <defs><linearGradient id="gradRight" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2A70DC"/><stop offset="1" stop-color="#00C7B7"/></linearGradient></defs>
-    <path d="M 10,220 C 200,260 380,120 640,200" class="dash" stroke="url(#gradRight)"/>
-    <g class="airplane2"><svg viewBox="0 0 64 64" width="22" height="22"><path fill="#FF7A1A" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/></svg></g>
-  </svg>
+  <svg class="p-left" viewBox="0 0 660 300"><defs><linearGradient id="gradLeft" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#00C7B7"/><stop offset="1" stop-color="#2A70DC"/></linearGradient></defs><path d="M 10,150 C 200,10 420,260 650,120" class="dash" stroke="url(#gradLeft)"/><g class="airplane"><svg viewBox="0 0 64 64" width="22" height="22"><path fill="#2A70DC" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/></svg></g></svg>
+  <svg class="p-right" viewBox="0 0 660 300"><defs><linearGradient id="gradRight" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2A70DC"/><stop offset="1" stop-color="#00C7B7"/></linearGradient></defs><path d="M 10,220 C 200,260 380,120 640,200" class="dash" stroke="url(#gradRight)"/><g class="airplane2"><svg viewBox="0 0 64 64" width="22" height="22"><path fill="#FF7A1A" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/></svg></g></svg>
 </div>
 
-<!-- الشعار -->
-<div class="logo-top"><img src="logo.PNG" alt="SIDAR Logo"></div>
+<!-- الشعار أعلى البطاقة (بدون تدوير) -->
+<div class="logo-top">
+  <!-- تأكد أن ملف logo.PNG موجود بجانب الملف -->
+  <img src="logo.PNG" alt="SIDAR Logo">
+</div>
 
 <!-- البطاقة -->
 <div class="center">
   <section class="welcome pro">
-    <h1 id="typedTitle">مرحبًا بك في سيدار ترافل 🌍</h1>
-    <p class="w-sub">نوفّر حلول سفر ذكية: eSIM • طيران • سيارات — بخدمة سريعة ودفع آمن.</p>
-    <div class="tagline">✨ وجهتك تبدأ معنا – رحلات، اتصالات، وراحة بال!</div>
+      <h1 id="typedTitle">مرحبًا بك في سيدار ترافل 🌍</h1>
+      <p class="w-sub">نوفّر حلول سفر ذكية: eSIM • طيران • سيارات — بخدمة سريعة ودفع آمن.</p>
+      <div class="tagline">✨ وجهتك تبدأ معنا – رحلات، اتصالات، وراحة بال!</div>
 
-    <div class="w-actions">
-      <a id="wa-top" class="cta" href="#">💬 تواصل واتساب</a>
-      <a class="cta ghost" href="#services">استعرض خدماتنا</a>
-    </div>
+      <div class="w-actions">
+        <a id="wa-top" class="cta" href="#">💬 تواصل واتساب</a>
+        <a class="cta ghost" href="#!" title="استعرض الخدمات لاحقًا">استعرض خدماتنا</a>
+      </div>
 
-    <div class="w-stats">
-      <div><strong>24/7</strong><small>دعم</small></div>
-      <div><strong>10 دقائق</strong><small>متوسط الرد</small></div>
-    </div>
+      <!-- فقط دعم 24/7 ومتوسط الرد 10 دقائق -->
+      <div class="w-stats">
+        <div><strong>24/7</strong><small>دعم</small></div>
+        <div><strong>10 دقائق</strong><small>متوسط الرد</small></div>
+      </div>
+
+      <div class="floaters-below">
+        <div class="badge b1" title="eSIM"><svg viewBox="0 0 64 64"><rect x="10" y="8" rx="6" ry="6" width="44" height="48" fill="#00C7B7"/><rect x="16" y="18" width="16" height="14" fill="#fff" opacity=".9"/></svg></div>
+        <div class="badge b2" title="Globe"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="#FFE895"/><path d="M20 28l6-2 2 3 4-1 3 2 5-1 2 3-4 4-6 1-4-2-4 1-4-6z" fill="#fff" opacity=".85"/></svg></div>
+        <div class="badge b3" title="Camera"><svg viewBox="0 0 64 64"><rect x="10" y="22" width="36" height="22" rx="6" fill="#FF7A1A"/><polygon points="46,26 58,22 58,44 46,40" fill="#FF7A1A"/><circle cx="28" cy="33" r="6" fill="#fff" opacity=".9"/></svg></div>
+        <div class="badge b4" title="Ticket"><svg viewBox="0 0 64 64"><path d="M10 28h8a4 4 0 1 0 0 8h-8v10h44V36h-8a4 4 0 1 1 0-8h8V18H10z" fill="#2A70DC"/><rect x="20" y="22" width="20" height="20" rx="4" fill="#fff" opacity=".9"/></svg></div>
+      </div>
   </section>
 </div>
-
-<!-- شريط الخدمات -->
-<section class="services-ribbon" id="services" aria-label="خدماتنا">
-  <div class="svc-title">خدماتنا</div>
-  <div class="services-track" id="servicesTrack">
-    <div class="svc-pill" data-target="widget-esim" data-wa="أريد eSIM للسفر 🌍"><span class="ico">📶</span> eSIM فوري</div>
-    <div class="svc-pill" data-target="widget-flight" data-wa="أريد حجز طيران ✈️"><span class="ico">✈️</span> تذاكر طيران</div>
-    <div class="svc-pill" data-target="widget-car" data-wa="أريد سيارة إيجار 🚗"><span class="ico">🚗</span> تأجير سيارات</div>
-    <div class="svc-pill" data-target="widget-film" data-wa="أريد زيارة أماكن تصوير 🎬"><span class="ico">🎬</span> أماكن تصوير</div>
-    <div class="svc-pill" data-target="widget-esim" data-wa="أريد باقة بيانات 🌐"><span class="ico">🌐</span> باقات بيانات</div>
-    <!-- التكرار -->
-    <div class="svc-pill" data-target="widget-esim" data-wa="أريد eSIM للسفر 🌍"><span class="ico">📶</span> eSIM فوري</div>
-    <div class="svc-pill" data-target="widget-flight" data-wa="أريد حجز طيران ✈️"><span class="ico">✈️</span> تذاكر طيران</div>
-    <div class="svc-pill" data-target="widget-car" data-wa="أريد سيارة إيجار 🚗"><span class="ico">🚗</span> تأجير سيارات</div>
-    <div class="svc-pill" data-target="widget-film" data-wa="أريد زيارة أماكن تصوير 🎬"><span class="ico">🎬</span> أماكن تصوير</div>
-    <div class="svc-pill" data-target="widget-esim" data-wa="أريد باقة بيانات 🌐"><span class="ico">🌐</span> باقات بيانات</div>
-  </div>
-</section>
 
 <footer>© <span id="year"></span> SIDAR TRAVEL</footer>
 
@@ -182,20 +169,12 @@ const baseWA=(t)=>`https://wa.me/${PHONE}?text=${encodeURIComponent(t)}`;
 document.getElementById("wa-top").href=baseWA("مرحبًا، أريد الاستفسار عن الخدمات ✈️");
 
 /* كتابة تدريجية */
-(function(){const el=document.getElementById('typedTitle');if(!el)return;
-  const full=el.textContent.trim();let j=0;el.textContent='';const tick=()=>{el.textContent=full.slice(0,++j);if(j<full.length)requestAnimationFrame(tick)};requestAnimationFrame(tick);})();
-
-/* كبسولات الخدمات */
-function openWidgetOrWA(id,msg){
-  const el=document.getElementById(id);
-  if(el){el.hidden=false;el.scrollIntoView({behavior:'smooth',block:'start'});}
-  else{window.open(baseWA(msg||'مرحبا'),'_blank');}
-}
-document.querySelectorAll('.svc-pill').forEach(p=>{
-  p.addEventListener('click',()=>openWidgetOrWA(p.dataset.target,p.dataset.wa));
-});
-
-/* سنة */
+(function(){
+  const el=document.getElementById('typedTitle');if(!el)return;
+  const full=el.textContent.trim();let j=0;el.textContent='';
+  const tick=()=>{el.textContent=full.slice(0,++j);if(j<full.length)requestAnimationFrame(tick);}
+  requestAnimationFrame(tick);
+})();
 document.getElementById("year").textContent=new Date().getFullYear();
 </script>
 </body>
