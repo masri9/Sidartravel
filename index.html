@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SIDAR TRAVEL — بطاقة ترحيب + خدمات مع خلفية حيّة</title>
+<title>SIDAR TRAVEL — بطاقة ترحيب مع خلفية حيّة</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --blue:#2A70DC; --orange:#FF7A1A; --yellow:#FFE895; --green:#00C7B7;
-    --ink:#0f1320; --ink-soft:#51607c; --bg2:#FFF7E6;
+    --ink:#0f1320; --ink-soft:#51607c;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{min-height:100%}
@@ -17,7 +17,7 @@
     background:
       radial-gradient(800px 500px at 15% -10%, rgba(255,232,149,.6), rgba(255,232,149,0) 60%),
       radial-gradient(900px 600px at 100% 0%, rgba(42,112,220,.25), rgba(42,112,220,0) 70%),
-      linear-gradient(180deg, #fff 0%, var(--bg2) 60%, #FFF 100%);
+      linear-gradient(180deg, #fff 0%, #FFF7E6 60%, #FFF 100%);
     overflow-x:hidden;
   }
 
@@ -30,44 +30,39 @@
   .wave.w3{bottom:80px; opacity:.15; animation-duration:34s}
   @keyframes waveMove{to{transform:translateX(50%)}}
 
-  /* جسيمات (فقاعات) أوضح */
+  /* جسيمات خفيفة */
   #bgfx{position:fixed; inset:0; z-index:-1; background:transparent}
 
-  /* مسارات الطيران (أوضح وأكبر + ظل) */
+  /* مسارات الطيران */
   .paths{position:fixed; inset:0; z-index:2; pointer-events:none}
-  .paths svg{position:absolute; width:60vw; max-width:900px; filter:drop-shadow(0 2px 4px rgba(0,0,0,.15))}
-  .p-left{left:-2vw; top:20vh; transform:rotate(6deg)}
-  .p-right{right:-2vw; bottom:8vh; transform:rotate(-4deg)}
-  .dash{fill:none; stroke-width:3.6; stroke-linecap:round; stroke-dasharray:8 12; opacity:.95; animation:dash 3s linear infinite}
-  @keyframes dash{to{stroke-dashoffset:-40}}
+  .paths svg{position:absolute; width:50vw; max-width:680px}
+  .p-left{left:-5vw; top:25vh; transform:rotate(6deg)}
+  .p-right{right:-5vw; bottom:10vh; transform:rotate(-4deg)}
+  .dash{fill:none; stroke-width:2.4; stroke-linecap:round; stroke-dasharray:6 12; animation:dash 3s linear infinite}
+  @keyframes dash{to{stroke-dashoffset:-36}}
   .airplane{offset-path:path("M 10,150 C 200,10 420,260 650,120"); offset-rotate:auto; animation:fly 11s linear infinite}
   .airplane2{offset-path:path("M 10,220 C 200,260 380,120 640,200"); offset-rotate:auto; animation:fly 13s linear infinite reverse}
   @keyframes fly{to{offset-distance:100%}}
 
-  /* تموضع المحتوى */
-  .wrap{position:relative; z-index:10; padding:36px 20px 100px; max-width:1080px; margin:auto}
+  /* تموضع البطاقة */
+  .center{position:relative; z-index:10; padding:36px 20px 80px; display:grid; place-items:center}
 
-  /* الشعار */
-  header{text-align:center; padding:10px 0 12px}
-  .logo{display:inline-block; padding:12px; background:rgba(255,255,255,.85);
-    border-radius:50%; border:1px solid #eee; box-shadow:0 8px 24px rgba(0,0,0,.08);}
-  .logo img{height:70px;width:auto;display:block}
-
-  /* البطاقة الترحيبية (زجاجية) بدون شارة "موثوق" */
+  /* البطاقة الترحيبية (زجاجية) */
   .welcome.pro{
-    width:min(95vw, 820px);
+    width:min(85vw, 700px);
     padding:24px;
     background:linear-gradient(145deg, rgba(255,255,255,0.60), rgba(255,255,255,0.35));
     backdrop-filter: blur(12px);
     border:1px solid rgba(255,255,255,0.40);
     border-radius:22px;
     box-shadow:0 8px 28px rgba(42,112,220,0.22);
-    text-align:center; margin:12px auto 18px; animation:fadeIn .9s ease both;
+    text-align:center; animation:fadeIn .9s ease both;
   }
   @keyframes fadeIn{from{opacity:0; transform:scale(.96)} to{opacity:1; transform:scale(1)}}
-  .w-head{display:flex; gap:14px; align-items:center; justify-content:center; flex-wrap:wrap}
+  .w-head{display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap}
   .w-logo{width:56px; height:56px; object-fit:contain; border-radius:14px; background:#fff; border:1px solid #eee; padding:6px}
-  .w-sub{margin:6px 0 0; color:var(--ink-soft)}
+  .w-sub{margin:4px 0 0; color:var(--ink-soft)}
+  /* .w-badge حُذفت من الـ HTML بناءً على طلبك */
   .w-chips{display:flex; gap:8px; flex-wrap:wrap; margin:12px 0 10px; justify-content:center}
   .w-chips span{background:#fff; border:1px solid #e9eef6; color:#334155; padding:8px 12px; border-radius:999px; font-size:13px; box-shadow:0 6px 12px rgba(0,0,0,.06)}
   .w-actions{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:6px}
@@ -78,15 +73,21 @@
   .w-stats{margin-top:12px; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; text-align:center}
   .w-stats strong{display:block; font-size:22px}
   .w-stats small{color:#6b7a99}
+  @media(max-width:720px){.w-head{justify-content:center}}
 
-  /* الخدمات تحت البطاقة مباشرة */
-  .section-title{text-align:center; font-size:22px; margin:18px 0 10px}
-  .services{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:8px}
-  @media(min-width:720px){.services{grid-template-columns:repeat(4,1fr)}}
-  .card{background:#fff; border:1px solid #eee; border-radius:16px; padding:16px; text-align:center; transition:.2s}
-  .card:hover{transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,.12)}
-  .icon{font-size:28px}
-  .card small{color:var(--ink-soft)}
+  /* الأيقونات الطافية تحت البطاقة */
+  .floaters-below{position:relative; width:100%; display:flex; justify-content:center; gap:40px; margin-top:26px; z-index:5;}
+  .badge{width:60px; height:60px; border-radius:16px; display:grid; place-items:center;
+    background:linear-gradient(180deg,#ffffffcc,#ffffff77); border:1px solid #ffffffaa;
+    box-shadow:0 8px 22px rgba(0,0,0,.1); animation:float 5.2s ease-in-out infinite}
+  .badge svg{width:32px; height:32px}
+  .b1{animation-delay:.2s}
+  .b2{animation-delay:.7s}
+  .b3{animation-delay:1.3s}
+  .b4{animation-delay:1.8s}
+  @keyframes float{50%{transform:translateY(-8px)}}
+
+  footer{position:relative; text-align:center; font-size:13px; color:#6b7a99; z-index:20; padding:10px 0 18px}
 </style>
 </head>
 <body>
@@ -98,55 +99,47 @@
   <div class="wave w3"></div>
 </div>
 
-<!-- فقاعات الخلفية (أوضح) -->
+<!-- جسيمات -->
 <canvas id="bgfx"></canvas>
 
-<!-- مسارات الطيران (مكبّرة ومغمّقة) -->
+<!-- مسارات الطيران (مع تعريف تدرّج داخل كل SVG) -->
 <div class="paths">
   <svg class="p-left" viewBox="0 0 660 300">
     <defs>
       <linearGradient id="gradLeft" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#0FB9B0"/><stop offset="1" stop-color="#2A70DC"/>
+        <stop offset="0" stop-color="#00C7B7"/><stop offset="1" stop-color="#2A70DC"/>
       </linearGradient>
     </defs>
     <path d="M 10,150 C 200,10 420,260 650,120" class="dash" stroke="url(#gradLeft)"/>
     <g class="airplane">
-      <svg viewBox="0 0 64 64" width="24" height="24"><path fill="#2A70DC" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/></svg>
+      <svg viewBox="0 0 64 64" width="22" height="22"><path fill="#2A70DC" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/></svg>
     </g>
   </svg>
 
   <svg class="p-right" viewBox="0 0 660 300">
     <defs>
       <linearGradient id="gradRight" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#2A70DC"/><stop offset="1" stop-color="#0FB9B0"/>
+        <stop offset="0" stop-color="#2A70DC"/><stop offset="1" stop-color="#00C7B7"/>
       </linearGradient>
     </defs>
     <path d="M 10,220 C 200,260 380,120 640,200" class="dash" stroke="url(#gradRight)"/>
     <g class="airplane2">
-      <svg viewBox="0 0 64 64" width="24" height="24"><path fill="#FF7A1A" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/></svg>
+      <svg viewBox="0 0 64 64" width="22" height="22"><path fill="#FF7A1A" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/></svg>
     </g>
   </svg>
 </div>
 
-<!-- المحتوى -->
-<div class="wrap">
-
-  <!-- الشعار -->
-  <header>
-    <div class="logo">
-      <!-- تأكد من وجود logo.PNG بجانب الملف -->
-      <img src="logo.PNG" alt="شعار SIDAR TRAVEL">
-    </div>
-  </header>
-
-  <!-- البطاقة الترحيبية (بدون شارة موثوق) -->
+<!-- البطاقة الترحيبية في الوسط -->
+<div class="center">
   <section class="welcome pro">
     <div class="w-head">
+      <!-- تأكد من وجود logo.PNG بجانب الملف -->
       <img src="logo.PNG" alt="SIDAR" class="w-logo" />
       <div>
         <h1 id="typedTitle">مرحبًا بك في سيدار ترافل 🌍</h1>
         <p class="w-sub">نوفّر حلول سفر ذكية: eSIM • طيران • سيارات — بخدمة سريعة ودفع آمن.</p>
       </div>
+      <!-- تمت إزالة شارة موثوق والنجم -->
     </div>
 
     <div class="w-chips">
@@ -158,7 +151,7 @@
 
     <div class="w-actions">
       <a id="wa-top" class="cta" href="#">💬 تواصل واتساب</a>
-      <a class="cta ghost" href="#services">استعرض خدماتنا</a>
+      <a class="cta ghost" href="#!" title="استعرض الخدمات لاحقًا">استعرض خدماتنا</a>
     </div>
 
     <div class="w-stats">
@@ -166,65 +159,43 @@
       <div><strong>24/7</strong><small>دعم</small></div>
       <div><strong>5 دقائق</strong><small>متوسط الرد</small></div>
     </div>
-  </section>
 
-  <!-- الخدمات بعد البطاقة مباشرة -->
-  <h2 class="section-title" id="services">الخدمات التي نقدمها</h2>
-  <section class="services">
-    <div class="card">
-      <div class="icon">📶</div>
-      <div>بطاقات eSIM</div>
-      <small>إنترنت فوري حول العالم</small>
-    </div>
-    <div class="card">
-      <div class="icon">✈️</div>
-      <div>تذاكر طيران</div>
-      <small>قارن واحجز أفضل الأسعار</small>
-    </div>
-    <div class="card">
-      <div class="icon">🚗</div>
-      <div>تأجير سيارات</div>
-      <small>خيارات اقتصادية وفاخرة</small>
-    </div>
-    <div class="card">
-      <div class="icon">🎬</div>
-      <div>أماكن تصوير</div>
-      <small>لوكيشنات لمسلسلات وأفلام</small>
+    <!-- الأيقونات أسفل البطاقة -->
+    <div class="floaters-below">
+      <div class="badge b1" title="eSIM">
+        <svg viewBox="0 0 64 64"><rect x="10" y="8" rx="6" ry="6" width="44" height="48" fill="#00C7B7"/><rect x="16" y="18" width="16" height="14" fill="#fff" opacity=".9"/></svg>
+      </div>
+      <div class="badge b2" title="Globe">
+        <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="#FFE895"/><path d="M20 28l6-2 2 3 4-1 3 2 5-1 2 3-4 4-6 1-4-2-4 1-4-6z" fill="#fff" opacity=".85"/></svg>
+      </div>
+      <div class="badge b3" title="Camera">
+        <svg viewBox="0 0 64 64"><rect x="10" y="22" width="36" height="22" rx="6" fill="#FF7A1A"/><polygon points="46,26 58,22 58,44 46,40" fill="#FF7A1A"/><circle cx="28" cy="33" r="6" fill="#fff" opacity=".9"/></svg>
+      </div>
+      <div class="badge b4" title="Ticket">
+        <svg viewBox="0 0 64 64"><path d="M10 28h8a4 4 0 1 0 0 8h-8v10h44V36h-8a4 4 0 1 1 0-8h8V18H10z" fill="#2A70DC"/><rect x="20" y="22" width="20" height="20" rx="4" fill="#fff" opacity=".9"/></svg>
+      </div>
     </div>
   </section>
-
 </div>
 
-<footer style="text-align:center;color:#6b7a99;padding:12px 0 22px;">© <span id="year"></span> SIDAR TRAVEL</footer>
+<footer>© <span id="year"></span> SIDAR TRAVEL</footer>
 
 <script>
-/* ===== فقاعات Canvas — أوضح (أكبر وأغمق قليلاً) ===== */
+/* ===== جسيمات Canvas الخفيفة ===== */
 const c=document.getElementById('bgfx'),ctx=c.getContext('2d');let w,h,particles;
 function resize(){w=c.width=innerWidth;h=c.height=innerHeight;make()}
 function make(){
-  const n=Math.min(140,Math.floor(w*h/12000)); // عدد أكثر بقليل
-  particles=Array.from({length:n},()=>({
-    x:Math.random()*w,
-    y:Math.random()*h,
-    vx:(Math.random()-.5)*.35,
-    vy:(Math.random()-.5)*.35,
-    r:Math.random()*2.2+1.0,         // أكبر
-    t:Math.random()*Math.PI*2
-  }));
+  const n=Math.min(110,Math.floor(w*h/16000));
+  particles=Array.from({length:n},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+0.5}))
 }
 function draw(){
   ctx.clearRect(0,0,w,h);
   for(const p of particles){
-    p.t += 0.01;
-    p.x += p.vx + Math.cos(p.t)*0.08;
-    p.y += p.vy + Math.sin(p.t)*0.08;
-    if(p.x<-10) p.x=w+10; if(p.x>w+10) p.x=-10;
-    if(p.y<-10) p.y=h+10; if(p.y>h+10) p.y=-10;
-    const grd = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*2.2);
-    grd.addColorStop(0,'rgba(42,112,220,0.55)');   // أغمق
-    grd.addColorStop(1,'rgba(42,112,220,0.00)');
-    ctx.fillStyle=grd;
-    ctx.beginPath(); ctx.arc(p.x,p.y,p.r*2,0,Math.PI*2); ctx.fill();
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>w)p.vx*=-1;
+    if(p.y<0||p.y>h)p.vy*=-1;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle='rgba(42,112,220,0.26)';ctx.fill();
   }
   requestAnimationFrame(draw);
 }
