@@ -62,11 +62,17 @@
     border:1px solid #e7ecf6; box-shadow:0 12px 26px rgba(30,57,120,.14);
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
     text-align:center; font-weight:800; color:#23324d; user-select:none; cursor:pointer;
-    transition:transform .2s ease, box-shadow .2s ease;
+    transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
   }
-  .app-icon:hover{transform:translateY(-8px) scale(1.03); box-shadow:0 16px 34px rgba(30,57,120,.2)}
-  .app-icon small{font-weight:600; color:#4c5c7a; font-size:13.5px}
+  .app-icon:hover{transform:translateY(-8px) scale(1.05);}
+  .app-icon.small{font-weight:600; color:#4c5c7a; font-size:13.5px}
   .app-icon svg{width:58px; height:58px}
+
+  /* Glow حسب اللون */
+  .app-icon.esim:hover{box-shadow:0 0 30px rgba(0,199,183,.7);}
+  .app-icon.hotel:hover{box-shadow:0 0 30px rgba(42,112,220,.7);}
+  .app-icon.flight:hover{box-shadow:0 0 30px rgba(255,122,26,.7);}
+  .app-icon.film:hover{box-shadow:0 0 30px rgba(255,232,149,.8);}
 
   /* أماكن الأيقونات */
   .pos-a{ right:4%;  top:6%;  }
@@ -115,7 +121,7 @@
   <div class="services-cloud">
 
     <!-- eSIM -->
-    <div class="app-icon pos-a float-1" title="eSIM — إنترنت فوري">
+    <div class="app-icon esim pos-a float-1" title="eSIM — إنترنت فوري">
       <svg viewBox="0 0 64 64">
         <rect x="12" y="10" rx="10" ry="10" width="40" height="44" fill="#00C7B7"/>
         <rect x="20" y="18" width="24" height="20" rx="4" fill="#fff"/>
@@ -125,7 +131,7 @@
     </div>
 
     <!-- فنادق -->
-    <div class="app-icon pos-b float-2" title="فنادق">
+    <div class="app-icon hotel pos-b float-2" title="فنادق">
       <svg viewBox="0 0 64 64">
         <rect x="8" y="14" width="48" height="36" rx="6" fill="#2A70DC"/>
         <rect x="16" y="22" width="8" height="8" fill="#fff" rx="2"/>
@@ -137,7 +143,7 @@
     </div>
 
     <!-- طيران -->
-    <div class="app-icon pos-c float-3" title="طيران">
+    <div class="app-icon flight pos-c float-3" title="طيران">
       <svg viewBox="0 0 64 64">
         <path d="M4 36l36-10c3-1 6 2 5 5l-4 8 8 5-2 4-10-4-6 10-4-2 3-10-26-6z" fill="#FF7A1A"/>
       </svg>
@@ -145,7 +151,7 @@
     </div>
 
     <!-- تصوير -->
-    <div class="app-icon pos-d float-4" title="أماكن تصوير المسلسلات">
+    <div class="app-icon film pos-d float-4" title="أماكن تصوير المسلسلات">
       <svg viewBox="0 0 64 64">
         <rect x="8" y="24" width="38" height="24" rx="6" fill="#FFE895"/>
         <polygon points="46,28 60,24 60,48 46,44" fill="#FFE895"/>
