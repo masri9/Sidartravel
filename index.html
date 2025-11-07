@@ -14,15 +14,16 @@
     --ink:#0f1320;
     --ink-soft:#51607c;
     --white:#ffffff;
+    --whatsapp:#25D366;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{min-height:100%}
+  html{scroll-behavior:smooth;}
   body{
     font-family:"Tajawal",system-ui;
     color:var(--ink);
     position:relative;
     overflow-x:hidden;
-    /* نفس روح الخلفية بألوان الشعار */
     background:
       radial-gradient(900px 600px at 12% -8%, rgba(255,232,149,.55), transparent 65%),
       radial-gradient(900px 600px at 90% -10%, rgba(0,199,183,.40), transparent 70%),
@@ -31,7 +32,7 @@
       linear-gradient(180deg,#fdfefe 0%,#e9f7ff 40%,#fff8ec 100%);
   }
 
-  /* أمواج سفلية (لا نغيّرها) */
+  /* أمواج سفلية */
   .waves-wrap{
     position:fixed;
     inset-inline:0;
@@ -151,7 +152,7 @@
     to{opacity:1; transform:translateY(0)}
   }
 
-  /* البطاقة */
+  /* البطاقة الترحيبية */
   .center{
     position:relative;
     z-index:5;
@@ -233,7 +234,8 @@
     color:#6b7a99;
   }
 
-  /* خدماتنا */
+  /* قسم خدماتنا + الفقاعات */
+
   .services-area{
     position:relative;
     z-index:5;
@@ -249,16 +251,15 @@
   .services-cloud{
     position:relative;
     width:min(92vw,900px);
-    height:250px;
+    height:260px;
     margin:0 auto;
   }
 
-  /* ===== فقاعات الخدمات (شكل غيمة حقيقي) ===== */
   .service-blob{
     position:absolute;
     width:150px;
-    height:130px;
-    padding:16px 14px 10px;
+    height:120px;
+    padding:14px 10px 10px;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -273,18 +274,13 @@
     text-align:center;
   }
 
-  /* أشكال كل Blob (بدون دوائر/مربعات — غيوم ناعمة) */
+  /* شكل كل أيقونة + إبعادها عن الثانية */
   .blob-esim{
     background:linear-gradient(145deg,#2A70DC,#1f8df5);
     border-radius:52% 68% 60% 38% / 60% 52% 70% 40%;
-    right:4%;
-    top:4%;
-  }
-  .blob-flight{
-    background:linear-gradient(145deg,#FF7A1A,#FF9A4A);
-    border-radius:64% 46% 58% 42% / 50% 64% 46% 50%;
-    right:18%;
-    bottom:0%;
+    right:6%;
+    top:2%;
+    z-index:3;
   }
   .blob-hotel{
     background:linear-gradient(145deg,#00C7B7,#2A70DC);
@@ -292,21 +288,29 @@
     left:50%;
     top:24%;
     transform:translateX(-50%);
+    z-index:2;
+  }
+  .blob-flight{
+    background:linear-gradient(145deg,#FF7A1A,#FF9A4A);
+    border-radius:64% 46% 58% 42% / 50% 64% 46% 50%;
+    right:18%;
+    bottom:4%;
+    z-index:2;
   }
   .blob-film{
     background:linear-gradient(145deg,#11bebe,#008f9f);
     border-radius:58% 42% 60% 40% / 52% 60% 40% 58%;
-    left:8%;
+    left:10%;
     bottom:10%;
+    z-index:2;
   }
 
-  /* أيقونة داخلية (بيضاء) */
   .service-blob .icon-wrap{
     width:54px;
     height:54px;
     margin-bottom:4px;
     border-radius:18px;
-    background:rgba(255,255,255,0.14);
+    background:rgba(255,255,255,0.16);
     display:flex;
     align-items:center;
     justify-content:center;
@@ -323,7 +327,6 @@
     color:rgba(255,255,255,0.9);
   }
 
-  /* حركات ناعمة */
   @keyframes floatSoft{
     0%,100%{transform:translateY(0)}
     50%{transform:translateY(-10px)}
@@ -332,6 +335,7 @@
   .blob-hotel{animation:floatSoft 7s ease-in-out infinite .3s;}
   .blob-flight{animation:floatSoft 6.5s ease-in-out infinite .6s;}
   .blob-film{animation:floatSoft 7.2s ease-in-out infinite .9s;}
+
   .service-blob:hover{
     transform:translateY(-14px) scale(1.04);
     box-shadow:0 22px 42px rgba(15,23,42,0.32);
@@ -381,7 +385,11 @@
     color:#1f2937;
   }
   @media(min-width:900px){
-    .floatbar{max-width:420px; left:50%; transform:translateX(-50%);}
+    .floatbar{
+      max-width:420px;
+      left:50%;
+      transform:translateX(-50%);
+    }
   }
 
   footer{
@@ -544,18 +552,21 @@
   <a class="rq" href="#services-cloud">✨ استكشف الخدمات</a>
 </div>
 
-<footer>© <span id="year"></span> SIDAR TRAVEL</footer>
+<footer>
+  © <span id="year"></span> SIDAR TRAVEL
+</footer>
 
 <script>
-  const PHONE = "9725XXXXXXXX";      // عدّل رقمك
+  const PHONE = "9725XXXXXXXX";       // عدّل
   const PHONE_CALL = "+9725XXXXXXXX"; // مع +
   const waLink = (txt) => `https://wa.me/${PHONE}?text=${encodeURIComponent(txt)}`;
 
+  // روابط واتساب واتصال
   document.getElementById("wa-top").href = waLink("مرحبًا، أريد الاستفسار عن خدمات سيدار ترافل 🌍");
   document.getElementById("fb-wa").href = waLink("مرحبًا، أحتاج مساعدة في الحجز ✈️");
   document.getElementById("fb-call").href = `tel:${PHONE_CALL}`;
 
-  // كتابة تدريجية
+  // كتابة تدريجية للعنوان
   (function(){
     const el = document.getElementById('typedTitle');
     if(!el) return;
