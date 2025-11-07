@@ -77,10 +77,11 @@
   .welcome.pro{
     width:min(85vw,720px);
     padding:30px 24px 26px;
-    background:linear-gradient(145deg,rgba(255,255,255,0.98),rgba(255,255,255,0.9));
-    backdrop-filter:blur(14px);
+    background:rgba(255,255,255,0.65); /* شفافية لطيفة */
+    backdrop-filter:blur(18px); /* تأثير زجاجي */
     border-radius:26px;
-    box-shadow:0 14px 40px rgba(17,40,90,0.20);
+    border:1px solid rgba(255,255,255,0.35);
+    box-shadow:0 14px 40px rgba(17,40,90,0.18);
     text-align:center;
     animation:fadeIn .9s ease both;
   }
@@ -147,7 +148,7 @@
   .service-blob{
     position:absolute;
     width:var(--blob-size,150px);
-    height:var(--blob-height,130px);
+    height:var(--blob-height,125px);
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -172,32 +173,32 @@
 
   /* كل فقاعة بلون ومكان وحجم */
   .blob-esim{
-    --blob-size:160px; --blob-height:140px;
+    --blob-size:150px; --blob-height:125px;
     background:linear-gradient(145deg,#2A70DC,#1f8df5);
     border-radius:52% 68% 60% 38% / 60% 52% 70% 40%;
-    right:5%; top:-40%;
+    right:8%; top:-40%;
     animation:floatSoft 6s ease-in-out infinite;
   }
   .blob-hotel{
-    --blob-size:170px; --blob-height:150px;
+    --blob-size:150px; --blob-height:125px;
     background:linear-gradient(145deg,#00C7B7,#2A70DC);
     border-radius:46% 58% 52% 64% / 58% 46% 62% 44%;
-    left:4%; top:-30%;
+    left:18%; top:-20%;
     transform:translateX(-50%);
     animation:floatSoft 7s ease-in-out infinite .3s;
   }
   .blob-flight{
-    --blob-size:160px; --blob-height:130px;
+    --blob-size:150px; --blob-height:125px;
     background:linear-gradient(145deg,#FF7A1A,#FF9A4A);
     border-radius:64% 46% 58% 42% / 50% 64% 46% 50%;
-    right:5%; bottom:15%;
+    right:12%; bottom:8%;
     animation:floatSoft 6.5s ease-in-out infinite .6s;
   }
   .blob-film{
-    --blob-size:170px; --blob-height:150px;
+    --blob-size:150px; --blob-height:125px;
     background:linear-gradient(145deg,#11bebe,#008f9f);
     border-radius:58% 42% 60% 40% / 52% 60% 40% 58%;
-    left:8%; bottom:14%;
+    left:14%; bottom:10%;
     animation:floatSoft 7.2s ease-in-out infinite .9s;
   }
 
