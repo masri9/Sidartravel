@@ -22,7 +22,7 @@
     color:var(--ink);
     position:relative;
     overflow-x:hidden;
-    /* خلفية بألوان الشعار (لا نلمسها لاحقاً) */
+    /* نفس روح الخلفية بألوان الشعار */
     background:
       radial-gradient(900px 600px at 12% -8%, rgba(255,232,149,.55), transparent 65%),
       radial-gradient(900px 600px at 90% -10%, rgba(0,199,183,.40), transparent 70%),
@@ -31,7 +31,7 @@
       linear-gradient(180deg,#fdfefe 0%,#e9f7ff 40%,#fff8ec 100%);
   }
 
-  /* أمواج سفلية */
+  /* أمواج سفلية (لا نغيّرها) */
   .waves-wrap{
     position:fixed;
     inset-inline:0;
@@ -82,19 +82,19 @@
   }
   .bubble{
     position:absolute;
-    width:120px;
-    height:120px;
+    width:110px;
+    height:110px;
     border-radius:50%;
     background:radial-gradient(circle at 30% 30%, #fff, rgba(42,112,220,0));
-    opacity:.16;
+    opacity:.12;
     animation:floatBubble 16s ease-in-out infinite;
   }
   .bubble.b1{top:14%; right:6%; background:radial-gradient(circle at 30% 30%, #fff, rgba(0,199,183,0));}
-  .bubble.b2{top:40%; left:4%; width:90px; height:90px; animation-duration:18s;}
+  .bubble.b2{top:40%; left:4%; width:80px; height:80px; animation-duration:18s;}
   .bubble.b3{bottom:22%; right:20%; width:70px; height:70px; animation-duration:20s;}
   @keyframes floatBubble{
     0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-18px)}
+    50%{transform:translateY(-14px)}
   }
 
   /* خطوط الطيران */
@@ -244,104 +244,100 @@
     font-size:19px;
     font-weight:800;
     color:#1d2a4a;
-    margin-bottom:12px;
+    margin-bottom:14px;
   }
   .services-cloud{
     position:relative;
     width:min(92vw,900px);
-    height:260px; /* أكبر لنفس روح التصميم */
+    height:250px;
     margin:0 auto;
   }
 
-  /* ===== أيقونات Blob مثل الغيم تماماً ===== */
-  .blob-icon{
+  /* ===== فقاعات الخدمات (شكل غيمة حقيقي) ===== */
+  .service-blob{
     position:absolute;
     width:150px;
-    height:120px;
-    padding:16px 12px 12px;
+    height:130px;
+    padding:16px 14px 10px;
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:center;
+    justify-content:flex-end;
     gap:4px;
-    color:#0f172a;
-    font-weight:700;
-    font-size:14px;
-    box-shadow:0 16px 34px rgba(15,23,42,0.23);
+    color:#ffffff;
+    font-weight:800;
+    font-size:15px;
+    box-shadow:0 16px 34px rgba(15,23,42,0.22);
     cursor:pointer;
     transition:transform .22s ease, box-shadow .22s ease;
-    /* شكل غيمة ناعم (أساسي، سيتم تخصيصه لكل واحدة) */
-    border-radius:40% 60% 55% 45% / 65% 45% 55% 35%;
-    background:linear-gradient(145deg,#ffffff,#f3f7ff);
+    text-align:center;
   }
-  .blob-icon span{
-    font-size:12px;
-    color:#4b5563;
+
+  /* أشكال كل Blob (بدون دوائر/مربعات — غيوم ناعمة) */
+  .blob-esim{
+    background:linear-gradient(145deg,#2A70DC,#1f8df5);
+    border-radius:52% 68% 60% 38% / 60% 52% 70% 40%;
+    right:4%;
+    top:4%;
+  }
+  .blob-flight{
+    background:linear-gradient(145deg,#FF7A1A,#FF9A4A);
+    border-radius:64% 46% 58% 42% / 50% 64% 46% 50%;
+    right:18%;
+    bottom:0%;
+  }
+  .blob-hotel{
+    background:linear-gradient(145deg,#00C7B7,#2A70DC);
+    border-radius:46% 58% 52% 64% / 58% 46% 62% 44%;
+    left:50%;
+    top:24%;
+    transform:translateX(-50%);
+  }
+  .blob-film{
+    background:linear-gradient(145deg,#11bebe,#008f9f);
+    border-radius:58% 42% 60% 40% / 52% 60% 40% 58%;
+    left:8%;
+    bottom:10%;
+  }
+
+  /* أيقونة داخلية (بيضاء) */
+  .service-blob .icon-wrap{
+    width:54px;
+    height:54px;
+    margin-bottom:4px;
+    border-radius:18px;
+    background:rgba(255,255,255,0.14);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    backdrop-filter:blur(4px);
+  }
+  .service-blob svg{
+    width:30px;
+    height:30px;
+    fill:#ffffff;
+  }
+  .service-blob span{
+    font-size:11px;
     font-weight:600;
+    color:rgba(255,255,255,0.9);
   }
-  .blob-icon img{
-    width:40px;
-    height:40px;
-    object-fit:contain;
-    filter:drop-shadow(0 3px 4px rgba(15,23,42,.22));
-  }
-
-  /* كل واحدة بشكل مختلف وواضح مثل الصورة */
-  .bi-esim{
-    background:
-      radial-gradient(circle at 20% 20%,#ffffff,rgba(58,165,255,0.9)),
-      linear-gradient(145deg,#2A70DC,#1f8cf5);
-    color:#fff;
-    border-radius:50% 60% 55% 45% / 70% 50% 55% 35%;
-  }
-  .bi-esim span{color:#e6f4ff;}
-
-  .bi-hotel{
-    background:
-      radial-gradient(circle at 15% 10%,#ffffff,rgba(255,232,149,0.95)),
-      linear-gradient(145deg,#27C7A8,#2A70DC);
-    border-radius:60% 40% 45% 55% / 55% 70% 40% 45%;
-  }
-
-  .bi-flight{
-    background:
-      radial-gradient(circle at 18% 12%,#ffffff,rgba(255,180,120,0.98)),
-      linear-gradient(145deg,#FF7A1A,#FF9550);
-    color:#fff;
-    border-radius:55% 45% 60% 40% / 50% 45% 65% 35%;
-  }
-  .bi-flight span{color:#fff7ea;}
-
-  .bi-film{
-    background:
-      radial-gradient(circle at 15% 15%,#ffffff,rgba(0,199,183,0.96)),
-      linear-gradient(145deg,#00C7B7,#2A70DC);
-    color:#fff;
-    border-radius:45% 55% 55% 60% / 65% 55% 45% 45%;
-  }
-  .bi-film span{color:#e6f4ff;}
-
-  /* تموضع متباعد ومبعثر (نفس روح الريفرنس) */
-  .pos-esim{ right:4%;  top:8%; }
-  .pos-hotel{ left:50%; top:26%; transform:translateX(-50%); }
-  .pos-flight{ right:16%; bottom:4%; }
-  .pos-film{ left:10%; bottom:10%; }
 
   /* حركات ناعمة */
   @keyframes floatSoft{
     0%,100%{transform:translateY(0)}
     50%{transform:translateY(-10px)}
   }
-  .blob-icon{ animation:floatSoft 6s ease-in-out infinite; }
-  .blob-icon:nth-child(2){animation-duration:7s; animation-delay:.25s;}
-  .blob-icon:nth-child(3){animation-duration:6.4s; animation-delay:.55s;}
-  .blob-icon:nth-child(4){animation-duration:7.3s; animation-delay:.9s;}
-  .blob-icon:hover{
-    transform:translateY(-12px) scale(1.04);
-    box-shadow:0 22px 42px rgba(15,23,42,0.30);
+  .blob-esim{animation:floatSoft 6s ease-in-out infinite;}
+  .blob-hotel{animation:floatSoft 7s ease-in-out infinite .3s;}
+  .blob-flight{animation:floatSoft 6.5s ease-in-out infinite .6s;}
+  .blob-film{animation:floatSoft 7.2s ease-in-out infinite .9s;}
+  .service-blob:hover{
+    transform:translateY(-14px) scale(1.04);
+    box-shadow:0 22px 42px rgba(15,23,42,0.32);
   }
 
-  /* شريط ثابت أسفل الشاشة */
+  /* شريط واتساب / اتصال ثابت */
   .floatbar{
     position:fixed;
     inset-inline:14px;
@@ -400,7 +396,7 @@
 </head>
 <body>
 
-<!-- أمواج -->
+<!-- الأمواج -->
 <div class="waves-wrap">
   <div class="wave-layer wave-1"></div>
   <div class="wave-layer wave-2"></div>
@@ -414,7 +410,7 @@
   <div class="bubble b3"></div>
 </div>
 
-<!-- مسارات الطيران -->
+<!-- خطوط الطيران -->
 <div class="paths">
   <svg class="p-left" viewBox="0 0 660 300">
     <defs>
@@ -425,7 +421,7 @@
     <path d="M 10,150 C 200,10 420,260 650,120" class="dash" stroke="url(#gradLeft)"/>
     <g class="airplane">
       <svg viewBox="0 0 64 64" width="22" height="22">
-        <path fill="#2A70DC" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/>
+        <path d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/>
       </svg>
     </g>
   </svg>
@@ -439,7 +435,7 @@
     <path d="M 10,220 C 200,260 380,120 640,200" class="dash" stroke="url(#gradRight)"/>
     <g class="airplane2">
       <svg viewBox="0 0 64 64" width="22" height="22">
-        <path fill="#FF7A1A" d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/>
+        <path d="M60 30c2 1 2 3 0 4l-18 6-10 12-4-1 7-12-15-4-7 6-5-2 6-8-6-2 2-2 8 1 15-4-7-12 4-1 10 12 18 5z"/>
       </svg>
     </g>
   </svg>
@@ -459,7 +455,7 @@
 
     <div class="w-actions">
       <a id="wa-top" class="cta" href="#">💬 تواصل عبر واتساب</a>
-      <a class="cta.ghost cta ghost" href="#services-cloud">استعرض خدماتنا</a>
+      <a class="cta ghost" href="#services-cloud">استعرض خدماتنا</a>
     </div>
 
     <div class="w-stats">
@@ -480,34 +476,68 @@
   <h2 class="services-title">خدماتنا</h2>
   <div class="services-cloud" id="services-cloud">
 
-    <div class="blob-icon bi-esim pos-esim" title="بطاقات eSIM — إنترنت فوري">
-      <img src="https://cdn-icons-png.flaticon.com/512/870/870143.png" alt="eSIM">
-      <div>eSIM</div>
-      <span>إنترنت حول العالم</span>
+    <!-- eSIM -->
+    <div class="service-blob blob-esim" title="بطاقات eSIM — إنترنت فوري">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 64 64">
+          <rect x="10" y="8" rx="10" ry="10" width="44" height="48" fill="#ffffff"/>
+          <rect x="16" y="18" width="16" height="10" fill="#2A70DC"/>
+          <rect x="16" y="32" width="6" height="10" fill="#2A70DC"/>
+          <rect x="26" y="32" width="6" height="10" fill="#2A70DC"/>
+          <rect x="36" y="32" width="6" height="10" fill="#2A70DC"/>
+        </svg>
+      </div>
+      eSIM
+      <span>إنترنت فوري عالمي</span>
     </div>
 
-    <div class="blob-icon bi-hotel pos-hotel" title="حجوزات فنادق">
-      <img src="https://cdn-icons-png.flaticon.com/512/2331/2331937.png" alt="Hotels">
-      <div>فنادق</div>
+    <!-- فنادق -->
+    <div class="service-blob blob-hotel" title="حجوزات فنادق">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 64 64">
+          <rect x="18" y="16" width="20" height="28" fill="#ffffff"/>
+          <rect x="22" y="20" width="4" height="4" fill="#2A70DC"/>
+          <rect x="30" y="20" width="4" height="4" fill="#2A70DC"/>
+          <rect x="22" y="26" width="4" height="4" fill="#2A70DC"/>
+          <rect x="30" y="26" width="4" height="4" fill="#2A70DC"/>
+          <rect x="24" y="36" width="6" height="8" fill="#2A70DC"/>
+          <circle cx="44" cy="32" r="6" fill="#FFB847"/>
+        </svg>
+      </div>
+      فنادق
       <span>إقامات مختارة</span>
     </div>
 
-    <div class="blob-icon bi-flight pos-flight" title="تذاكر طيران">
-      <img src="https://cdn-icons-png.flaticon.com/512/681/681682.png" alt="Flights">
-      <div>طيران</div>
+    <!-- طيران -->
+    <div class="service-blob blob-flight" title="تذاكر طيران">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 64 64">
+          <path d="M8 30l44-10c2-.4 4 1.6 3.4 3.6L52 34l-16 4-4 12-5-1 3-12-11 2-3-4 9-5-11-4z" />
+        </svg>
+      </div>
+      طيران
       <span>عروض مميزة</span>
     </div>
 
-    <div class="blob-icon bi-film pos-film" title="أماكن تصوير المسلسلات">
-      <img src="https://cdn-icons-png.flaticon.com/512/3106/3106921.png" alt="Film">
-      <div>تصوير</div>
-      <span>لوكيشنات خاصة</span>
+    <!-- تصوير -->
+    <div class="service-blob blob-film" title="أماكن تصوير المسلسلات">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 64 64">
+          <rect x="10" y="22" width="44" height="24" rx="4" fill="#ffffff"/>
+          <rect x="14" y="18" width="6" height="8" fill="#00A9A0"/>
+          <rect x="24" y="18" width="6" height="8" fill="#00A9A0"/>
+          <rect x="34" y="18" width="6" height="8" fill="#00A9A0"/>
+          <polygon points="26,30 36,36 26,42" fill="#00A9A0"/>
+        </svg>
+      </div>
+      تصوير
+      <span>لوكيشنات مميزة</span>
     </div>
 
   </div>
 </section>
 
-<!-- شريط واتساب واتصال -->
+<!-- شريط واتساب / اتصال ثابت -->
 <div class="floatbar">
   <a class="wa" id="fb-wa" href="#">💬 تواصل واتساب</a>
   <a class="call" id="fb-call" href="#">📞 اتصال</a>
@@ -539,7 +569,7 @@
     requestAnimationFrame(step);
   })();
 
-  // سنة
+  // سنة الفوتر
   document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 </body>
