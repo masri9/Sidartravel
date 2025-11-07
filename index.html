@@ -172,33 +172,34 @@
 
   /* كل فقاعة بلون ومكان وحجم */
   .blob-esim{
-  --blob-size:150px;
-  --blob-height:125px;
-  right:8%;
-  top:-40%;
-}
-
-.blob-hotel{
-  --blob-size:150px;
-  --blob-height:125px;
-  left:18%;
-  top:-20%;
-  transform:translateX(-50%);
-}
-
-.blob-flight{
-  --blob-size:150px;
-  --blob-height:125px;
-  right:12%;
-  bottom:8%;
-}
-
-.blob-film{
-  --blob-size:150px;
-  --blob-height:125px;
-  left:14%;
-  bottom:10%;
-}
+    --blob-size:160px; --blob-height:140px;
+    background:linear-gradient(145deg,#2A70DC,#1f8df5);
+    border-radius:52% 68% 60% 38% / 60% 52% 70% 40%;
+    right:5%; top:-40%;
+    animation:floatSoft 6s ease-in-out infinite;
+  }
+  .blob-hotel{
+    --blob-size:170px; --blob-height:150px;
+    background:linear-gradient(145deg,#00C7B7,#2A70DC);
+    border-radius:46% 58% 52% 64% / 58% 46% 62% 44%;
+    left:4%; top:-30%;
+    transform:translateX(-50%);
+    animation:floatSoft 7s ease-in-out infinite .3s;
+  }
+  .blob-flight{
+    --blob-size:160px; --blob-height:130px;
+    background:linear-gradient(145deg,#FF7A1A,#FF9A4A);
+    border-radius:64% 46% 58% 42% / 50% 64% 46% 50%;
+    right:5%; bottom:15%;
+    animation:floatSoft 6.5s ease-in-out infinite .6s;
+  }
+  .blob-film{
+    --blob-size:170px; --blob-height:150px;
+    background:linear-gradient(145deg,#11bebe,#008f9f);
+    border-radius:58% 42% 60% 40% / 52% 60% 40% 58%;
+    left:8%; bottom:14%;
+    animation:floatSoft 7.2s ease-in-out infinite .9s;
+  }
 
   /* الشريط السفلي */
   .floatbar{
