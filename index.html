@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SIDAR TRAVEL — صفحة ترحيب أنيقة</title>
+<title>SIDAR TRAVEL — صفحة ترحيب</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -13,44 +13,86 @@
     --green:#00C7B7;
     --ink:#0f1320;
     --ink-soft:#51607c;
+    --white:#ffffff;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{min-height:100%}
   body{
     font-family:"Tajawal",system-ui;
     color:var(--ink);
-    background:
-      radial-gradient(900px 600px at 8% -10%, rgba(255,232,149,.50), rgba(255,232,149,0) 60%),
-      radial-gradient(900px 600px at 96% 0%, rgba(42,112,220,.18), rgba(42,112,220,0) 70%),
-      radial-gradient(700px 480px at 15% 85%, rgba(255,122,26,.12), rgba(255,122,26,0) 65%),
-      radial-gradient(680px 460px at 85% 82%, rgba(0,199,183,.10), rgba(0,199,183,0) 60%),
-      linear-gradient(180deg, #fff 0%, #FFF7E6 60%, #FFF 100%);
     overflow-x:hidden;
+    position:relative;
+    background:
+      radial-gradient(900px 600px at 8% -10%, rgba(255,232,149,.55), transparent 60%),
+      radial-gradient(900px 600px at 96% 0%, rgba(42,112,220,.22), transparent 70%),
+      radial-gradient(700px 480px at 15% 85%, rgba(255,122,26,.12), transparent 65%),
+      radial-gradient(680px 460px at 85% 82%, rgba(0,199,183,.12), transparent 60%),
+      linear-gradient(180deg,#FFFFFF 0%,#FFF7E6 55%,#FFFFFF 100%);
+    animation:bgPulse 18s ease-in-out infinite;
+  }
+  @keyframes bgPulse{
+    0%,100%{filter:saturate(100%) brightness(100%)}
+    50%{filter:saturate(112%) brightness(102%)}
   }
 
-  /* الشعار */
+  /* Blobs الخلفية الكبيرة المتحركة */
+  .bg-blob{
+    position:fixed;
+    width:340px;
+    height:340px;
+    border-radius:45% 55% 50% 50%;
+    opacity:.30;
+    filter:blur(0.2px);
+    z-index:-1;
+    mix-blend-mode:normal;
+    animation:blobDrift 26s ease-in-out infinite alternate;
+  }
+  .bg-blob.b1{
+    top:-120px; right:-40px;
+    background:radial-gradient(circle at 30% 0%,rgba(255,232,149,.9),rgba(255,232,149,0));
+  }
+  .bg-blob.b2{
+    top:18%; left:-90px;
+    background:radial-gradient(circle at 0% 0%,rgba(42,112,220,.55),rgba(42,112,220,0));
+    animation-duration:32s;
+  }
+  .bg-blob.b3{
+    bottom:-140px; left:12%;
+    background:radial-gradient(circle at 30% 80%,rgba(0,199,183,.40),rgba(0,199,183,0));
+    animation-duration:30s;
+  }
+  .bg-blob.b4{
+    bottom:-120px; right:8%;
+    background:radial-gradient(circle at 80% 90%,rgba(255,122,26,.35),rgba(255,122,26,0));
+    animation-duration:34s;
+  }
+  @keyframes blobDrift{
+    0%{transform:translate3d(0,0,0) rotate(0deg);}
+    50%{transform:translate3d(15px,-10px,0) rotate(4deg);}
+    100%{transform:translate3d(-10px,10px,0) rotate(-3deg);}
+  }
+
+  /* Logo أعلى */
   .logo-top{
     position:relative;
-    z-index:15;
+    z-index:5;
     display:flex;
     justify-content:center;
-    margin-top:12px;
-    animation:fadeZoom 1.2s ease both;
+    margin-top:10px;
+    animation:fadeDown .9s ease both;
   }
   .logo-top img{
-    width:240px;
+    width:190px;
     height:auto;
     border-radius:0;
-    background:transparent;
-    padding:0;
-    box-shadow:none;
+    pointer-events:none;
+    user-select:none;
   }
-  @keyframes fadeZoom{
-    0%{opacity:0; transform:scale(.8) translateY(-20px)}
-    100%{opacity:1; transform:scale(1) translateY(0)}
+  @keyframes fadeDown{
+    from{opacity:0;transform:translateY(-20px)}
+    to{opacity:1;transform:translateY(0)}
   }
 
-  /* البطاقة الترحيبية */
   .center{
     position:relative;
     z-index:10;
@@ -58,292 +100,426 @@
     display:grid;
     place-items:center;
   }
+
+  /* بطاقة الترحيب */
   .welcome.pro{
-    width:min(85vw, 700px);
-    padding:32px 24px 28px;
-    background:linear-gradient(145deg, rgba(255,255,255,0.60), rgba(255,255,255,0.35));
-    backdrop-filter: blur(12px);
-    border:1px solid rgba(255,255,255,0.40);
-    border-radius:22px;
-    box-shadow:0 8px 28px rgba(42,112,220,0.22);
+    width:min(90vw,720px);
+    padding:28px 24px 24px;
+    background:linear-gradient(145deg,rgba(255,255,255,0.9),rgba(255,255,255,0.72));
+    backdrop-filter:blur(14px);
+    border-radius:24px;
+    border:1px solid rgba(255,255,255,0.9);
+    box-shadow:0 14px 40px rgba(42,112,220,0.20);
     text-align:center;
     animation:fadeIn .9s ease both;
   }
   @keyframes fadeIn{
-    from{opacity:0; transform:scale(.96)}
-    to{opacity:1; transform:scale(1)}
+    from{opacity:0;transform:scale(.97) translateY(6px)}
+    to{opacity:1;transform:scale(1) translateY(0)}
   }
   .welcome.pro h1{
     font-size:26px;
-    margin-bottom:4px;
+    margin-bottom:6px;
   }
   .w-sub{
-    margin:6px 0 0;
+    margin:0;
     color:var(--ink-soft);
     font-size:15px;
   }
   .tagline{
-    margin:12px 0 4px;
+    margin-top:10px;
     font-weight:600;
     color:var(--blue);
-    font-size:16px;
+    font-size:15px;
   }
   .w-actions{
+    margin-top:14px;
     display:flex;
     gap:10px;
     flex-wrap:wrap;
     justify-content:center;
-    margin-top:14px;
   }
   .cta{
     display:inline-flex;
     align-items:center;
     justify-content:center;
     gap:8px;
-    padding:12px 20px;
-    border-radius:50px;
-    background:linear-gradient(90deg, #25D366, #1ebe5b);
+    padding:11px 20px;
+    border-radius:999px;
+    background:linear-gradient(90deg,#25D366,#1ebe5b);
     color:#fff;
     font-weight:700;
     text-decoration:none;
-    transition:.2s;
+    font-size:14px;
     box-shadow:0 8px 20px rgba(37,211,102,.25);
+    transition:.2s;
   }
   .cta:hover{transform:translateY(-3px)}
   .cta.ghost{
-    background:#f6f9ff;
+    background:#f6f8ff;
     color:#1f3a7a;
     box-shadow:none;
     border:1px solid #e3eafc;
   }
   .w-stats{
-    margin-top:18px;
+    margin-top:12px;
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:10px;
     text-align:center;
+    font-size:13px;
   }
   .w-stats strong{
     display:block;
-    font-size:22px;
+    font-size:20px;
   }
   .w-stats small{
     color:#6b7a99;
   }
 
-  /* خدماتنا - أيقونات دائرية بصور */
+  /* قسم الخدمات Blobs */
   .services-area{
     position:relative;
     z-index:9;
-    padding:22px 20px 40px;
+    padding:20px 16px 80px;
   }
   .services-title{
-    font-size:20px;
-    font-weight:800;
-    color:#1d2a4a;
     text-align:center;
+    font-weight:800;
+    font-size:20px;
+    color:#1d2a4a;
+    margin-bottom:14px;
+  }
+  .services-sub{
+    text-align:center;
+    font-size:13px;
+    color:var(--ink-soft);
     margin-bottom:16px;
   }
   .services-cloud{
     position:relative;
-    width:min(92vw, 900px);
-    height:280px;
+    width:min(94vw,900px);
+    height:260px;
     margin:0 auto;
   }
 
-  .service-icon{
+  .service-blob{
     position:absolute;
-    width:132px;
-    height:132px;
-    border-radius:50%;
-    background-size:cover;
-    background-position:center;
+    width:130px;
+    height:130px;
+    border-radius:40% 60% 55% 45%;
+    padding:10px;
+    background:linear-gradient(180deg,#ffffffee,#f6f9ffdd);
+    box-shadow:0 10px 26px rgba(15,23,42,0.16);
+    border:1px solid rgba(230,236,250,0.98);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-end;
+    text-align:center;
+    gap:4px;
+    cursor:pointer;
+    transition:transform .2s, box-shadow .2s, border-color .2s;
+    backdrop-filter:blur(8px);
+  }
+  .service-blob span{
+    font-size:13px;
+    font-weight:700;
+    color:#1f2937;
+  }
+  .service-blob small{
+    font-size:11px;
+    color:var(--ink-soft);
+  }
+  .blob-icon-wrap{
+    width:54px;
+    height:54px;
+    border-radius:18px;
+    margin-bottom:4px;
     display:flex;
     align-items:center;
     justify-content:center;
-    text-align:center;
-    color:#fff;
-    font-weight:800;
-    font-size:17px;
-    box-shadow:0 10px 25px rgba(0,0,0,.18);
-    cursor:pointer;
-    user-select:none;
-    overflow:hidden;
-    transition:transform .25s ease, box-shadow .25s ease;
+    background:linear-gradient(145deg,rgba(42,112,220,0.1),rgba(255,255,255,0.95));
   }
-  .service-icon::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    border-radius:50%;
-    background:linear-gradient(
-      180deg,
-      rgba(0,0,0,.05),
-      rgba(0,0,0,.40)
-    );
-    z-index:1;
+  .blob-icon{
+    font-size:26px;
   }
-  .service-icon span{
-    position:relative;
-    z-index:2;
-    padding:0 6px;
-  }
-  .service-icon:hover{
-    transform:translateY(-10px) scale(1.06);
-    box-shadow:0 18px 40px rgba(0,0,0,.30);
+  .service-blob:hover{
+    transform:translateY(-6px) scale(1.03);
+    box-shadow:0 16px 34px rgba(15,23,42,0.22);
+    border-color:rgba(42,112,220,0.35);
   }
 
-  /* ألوان توهج خفيف حسب الخدمة */
-  .service-icon.esim:hover{
-    box-shadow:0 0 26px rgba(0,199,183,.85);
-  }
-  .service-icon.hotel:hover{
-    box-shadow:0 0 26px rgba(42,112,220,.85);
-  }
-  .service-icon.flight:hover{
-    box-shadow:0 0 26px rgba(255,122,26,.85);
-  }
-  .service-icon.film:hover{
-    box-shadow:0 0 26px rgba(255,232,149,.9);
-  }
+  /* مواقع الخدمات (تشبه الصورة: عنقودية وعضوية) */
+  .esim   { right:8%;  top:10%;  background:linear-gradient(180deg,#e6fff8,#ffffff); }
+  .hotel  { right:34%; top:0%;   background:linear-gradient(180deg,#f5f7ff,#ffffff); }
+  .flight { right:60%; top:38%;  background:linear-gradient(180deg,#fff4e8,#ffffff); }
+  .film   { right:18%; top:62%;  background:linear-gradient(180deg,#fffbea,#ffffff); }
 
-  /* مواقع الأيقونات (مبعثرة بشكل متناسق) */
-  .pos-a{ right:4%;   top:8%;  }
-  .pos-b{ right:34%;  top:0%;  }
-  .pos-c{ right:60%;  top:40%; }
-  .pos-d{ right:18%;  top:64%; }
-
-  /* أنيميشن الطفو */
-  @keyframes bob {
+  /* أنيميشن طفوي لكل Blob */
+  @keyframes floatY{
     0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-12px)}
+    50%{transform:translateY(-10px)}
   }
-  @keyframes drift {
-    0%{transform:translateX(0)}
-    50%{transform:translateX(8px)}
-    100%{transform:translateX(0)}
+  @keyframes floatXY{
+    0%,100%{transform:translate(0,0)}
+    50%{transform:translate(6px,-8px)}
   }
-  .float-1{animation:bob 5.5s ease-in-out infinite, drift 7.5s ease-in-out infinite}
-  .float-2{animation:bob 6.2s ease-in-out infinite .3s, drift 8.6s ease-in-out infinite .2s}
-  .float-3{animation:bob 5.0s ease-in-out infinite .6s, drift 7.0s ease-in-out infinite .4s}
-  .float-4{animation:bob 6.8s ease-in-out infinite .9s, drift 9.2s ease-in-out infinite .3s}
+  .float-1{animation:floatY 5.5s ease-in-out infinite;}
+  .float-2{animation:floatXY 6.4s ease-in-out infinite;}
+  .float-3{animation:floatY 5.0s ease-in-out infinite .6s;}
+  .float-4{animation:floatXY 7.2s ease-in-out infinite .3s;}
 
-  /* فوتر بسيط */
+  /* شريط عائم أسفل الشاشة (واتساب + اتصال + حجز) */
+  .floatbar{
+    position:fixed;
+    inset-inline:14px;
+    bottom:14px;
+    display:flex;
+    gap:8px;
+    padding:8px;
+    border-radius:999px;
+    background:rgba(255,255,255,0.92);
+    box-shadow:0 10px 26px rgba(15,23,42,0.18);
+    border:1px solid rgba(230,236,250,0.96);
+    z-index:40;
+    backdrop-filter:blur(10px);
+    align-items:center;
+    justify-content:space-between;
+  }
+  .floatbar a{
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 12px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:700;
+    border:1px solid transparent;
+    color:#111827;
+    transition:.18s;
+  }
+  .floatbar a span{display:inline-block;}
+  .floatbar .wa{
+    background:linear-gradient(90deg,#25D366,#1ebe5b);
+    color:#fff;
+    box-shadow:0 6px 16px rgba(37,211,102,.45);
+  }
+  .floatbar .call{
+    background:#f3f6ff;
+    color:#1f3a7a;
+    border-color:#e0e7ff;
+  }
+  .floatbar .book{
+    background:#ffffff;
+    color:#111827;
+    border-color:#e5e7eb;
+  }
+  .floatbar a:hover{transform:translateY(-2px)}
+  @media(min-width:900px){
+    .floatbar{
+      max-width:480px;
+      margin-inline:auto;
+      left:0; right:0;
+    }
+  }
+
   footer{
     position:relative;
     text-align:center;
-    font-size:13px;
+    font-size:12px;
     color:#6b7a99;
-    padding:10px 0 18px;
+    z-index:5;
+    padding:6px 0 18px;
   }
 </style>
 </head>
 <body>
 
+<!-- Blobs الخلفية -->
+<div class="bg-blob b1"></div>
+<div class="bg-blob b2"></div>
+<div class="bg-blob b3"></div>
+<div class="bg-blob b4"></div>
+
+<!-- (اختياري) Canvas جسيمات خفيفة - ممكن تزيله لو مش حابب -->
+<canvas id="bgfx"></canvas>
+
 <!-- الشعار -->
 <div class="logo-top">
-  <img src="https://i.ibb.co/Q3p4gmYX/IMG-1629.png" alt="SIDAR Logo">
+  <img src="https://i.ibb.co/Q3p4gmYX/IMG-1629.png" alt="SIDAR TRAVEL Logo">
 </div>
 
 <!-- البطاقة الترحيبية -->
 <div class="center">
   <section class="welcome pro">
-    <h1 id="typedTitle">مرحبًا بك في سيدار ترافل 🌍</h1>
-    <p class="w-sub">نوفّر حلول سفر ذكية: eSIM • طيران • سيارات — بخدمة سريعة ودفع آمن.</p>
-    <div class="tagline">✨ وجهتك تبدأ معنا – رحلات، اتصالات، وراحة بال!</div>
+      <h1 id="typedTitle">مرحبًا بك في سيدار ترافل 🌍</h1>
+      <p class="w-sub">نوفّر لك حلول سفر ذكية وحديثة: eSIM، تذاكر طيران، فنادق، وتجارب تصوير — بخدمة سريعة ودفع آمن.</p>
+      <div class="tagline">✨ خلّي رحلتك أذكى وأسهل وأجمل مع SIDAR TRAVEL.</div>
 
-    <div class="w-actions">
-      <a id="wa-top" class="cta" href="#">💬 تواصل واتساب</a>
-      <a class="cta.ghost cta ghost" href="#services">استعرض خدماتنا</a>
-    </div>
+      <div class="w-actions">
+        <a id="wa-top" class="cta" href="#">💬 تواصل واتساب</a>
+        <a class="cta ghost" href="#services">استعرض خدماتنا</a>
+      </div>
 
-    <div class="w-stats">
-      <div>
-        <strong>24/7</strong>
-        <small>دعم عبر واتساب</small>
+      <div class="w-stats">
+        <div>
+          <strong>24/7</strong>
+          <small>دعم عبر واتساب</small>
+        </div>
+        <div>
+          <strong>10 دقائق</strong>
+          <small>متوسط زمن الرد</small>
+        </div>
       </div>
-      <div>
-        <strong>10 دقائق</strong>
-        <small>متوسط سرعة الرد</small>
-      </div>
-    </div>
   </section>
 </div>
 
-<!-- خدماتنا -->
+<!-- خدماتنا بأسلوب Blobs عضوية -->
 <section id="services" class="services-area" aria-label="الخدمات">
   <h2 class="services-title">خدماتنا</h2>
-  <div class="services-cloud">
+  <p class="services-sub">اختر الخدمة التي تناسبك، وسنكمّل الباقي عنك 👇</p>
 
+  <div class="services-cloud">
     <!-- eSIM -->
-    <div
-      class="service-icon esim pos-a float-1"
-      title="eSIM — إنترنت فوري"
-      style="background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80');"
-    >
+    <div class="service-blob esim float-1" title="بطاقات eSIM — إنترنت فوري">
+      <div class="blob-icon-wrap">
+        <div class="blob-icon">📶</div>
+      </div>
       <span>eSIM</span>
+      <small>إنترنت فوري حول العالم</small>
     </div>
 
     <!-- فنادق -->
-    <div
-      class="service-icon hotel pos-b float-2"
-      title="حجوزات فنادق"
-      style="background-image:url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=600&q=80');"
-    >
+    <div class="service-blob hotel float-2" title="حجوزات فنادق">
+      <div class="blob-icon-wrap">
+        <div class="blob-icon">🏨</div>
+      </div>
       <span>فنادق</span>
+      <small>خيارات مختارة بعناية</small>
     </div>
 
     <!-- طيران -->
-    <div
-      class="service-icon flight pos-c float-3"
-      title="تذاكر طيران"
-      style="background-image:url('https://images.unsplash.com/photo-1504198266285-165a16c2f621?auto=format&fit=crop&w=600&q=80');"
-    >
+    <div class="service-blob flight float-3" title="تذاكر طيران">
+      <div class="blob-icon-wrap">
+        <div class="blob-icon">✈️</div>
+      </div>
       <span>طيران</span>
+      <small>أسعار منافسة ومسارات ذكية</small>
     </div>
 
-    <!-- أماكن تصوير المسلسلات -->
-    <div
-      class="service-icon film pos-d float-4"
-      title="أماكن تصوير المسلسلات والأفلام"
-      style="background-image:url('https://images.unsplash.com/photo-1516031190212-da133013de50?auto=format&fit=crop&w=600&q=80');"
-    >
+    <!-- تصوير / مسلسلات -->
+    <div class="service-blob film float-4" title="أماكن تصوير المسلسلات والأفلام">
+      <div class="blob-icon-wrap">
+        <div class="blob-icon">🎬</div>
+      </div>
       <span>تصوير</span>
+      <small>لوكيشنات لمسلسلات وأفلام</small>
     </div>
-
   </div>
 </section>
 
+<!-- شريط واتساب / اتصال ثابت -->
+<div class="floatbar">
+  <a class="wa" id="fb-wa" href="#">
+    <span>💬 واتساب</span>
+  </a>
+  <a class="call" id="fb-call" href="#">
+    <span>📞 اتصال</span>
+  </a>
+  <a class="book" href="#services">
+    <span>✈️ الخدمات</span>
+  </a>
+</div>
+
 <footer>
-  © <span id="year"></span> SIDAR TRAVEL
+  © <span id="year"></span> جميع الحقوق محفوظة – SIDAR TRAVEL
 </footer>
 
 <script>
-  // رقم الواتساب
-  const PHONE = "9725XXXXXXXX"; // عدّل رقمك الدولي بدون +
+  // رقمك هنا
+  const PHONE = "9725XXXXXXXX";      // بدون +
+  const PHONE_CALL = "+9725XXXXXXXX"; // مع +
+
   const baseWA = (t) => `https://wa.me/${PHONE}?text=${encodeURIComponent(t)}`;
+
+  // زر واتساب في البطاقة
   const waTop = document.getElementById("wa-top");
-  if (waTop) {
-    waTop.href = baseWA("مرحبًا، أريد الاستفسار عن خدمات سيدار ترافل 🌍✈️");
+  if(waTop){
+    waTop.href = baseWA("مرحبًا، أريد الاستفسار عن خدمات SIDAR TRAVEL ✈️");
+  }
+
+  // الشريط السفلي
+  document.getElementById("fb-wa").href   = baseWA("مرحبًا، أحتاج مساعدة فورية 👋");
+  document.getElementById("fb-call").href = `tel:${PHONE_CALL}`;
+
+  // جسيمات خفيفة في الخلفية
+  const c = document.getElementById('bgfx');
+  if(c){
+    const ctx = c.getContext('2d');
+    let w,h,parts=[];
+    function resize(){
+      w = c.width = innerWidth;
+      h = c.height = innerHeight;
+      const n = Math.min(80, Math.floor(w*h/28000));
+      parts = Array.from({length:n},()=>({
+        x:Math.random()*w,
+        y:Math.random()*h,
+        vx:(Math.random()-.5)*.25,
+        vy:(Math.random()-.5)*.25,
+        r:Math.random()*1.4+0.4,
+        a:Math.random()*0.4+0.1
+      }));
+    }
+    function draw(){
+      ctx.clearRect(0,0,w,h);
+      for(const p of parts){
+        p.x+=p.vx; p.y+=p.vy;
+        if(p.x<0||p.x>w) p.vx*=-1;
+        if(p.y<0||p.y>h) p.vy*=-1;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(42,112,220,${p.a})`;
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    resize(); draw();
+    addEventListener('resize',resize);
   }
 
   // كتابة تدريجية لعنوان البطاقة
-  (function () {
-    const el = document.getElementById("typedTitle");
-    if (!el) return;
+  (function(){
+    const el = document.getElementById('typedTitle');
+    if(!el) return;
     const full = el.textContent.trim();
-    let j = 0;
+    let i = 0;
     el.textContent = "";
-    const tick = () => {
-      el.textContent = full.slice(0, ++j);
-      if (j < full.length) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
+    function step(){
+      el.textContent = full.slice(0, ++i);
+      if(i < full.length) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
   })();
 
   // سنة الفوتر
   document.getElementById("year").textContent = new Date().getFullYear();
-</script>
 
+  // ملاحظات ضغط على Blobs (مكان جاهز تربطه بالودجت/صفحات لاحقًا)
+  document.querySelector('.service-blob.esim')?.addEventListener('click', ()=>{
+    // مثال: window.location.href = 'esim.html';
+    alert('هنا تربط صفحة / ويدجت eSIM الخاص بك 🌐');
+  });
+  document.querySelector('.service-blob.hotel')?.addEventListener('click', ()=>{
+    alert('هنا تربط نظام حجز الفنادق 🏨');
+  });
+  document.querySelector('.service-blob.flight')?.addEventListener('click', ()=>{
+    alert('هنا تربط ويدجت أو صفحة تذاكر الطيران ✈️');
+  });
+  document.querySelector('.service-blob.film')?.addEventListener('click', ()=>{
+    alert('هنا تعرض خدمات أماكن تصوير المسلسلات والأفلام 🎬');
+  });
+</script>
 </body>
 </html>
