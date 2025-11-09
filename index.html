@@ -51,6 +51,16 @@
     animation:fadeIn .9s ease both;
   }
   @keyframes fadeIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+  .welcome.pro h1{font-size:26px;margin-bottom:6px;}
+  .w-sub{color:var(--ink-soft);font-size:15px;line-height:1.7;}
+  .tagline{margin:12px 0;font-weight:600;color:#2A70DC;font-size:15px;}
+  .w-actions{margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .cta{padding:11px 20px;border-radius:999px;font-weight:700;text-decoration:none;font-size:14px;transition:transform .2s,box-shadow .2s;}
+  .cta:first-child{background:linear-gradient(90deg,#25D366,#1ebe5b);color:#fff;box-shadow:0 8px 20px rgba(37,211,102,.25);}
+  .cta.ghost{background:#f6f9ff;color:#1f3a7a;border:1px solid #dde7ff;}
+  .cta:hover{transform:translateY(-3px);}
+  .w-stats{margin-top:14px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px;font-size:13px;}
+  .w-stats strong{display:block;font-size:20px;color:#1d2a4a;}
 
   /* الخدمات */
   .services-area{position:relative;z-index:5;padding:20px 20px 100px;}
@@ -72,34 +82,10 @@
   @keyframes floatSoft{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
   /* أحجام وأشكال متنوعة */
-  .blob-esim{
-    width:180px;height:160px;
-    border-radius:60% 40% 60% 50%;
-    right:8%;top:-25%;
-    transform:rotate(4deg);
-    animation-duration:6.5s;
-  }
-  .blob-hotel{
-    width:150px;height:140px;
-    border-radius:45% 55% 60% 40%;
-    left:8%;top:-20%;
-    transform:rotate(-3deg);
-    animation-duration:7s;
-  }
-  .blob-flight{
-    width:200px;height:180px;
-    border-radius:50% 60% 55% 45%;
-    right:18%;bottom:5%;
-    transform:rotate(2deg);
-    animation-duration:6s;
-  }
-  .blob-film{
-    width:130px;height:120px;
-    border-radius:55% 45% 60% 40%;
-    left:15%;bottom:10%;
-    transform:rotate(-5deg);
-    animation-duration:7.5s;
-  }
+  .blob-esim{width:180px;height:160px;border-radius:60% 40% 60% 50%;right:8%;top:-25%;transform:rotate(4deg);animation-duration:6.5s;}
+  .blob-hotel{width:150px;height:140px;border-radius:45% 55% 60% 40%;left:8%;top:-20%;transform:rotate(-3deg);animation-duration:7s;}
+  .blob-flight{width:200px;height:180px;border-radius:50% 60% 55% 45%;right:18%;bottom:5%;transform:rotate(2deg);animation-duration:6s;}
+  .blob-film{width:130px;height:120px;border-radius:55% 45% 60% 40%;left:15%;bottom:10%;transform:rotate(-5deg);animation-duration:7.5s;}
 
   /* الشريط السفلي */
   .floatbar{position:fixed;inset-inline:14px;bottom:12px;z-index:50;display:flex;gap:8px;padding:6px;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-radius:999px;box-shadow:0 10px 28px rgba(15,23,42,0.18);}
@@ -125,15 +111,15 @@
 
 <div class="center">
   <section class="welcome pro">
-    <h1 id="typedTitle">مرحبًا بك في سيدار ترافل 🌍</h1>
-    <p class="w-sub">نوفّر حلول سفر ذكية: eSIM، طيران، فنادق، سيارات، وأماكن تصوير — بخدمة سريعة ودفع آمن.</p>
-    <div class="tagline">✨ وجهتك تبدأ معنا – اتصالات، رحلات، وتجارب لا تُنسى.</div>
+    <h1 id="typedTitle">مرحبًا بك في سيدار ترافل ✈️</h1>
+    <p class="w-sub">نقدّم لك تجربة سفر متكاملة تجمع بين الراحة، الذكاء، والجمال — من الإقامة إلى الرحلات والأنشطة حول العالم.</p>
+    <div class="tagline">🌍 استكشف العالم بثقة — بداية رحلتك معنا.</div>
     <div class="w-actions">
       <a id="wa-top" class="cta" href="#">💬 تواصل عبر واتساب</a>
       <a class="cta ghost" href="#services-cloud">استعرض خدماتنا</a>
     </div>
     <div class="w-stats">
-      <div><strong>24/7</strong><small>دعم عبر واتساب</small></div>
+      <div><strong>24/7</strong><small>دعم مباشر</small></div>
       <div><strong>10 دقائق</strong><small>متوسط سرعة الرد</small></div>
     </div>
   </section>
