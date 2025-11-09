@@ -7,15 +7,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --blue:#2A70DC;
-    --orange:#FF7A1A;
-    --yellow:#FFE895;
-    --green:#00C7B7;
-    --ink:#0f1320;
-    --ink-soft:#51607c;
-    --white:#ffffff;
+    --blue:#2A70DC; --orange:#FF7A1A; --yellow:#FFE895; --green:#00C7B7;
+    --ink:#0f1320; --ink-soft:#51607c; --white:#ffffff;
   }
-
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{min-height:100%}
   body{
@@ -31,344 +25,99 @@
       linear-gradient(180deg,#fdfefe 0%,#e9f7ff 40%,#fff8ec 100%);
   }
 
-  /* الأمواج السفلية */
+  /* أمواج متحركة في الخلفية */
   .waves-wrap{
-    position:fixed;
-    inset-inline:0;
-    bottom:-5px;
-    height:260px;
-    pointer-events:none;
-    z-index:0;
+    position:fixed;inset-inline:0;bottom:-5px;height:260px;pointer-events:none;z-index:0;
   }
-  .wave-layer{
-    position:absolute;
-    left:-40%;
-    width:180%;
-    height:150px;
-    border-radius:40%;
-    opacity:.9;
-    animation:waveMove 22s linear infinite;
-  }
-  .wave-1{
-    bottom:0;
-    background:linear-gradient(90deg,rgba(42,112,220,.9),rgba(0,199,183,.85));
-  }
-  .wave-2{
-    bottom:40px;
-    background:linear-gradient(90deg,rgba(0,199,183,.85),rgba(255,232,149,.9));
-    animation-duration:28s;
-    animation-direction:reverse;
-  }
-  .wave-3{
-    bottom:80px;
-    background:linear-gradient(90deg,rgba(255,232,149,.9),rgba(255,122,26,.9));
-    animation-duration:34s;
-  }
-  @keyframes waveMove{
-    0%{transform:translateX(0)}
-    100%{transform:translateX(30%)}
-  }
+  .wave-layer{position:absolute;left:-40%;width:180%;height:150px;border-radius:40%;opacity:.9;animation:waveMove 22s linear infinite;}
+  .wave-1{bottom:0;background:linear-gradient(90deg,rgba(42,112,220,.9),rgba(0,199,183,.85));}
+  .wave-2{bottom:40px;background:linear-gradient(90deg,rgba(0,199,183,.85),rgba(255,232,149,.9));animation-duration:28s;animation-direction:reverse;}
+  .wave-3{bottom:80px;background:linear-gradient(90deg,rgba(255,232,149,.9),rgba(255,122,26,.9));animation-duration:34s;}
+  @keyframes waveMove{0%{transform:translateX(0)}100%{transform:translateX(30%)}}
 
   /* الشعار */
-  .logo-top{
-    position:relative;
-    z-index:5;
-    display:flex;
-    justify-content:center;
-    margin-top:10px;
-    animation:fadeDown .9s ease both;
-  }
-  .logo-top img{
-    width:190px;
-    height:auto;
-  }
-  @keyframes fadeDown{
-    from{opacity:0;transform:translateY(-20px)}
-    to{opacity:1;transform:translateY(0)}
-  }
+  .logo-top{position:relative;z-index:5;display:flex;justify-content:center;margin-top:10px;animation:fadeDown .9s ease both;}
+  .logo-top img{width:190px;height:auto;}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 
   /* البطاقة الترحيبية */
-  .center{
-    position:relative;
-    z-index:5;
-    padding:14px 20px 30px;
-    display:grid;
-    place-items:center;
-  }
+  .center{position:relative;z-index:5;padding:14px 20px 30px;display:grid;place-items:center;}
   .welcome.pro{
     width:min(85vw,720px);
     padding:30px 24px 26px;
-    background:linear-gradient(145deg,rgba(255,255,255,0.92),rgba(255,255,255,0.82));
-    backdrop-filter:blur(16px);
+    background:rgba(255,255,255,0.65);
+    backdrop-filter:blur(18px);
     border-radius:26px;
     box-shadow:0 14px 40px rgba(17,40,90,0.18);
+    border:1px solid rgba(255,255,255,0.35);
     text-align:center;
     animation:fadeIn .9s ease both;
   }
-  @keyframes fadeIn{
-    from{opacity:0;transform:scale(.96)}
-    to{opacity:1;transform:scale(1)}
-  }
-  .welcome.pro h1{
-    font-size:26px;
-    margin-bottom:4px;
-  }
-  .w-sub{
-    color:var(--ink-soft);
-    font-size:15px;
-  }
-  .tagline{
-    margin:10px 0;
-    font-weight:600;
-    color:#2A70DC;
-    font-size:15px;
-  }
-  .w-actions{
-    margin-top:12px;
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    flex-wrap:wrap;
-  }
-  .cta{
-    padding:11px 20px;
-    border-radius:999px;
-    font-weight:700;
-    text-decoration:none;
-    font-size:14px;
-    transition:transform .2s,box-shadow .2s;
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-  }
-  .cta:first-child{
-    background:linear-gradient(90deg,#25D366,#1ebe5b);
-    color:#fff;
-    box-shadow:0 8px 20px rgba(37,211,102,.25);
-  }
-  .cta.ghost{
-    background:#f6f9ff;
-    color:#1f3a7a;
-    border:1px solid #dde7ff;
-  }
-  .cta:hover{
-    transform:translateY(-3px);
-  }
-  .w-stats{
-    margin-top:14px;
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-    font-size:13px;
-  }
-  .w-stats strong{
-    display:block;
-    font-size:20px;
-    color:#1d2a4a;
-  }
-  .w-stats small{
-    color:#6b7a99;
-  }
+  @keyframes fadeIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+  .welcome.pro h1{font-size:26px;margin-bottom:4px;}
+  .w-sub{color:var(--ink-soft);font-size:15px;}
+  .tagline{margin:10px 0;font-weight:600;color:#2A70DC;font-size:15px;}
+  .w-actions{margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .cta{padding:11px 20px;border-radius:999px;font-weight:700;text-decoration:none;font-size:14px;transition:transform .2s,box-shadow .2s;}
+  .cta:first-child{background:linear-gradient(90deg,#25D366,#1ebe5b);color:#fff;box-shadow:0 8px 20px rgba(37,211,102,.25);}
+  .cta.ghost{background:#f6f9ff;color:#1f3a7a;border:1px solid #dde7ff;}
+  .cta:hover{transform:translateY(-3px);}
+  .w-stats{margin-top:14px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px;font-size:13px;}
+  .w-stats strong{display:block;font-size:20px;color:#1d2a4a;}
 
   /* الخدمات */
-  .services-area{
-    position:relative;
-    z-index:5;
-    padding:20px 20px 100px;
-  }
-  .services-title{
-    text-align:center;
-    font-size:20px;
-    font-weight:800;
-    color:#1d2a4a;
-    margin-bottom:20px;
-  }
-  .services-cloud{
-    position:relative;
-    width:min(92vw,900px);
-    height:270px;
-    margin:0 auto;
-  }
+  .services-area{position:relative;z-index:5;padding:20px 20px 100px;}
+  .services-title{text-align:center;font-size:20px;font-weight:800;color:#1d2a4a;margin-bottom:20px;}
+  .services-cloud{position:relative;width:min(92vw,900px);height:320px;margin:0 auto;}
 
-  /* فقاعات الخدمات مع فيديو + أيقونة + نص */
+  /* فقاعات الصور */
   .service-blob{
     position:absolute;
-    width:150px;
-    height:130px;
-    padding:10px 8px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:flex-end;
-    text-align:center;
-    color:#fff;
-    font-weight:800;
-    font-size:15px;
-    cursor:pointer;
-    box-shadow:0 16px 34px rgba(15,23,42,0.22);
+    width:160px;
+    height:140px;
+    border-radius:50px;
     overflow:hidden;
+    box-shadow:0 16px 34px rgba(15,23,42,0.22);
+    cursor:pointer;
+    animation:floatSoft 6s ease-in-out infinite;
   }
-
-  /* الفيديو داخل الفقاعة */
-  .service-blob video{
-    position:absolute;
-    inset:0;
+  .service-blob img{
     width:100%;
     height:100%;
     object-fit:cover;
-    border-radius:inherit;
-    opacity:0.92;
-    z-index:1;
+    transition:transform .5s ease;
   }
+  .service-blob:hover img{transform:scale(1.08);}
+  @keyframes floatSoft{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
-  /* طبقة تدرّج خفيفة فوق الفيديو لتوحيد الألوان */
-  .service-blob::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    border-radius:inherit;
-    background:linear-gradient(to bottom,rgba(0,0,0,0.08),rgba(0,0,0,0.32));
-    mix-blend-mode:multiply;
-    z-index:2;
-  }
-
-  /* محتوى (أيقونة + نص) فوق الفيديو */
-  .service-blob .icon-wrap,
-  .service-blob strong,
-  .service-blob span{
-    position:relative;
-    z-index:3;
-  }
-
-  .service-blob .icon-wrap{
-    width:54px;
-    height:54px;
-    border-radius:18px;
-    background:rgba(255,255,255,0.18);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-bottom:4px;
-    backdrop-filter:blur(4px);
-  }
-  .service-blob svg{
-    width:30px;
-    height:30px;
-    fill:#ffffff;
-  }
-  .service-blob strong{
-    display:block;
-    font-size:14px;
-  }
-  .service-blob span{
-    font-size:11px;
-    color:rgba(255,255,255,0.9);
-    font-weight:600;
-  }
-
-  @keyframes floatSoft{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-10px)}
-  }
-  .service-blob:hover{
-    box-shadow:0 22px 42px rgba(15,23,42,0.32);
-  }
-
-  /* شكل ولون كل فقاعة + أماكنها (غيوم متموجة) */
-  .blob-esim{
-    border-radius:52% 68% 60% 38% / 60% 52% 70% 40%;
-    right:8%;
-    bottom:20;
-    animation:floatSoft 6s ease-in-out infinite;
-  }
-  .blob-hotel{
-    border-radius:46% 58% 52% 64% / 58% 46% 62% 44%;
-    left:12%;
-    bottom:30%;
-    animation:floatSoft 7s ease-in-out infinite .3s;
-  }
-  .blob-flight{
-    border-radius:64% 46% 58% 42% / 50% 64% 46% 50%;
-    right:18%;
-    bottom:20%;
-    animation:floatSoft 6.5s ease-in-out infinite .6s;
-  }
-  .blob-film{
-    border-radius:58% 42% 60% 40% / 52% 60% 40% 58%;
-    left:6%;
-    bottom:10%;
-    animation:floatSoft 7.2s ease-in-out infinite .9s;
-  }
+  /* أماكن الفقاعات */
+  .blob-esim{right:10%;top:-30%;}
+  .blob-hotel{left:5%;top:-25%;}
+  .blob-flight{right:20%;bottom:5%;}
+  .blob-film{left:15%;bottom:8%;}
 
   /* الشريط السفلي */
-  .floatbar{
-    position:fixed;
-    inset-inline:14px;
-    bottom:12px;
-    z-index:50;
-    display:flex;
-    gap:8px;
-    padding:6px;
-    background:rgba(255,255,255,.96);
-    backdrop-filter:blur(10px);
-    border-radius:999px;
-    box-shadow:0 10px 28px rgba(15,23,42,0.18);
-  }
-  .floatbar a{
-    flex:1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:6px;
-    padding:8px 10px;
-    border-radius:999px;
-    font-size:13px;
-    font-weight:700;
-    text-decoration:none;
-  }
-  .floatbar .wa{
-    background:linear-gradient(90deg,#25D366,#1ebe5b);
-    color:#fff;
-  }
-  .floatbar .call{
-    background:#f3f6ff;
-    color:#1f3a7a;
-  }
-  .floatbar .rq{
-    background:#ffffff;
-    color:#1f2937;
-  }
-  @media(min-width:900px){
-    .floatbar{
-      max-width:420px;
-      left:50%;
-      transform:translateX(-50%);
-    }
-  }
-
-  footer{
-    text-align:center;
-    font-size:12px;
-    color:#6b7a99;
-    padding:4px 0 10px;
-  }
+  .floatbar{position:fixed;inset-inline:14px;bottom:12px;z-index:50;display:flex;gap:8px;padding:6px;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-radius:999px;box-shadow:0 10px 28px rgba(15,23,42,0.18);}
+  .floatbar a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;}
+  .floatbar .wa{background:linear-gradient(90deg,#25D366,#1ebe5b);color:#fff;}
+  .floatbar .call{background:#f3f6ff;color:#1f3a7a;}
+  .floatbar .rq{background:#ffffff;color:#1f2937;}
+  @media(min-width:900px){.floatbar{max-width:420px;left:50%;transform:translateX(-50%);}}
+  footer{text-align:center;font-size:12px;color:#6b7a99;padding:4px 0 10px;}
 </style>
 </head>
 <body>
 
-<!-- الأمواج -->
 <div class="waves-wrap">
   <div class="wave-layer wave-1"></div>
   <div class="wave-layer wave-2"></div>
   <div class="wave-layer wave-3"></div>
 </div>
 
-<!-- الشعار -->
 <div class="logo-top">
   <img src="https://i.ibb.co/Q3p4gmYX/IMG-1629.png" alt="SIDAR TRAVEL">
 </div>
 
-<!-- البطاقة الترحيبية -->
 <div class="center">
   <section class="welcome pro">
     <h1 id="typedTitle">مرحبًا بك في سيدار ترافل 🌍</h1>
@@ -379,98 +128,22 @@
       <a class="cta ghost" href="#services-cloud">استعرض خدماتنا</a>
     </div>
     <div class="w-stats">
-      <div>
-        <strong>24/7</strong>
-        <small>دعم عبر واتساب</small>
-      </div>
-      <div>
-        <strong>10 دقائق</strong>
-        <small>متوسط سرعة الرد</small>
-      </div>
+      <div><strong>24/7</strong><small>دعم عبر واتساب</small></div>
+      <div><strong>10 دقائق</strong><small>متوسط سرعة الرد</small></div>
     </div>
   </section>
 </div>
 
-<!-- خدماتنا -->
-<section class="services-area" aria-label="الخدمات">
+<section class="services-area">
   <h2 class="services-title">خدماتنا</h2>
   <div class="services-cloud" id="services-cloud">
-
-    <!-- eSIM -->
-    <div class="service-blob blob-esim" title="بطاقات eSIM — إنترنت فوري">
-      <video autoplay loop muted playsinline>
-        <source src="esim.mp4" type="video/mp4">
-      </video>
-      <div class="icon-wrap">
-        <!-- شريحة -->
-        <svg viewBox="0 0 64 64">
-          <rect x="10" y="8" rx="10" ry="10" width="44" height="48"/>
-          <rect x="16" y="18" width="16" height="10"/>
-          <rect x="16" y="32" width="6" height="10"/>
-          <rect x="26" y="32" width="6" height="10"/>
-          <rect x="36" y="32" width="6" height="10"/>
-        </svg>
-      </div>
-      <strong>eSIM</strong>
-      <span>إنترنت فوري عالمي</span>
-    </div>
-
-    <!-- فنادق -->
-    <div class="service-blob blob-hotel" title="حجوزات فنادق">
-      <video autoplay loop muted playsinline>
-        <source src="hotel.mp4" type="video/mp4">
-      </video>
-      <div class="icon-wrap">
-        <!-- مبنى فندق -->
-        <svg viewBox="0 0 64 64">
-          <rect x="18" y="16" width="20" height="28"/>
-          <rect x="22" y="20" width="4" height="4"/>
-          <rect x="30" y="20" width="4" height="4"/>
-          <rect x="22" y="26" width="4" height="4"/>
-          <rect x="30" y="26" width="4" height="4"/>
-          <rect x="24" y="36" width="6" height="8"/>
-          <circle cx="44" cy="32" r="6"/>
-        </svg>
-      </div>
-      <strong>فنادق</strong>
-      <span>إقامات مختارة</span>
-    </div>
-
-    <!-- طيران -->
-    <div class="service-blob blob-flight" title="تذاكر طيران">
-      <video autoplay loop muted playsinline>
-        <source src="flight.mp4" type="video/mp4">
-      </video>
-      <div class="icon-wrap">
-        <!-- طائرة -->
-        <svg viewBox="0 0 64 64">
-          <path d="M8 30l44-10c2-.4 4 1.6 3.4 3.6L52 34l-16 4-4 12-5-1 3-12-11 2-3-4 9-5-11-4z"/>
-        </svg>
-      </div>
-      <strong>طيران</strong>
-      <span>عروض مميزة</span>
-    </div>
-
-    <!-- تصوير -->
-    <div class="service-blob blob-film" title="أماكن تصوير المسلسلات">
-      <video autoplay loop muted playsinline>
-        <source src="film.mp4" type="video/mp4">
-      </video>
-      <div class="icon-wrap">
-        <!-- بلاي / شاشة -->
-        <svg viewBox="0 0 64 64">
-          <rect x="10" y="22" width="44" height="24" rx="4"/>
-          <polygon points="26,30 36,36 26,42" fill="#ffffff"/>
-        </svg>
-      </div>
-      <strong>تصوير</strong>
-      <span>لوكيشنات مميزة</span>
-    </div>
-
+    <div class="service-blob blob-esim"><img src="https://i.ibb.co/PsDM3tyk/IMG-1790.jpg" alt="eSIM"></div>
+    <div class="service-blob blob-hotel"><img src="https://i.ibb.co/qMZxwfg0/IMG-1793.jpg" alt="Hotel"></div>
+    <div class="service-blob blob-flight"><img src="https://i.ibb.co/spZf3qW1/IMG-1792.jpg" alt="Flight"></div>
+    <div class="service-blob blob-film"><img src="https://i.ibb.co/ZpsqXGPv/IMG-1791.jpg" alt="Film"></div>
   </div>
 </section>
 
-<!-- شريط واتساب / اتصال ثابت -->
 <div class="floatbar">
   <a class="wa" id="fb-wa" href="#">💬 واتساب</a>
   <a class="call" id="fb-call" href="#">📞 اتصال</a>
@@ -480,30 +153,21 @@
 <footer>© <span id="year"></span> SIDAR TRAVEL</footer>
 
 <script>
-const PHONE = "9725XXXXXXXX";        // ضع رقمك بدون +
-const PHONE_CALL = "+9725XXXXXXXX";  // نفس الرقم مع +
-const waLink = (txt) => `https://wa.me/${PHONE}?text=${encodeURIComponent(txt)}`;
-
-document.getElementById("wa-top").href = waLink("مرحبًا، أريد الاستفسار عن خدمات سيدار ترافل 🌍");
-document.getElementById("fb-wa").href  = waLink("مرحبًا، أحتاج مساعدة في الحجز ✈️");
-document.getElementById("fb-call").href = `tel:${PHONE_CALL}`;
-
-// كتابة تدريجية للعنوان
+const PHONE="9725XXXXXXXX";
+const PHONE_CALL="+9725XXXXXXXX";
+const waLink=(txt)=>`https://wa.me/${PHONE}?text=${encodeURIComponent(txt)}`;
+document.getElementById("wa-top").href=waLink("مرحبًا، أريد الاستفسار عن خدمات سيدار ترافل 🌍");
+document.getElementById("fb-wa").href=waLink("مرحبًا، أحتاج مساعدة في الحجز ✈️");
+document.getElementById("fb-call").href=`tel:${PHONE_CALL}`;
 (function(){
-  const el = document.getElementById('typedTitle');
-  if(!el) return;
-  const full = el.textContent.trim();
-  let i = 0;
-  el.textContent = "";
-  const step = () => {
-    el.textContent = full.slice(0, ++i);
-    if(i < full.length) requestAnimationFrame(step);
-  };
+  const el=document.getElementById('typedTitle');
+  if(!el)return;
+  const full=el.textContent.trim();
+  let i=0; el.textContent="";
+  const step=()=>{el.textContent=full.slice(0,++i);if(i<full.length)requestAnimationFrame(step);};
   requestAnimationFrame(step);
 })();
-
-// سنة الفوتر
-document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementById("year").textContent=new Date().getFullYear();
 </script>
 </body>
 </html>
