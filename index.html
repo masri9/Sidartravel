@@ -15,7 +15,6 @@
   body{
     font-family:"Tajawal",system-ui;
     color:var(--ink);
-    position:relative;
     overflow-x:hidden;
     background:
       radial-gradient(900px 600px at 12% -8%, rgba(255,232,149,.55), transparent 65%),
@@ -25,10 +24,8 @@
       linear-gradient(180deg,#fdfefe 0%,#e9f7ff 40%,#fff8ec 100%);
   }
 
-  /* أمواج متحركة في الخلفية */
-  .waves-wrap{
-    position:fixed;inset-inline:0;bottom:-5px;height:260px;pointer-events:none;z-index:0;
-  }
+  /* أمواج */
+  .waves-wrap{position:fixed;inset-inline:0;bottom:-5px;height:260px;pointer-events:none;z-index:0;}
   .wave-layer{position:absolute;left:-40%;width:180%;height:150px;border-radius:40%;opacity:.9;animation:waveMove 22s linear infinite;}
   .wave-1{bottom:0;background:linear-gradient(90deg,rgba(42,112,220,.9),rgba(0,199,183,.85));}
   .wave-2{bottom:40px;background:linear-gradient(90deg,rgba(0,199,183,.85),rgba(255,232,149,.9));animation-duration:28s;animation-direction:reverse;}
@@ -36,15 +33,15 @@
   @keyframes waveMove{0%{transform:translateX(0)}100%{transform:translateX(30%)}}
 
   /* الشعار */
-  .logo-top{position:relative;z-index:5;display:flex;justify-content:center;margin-top:10px;animation:fadeDown .9s ease both;}
+  .logo-top{z-index:5;display:flex;justify-content:center;margin-top:10px;animation:fadeDown .9s ease both;}
   .logo-top img{width:190px;height:auto;}
   @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 
-  /* البطاقة الترحيبية */
-  .center{position:relative;z-index:5;padding:14px 20px 30px;display:grid;place-items:center;}
+  /* البطاقة */
+  .center{z-index:5;padding:14px 20px 30px;display:grid;place-items:center;}
   .welcome.pro{
     width:min(85vw,720px);
-    padding:30px 24px 26px;
+    padding:30px 24px;
     background:rgba(255,255,255,0.65);
     backdrop-filter:blur(18px);
     border-radius:26px;
@@ -54,47 +51,55 @@
     animation:fadeIn .9s ease both;
   }
   @keyframes fadeIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
-  .welcome.pro h1{font-size:26px;margin-bottom:4px;}
-  .w-sub{color:var(--ink-soft);font-size:15px;}
-  .tagline{margin:10px 0;font-weight:600;color:#2A70DC;font-size:15px;}
-  .w-actions{margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
-  .cta{padding:11px 20px;border-radius:999px;font-weight:700;text-decoration:none;font-size:14px;transition:transform .2s,box-shadow .2s;}
-  .cta:first-child{background:linear-gradient(90deg,#25D366,#1ebe5b);color:#fff;box-shadow:0 8px 20px rgba(37,211,102,.25);}
-  .cta.ghost{background:#f6f9ff;color:#1f3a7a;border:1px solid #dde7ff;}
-  .cta:hover{transform:translateY(-3px);}
-  .w-stats{margin-top:14px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px;font-size:13px;}
-  .w-stats strong{display:block;font-size:20px;color:#1d2a4a;}
 
   /* الخدمات */
   .services-area{position:relative;z-index:5;padding:20px 20px 100px;}
   .services-title{text-align:center;font-size:20px;font-weight:800;color:#1d2a4a;margin-bottom:20px;}
-  .services-cloud{position:relative;width:min(92vw,900px);height:320px;margin:0 auto;}
+  .services-cloud{position:relative;width:min(92vw,900px);height:350px;margin:0 auto;}
 
   /* فقاعات الصور */
   .service-blob{
     position:absolute;
-    width:160px;
-    height:140px;
-    border-radius:50px;
     overflow:hidden;
     box-shadow:0 16px 34px rgba(15,23,42,0.22);
     cursor:pointer;
     animation:floatSoft 6s ease-in-out infinite;
   }
   .service-blob img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    transition:transform .5s ease;
+    width:100%;height:100%;object-fit:cover;transition:transform .6s ease;
   }
   .service-blob:hover img{transform:scale(1.08);}
   @keyframes floatSoft{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
-  /* أماكن الفقاعات */
-  .blob-esim{right:10%;top:-30%;}
-  .blob-hotel{left:5%;top:-25%;}
-  .blob-flight{right:20%;bottom:5%;}
-  .blob-film{left:15%;bottom:8%;}
+  /* أحجام وأشكال متنوعة */
+  .blob-esim{
+    width:180px;height:160px;
+    border-radius:60% 40% 60% 50%;
+    right:8%;top:-25%;
+    transform:rotate(4deg);
+    animation-duration:6.5s;
+  }
+  .blob-hotel{
+    width:150px;height:140px;
+    border-radius:45% 55% 60% 40%;
+    left:8%;top:-20%;
+    transform:rotate(-3deg);
+    animation-duration:7s;
+  }
+  .blob-flight{
+    width:200px;height:180px;
+    border-radius:50% 60% 55% 45%;
+    right:18%;bottom:5%;
+    transform:rotate(2deg);
+    animation-duration:6s;
+  }
+  .blob-film{
+    width:130px;height:120px;
+    border-radius:55% 45% 60% 40%;
+    left:15%;bottom:10%;
+    transform:rotate(-5deg);
+    animation-duration:7.5s;
+  }
 
   /* الشريط السفلي */
   .floatbar{position:fixed;inset-inline:14px;bottom:12px;z-index:50;display:flex;gap:8px;padding:6px;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-radius:999px;box-shadow:0 10px 28px rgba(15,23,42,0.18);}
