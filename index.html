@@ -1,31 +1,32 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MEEM — منصة بث</title>
-  <meta name="description" content="MEEM — منصة OTT جديدة قريباً" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>MEEM — OTT Platform</title>
+  <meta name="description" content="MEEM — منصة بث قادمة قريباً"/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --bg:#07060b;
-      --text:#F7F7FF;
-      --muted:rgba(247,247,255,.72);
+      --text:#f8f7ff;
+      --muted:rgba(248,247,255,.72);
       --line:rgba(255,255,255,.12);
-      --glass:rgba(255,255,255,.06);
-      --glass2:rgba(255,255,255,.04);
+      --glass:rgba(255,255,255,.08);
+      --glass2:rgba(255,255,255,.05);
+      --shadow: 0 26px 90px rgba(0,0,0,.65);
+      --r:18px;
 
-      /* اختر أكسنت واحد (بنفسجي أو أخضر) */
+      /* اختر أكسنت */
       --accent:#7c3aed; /* purple */
       /* --accent:#22c55e; */
+      /* --accent:#06b6d4; */
 
-      --max:1200px;
-      --r:18px;
-      --shadow:0 26px 90px rgba(0,0,0,.62);
+      --max:1180px;
     }
 
     *{box-sizing:border-box}
@@ -33,468 +34,418 @@
     body{
       margin:0;
       font-family:"Tajawal",system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      color:var(--text);
       background:var(--bg);
+      color:var(--text);
       overflow-x:hidden;
     }
+    a{color:inherit}
 
-    /* ===== Background (cinematic) ===== */
-    .bg{
-      position:fixed; inset:0;
-      background:url("assets/bg.jpg") center/cover no-repeat;
+    /* ===== BACKGROUND: tilted poster wall ===== */
+    .poster-wall{
+      position:fixed; inset:-12% -12%;
       z-index:-5;
-      opacity:.60;
-      filter:saturate(1.15) contrast(1.02);
-      transform:scale(1.06);
-      animation: ken 18s ease-in-out infinite alternate;
+      transform: rotate(-12deg) scale(1.05);
+      transform-origin:center;
+      opacity:.55;
+      filter: saturate(1.15) contrast(1.05);
+      pointer-events:none;
+      display:grid;
+      place-items:center;
     }
-    @keyframes ken{
-      from{transform:scale(1.06) translateY(0)}
-      to{transform:scale(1.12) translateY(-14px)}
+    .poster-grid{
+      width: 140%;
+      display:grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap:14px;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    @keyframes drift{
+      from{ transform: translate3d(-2%, -2%, 0); }
+      to{ transform: translate3d(2%, 2%, 0); }
+    }
+    .tile{
+      aspect-ratio: 2/3;
+      border-radius: 14px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+    }
+    .tile img{
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+      transform: scale(1.05);
     }
 
-    /* dark overlay + glow */
+    /* overlays */
     .overlay{
       position:fixed; inset:0;
-      background:
-        radial-gradient(900px 600px at 18% 18%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 60%),
-        radial-gradient(900px 600px at 82% 26%, rgba(255,255,255,.07), transparent 65%),
-        linear-gradient(180deg, rgba(7,6,11,.92), rgba(7,6,11,.72));
       z-index:-4;
-    }
-
-    /* Big subtle MEEM "M" glow (unique touch) */
-    .mark{
-      position:fixed;
-      inset:auto -10% -35% auto;
-      width:min(900px, 120vw);
-      height:min(900px, 120vw);
-      z-index:-3;
-      filter: blur(14px);
-      opacity:.55;
-      pointer-events:none;
       background:
-        radial-gradient(closest-side, color-mix(in srgb, var(--accent) 22%, transparent), transparent 75%);
-      -webkit-mask: radial-gradient(circle at 40% 40%, #000 42%, transparent 43%),
-                   radial-gradient(circle at 65% 40%, #000 42%, transparent 43%),
-                   linear-gradient(#000 0 0);
-      mask: radial-gradient(circle at 40% 40%, #000 42%, transparent 43%),
-            radial-gradient(circle at 65% 40%, #000 42%, transparent 43%),
-            linear-gradient(#000 0 0);
+        radial-gradient(900px 650px at 25% 18%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 60%),
+        radial-gradient(900px 650px at 75% 25%, rgba(255,255,255,.08), transparent 65%),
+        linear-gradient(180deg, rgba(7,6,11,.92), rgba(7,6,11,.75));
     }
-
-    /* grain */
+    .vignette{
+      position:fixed; inset:0;
+      z-index:-3;
+      background: radial-gradient(120% 120% at 50% 35%, transparent 0 45%, rgba(0,0,0,.45) 75%, rgba(0,0,0,.75));
+      pointer-events:none;
+    }
     .grain{
       position:fixed; inset:0;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.33'/%3E%3C/svg%3E");
+      z-index:-2;
       opacity:.10;
       mix-blend-mode: overlay;
       pointer-events:none;
-      z-index:-2;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
     }
 
-    /* ===== Layout ===== */
+    /* ===== LAYOUT ===== */
     .wrap{
       max-width:var(--max);
       margin:0 auto;
-      padding:22px 18px 70px;
+      padding: 22px 18px 70px;
     }
 
-    /* ===== Top bar ===== */
-    .top{
+    /* ===== HERO ===== */
+    .hero{
+      min-height: 72vh;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding: 28px 0 8px;
+    }
+
+    .heroCard{
+      width:min(860px, 100%);
+      border-radius: 26px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      padding: 26px 18px 20px;
+      position:relative;
+      overflow:hidden;
+    }
+    .heroCard:before{
+      content:"";
+      position:absolute; inset:-120px;
+      background:
+        radial-gradient(360px 360px at 30% 25%, color-mix(in srgb, var(--accent) 38%, transparent), transparent 60%),
+        radial-gradient(420px 420px at 75% 35%, rgba(255,255,255,.10), transparent 60%);
+      filter: blur(18px);
+      opacity:.85;
+      pointer-events:none;
+    }
+
+    .logoRow{
       display:flex;
       align-items:center;
-      justify-content:space-between;
+      justify-content:center;
       gap:12px;
-      padding:10px 0 18px;
+      margin-bottom: 10px;
+      position:relative;
+      z-index:1;
     }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      font-weight:900;
-      letter-spacing:.3px;
-    }
-    .badge{
-      width:42px; height:42px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.16);
-      background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 40%, white));
-      box-shadow:0 22px 70px color-mix(in srgb, var(--accent) 22%, transparent);
+    .mark{
+      width:54px; height:54px;
+      border-radius:18px;
       display:grid; place-items:center;
+      background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 45%, white));
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 22px 70px color-mix(in srgb, var(--accent) 22%, transparent);
       font-weight:900;
+      font-size:22px;
     }
-    .nav{
-      display:flex; gap:10px; flex-wrap:wrap;
+    .brandText{
+      display:flex; flex-direction:column; line-height:1.05;
+      text-align:right;
     }
-    .nav a{
-      text-decoration:none;
-      color:rgba(247,247,255,.72);
+    .brandText strong{font-size:18px; font-weight:900; letter-spacing:.2px}
+    .brandText span{font-size:12px; color:rgba(248,247,255,.62); font-weight:900}
+
+    h1{
+      margin: 8px 0 10px;
+      font-size: clamp(34px, 4.4vw, 64px);
+      line-height:1.05;
       font-weight:900;
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px solid transparent;
-      transition:.15s ease;
+      letter-spacing:-.2px;
+      position:relative;
+      z-index:1;
     }
-    .nav a:hover{
-      background:rgba(255,255,255,.06);
-      border-color:rgba(255,255,255,.10);
-      transform: translateY(-1px);
+    .desc{
+      margin:0 auto 18px;
+      color:var(--muted);
+      font-size: 18px;
+      line-height: 1.95;
+      font-weight:700;
+      max-width: 60ch;
+      position:relative;
+      z-index:1;
     }
 
+    .soon{
+      display:inline-flex; align-items:center; gap:10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+      padding: 9px 12px;
+      font-weight:900;
+      color: rgba(248,247,255,.78);
+      position:relative;
+      z-index:1;
+      width:fit-content;
+      margin:0 auto 16px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--accent);
+      box-shadow:0 0 0 7px color-mix(in srgb, var(--accent) 18%, transparent);
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      position:relative;
+      z-index:1;
+      margin-top: 6px;
+    }
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
-      padding:12px 16px;
-      border-radius:14px;
+      padding: 12px 18px;
+      border-radius: 14px;
       border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
       font-weight:900;
       text-decoration:none;
       transition:.15s ease;
       gap:10px;
       user-select:none;
+      cursor:pointer;
     }
-    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.09)}
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.09); }
     .btn.primary{
       background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 55%, white));
-      border-color:rgba(255,255,255,.18);
-      box-shadow:0 22px 70px color-mix(in srgb, var(--accent) 22%, transparent);
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 22px 70px color-mix(in srgb, var(--accent) 22%, transparent);
     }
 
-    /* ===== Hero ===== */
-    .hero{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:22px;
-      align-items:center;
-      margin-top: 4px;
+    /* disabled "Soon" buttons */
+    .btn.disabled{
+      opacity:.55;
+      cursor:not-allowed;
+      filter: grayscale(.1);
     }
-
-    .pill{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:8px 12px;
+    .btn.disabled:hover{ transform:none; background: rgba(255,255,255,.06); }
+    .badgeSoon{
+      font-size:12px;
+      font-weight:900;
+      padding:6px 10px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.05);
-      color:var(--muted);
-      font-weight:900;
-      width: fit-content;
-    }
-    .dot{
-      width:10px; height:10px;
-      border-radius:999px;
-      background:var(--accent);
-      box-shadow:0 0 0 7px color-mix(in srgb, var(--accent) 18%, transparent);
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.18);
+      color: rgba(248,247,255,.72);
     }
 
-    h1{
-      margin:12px 0 10px;
-      font-size: clamp(34px, 4.6vw, 64px);
-      line-height:1.02;
-      letter-spacing:-.2px;
-      font-weight:900;
-    }
-    .sub{
-      margin:0 0 18px;
-      color:var(--muted);
-      font-size:18px;
-      line-height:1.95;
-      font-weight:700;
-      max-width: 58ch;
-    }
-
-    .cta{
-      display:flex; gap:12px; flex-wrap:wrap;
-      margin-top: 6px;
-      align-items:center;
-    }
-
-    .mini{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top: 16px;
-    }
-    .chip{
-      padding:8px 10px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      color:rgba(247,247,255,.70);
-      font-weight:900;
-      font-size:13px;
-    }
-
-    /* ===== Device Frame (unique glass) ===== */
-    .frame{
+    .hint{
+      margin-top: 14px;
+      color: rgba(248,247,255,.55);
+      font-weight:800;
+      font-size: 13px;
       position:relative;
-      border-radius:26px;
-      border:1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      min-height: 520px;
-      padding: 16px;
-      backdrop-filter: blur(10px);
-      transform: translateY(0);
-      transition:.2s ease;
-    }
-    .frame:hover{ transform: translateY(-4px); }
-
-    .frame:before{
-      content:"";
-      position:absolute; inset:-120px;
-      background:
-        radial-gradient(320px 320px at 35% 25%, color-mix(in srgb, var(--accent) 32%, transparent), transparent 60%),
-        radial-gradient(360px 360px at 80% 35%, rgba(255,255,255,.10), transparent 60%);
-      filter: blur(18px);
-      opacity:.9;
-      pointer-events:none;
-    }
-
-    .device{
-      position:relative;
-      z-index:2;
-      width: min(520px, 96%);
-      margin: 18px auto 0;
-      display:block;
-      border-radius: 18px;
-      transform: rotate(-7deg);
-      filter: drop-shadow(0 34px 90px rgba(0,0,0,.72));
-    }
-
-    /* small highlight line */
-    .shine{
-      position:absolute;
-      inset:0;
       z-index:1;
-      background:
-        linear-gradient(115deg, transparent 0%, rgba(255,255,255,.10) 28%, transparent 60%);
-      transform: translateX(-40%);
-      opacity:.35;
-      animation: shine 5.6s ease-in-out infinite;
-      pointer-events:none;
-    }
-    @keyframes shine{
-      0%{transform: translateX(-55%)}
-      50%{transform: translateX(35%)}
-      100%{transform: translateX(55%)}
     }
 
-    /* ===== Poster rail (Netflix feel) ===== */
-    .railWrap{
-      margin-top: 22px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(10,9,16,.26);
+    /* ===== SECTIONS ===== */
+    .section{
+      margin-top: 18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
       border-radius: 22px;
-      padding: 14px;
-      overflow:hidden;
-      backdrop-filter: blur(10px);
+      padding: 16px;
+      backdrop-filter: blur(12px);
       box-shadow: 0 18px 55px rgba(0,0,0,.35);
     }
-    .railTitle{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px; margin-bottom: 10px;
+    .sectionTop{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom: 10px;
     }
-    .railTitle h2{
-      margin:0; font-size:16px; font-weight:900;
+    .sectionTop h2{
+      margin:0;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing:-.1px;
     }
-    .railTitle span{
-      color:rgba(247,247,255,.60);
-      font-weight:900; font-size:12px;
+    .sectionTop span{
+      color: rgba(248,247,255,.60);
+      font-weight: 900;
+      font-size: 12px;
     }
 
+    /* poster rail */
     .rail{
       display:flex;
       gap:10px;
       align-items:center;
       width:max-content;
-      animation: scroll 28s linear infinite;
-    }
-    @keyframes scroll{
-      from{transform: translateX(0)}
-      to{transform: translateX(50%)}
+      animation: scroll 26s linear infinite;
+      padding: 4px 0;
     }
     .rail:hover{ animation-play-state: paused; }
-
+    @keyframes scroll{
+      from{ transform: translateX(0); }
+      to{ transform: translateX(50%); }
+    }
     .poster{
-      width: 112px;
-      height: 164px;
+      width: 120px;
+      height: 176px;
       border-radius: 14px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      box-shadow: 0 18px 60px rgba(0,0,0,.40);
-      transition:.18s ease;
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+      transition:.16s ease;
       flex: 0 0 auto;
     }
-    .poster img{
-      width:100%; height:100%;
-      object-fit:cover;
-      display:block;
-      transform: scale(1.02);
-    }
-    .poster:hover{
-      transform: translateY(-3px) scale(1.03);
-      border-color: color-mix(in srgb, var(--accent) 45%, rgba(255,255,255,.20));
-    }
+    .poster img{ width:100%; height:100%; object-fit:cover; display:block; transform:scale(1.03); }
+    .poster:hover{ transform: translateY(-3px) scale(1.03); border-color: color-mix(in srgb, var(--accent) 45%, rgba(255,255,255,.20)); }
 
-    /* ===== Contact section ===== */
-    .contact{
-      margin-top: 18px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(10,9,16,.26);
-      border-radius: 22px;
-      padding: 16px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 18px 55px rgba(0,0,0,.35);
-    }
-    .contactTop{
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      margin-bottom:10px;
-    }
-    .contactTop h3{
-      margin:0; font-size:16px; font-weight:900;
-    }
-    .form{
+    /* info cards */
+    .grid{
+      margin-top: 14px;
       display:grid;
-      gap:10px;
-      max-width: 680px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
     }
-    .in, .ta{
-      width:100%;
-      padding:12px 14px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.18);
-      color:#fff;
-      font:inherit;
-      font-weight:800;
-      outline:none;
+    .card{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+      border-radius: 18px;
+      padding: 14px;
+      position:relative;
+      overflow:hidden;
+      transition:.16s ease;
     }
-    .ta{ min-height:110px; resize:vertical; }
-    .in:focus, .ta:focus{
-      border-color: color-mix(in srgb, var(--accent) 60%, white);
-      box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent);
+    .card:hover{ transform: translateY(-2px); background: rgba(0,0,0,.22); }
+    .card:before{
+      content:"";
+      position:absolute; inset:-90px;
+      background: radial-gradient(260px 260px at 25% 18%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%);
+      filter: blur(14px);
+      opacity:.75;
+      pointer-events:none;
     }
+    .card h3{ margin:0 0 6px; font-size:15px; font-weight:900; position:relative; z-index:1; }
+    .card p{ margin:0; color: rgba(248,247,255,.70); line-height:1.9; font-weight:700; font-size:14px; position:relative; z-index:1; }
 
     footer{
-      margin-top:16px;
+      margin-top: 16px;
       display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
-      color:rgba(247,247,255,.52);
+      color: rgba(248,247,255,.52);
       font-weight:900;
-      font-size:13px;
-      padding-top:6px;
+      font-size: 13px;
+      padding-top: 6px;
     }
 
+    /* responsive */
     @media (max-width: 980px){
-      .nav{display:none}
-      .hero{grid-template-columns:1fr}
-      .frame{min-height: 390px}
-      .device{transform: rotate(-4deg)}
-      .poster{width: 96px; height: 140px}
+      .poster-grid{ grid-template-columns: repeat(6, 1fr); }
+      .grid{ grid-template-columns: 1fr; }
+      .poster{ width: 105px; height: 154px; }
+    }
+    @media (max-width: 520px){
+      .poster-grid{ grid-template-columns: repeat(5, 1fr); gap:10px; }
+      .heroCard{ padding: 22px 14px 18px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="bg"></div>
-  <div class="overlay"></div>
-  <div class="mark"></div>
-  <div class="grain"></div>
+  <!-- Poster wall background -->
+  <div class="poster-wall" aria-hidden="true">
+    <div class="poster-grid" id="posterGrid">
+      <!-- سيتم حقن الصور هنا بالـ JS -->
+    </div>
+  </div>
 
-  <div class="wrap">
+  <div class="overlay" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
 
-    <header class="top">
-      <div class="brand">
-        <div class="badge">م</div>
-        <div style="display:flex;flex-direction:column;line-height:1.05">
-          <div style="font-size:16px">MEEM</div>
-          <div style="font-size:12px;color:rgba(247,247,255,.60);font-weight:900">OTT Platform</div>
-        </div>
-      </div>
+  <main class="wrap">
 
-      <nav class="nav">
-        <a href="#rail">المحتوى</a>
-        <a href="#contact">تواصل</a>
-      </nav>
-
-      <a class="btn primary" href="#contact">ابدأ الآن</a>
-    </header>
-
+    <!-- HERO -->
     <section class="hero">
-      <div>
-        <div class="pill"><span class="dot"></span> قريباً — إطلاق تجريبي</div>
-        <h1>MEEM<br>منصة بث بتجربة سينمائية</h1>
-        <p class="sub">
-          صفحة هبوط بسيطة وفخمة: بوسترات بالخلفية بإضاءة خفيفة، ومعاينة للتطبيق على جهاز.
-          نبدأ بمحتوى مختار بعناية ثم نتوسع بشراكات وترخيص رسمي.
+      <div class="heroCard">
+
+        <div class="logoRow">
+          <!-- إذا عندك logo.png بدّل هذا الـ mark بصورة -->
+          <div class="mark">م</div>
+          <div class="brandText">
+            <strong>MEEM</strong>
+            <span>OTT Platform</span>
+          </div>
+        </div>
+
+        <h1>منصة MEEM قادمة قريباً</h1>
+        <p class="desc">
+          تجربة مشاهدة سينمائية للأفلام والمسلسلات — واجهة نظيفة، بوسترات قوية، وتجربة سلسة.
         </p>
 
-        <div class="cta">
-          <a class="btn primary" href="#contact">سجّل اهتمامك</a>
-          <a class="btn" href="#rail">شاهد الستايل</a>
+        <div class="soon">
+          <span class="dot"></span>
+          الإطلاق قريباً — <span style="color:rgba(248,247,255,.85)">Coming Soon</span>
         </div>
 
-        <div class="mini">
-          <span class="chip">SVOD / AVOD</span>
-          <span class="chip">Arabic + Turkish</span>
-          <span class="chip">Mobile + TV</span>
-          <span class="chip">Revenue Share</span>
+        <div class="actions">
+          <button class="btn primary disabled" type="button" title="Soon" disabled>
+            اشتراك <span class="badgeSoon">SOON</span>
+          </button>
+          <button class="btn disabled" type="button" title="Soon" disabled>
+            تسجيل دخول <span class="badgeSoon">SOON</span>
+          </button>
         </div>
-      </div>
 
-      <aside class="frame" aria-label="App preview">
-        <div class="shine"></div>
-        <img class="device" src="assets/device.png" alt="MEEM app preview">
-      </aside>
-    </section>
-
-    <section id="rail" class="railWrap">
-      <div class="railTitle">
-        <h2>لمحة عن المحتوى</h2>
-        <span>بوسترات — مجرد شكل بصري</span>
-      </div>
-
-      <!-- duplicated posters to make infinite feel -->
-      <div class="rail" aria-label="Poster rail">
-        <!-- set 1 -->
-        <div class="poster"><img src="assets/p1.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p2.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p3.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p4.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p5.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p6.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p7.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p8.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p9.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p10.jpg" alt=""></div>
-        <!-- set 2 -->
-        <div class="poster"><img src="assets/p1.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p2.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p3.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p4.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p5.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p6.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p7.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p8.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p9.jpg" alt=""></div>
-        <div class="poster"><img src="assets/p10.jpg" alt=""></div>
+        <div class="hint">مرّر للأسفل لرؤية المحتوى ✨</div>
       </div>
     </section>
 
-    <section id="contact" class="contact">
-      <div class="contactTop">
-        <h3>تواصل</h3>
-        <span style="color:rgba(247,247,255,.60);font-weight:900;font-size:12px">للتحديثات + الشراكات</span>
+    <!-- Posters section -->
+    <section class="section">
+      <div class="sectionTop">
+        <h2>لمحة من المحتوى</h2>
+        <span>بوسترات (شكل بصري مؤقت)</span>
       </div>
 
-      <form class="form" onsubmit="return sendMsg(event)">
-        <input class="in" name="name" placeholder="الاسم" required>
-        <input class="in" type="email" name="email" placeholder="الإيميل" required>
-        <textarea class="ta" name="message" placeholder="رسالتك" required></textarea>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button class="btn primary" type="submit">إرسال</button>
-          <a class="btn" href="mailto:your@email.com">your@email.com</a>
+      <div style="overflow:hidden;">
+        <div class="rail" id="rail">
+          <!-- سيتم حقن الصور هنا -->
         </div>
-      </form>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>مرحباً بك في MEEM</h3>
+          <p>منصة جديدة بواجهة سينمائية وتجربة مشاهدة بسيطة وواضحة.</p>
+        </div>
+        <div class="card">
+          <h3>محتوى مختار بعناية</h3>
+          <p>نبدأ بمكتبة صغيرة “Curated”، ثم نتوسع تدريجياً حسب الشراكات والترخيص.</p>
+        </div>
+        <div class="card">
+          <h3>لغات وترجمات</h3>
+          <p>هدفنا دعم العربية + التركية (ومستقبلاً لغات إضافية) مع جودة ترجمة أعلى.</p>
+        </div>
+      </div>
     </section>
 
     <footer>
@@ -502,15 +453,54 @@
       <span>Terms • Privacy</span>
     </footer>
 
-  </div>
+  </main>
 
   <script>
+    // year
     document.getElementById("y").textContent = new Date().getFullYear();
-    function sendMsg(e){
-      e.preventDefault();
-      alert("تم الإرسال ✅");
-      e.target.reset();
-      return false;
+
+    // ======= EDIT THIS LIST (your posters) =======
+    const posters = [
+      "assets/posters/p1.jpg",
+      "assets/posters/p2.jpg",
+      "assets/posters/p3.jpg",
+      "assets/posters/p4.jpg",
+      "assets/posters/p5.jpg",
+      "assets/posters/p6.jpg",
+      "assets/posters/p7.jpg",
+      "assets/posters/p8.jpg",
+      "assets/posters/p9.jpg",
+      "assets/posters/p10.jpg",
+      "assets/posters/p11.jpg",
+      "assets/posters/p12.jpg",
+    ];
+
+    // Build poster wall (lots of tiles, repeated)
+    const grid = document.getElementById("posterGrid");
+    const tileCount = 80; // كثافة الخلفية
+    for(let i=0;i<tileCount;i++){
+      const src = posters[i % posters.length];
+      const tile = document.createElement("div");
+      tile.className = "tile";
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = "";
+      tile.appendChild(img);
+      grid.appendChild(tile);
+    }
+
+    // Build rail (duplicate to feel infinite)
+    const rail = document.getElementById("rail");
+    const railCount = posters.length * 2;
+    for(let i=0;i<railCount;i++){
+      const src = posters[i % posters.length];
+      const box = document.createElement("div");
+      box.className = "poster";
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = "";
+      box.appendChild(img);
+      rail.appendChild(box);
     }
   </script>
 </body>
