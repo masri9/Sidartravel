@@ -1,87 +1,94 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>OTT Platform — Coming Soon</title>
-  <meta name="description" content="New OTT streaming platform launching soon." />
+  <title>MEEM — OTT Platform</title>
+  <meta name="description" content="MEEM — New OTT platform launching soon." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --bg:#07060b;
-      --text:#f6f6ff;
-      --muted:rgba(246,246,255,.75);
-
-      /* Change accent here:
-         Purple: #7c3aed
-         Green:  #22c55e
-      */
-      --accent:#7c3aed;
-
-      --card:rgba(255,255,255,.06);
+      --text:#F6F6FF;
+      --muted:rgba(246,246,255,.74);
       --border:rgba(255,255,255,.12);
-      --shadow:0 18px 60px rgba(0,0,0,.55);
-      --radius:18px;
-      --max:1120px;
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(255,255,255,.04);
+      --shadow: 0 22px 80px rgba(0,0,0,.60);
+      --radius: 18px;
+      --max: 1180px;
+
+      /* اختر لونك هنا */
+      --accent:#7c3aed; /* purple */
+      /* --accent:#22c55e;  green */
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-family:"Tajawal", system-ui, -apple-system, Segoe UI, Roboto, Arial;
       color:var(--text);
       background:var(--bg);
       overflow-x:hidden;
     }
 
-    /* ===== Poster Background ===== */
+    /* ===== Background (posters + cinematic overlays) ===== */
     .bg{
       position:fixed; inset:0;
+      background:url("assets/posters-collage.jpg") center/cover no-repeat;
+      filter: blur(10px) saturate(1.12) contrast(1.02);
+      transform: scale(1.09);
+      opacity:.58;
+      z-index:-4;
+    }
+    .vignette{
+      position:fixed; inset:0;
       background:
-        url("assets/posters-collage.jpg") center/cover no-repeat;
-      filter: blur(10px) saturate(1.1);
-      transform: scale(1.08);
-      opacity:.55;
+        radial-gradient(1200px 700px at 15% 10%, color-mix(in srgb, var(--accent) 34%, transparent), transparent 60%),
+        radial-gradient(1000px 700px at 85% 25%, rgba(255,255,255,.07), transparent 62%),
+        radial-gradient(900px 700px at 70% 92%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 62%),
+        linear-gradient(180deg, rgba(7,6,11,.94), rgba(7,6,11,.78));
       z-index:-3;
     }
-    .overlay{
-      position:fixed; inset:0;
-      background:
-        linear-gradient(180deg, rgba(7,6,11,.92), rgba(7,6,11,.78)),
-        radial-gradient(900px 600px at 20% 10%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 60%),
-        radial-gradient(800px 600px at 80% 30%, rgba(255,255,255,.06), transparent 65%);
-      z-index:-2;
-    }
-    /* optional grain */
     .grain{
       position:fixed; inset:0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.33'/%3E%3C/svg%3E");
       opacity:.10;
       mix-blend-mode: overlay;
       pointer-events:none;
-      z-index:-1;
+      z-index:-2;
     }
 
+    /* ===== Layout ===== */
     .wrap{
       max-width:var(--max);
       margin:0 auto;
-      padding:26px 18px 64px;
+      padding:20px 18px 70px;
       min-height:100vh;
       display:flex;
       flex-direction:column;
-      gap:18px;
+      gap:20px;
     }
 
-    header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
+    /* ===== Top Bar ===== */
+    .topbar{
+      position:sticky; top:0;
+      padding:12px 0;
+      z-index:10;
+      backdrop-filter: blur(10px);
+    }
+    .topbarInner{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(10,9,16,.40);
+      border-radius:16px;
+      padding:12px 14px;
+      box-shadow: 0 18px 55px rgba(0,0,0,.35);
     }
     .brand{
       display:flex; align-items:center; gap:10px;
@@ -89,10 +96,29 @@
       letter-spacing:.2px;
     }
     .logo{
-      width:38px; height:38px; border-radius:12px;
-      background: linear-gradient(135deg, var(--accent), rgba(255,255,255,.18));
+      width:40px;height:40px;border-radius:14px;
+      background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 40%, white));
       border:1px solid rgba(255,255,255,.18);
-      box-shadow:0 18px 55px color-mix(in srgb, var(--accent) 20%, transparent);
+      box-shadow:0 22px 70px color-mix(in srgb, var(--accent) 22%, transparent);
+      display:grid; place-items:center;
+      font-weight:900;
+    }
+    .nav{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    }
+    .nav a{
+      color:rgba(246,246,255,.78);
+      text-decoration:none;
+      font-weight:800;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid transparent;
+      transition:.15s ease;
+    }
+    .nav a:hover{
+      background:rgba(255,255,255,.06);
+      border-color:rgba(255,255,255,.10);
+      transform: translateY(-1px);
     }
 
     .btn{
@@ -100,210 +126,373 @@
       padding:12px 16px;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
+      background:rgba(255,255,255,.06);
       color:var(--text);
-      font-weight:800;
+      font-weight:900;
       text-decoration:none;
       transition:.15s ease;
       cursor:pointer;
       user-select:none;
+      gap:10px;
     }
     .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.09)}
     .btn.primary{
-      background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 60%, white));
-      border-color: rgba(255,255,255,.18);
-      box-shadow:0 18px 60px color-mix(in srgb, var(--accent) 20%, transparent);
+      background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 55%, white));
+      border-color:rgba(255,255,255,.18);
+      box-shadow:0 22px 70px color-mix(in srgb, var(--accent) 22%, transparent);
     }
-
-    main{
-      flex:1;
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:22px;
-      align-items:center;
-    }
-
-    .kicker{
-      display:inline-flex; gap:10px; align-items:center;
+    .pill{
+      display:inline-flex; align-items:center; gap:10px;
       padding:8px 12px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      color: var(--muted);
-      font-weight:700;
-      margin-bottom:12px;
+      background:rgba(255,255,255,.05);
+      color:var(--muted);
+      font-weight:800;
+      width: fit-content;
     }
     .dot{
       width:10px;height:10px;border-radius:999px;background:var(--accent);
-      box-shadow:0 0 0 6px color-mix(in srgb, var(--accent) 18%, transparent);
+      box-shadow:0 0 0 7px color-mix(in srgb, var(--accent) 18%, transparent);
     }
-    h1{
-      margin:0 0 10px;
-      font-size: clamp(30px, 4.2vw, 54px);
-      line-height:1.05;
-      letter-spacing:-.2px;
+
+    /* ===== Hero ===== */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:26px;
+      align-items:center;
+      margin-top:8px;
     }
-    .lead{
-      margin:0 0 16px;
+    .hero h1{
+      margin:10px 0 10px;
+      font-size: clamp(34px, 4.3vw, 60px);
+      line-height:1.02;
+      letter-spacing:-.3px;
+      font-weight:900;
+    }
+    .hero p{
+      margin:0 0 18px;
       color:var(--muted);
       font-size:18px;
-      line-height:1.9;
-      max-width: 52ch;
+      line-height:1.95;
+      font-weight:700;
+      max-width: 58ch;
+    }
+    .ctaRow{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:10px;
     }
     .tags{
-      display:flex; flex-wrap:wrap; gap:10px;
+      display:flex; gap:10px; flex-wrap:wrap;
       margin-top:16px;
     }
     .tag{
       padding:8px 10px;
       border-radius:12px;
       border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      color: rgba(246,246,255,.72);
-      font-weight:800;
+      background:rgba(255,255,255,.04);
+      color:rgba(246,246,255,.72);
+      font-weight:900;
       font-size:13px;
     }
 
+    /* ===== Device card ===== */
     .deviceCard{
-      border-radius: 26px;
+      position:relative;
+      border-radius:26px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.05);
       box-shadow: var(--shadow);
       overflow:hidden;
-      position:relative;
-      min-height: 420px;
+      min-height: 460px;
+      padding:18px;
       display:grid;
       place-items:center;
-      padding:18px;
+      transform: translateY(0);
+      transition: .18s ease;
     }
+    .deviceCard:hover{ transform: translateY(-3px); }
     .deviceGlow{
-      position:absolute; inset:-80px;
+      position:absolute; inset:-90px;
       background:
-        radial-gradient(260px 260px at 30% 20%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 60%),
-        radial-gradient(260px 260px at 75% 40%, rgba(255,255,255,.09), transparent 60%);
+        radial-gradient(300px 300px at 32% 22%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 60%),
+        radial-gradient(320px 320px at 75% 42%, rgba(255,255,255,.09), transparent 60%);
       filter: blur(18px);
-      opacity:.9;
+      opacity:.95;
       pointer-events:none;
     }
     .deviceImg{
-      width:min(520px, 92%);
+      width:min(560px, 94%);
       height:auto;
       display:block;
-      transform: rotate(-5deg);
-      filter: drop-shadow(0 30px 70px rgba(0,0,0,.65));
-      border-radius: 18px;
+      transform: rotate(-6deg);
+      border-radius:18px;
+      filter: drop-shadow(0 34px 80px rgba(0,0,0,.70));
       z-index:1;
     }
 
+    /* ===== Sections ===== */
+    .section{
+      margin-top:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(10,9,16,.32);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 18px 55px rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
+    }
+    .sectionTitle{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:12px;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-size:20px;
+      font-weight:900;
+      letter-spacing:-.1px;
+    }
+    .sectionTitle span{
+      color:rgba(246,246,255,.62);
+      font-weight:800;
+      font-size:13px;
+    }
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    .card{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding: 14px;
+      transition:.16s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .card:hover{ transform: translateY(-2px); background: rgba(255,255,255,.06); }
+    .card:before{
+      content:"";
+      position:absolute; inset:-80px;
+      background: radial-gradient(200px 200px at 20% 10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%);
+      opacity:.7;
+      pointer-events:none;
+      filter: blur(10px);
+    }
+    .card h3{ margin:0 0 6px; font-size:16px; font-weight:900; }
+    .card p{ margin:0; color:rgba(246,246,255,.68); line-height:1.8; font-weight:700; font-size:14px; }
+
+    /* ===== Contact form ===== */
+    .form{
+      display:grid;
+      gap:10px;
+      max-width: 620px;
+    }
+    .input, .textarea{
+      width:100%;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color:#fff;
+      font:inherit;
+      font-weight:800;
+      outline:none;
+    }
+    .textarea{ min-height:120px; resize: vertical; }
+    .input:focus, .textarea:focus{
+      border-color: color-mix(in srgb, var(--accent) 55%, white);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent);
+    }
+
+    /* ===== Footer ===== */
     footer{
       display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
       color:rgba(246,246,255,.55);
-      font-weight:700;
+      font-weight:800;
       font-size:13px;
       padding-top:6px;
     }
 
-    @media (max-width: 920px){
-      main{grid-template-columns:1fr;}
-      .deviceCard{min-height: 360px;}
+    /* ===== Animations ===== */
+    .reveal{
+      opacity:0;
+      transform: translateY(10px);
+      transition: .55s ease;
     }
+    .reveal.show{
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 980px){
+      .hero{ grid-template-columns: 1fr; }
+      .deviceCard{ min-height: 380px; }
+      .grid3{ grid-template-columns: 1fr; }
+      .nav{ display:none; }
+    }
+
+    /* smooth scroll */
+    html{ scroll-behavior:smooth; }
   </style>
 </head>
+
 <body>
   <div class="bg"></div>
-  <div class="overlay"></div>
+  <div class="vignette"></div>
   <div class="grain"></div>
 
   <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="logo"></div>
-        <div>Your Platform</div>
-      </div>
-      <a class="btn" href="#contact">Contact</a>
-    </header>
 
-    <main>
-      <section>
-        <div class="kicker"><span class="dot"></span> Launching soon — Beta</div>
-        <h1>New OTT Platform<br/>Launching Soon</h1>
-        <p class="lead">
-          Streaming indie films & Turkish dramas for MENA audiences.
-          Cinematic experience, simple pricing, and content partnerships (revenue share).
+    <div class="topbar">
+      <div class="topbarInner">
+        <div class="brand">
+          <div class="logo">م</div>
+          <div style="display:flex;flex-direction:column;line-height:1.05">
+            <div style="font-size:16px;font-weight:900">MEEM</div>
+            <div style="font-size:12px;color:rgba(246,246,255,.62);font-weight:800">OTT Platform</div>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <a href="#features">المميزات</a>
+          <a href="#partners">شركاء المحتوى</a>
+          <a href="#contact">تواصل</a>
+        </nav>
+
+        <a class="btn" href="#contact">تواصل</a>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="reveal">
+        <div class="pill"><span class="dot"></span> قريباً — نسخة تجريبية (Beta)</div>
+
+        <h1>منصة MEEM<br>قريباً على الهواء</h1>
+
+        <p>
+          تجربة سينمائية سلسة للأفلام والمسلسلات.
+          نبدأ بمحتوى مختار بعناية، ومع الوقت نتوسع لمكتبات أكبر وشراكات أقوى.
         </p>
 
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;">
-          <a class="btn primary" href="#contact">Get Notified</a>
-          <a class="btn" href="#partners">Content Partners</a>
+        <div class="ctaRow">
+          <a class="btn primary" href="#contact">سجّل اهتمامك</a>
+          <a class="btn" href="#partners">شركاء المحتوى (RevShare)</a>
         </div>
 
         <div class="tags">
           <span class="tag">SVOD / AVOD</span>
           <span class="tag">MENA First</span>
           <span class="tag">Live Channels Later</span>
+          <span class="tag">Arabic + Turkish</span>
         </div>
-      </section>
+      </div>
 
-      <aside class="deviceCard" aria-label="Device preview">
+      <div class="deviceCard reveal" aria-label="App preview">
         <div class="deviceGlow"></div>
-        <img class="deviceImg" src="assets/device-mock.png" alt="App on device">
-      </aside>
-    </main>
+        <img class="deviceImg" src="assets/device-mock.png" alt="MEEM App on device">
+      </div>
+    </section>
 
-    <section id="partners" style="margin-top:10px;">
-      <div style="
-        border:1px solid rgba(255,255,255,.12);
-        background: rgba(255,255,255,.05);
-        border-radius: 18px;
-        padding: 16px;
-      ">
-        <div style="font-weight:900; font-size:16px; margin-bottom:6px;">Content Partners — Revenue Share</div>
-        <div style="color: rgba(246,246,255,.74); line-height:1.8; font-weight:700;">
-          We’re open to licensing indie films and Turkish series with a fair revenue share model.
-          Reach out to discuss availability, territories, and terms.
+    <!-- FEATURES -->
+    <section id="features" class="section reveal">
+      <div class="sectionTitle">
+        <h2>مميزات المنصة</h2>
+        <span>واجهة عصرية • أداء سريع • تجربة سينمائية</span>
+      </div>
+
+      <div class="grid3">
+        <div class="card">
+          <h3>واجهة سينمائية</h3>
+          <p>تصميم أنيق بخلفيات ناعمة وتدرجات إضاءة مع بوسترات محتوى بطريقة جذابة.</p>
+        </div>
+        <div class="card">
+          <h3>تشغيل سلس</h3>
+          <p>تجربة مشاهدة مستقرة مع دعم الويب والموبايل لاحقاً للتلفاز.</p>
+        </div>
+        <div class="card">
+          <h3>شراكات محتوى</h3>
+          <p>نموذج تقاسم أرباح (Revenue Share) مع شركاء محتوى مستقلين حسب الاتفاق.</p>
         </div>
       </div>
     </section>
 
-    <section id="contact" style="margin-top:10px;">
-      <div style="
-        border:1px solid rgba(255,255,255,.12);
-        background: rgba(255,255,255,.05);
-        border-radius: 18px;
-        padding: 16px;
-      ">
-        <div style="font-weight:900; font-size:16px; margin-bottom:10px;">Contact</div>
-
-        <form onsubmit="return sendMsg(event)" style="display:grid; gap:10px; max-width:560px;">
-          <input required name="name" placeholder="Name"
-                 style="padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.18);color:#fff;font:inherit;font-weight:700;">
-          <input required type="email" name="email" placeholder="Email"
-                 style="padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.18);color:#fff;font:inherit;font-weight:700;">
-          <textarea required name="message" placeholder="Message"
-                 style="padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.18);color:#fff;font:inherit;font-weight:700;min-height:110px"></textarea>
-
-          <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            <button class="btn primary" type="submit">Send</button>
-            <a class="btn" href="mailto:your@email.com">your@email.com</a>
-          </div>
-        </form>
+    <!-- PARTNERS -->
+    <section id="partners" class="section reveal">
+      <div class="sectionTitle">
+        <h2>شركاء المحتوى</h2>
+        <span>نبحث عن موزعين / منتجين / أصحاب حقوق</span>
       </div>
+
+      <div class="grid3">
+        <div class="card">
+          <h3>Revenue Share</h3>
+          <p>بدل دفع كبير مقدماً: نتفق على نسبة واضحة من الإيرادات حسب الأداء.</p>
+        </div>
+        <div class="card">
+          <h3>ترخيص رقمي</h3>
+          <p>ترخيص SVOD / AVOD حسب الدولة/المنطقة ومدة العقد ونوع المحتوى.</p>
+        </div>
+        <div class="card">
+          <h3>شفافية وتقارير</h3>
+          <p>تقرير شهري للمشاهدات والإيرادات وفق شروط التوزيع.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section reveal">
+      <div class="sectionTitle">
+        <h2>تواصل معنا</h2>
+        <span>لنرسل لك تحديثات الإطلاق + الشراكات</span>
+      </div>
+
+      <form class="form" onsubmit="return sendMsg(event)">
+        <input class="input" name="name" placeholder="الاسم" required>
+        <input class="input" type="email" name="email" placeholder="الإيميل" required>
+        <textarea class="textarea" name="message" placeholder="رسالتك (مثلاً: شريك محتوى / استفسار / تسجيل اهتمام)" required></textarea>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <button class="btn primary" type="submit">إرسال</button>
+          <a class="btn" href="mailto:your@email.com">your@email.com</a>
+        </div>
+      </form>
     </section>
 
     <footer>
-      <span>© <span id="y"></span> Your Platform</span>
+      <span>© <span id="y"></span> MEEM</span>
       <span>Terms • Privacy</span>
     </footer>
+
   </div>
 
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
+
     function sendMsg(e){
       e.preventDefault();
-      alert("Sent ✅");
+      alert("تم الإرسال ✅");
       e.target.reset();
       return false;
     }
+
+    // reveal on scroll
+    const els = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting) en.target.classList.add("show");
+      });
+    }, {threshold: 0.12});
+    els.forEach(el=>io.observe(el));
   </script>
 </body>
 </html>
