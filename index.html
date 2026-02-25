@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MEEM — OTT Platform</title>
-  <meta name="description" content="MEEM — New OTT platform launching soon." />
+  <title>MEEM — منصة بث</title>
+  <meta name="description" content="MEEM — منصة OTT جديدة قريباً" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,48 +13,77 @@
   <style>
     :root{
       --bg:#07060b;
-      --text:#F6F6FF;
-      --muted:rgba(246,246,255,.74);
-      --border:rgba(255,255,255,.12);
-      --card:rgba(255,255,255,.06);
-      --card2:rgba(255,255,255,.04);
-      --shadow: 0 22px 80px rgba(0,0,0,.60);
-      --radius: 18px;
-      --max: 1180px;
+      --text:#F7F7FF;
+      --muted:rgba(247,247,255,.72);
+      --line:rgba(255,255,255,.12);
+      --glass:rgba(255,255,255,.06);
+      --glass2:rgba(255,255,255,.04);
 
-      /* اختر لونك هنا */
+      /* اختر أكسنت واحد (بنفسجي أو أخضر) */
       --accent:#7c3aed; /* purple */
-      /* --accent:#22c55e;  green */
+      /* --accent:#22c55e; */
+
+      --max:1200px;
+      --r:18px;
+      --shadow:0 26px 90px rgba(0,0,0,.62);
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family:"Tajawal", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-family:"Tajawal",system-ui,-apple-system,Segoe UI,Roboto,Arial;
       color:var(--text);
       background:var(--bg);
       overflow-x:hidden;
     }
 
-    /* ===== Background (posters + cinematic overlays) ===== */
+    /* ===== Background (cinematic) ===== */
     .bg{
       position:fixed; inset:0;
-      background:url("assets/posters-collage.jpg") center/cover no-repeat;
-      filter: blur(10px) saturate(1.12) contrast(1.02);
-      transform: scale(1.09);
-      opacity:.58;
-      z-index:-4;
+      background:url("assets/bg.jpg") center/cover no-repeat;
+      z-index:-5;
+      opacity:.60;
+      filter:saturate(1.15) contrast(1.02);
+      transform:scale(1.06);
+      animation: ken 18s ease-in-out infinite alternate;
     }
-    .vignette{
+    @keyframes ken{
+      from{transform:scale(1.06) translateY(0)}
+      to{transform:scale(1.12) translateY(-14px)}
+    }
+
+    /* dark overlay + glow */
+    .overlay{
       position:fixed; inset:0;
       background:
-        radial-gradient(1200px 700px at 15% 10%, color-mix(in srgb, var(--accent) 34%, transparent), transparent 60%),
-        radial-gradient(1000px 700px at 85% 25%, rgba(255,255,255,.07), transparent 62%),
-        radial-gradient(900px 700px at 70% 92%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 62%),
-        linear-gradient(180deg, rgba(7,6,11,.94), rgba(7,6,11,.78));
-      z-index:-3;
+        radial-gradient(900px 600px at 18% 18%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 60%),
+        radial-gradient(900px 600px at 82% 26%, rgba(255,255,255,.07), transparent 65%),
+        linear-gradient(180deg, rgba(7,6,11,.92), rgba(7,6,11,.72));
+      z-index:-4;
     }
+
+    /* Big subtle MEEM "M" glow (unique touch) */
+    .mark{
+      position:fixed;
+      inset:auto -10% -35% auto;
+      width:min(900px, 120vw);
+      height:min(900px, 120vw);
+      z-index:-3;
+      filter: blur(14px);
+      opacity:.55;
+      pointer-events:none;
+      background:
+        radial-gradient(closest-side, color-mix(in srgb, var(--accent) 22%, transparent), transparent 75%);
+      -webkit-mask: radial-gradient(circle at 40% 40%, #000 42%, transparent 43%),
+                   radial-gradient(circle at 65% 40%, #000 42%, transparent 43%),
+                   linear-gradient(#000 0 0);
+      mask: radial-gradient(circle at 40% 40%, #000 42%, transparent 43%),
+            radial-gradient(circle at 65% 40%, #000 42%, transparent 43%),
+            linear-gradient(#000 0 0);
+    }
+
+    /* grain */
     .grain{
       position:fixed; inset:0;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.33'/%3E%3C/svg%3E");
@@ -68,48 +97,38 @@
     .wrap{
       max-width:var(--max);
       margin:0 auto;
-      padding:20px 18px 70px;
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      gap:20px;
+      padding:22px 18px 70px;
     }
 
-    /* ===== Top Bar ===== */
-    .topbar{
-      position:sticky; top:0;
-      padding:12px 0;
-      z-index:10;
-      backdrop-filter: blur(10px);
-    }
-    .topbarInner{
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(10,9,16,.40);
-      border-radius:16px;
-      padding:12px 14px;
-      box-shadow: 0 18px 55px rgba(0,0,0,.35);
+    /* ===== Top bar ===== */
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 18px;
     }
     .brand{
-      display:flex; align-items:center; gap:10px;
+      display:flex; align-items:center; gap:12px;
       font-weight:900;
-      letter-spacing:.2px;
+      letter-spacing:.3px;
     }
-    .logo{
-      width:40px;height:40px;border-radius:14px;
+    .badge{
+      width:42px; height:42px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.16);
       background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 40%, white));
-      border:1px solid rgba(255,255,255,.18);
       box-shadow:0 22px 70px color-mix(in srgb, var(--accent) 22%, transparent);
       display:grid; place-items:center;
       font-weight:900;
     }
     .nav{
-      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+      display:flex; gap:10px; flex-wrap:wrap;
     }
     .nav a{
-      color:rgba(246,246,255,.78);
       text-decoration:none;
-      font-weight:800;
+      color:rgba(247,247,255,.72);
+      font-weight:900;
       padding:10px 12px;
       border-radius:12px;
       border:1px solid transparent;
@@ -131,9 +150,8 @@
       font-weight:900;
       text-decoration:none;
       transition:.15s ease;
-      cursor:pointer;
-      user-select:none;
       gap:10px;
+      user-select:none;
     }
     .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.09)}
     .btn.primary{
@@ -141,6 +159,16 @@
       border-color:rgba(255,255,255,.18);
       box-shadow:0 22px 70px color-mix(in srgb, var(--accent) 22%, transparent);
     }
+
+    /* ===== Hero ===== */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:22px;
+      align-items:center;
+      margin-top: 4px;
+    }
+
     .pill{
       display:inline-flex; align-items:center; gap:10px;
       padding:8px 12px;
@@ -148,30 +176,24 @@
       border:1px solid rgba(255,255,255,.12);
       background:rgba(255,255,255,.05);
       color:var(--muted);
-      font-weight:800;
+      font-weight:900;
       width: fit-content;
     }
     .dot{
-      width:10px;height:10px;border-radius:999px;background:var(--accent);
+      width:10px; height:10px;
+      border-radius:999px;
+      background:var(--accent);
       box-shadow:0 0 0 7px color-mix(in srgb, var(--accent) 18%, transparent);
     }
 
-    /* ===== Hero ===== */
-    .hero{
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:26px;
-      align-items:center;
-      margin-top:8px;
-    }
-    .hero h1{
-      margin:10px 0 10px;
-      font-size: clamp(34px, 4.3vw, 60px);
+    h1{
+      margin:12px 0 10px;
+      font-size: clamp(34px, 4.6vw, 64px);
       line-height:1.02;
-      letter-spacing:-.3px;
+      letter-spacing:-.2px;
       font-weight:900;
     }
-    .hero p{
+    .sub{
       margin:0 0 18px;
       color:var(--muted);
       font-size:18px;
@@ -179,289 +201,296 @@
       font-weight:700;
       max-width: 58ch;
     }
-    .ctaRow{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
+
+    .cta{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top: 6px;
       align-items:center;
-      margin-top:10px;
     }
-    .tags{
+
+    .mini{
       display:flex; gap:10px; flex-wrap:wrap;
-      margin-top:16px;
+      margin-top: 16px;
     }
-    .tag{
+    .chip{
       padding:8px 10px;
       border-radius:12px;
       border:1px solid rgba(255,255,255,.10);
       background:rgba(255,255,255,.04);
-      color:rgba(246,246,255,.72);
+      color:rgba(247,247,255,.70);
       font-weight:900;
       font-size:13px;
     }
 
-    /* ===== Device card ===== */
-    .deviceCard{
+    /* ===== Device Frame (unique glass) ===== */
+    .frame{
       position:relative;
       border-radius:26px;
       border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
       box-shadow: var(--shadow);
       overflow:hidden;
-      min-height: 460px;
-      padding:18px;
-      display:grid;
-      place-items:center;
-      transform: translateY(0);
-      transition: .18s ease;
-    }
-    .deviceCard:hover{ transform: translateY(-3px); }
-    .deviceGlow{
-      position:absolute; inset:-90px;
-      background:
-        radial-gradient(300px 300px at 32% 22%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 60%),
-        radial-gradient(320px 320px at 75% 42%, rgba(255,255,255,.09), transparent 60%);
-      filter: blur(18px);
-      opacity:.95;
-      pointer-events:none;
-    }
-    .deviceImg{
-      width:min(560px, 94%);
-      height:auto;
-      display:block;
-      transform: rotate(-6deg);
-      border-radius:18px;
-      filter: drop-shadow(0 34px 80px rgba(0,0,0,.70));
-      z-index:1;
-    }
-
-    /* ===== Sections ===== */
-    .section{
-      margin-top:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(10,9,16,.32);
-      border-radius: 22px;
-      padding: 18px;
-      box-shadow: 0 18px 55px rgba(0,0,0,.35);
+      min-height: 520px;
+      padding: 16px;
       backdrop-filter: blur(10px);
+      transform: translateY(0);
+      transition:.2s ease;
     }
-    .sectionTitle{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:12px;
-    }
-    .sectionTitle h2{
-      margin:0;
-      font-size:20px;
-      font-weight:900;
-      letter-spacing:-.1px;
-    }
-    .sectionTitle span{
-      color:rgba(246,246,255,.62);
-      font-weight:800;
-      font-size:13px;
-    }
+    .frame:hover{ transform: translateY(-4px); }
 
-    .grid3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-    }
-    .card{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      border-radius: 16px;
-      padding: 14px;
-      transition:.16s ease;
-      position:relative;
-      overflow:hidden;
-    }
-    .card:hover{ transform: translateY(-2px); background: rgba(255,255,255,.06); }
-    .card:before{
+    .frame:before{
       content:"";
-      position:absolute; inset:-80px;
-      background: radial-gradient(200px 200px at 20% 10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%);
-      opacity:.7;
+      position:absolute; inset:-120px;
+      background:
+        radial-gradient(320px 320px at 35% 25%, color-mix(in srgb, var(--accent) 32%, transparent), transparent 60%),
+        radial-gradient(360px 360px at 80% 35%, rgba(255,255,255,.10), transparent 60%);
+      filter: blur(18px);
+      opacity:.9;
       pointer-events:none;
-      filter: blur(10px);
     }
-    .card h3{ margin:0 0 6px; font-size:16px; font-weight:900; }
-    .card p{ margin:0; color:rgba(246,246,255,.68); line-height:1.8; font-weight:700; font-size:14px; }
 
-    /* ===== Contact form ===== */
+    .device{
+      position:relative;
+      z-index:2;
+      width: min(520px, 96%);
+      margin: 18px auto 0;
+      display:block;
+      border-radius: 18px;
+      transform: rotate(-7deg);
+      filter: drop-shadow(0 34px 90px rgba(0,0,0,.72));
+    }
+
+    /* small highlight line */
+    .shine{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      background:
+        linear-gradient(115deg, transparent 0%, rgba(255,255,255,.10) 28%, transparent 60%);
+      transform: translateX(-40%);
+      opacity:.35;
+      animation: shine 5.6s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes shine{
+      0%{transform: translateX(-55%)}
+      50%{transform: translateX(35%)}
+      100%{transform: translateX(55%)}
+    }
+
+    /* ===== Poster rail (Netflix feel) ===== */
+    .railWrap{
+      margin-top: 22px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(10,9,16,.26);
+      border-radius: 22px;
+      padding: 14px;
+      overflow:hidden;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 55px rgba(0,0,0,.35);
+    }
+    .railTitle{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; margin-bottom: 10px;
+    }
+    .railTitle h2{
+      margin:0; font-size:16px; font-weight:900;
+    }
+    .railTitle span{
+      color:rgba(247,247,255,.60);
+      font-weight:900; font-size:12px;
+    }
+
+    .rail{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      width:max-content;
+      animation: scroll 28s linear infinite;
+    }
+    @keyframes scroll{
+      from{transform: translateX(0)}
+      to{transform: translateX(50%)}
+    }
+    .rail:hover{ animation-play-state: paused; }
+
+    .poster{
+      width: 112px;
+      height: 164px;
+      border-radius: 14px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      box-shadow: 0 18px 60px rgba(0,0,0,.40);
+      transition:.18s ease;
+      flex: 0 0 auto;
+    }
+    .poster img{
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+      transform: scale(1.02);
+    }
+    .poster:hover{
+      transform: translateY(-3px) scale(1.03);
+      border-color: color-mix(in srgb, var(--accent) 45%, rgba(255,255,255,.20));
+    }
+
+    /* ===== Contact section ===== */
+    .contact{
+      margin-top: 18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(10,9,16,.26);
+      border-radius: 22px;
+      padding: 16px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 55px rgba(0,0,0,.35);
+    }
+    .contactTop{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-bottom:10px;
+    }
+    .contactTop h3{
+      margin:0; font-size:16px; font-weight:900;
+    }
     .form{
       display:grid;
       gap:10px;
-      max-width: 620px;
+      max-width: 680px;
     }
-    .input, .textarea{
+    .in, .ta{
       width:100%;
       padding:12px 14px;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.18);
+      background:rgba(0,0,0,.18);
       color:#fff;
       font:inherit;
       font-weight:800;
       outline:none;
     }
-    .textarea{ min-height:120px; resize: vertical; }
-    .input:focus, .textarea:focus{
-      border-color: color-mix(in srgb, var(--accent) 55%, white);
+    .ta{ min-height:110px; resize:vertical; }
+    .in:focus, .ta:focus{
+      border-color: color-mix(in srgb, var(--accent) 60%, white);
       box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent);
     }
 
-    /* ===== Footer ===== */
     footer{
+      margin-top:16px;
       display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
-      color:rgba(246,246,255,.55);
-      font-weight:800;
+      color:rgba(247,247,255,.52);
+      font-weight:900;
       font-size:13px;
       padding-top:6px;
     }
 
-    /* ===== Animations ===== */
-    .reveal{
-      opacity:0;
-      transform: translateY(10px);
-      transition: .55s ease;
-    }
-    .reveal.show{
-      opacity:1;
-      transform: translateY(0);
-    }
-
-    /* ===== Responsive ===== */
     @media (max-width: 980px){
-      .hero{ grid-template-columns: 1fr; }
-      .deviceCard{ min-height: 380px; }
-      .grid3{ grid-template-columns: 1fr; }
-      .nav{ display:none; }
+      .nav{display:none}
+      .hero{grid-template-columns:1fr}
+      .frame{min-height: 390px}
+      .device{transform: rotate(-4deg)}
+      .poster{width: 96px; height: 140px}
     }
-
-    /* smooth scroll */
-    html{ scroll-behavior:smooth; }
   </style>
 </head>
 
 <body>
   <div class="bg"></div>
-  <div class="vignette"></div>
+  <div class="overlay"></div>
+  <div class="mark"></div>
   <div class="grain"></div>
 
   <div class="wrap">
 
-    <div class="topbar">
-      <div class="topbarInner">
-        <div class="brand">
-          <div class="logo">م</div>
-          <div style="display:flex;flex-direction:column;line-height:1.05">
-            <div style="font-size:16px;font-weight:900">MEEM</div>
-            <div style="font-size:12px;color:rgba(246,246,255,.62);font-weight:800">OTT Platform</div>
-          </div>
+    <header class="top">
+      <div class="brand">
+        <div class="badge">م</div>
+        <div style="display:flex;flex-direction:column;line-height:1.05">
+          <div style="font-size:16px">MEEM</div>
+          <div style="font-size:12px;color:rgba(247,247,255,.60);font-weight:900">OTT Platform</div>
         </div>
-
-        <nav class="nav">
-          <a href="#features">المميزات</a>
-          <a href="#partners">شركاء المحتوى</a>
-          <a href="#contact">تواصل</a>
-        </nav>
-
-        <a class="btn" href="#contact">تواصل</a>
       </div>
-    </div>
 
-    <!-- HERO -->
+      <nav class="nav">
+        <a href="#rail">المحتوى</a>
+        <a href="#contact">تواصل</a>
+      </nav>
+
+      <a class="btn primary" href="#contact">ابدأ الآن</a>
+    </header>
+
     <section class="hero">
-      <div class="reveal">
-        <div class="pill"><span class="dot"></span> قريباً — نسخة تجريبية (Beta)</div>
-
-        <h1>منصة MEEM<br>قريباً على الهواء</h1>
-
-        <p>
-          تجربة سينمائية سلسة للأفلام والمسلسلات.
-          نبدأ بمحتوى مختار بعناية، ومع الوقت نتوسع لمكتبات أكبر وشراكات أقوى.
+      <div>
+        <div class="pill"><span class="dot"></span> قريباً — إطلاق تجريبي</div>
+        <h1>MEEM<br>منصة بث بتجربة سينمائية</h1>
+        <p class="sub">
+          صفحة هبوط بسيطة وفخمة: بوسترات بالخلفية بإضاءة خفيفة، ومعاينة للتطبيق على جهاز.
+          نبدأ بمحتوى مختار بعناية ثم نتوسع بشراكات وترخيص رسمي.
         </p>
 
-        <div class="ctaRow">
+        <div class="cta">
           <a class="btn primary" href="#contact">سجّل اهتمامك</a>
-          <a class="btn" href="#partners">شركاء المحتوى (RevShare)</a>
+          <a class="btn" href="#rail">شاهد الستايل</a>
         </div>
 
-        <div class="tags">
-          <span class="tag">SVOD / AVOD</span>
-          <span class="tag">MENA First</span>
-          <span class="tag">Live Channels Later</span>
-          <span class="tag">Arabic + Turkish</span>
+        <div class="mini">
+          <span class="chip">SVOD / AVOD</span>
+          <span class="chip">Arabic + Turkish</span>
+          <span class="chip">Mobile + TV</span>
+          <span class="chip">Revenue Share</span>
         </div>
       </div>
 
-      <div class="deviceCard reveal" aria-label="App preview">
-        <div class="deviceGlow"></div>
-        <img class="deviceImg" src="assets/device-mock.png" alt="MEEM App on device">
+      <aside class="frame" aria-label="App preview">
+        <div class="shine"></div>
+        <img class="device" src="assets/device.png" alt="MEEM app preview">
+      </aside>
+    </section>
+
+    <section id="rail" class="railWrap">
+      <div class="railTitle">
+        <h2>لمحة عن المحتوى</h2>
+        <span>بوسترات — مجرد شكل بصري</span>
+      </div>
+
+      <!-- duplicated posters to make infinite feel -->
+      <div class="rail" aria-label="Poster rail">
+        <!-- set 1 -->
+        <div class="poster"><img src="assets/p1.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p2.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p3.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p4.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p5.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p6.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p7.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p8.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p9.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p10.jpg" alt=""></div>
+        <!-- set 2 -->
+        <div class="poster"><img src="assets/p1.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p2.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p3.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p4.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p5.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p6.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p7.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p8.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p9.jpg" alt=""></div>
+        <div class="poster"><img src="assets/p10.jpg" alt=""></div>
       </div>
     </section>
 
-    <!-- FEATURES -->
-    <section id="features" class="section reveal">
-      <div class="sectionTitle">
-        <h2>مميزات المنصة</h2>
-        <span>واجهة عصرية • أداء سريع • تجربة سينمائية</span>
-      </div>
-
-      <div class="grid3">
-        <div class="card">
-          <h3>واجهة سينمائية</h3>
-          <p>تصميم أنيق بخلفيات ناعمة وتدرجات إضاءة مع بوسترات محتوى بطريقة جذابة.</p>
-        </div>
-        <div class="card">
-          <h3>تشغيل سلس</h3>
-          <p>تجربة مشاهدة مستقرة مع دعم الويب والموبايل لاحقاً للتلفاز.</p>
-        </div>
-        <div class="card">
-          <h3>شراكات محتوى</h3>
-          <p>نموذج تقاسم أرباح (Revenue Share) مع شركاء محتوى مستقلين حسب الاتفاق.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- PARTNERS -->
-    <section id="partners" class="section reveal">
-      <div class="sectionTitle">
-        <h2>شركاء المحتوى</h2>
-        <span>نبحث عن موزعين / منتجين / أصحاب حقوق</span>
-      </div>
-
-      <div class="grid3">
-        <div class="card">
-          <h3>Revenue Share</h3>
-          <p>بدل دفع كبير مقدماً: نتفق على نسبة واضحة من الإيرادات حسب الأداء.</p>
-        </div>
-        <div class="card">
-          <h3>ترخيص رقمي</h3>
-          <p>ترخيص SVOD / AVOD حسب الدولة/المنطقة ومدة العقد ونوع المحتوى.</p>
-        </div>
-        <div class="card">
-          <h3>شفافية وتقارير</h3>
-          <p>تقرير شهري للمشاهدات والإيرادات وفق شروط التوزيع.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="section reveal">
-      <div class="sectionTitle">
-        <h2>تواصل معنا</h2>
-        <span>لنرسل لك تحديثات الإطلاق + الشراكات</span>
+    <section id="contact" class="contact">
+      <div class="contactTop">
+        <h3>تواصل</h3>
+        <span style="color:rgba(247,247,255,.60);font-weight:900;font-size:12px">للتحديثات + الشراكات</span>
       </div>
 
       <form class="form" onsubmit="return sendMsg(event)">
-        <input class="input" name="name" placeholder="الاسم" required>
-        <input class="input" type="email" name="email" placeholder="الإيميل" required>
-        <textarea class="textarea" name="message" placeholder="رسالتك (مثلاً: شريك محتوى / استفسار / تسجيل اهتمام)" required></textarea>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <input class="in" name="name" placeholder="الاسم" required>
+        <input class="in" type="email" name="email" placeholder="الإيميل" required>
+        <textarea class="ta" name="message" placeholder="رسالتك" required></textarea>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
           <button class="btn primary" type="submit">إرسال</button>
           <a class="btn" href="mailto:your@email.com">your@email.com</a>
         </div>
@@ -477,22 +506,12 @@
 
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
-
     function sendMsg(e){
       e.preventDefault();
       alert("تم الإرسال ✅");
       e.target.reset();
       return false;
     }
-
-    // reveal on scroll
-    const els = document.querySelectorAll(".reveal");
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(en=>{
-        if(en.isIntersecting) en.target.classList.add("show");
-      });
-    }, {threshold: 0.12});
-    els.forEach(el=>io.observe(el));
   </script>
 </body>
 </html>
