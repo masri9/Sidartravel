@@ -1,164 +1,510 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SIDAR TRAVEL — الصفحة الرئيسية</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --blue:#2A70DC; --orange:#FF7A1A; --yellow:#FFE895; --green:#00C7B7;
-    --ink:#0f1320; --ink-soft:#51607c; --white:#ffffff;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{min-height:100%}
-  body{
-    font-family:"Tajawal",system-ui;
-    color:var(--ink);
-    overflow-x:hidden;
-    background:
-      radial-gradient(900px 600px at 12% -8%, rgba(255,232,149,.55), transparent 65%),
-      radial-gradient(900px 600px at 90% -10%, rgba(0,199,183,.40), transparent 70%),
-      radial-gradient(700px 520px at 0% 80%, rgba(255,122,26,.18), transparent 70%),
-      radial-gradient(700px 520px at 100% 85%, rgba(42,112,220,.30), transparent 70%),
-      linear-gradient(180deg,#fdfefe 0%,#e9f7ff 40%,#fff8ec 100%);
-  }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>منصة OTT — قريباً</title>
+  <meta name="description" content="منصة بث قادمة تستهدف جمهور MENA: أفلام مستقلة + دراما تركية مترجمة + توسّع لاحقاً لقنوات مباشرة." />
 
-  /* أمواج */
-  .waves-wrap{position:fixed;inset-inline:0;bottom:-5px;height:260px;pointer-events:none;z-index:0;}
-  .wave-layer{position:absolute;left:-40%;width:180%;height:150px;border-radius:40%;opacity:.9;animation:waveMove 22s linear infinite;}
-  .wave-1{bottom:0;background:linear-gradient(90deg,rgba(42,112,220,.9),rgba(0,199,183,.85));}
-  .wave-2{bottom:40px;background:linear-gradient(90deg,rgba(0,199,183,.85),rgba(255,232,149,.9));animation-duration:28s;animation-direction:reverse;}
-  .wave-3{bottom:80px;background:linear-gradient(90deg,rgba(255,232,149,.9),rgba(255,122,26,.9));animation-duration:34s;}
-  @keyframes waveMove{0%{transform:translateX(0)}100%{transform:translateX(30%)}}
+  <!-- Optional: Google Font (Arabic-friendly) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-  /* الشعار */
-  .logo-top{z-index:5;display:flex;justify-content:center;margin-top:10px;animation:fadeDown .9s ease both;}
-  .logo-top img{width:190px;height:auto;}
-  @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+  <style>
+    :root{
+      /* ====== THEME (Purple + Teal accent) ====== */
+      --bg0:#07060b;
+      --bg1:#0b0814;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.10);
+      --border: rgba(255,255,255,.10);
 
-  /* البطاقة */
-  .center{z-index:5;padding:14px 20px 30px;display:grid;place-items:center;}
-  .welcome.pro{
-    width:min(85vw,720px);
-    padding:30px 24px;
-    background:rgba(255,255,255,0.65);
-    backdrop-filter:blur(18px);
-    border-radius:26px;
-    box-shadow:0 14px 40px rgba(17,40,90,0.18);
-    border:1px solid rgba(255,255,255,0.35);
-    text-align:center;
-    animation:fadeIn .9s ease both;
-  }
-  @keyframes fadeIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
-  .welcome.pro h1{font-size:26px;margin-bottom:6px;}
-  .w-sub{color:var(--ink-soft);font-size:15px;line-height:1.7;}
-  .tagline{margin:12px 0;font-weight:600;color:#2A70DC;font-size:15px;}
-  .w-actions{margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
-  .cta{padding:11px 20px;border-radius:999px;font-weight:700;text-decoration:none;font-size:14px;transition:transform .2s,box-shadow .2s;}
-  .cta:first-child{background:linear-gradient(90deg,#25D366,#1ebe5b);color:#fff;box-shadow:0 8px 20px rgba(37,211,102,.25);}
-  .cta.ghost{background:#f6f9ff;color:#1f3a7a;border:1px solid #dde7ff;}
-  .cta:hover{transform:translateY(-3px);}
-  .w-stats{margin-top:14px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px;font-size:13px;}
-  .w-stats strong{display:block;font-size:20px;color:#1d2a4a;}
+      --text:#f2f2f7;
+      --muted: rgba(242,242,247,.72);
 
-  /* الخدمات */
-  .services-area{position:relative;z-index:5;padding:20px 20px 100px;}
-  .services-title{text-align:center;font-size:20px;font-weight:800;color:#1d2a4a;margin-bottom:20px;}
-  .services-cloud{position:relative;width:min(92vw,900px);height:350px;margin:0 auto;}
+      --purple:#7c3aed;      /* primary */
+      --purple2:#a855f7;     /* glow */
+      --teal:#22c55e;        /* accent (can switch to green theme) */
+      --teal2:#2dd4bf;       /* secondary accent */
 
-  /* فقاعات الصور */
-  .service-blob{
-    position:absolute;
-    overflow:hidden;
-    box-shadow:0 16px 34px rgba(15,23,42,0.22);
-    cursor:pointer;
-    animation:floatSoft 6s ease-in-out infinite;
-  }
-  .service-blob img{
-    width:100%;height:100%;object-fit:cover;transition:transform .6s ease;
-  }
-  .service-blob:hover img{transform:scale(1.08);}
-  @keyframes floatSoft{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 26px;
 
-  /* أحجام وأشكال متنوعة */
-  .blob-esim{width:180px;height:160px;border-radius:60% 40% 60% 50%;right:0%;top:-25%;transform:rotate(4deg);animation-duration:6.5s;}
-  .blob-hotel{width:150px;height:140px;border-radius:45% 55% 60% 40%;left:1%;top:-20%;transform:rotate(-3deg);animation-duration:7s;}
-  .blob-flight{width:200px;height:180px;border-radius:50% 60% 55% 45%;right:0%;top:-25%;transform:rotate(2deg);animation-duration:6s;}
-  .blob-film{width:130px;height:120px;border-radius:55% 45% 60% 40%;left:15%;bottom:10%;transform:rotate(-5deg);animation-duration:7.5s;}
+      --max: 1120px;
+    }
 
-  /* الشريط السفلي */
-  .floatbar{position:fixed;inset-inline:14px;bottom:12px;z-index:50;display:flex;gap:8px;padding:6px;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-radius:999px;box-shadow:0 10px 28px rgba(15,23,42,0.18);}
-  .floatbar a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;}
-  .floatbar .wa{background:linear-gradient(90deg,#25D366,#1ebe5b);color:#fff;}
-  .floatbar .call{background:#f3f6ff;color:#1f3a7a;}
-  .floatbar .rq{background:#ffffff;color:#1f2937;}
-  @media(min-width:900px){.floatbar{max-width:420px;left:50%;transform:translateX(-50%);}}
-  footer{text-align:center;font-size:12px;color:#6b7a99;padding:4px 0 10px;}
-</style>
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: "Tajawal", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(900px 500px at 20% 15%, rgba(124,58,237,.35), transparent 60%),
+        radial-gradient(900px 500px at 80% 20%, rgba(45,212,191,.20), transparent 60%),
+        radial-gradient(900px 500px at 55% 85%, rgba(168,85,247,.18), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width: var(--max); margin:0 auto; padding: 22px 18px 70px; }
+
+    /* Top nav */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      padding: 14px 0;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(7,6,11,.75), rgba(7,6,11,.35));
+      z-index: 20;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+    .logo{
+      width:38px; height:38px; border-radius: 12px;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,.32), transparent 55%),
+        linear-gradient(135deg, rgba(124,58,237,1), rgba(45,212,191,.85));
+      box-shadow: 0 12px 40px rgba(124,58,237,.25);
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    nav{
+      display:flex; gap: 14px; align-items:center;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    nav a{ padding:10px 12px; border-radius: 12px; }
+    nav a:hover{ background: rgba(255,255,255,.06); color: var(--text); }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      cursor:pointer;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.22); }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,58,237,1), rgba(168,85,247,1));
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 18px 60px rgba(124,58,237,.22);
+    }
+    .btn.primary:hover{ filter: brightness(1.04); }
+    .btn.ghost{
+      background: transparent;
+      border-color: rgba(255,255,255,.14);
+    }
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 26px;
+      align-items:center;
+      padding: 30px 0 10px;
+    }
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--teal2);
+      box-shadow: 0 0 0 6px rgba(45,212,191,.14);
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(32px, 4.2vw, 54px);
+      line-height: 1.05;
+      letter-spacing: -0.3px;
+    }
+    .lead{
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+      max-width: 52ch;
+    }
+    .ctaRow{ display:flex; gap: 12px; flex-wrap:wrap; margin: 16px 0 16px; }
+    .mini{
+      display:flex; gap: 12px; flex-wrap:wrap;
+      margin-top: 14px;
+      color: rgba(242,242,247,.70);
+      font-weight: 600;
+    }
+    .mini span{
+      display:inline-flex; gap:8px; align-items:center;
+      padding: 8px 10px; border-radius: 12px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .check{
+      width:18px; height:18px; border-radius: 7px;
+      background: rgba(34,197,94,.18);
+      border: 1px solid rgba(34,197,94,.35);
+      display:inline-flex; align-items:center; justify-content:center;
+      font-size: 12px;
+      color: rgba(34,197,94,1);
+    }
+
+    /* Mock */
+    .mock{
+      position: relative;
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      min-height: 380px;
+    }
+    .mock::before{
+      content:"";
+      position:absolute; inset:-40px;
+      background:
+        radial-gradient(260px 260px at 25% 25%, rgba(124,58,237,.30), transparent 60%),
+        radial-gradient(260px 260px at 70% 30%, rgba(45,212,191,.22), transparent 60%),
+        radial-gradient(320px 320px at 55% 85%, rgba(168,85,247,.20), transparent 60%);
+      filter: blur(18px);
+      opacity: .9;
+    }
+    .mockInner{
+      position:relative;
+      padding: 22px;
+      display:grid;
+      gap: 14px;
+    }
+    .mockTop{
+      display:flex; justify-content:space-between; align-items:center;
+      color: rgba(242,242,247,.78);
+      font-weight: 700;
+    }
+    .pill{
+      padding: 8px 12px; border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      font-size: 13px;
+    }
+    .posterGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 6px;
+    }
+    .poster{
+      aspect-ratio: 16/9;
+      border-radius: 16px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.04)),
+        radial-gradient(160px 120px at 30% 35%, rgba(124,58,237,.35), transparent 55%),
+        radial-gradient(160px 120px at 70% 60%, rgba(45,212,191,.22), transparent 55%);
+      border: 1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+      position:relative;
+    }
+    .poster b{
+      position:absolute;
+      right: 14px;
+      bottom: 12px;
+      font-size: 14px;
+      color: rgba(242,242,247,.90);
+    }
+    .poster small{
+      position:absolute;
+      right: 14px;
+      bottom: 32px;
+      font-size: 12px;
+      color: rgba(242,242,247,.65);
+      font-weight: 700;
+    }
+
+    /* Sections */
+    section{ padding: 34px 0 0; }
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .card{
+      padding: 18px 18px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 14px 40px rgba(0,0,0,.25);
+      position:relative;
+      overflow:hidden;
+    }
+    .card::after{
+      content:"";
+      position:absolute; inset:-80px;
+      background: radial-gradient(220px 220px at 20% 15%, rgba(124,58,237,.18), transparent 60%);
+      opacity:.7;
+      filter: blur(18px);
+      pointer-events:none;
+    }
+    .card h3{ margin: 10px 0 6px; font-size: 18px; position:relative; }
+    .card p{ margin:0; color: var(--muted); line-height: 1.85; position:relative; }
+    .icon{
+      width:42px; height:42px; border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      display:flex; align-items:center; justify-content:center;
+      font-size: 18px;
+      position:relative;
+    }
+    .icon.p{ box-shadow: 0 18px 50px rgba(124,58,237,.18); }
+    .icon.t{ box-shadow: 0 18px 50px rgba(45,212,191,.12); }
+
+    .band{
+      margin-top: 18px;
+      padding: 22px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: var(--shadow);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 16px;
+      flex-wrap:wrap;
+    }
+    .band h2{ margin:0; font-size: 22px; }
+    .band p{ margin:6px 0 0; color: var(--muted); line-height:1.8; max-width: 70ch; }
+
+    /* Contact */
+    .contact{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .field{
+      display:flex; flex-direction:column; gap:8px;
+    }
+    label{ color: rgba(242,242,247,.78); font-weight: 700; font-size: 13px; }
+    input, textarea{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      outline:none;
+      font-family: inherit;
+      font-size: 15px;
+    }
+    textarea{ min-height: 110px; resize: vertical; }
+    input:focus, textarea:focus{ border-color: rgba(168,85,247,.55); box-shadow: 0 0 0 4px rgba(168,85,247,.12); }
+
+    footer{
+      margin-top: 36px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: rgba(242,242,247,.65);
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap:wrap;
+      font-weight: 600;
+    }
+    .links{ display:flex; gap: 14px; flex-wrap:wrap; }
+    .links a:hover{ color: var(--text); }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .hero{ grid-template-columns: 1fr; }
+      nav{ display:none; }
+      .grid3{ grid-template-columns: 1fr; }
+      .contact{ grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
+
 <body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div style="font-size:18px;">اسم منصتك هنا</div>
+          <div style="font-size:12px;color:rgba(242,242,247,.65);font-weight:700;">OTT Platform</div>
+        </div>
+      </div>
 
-<div class="waves-wrap">
-  <div class="wave-layer wave-1"></div>
-  <div class="wave-layer wave-2"></div>
-  <div class="wave-layer wave-3"></div>
-</div>
+      <nav>
+        <a href="#home">الرئيسية</a>
+        <a href="#about">عن المنصة</a>
+        <a href="#content">المحتوى</a>
+        <a href="#partners">شركاء المحتوى</a>
+        <a href="#contact">تواصل</a>
+      </nav>
 
-<div class="logo-top">
-  <img src="https://i.ibb.co/Q3p4gmYX/IMG-1629.png" alt="SIDAR TRAVEL">
-</div>
+      <a class="btn ghost" href="#partners">للشركاء</a>
+    </header>
 
-<div class="center">
-  <section class="welcome pro">
-    <h1 id="typedTitle">مرحبًا بك في سيدار ترافل ✈️</h1>
-    <p class="w-sub">نقدّم لك تجربة سفر متكاملة تجمع بين الراحة، الذكاء، والجمال — من الإقامة إلى الرحلات والأنشطة حول العالم.</p>
-    <div class="tagline">🌍 استكشف العالم بثقة — بداية رحلتك معنا.</div>
-    <div class="w-actions">
-      <a id="wa-top" class="cta" href="#">💬 تواصل عبر واتساب</a>
-      <a class="cta ghost" href="#services-cloud">استعرض خدماتنا</a>
-    </div>
-    <div class="w-stats">
-      <div><strong>24/7</strong><small>دعم مباشر</small></div>
-      <div><strong>10 دقائق</strong><small>متوسط سرعة الرد</small></div>
-    </div>
-  </section>
-</div>
+    <!-- HERO -->
+    <main id="home" class="hero">
+      <div>
+        <div class="kicker"><span class="dot"></span> إطلاق قريباً — نسخة تجريبية</div>
+        <h1>منصة OTT جديدة<br/>قيد الإطلاق قريباً</h1>
+        <p class="lead">
+          بث أفلام مستقلة عالمية + دراما تركية مترجمة للجمهور العربي/العبري في منطقة MENA،
+          مع توسّع لاحقاً لقنوات مباشرة.
+        </p>
 
-<section class="services-area">
-  <h2 class="services-title">خدماتنا</h2>
-  <div class="services-cloud" id="services-cloud">
-    <div class="service-blob blob-esim"><img src="https://i.ibb.co/PsDM3tyk/IMG-1790.jpg" alt="eSIM"></div>
-    <div class="service-blob blob-hotel"><img src="https://i.ibb.co/qMZxwfg0/IMG-1793.jpg" alt="Hotel"></div>
-    <div class="service-blob blob-flight"><img src="https://i.ibb.co/spZf3qW1/IMG-1792.jpg" alt="Flight"></div>
-    <div class="service-blob blob-film"><img src="https://i.ibb.co/ZpsqXGPv/IMG-1791.jpg" alt="Film"></div>
+        <div class="ctaRow">
+          <a class="btn primary" href="#contact">سجّل اهتمامك</a>
+          <a class="btn" href="#partners">شراكات المحتوى (RevShare)</a>
+        </div>
+
+        <div class="mini">
+          <span><span class="check">✓</span> SVOD / AVOD خيارات</span>
+          <span><span class="check">✓</span> تركيز على محتوى مستقل</span>
+          <span><span class="check">✓</span> إطلاق تدريجي ومنظم</span>
+        </div>
+      </div>
+
+      <div class="mock" aria-label="Preview">
+        <div class="mockInner">
+          <div class="mockTop">
+            <span class="pill">واجهة تطبيق — مثال</span>
+            <span class="pill">Dark • Premium</span>
+          </div>
+
+          <div class="posterGrid">
+            <div class="poster"><small>Indie Films</small><b>أفضل الأفلام</b></div>
+            <div class="poster"><small>Turkish Series</small><b>دراما تركية</b></div>
+            <div class="poster"><small>Coming Soon</small><b>قنوات مباشرة</b></div>
+            <div class="poster"><small>Partners</small><b>RevShare</b></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="band">
+        <div>
+          <h2>عن المنصة</h2>
+          <p>
+            نحن منصة بث ناشئة تستهدف جمهور MENA. هدفنا تقديم تجربة مشاهدة “بريميوم”
+            مع مكتبة محتوى مستقلة تُبنى بالشراكة مع موزعين ومنتجين بنظام تقاسم أرباح عادل.
+          </p>
+        </div>
+        <a class="btn primary" href="#partners">أنا موزّع محتوى</a>
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section id="content">
+      <div class="grid3">
+        <div class="card">
+          <div class="icon p">🎬</div>
+          <h3>أفلام مستقلة</h3>
+          <p>اختيارات قيّمة من أفلام عالمية مستقلة تُناسب جمهور المنطقة وتفتح نوافذ جديدة للمشاهدة.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon t">🇹🇷</div>
+          <h3>دراما تركية مترجمة</h3>
+          <p>مسلسلات تركية مع ترجمة عربية (ومستقبلاً عبري) ضمن تجربة مشاهدة سلسة.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">📺</div>
+          <h3>قنوات مباشرة — قريباً</h3>
+          <p>توسّع لاحق نحو قنوات مباشرة مرخّصة (News/Entertainment) حسب الشراكات والميزانية.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARTNERS -->
+    <section id="partners">
+      <div class="band">
+        <div>
+          <h2>شركاء المحتوى — Revenue Share</h2>
+          <p>
+            نبحث عن موزعين، منتجين، ومالكي حقوق لتراخيص SVOD/AVOD بنظام تقاسم أرباح عادل.
+            هدفنا شراكة طويلة المدى مع تقارير شفافة وحقوق واضحة حسب المنطقة.
+          </p>
+        </div>
+        <a class="btn" href="#contact">تواصل كشريك محتوى</a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="card">
+        <h3 style="margin-top:0;">تواصل معنا</h3>
+        <p>اكتب بياناتك وسنرجع لك. (يمكن لاحقاً ربط النموذج بـ Email/CRM).</p>
+
+        <form class="contact" onsubmit="return handleSubmit(event)">
+          <div class="field">
+            <label>الاسم</label>
+            <input required placeholder="اسمك الكامل" name="name" />
+          </div>
+
+          <div class="field">
+            <label>البريد الإلكتروني</label>
+            <input required type="email" placeholder="name@email.com" name="email" />
+          </div>
+
+          <div class="field" style="grid-column: 1 / -1;">
+            <label>رسالتك</label>
+            <textarea required placeholder="هل أنت موزّع محتوى؟ منتج؟ أو مهتم بالاشتراك عند الإطلاق؟" name="message"></textarea>
+          </div>
+
+          <div style="grid-column: 1 / -1; display:flex; gap:12px; flex-wrap:wrap;">
+            <button class="btn primary" type="submit">إرسال</button>
+            <a class="btn ghost" href="mailto:your@email.com">أرسل عبر البريد</a>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> اسم منصتك — جميع الحقوق محفوظة</div>
+      <div class="links">
+        <a href="#">الشروط</a>
+        <a href="#">الخصوصية</a>
+        <a href="#home">أعلى الصفحة</a>
+      </div>
+    </footer>
   </div>
-</section>
 
-<div class="floatbar">
-  <a class="wa" id="fb-wa" href="#">💬 واتساب</a>
-  <a class="call" id="fb-call" href="#">📞 اتصال</a>
-  <a class="rq" href="#services-cloud">✨ خدماتنا</a>
-</div>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-<footer>© <span id="year"></span> SIDAR TRAVEL</footer>
+    function handleSubmit(e){
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const data = Object.fromEntries(fd.entries());
 
-<script>
-const PHONE="9725XXXXXXXX";
-const PHONE_CALL="+9725XXXXXXXX";
-const waLink=(txt)=>`https://wa.me/${PHONE}?text=${encodeURIComponent(txt)}`;
-document.getElementById("wa-top").href=waLink("مرحبًا، أريد الاستفسار عن خدمات سيدار ترافل 🌍");
-document.getElementById("fb-wa").href=waLink("مرحبًا، أحتاج مساعدة في الحجز ✈️");
-document.getElementById("fb-call").href=`tel:${PHONE_CALL}`;
-(function(){
-  const el=document.getElementById('typedTitle');
-  if(!el)return;
-  const full=el.textContent.trim();
-  let i=0; el.textContent="";
-  const step=()=>{el.textContent=full.slice(0,++i);if(i<full.length)requestAnimationFrame(step);};
-  requestAnimationFrame(step);
-})();
-document.getElementById("year").textContent=new Date().getFullYear();
-</script>
+      // MVP: just show success message. Later you can connect to Formspree / backend.
+      alert("تم الإرسال ✅\\nسنعود لك قريباً.\\n\\n" + "الاسم: " + data.name + "\\nالإيميل: " + data.email);
+      e.target.reset();
+      return false;
+    }
+  </script>
 </body>
 </html>
