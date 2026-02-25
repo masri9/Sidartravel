@@ -2,506 +2,300 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>منصة OTT — قريباً</title>
-  <meta name="description" content="منصة بث قادمة تستهدف جمهور MENA: أفلام مستقلة + دراما تركية مترجمة + توسّع لاحقاً لقنوات مباشرة." />
+  <meta name="description" content="منصة بث قادمة: أفلام مستقلة + دراما تركية مترجمة (قريباً)." />
 
-  <!-- Optional: Google Font (Arabic-friendly) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* ====== THEME (Purple + Teal accent) ====== */
-      --bg0:#07060b;
-      --bg1:#0b0814;
+      --bg:#07060b;
+      --text:#f5f5fb;
+      --muted:rgba(245,245,251,.75);
+
+      /* اختر اللون اللي بدك:
+         - للبنفسجي السينمائي: #7c3aed
+         - للأخضر: #22c55e
+      */
+      --accent:#7c3aed;
+
       --card: rgba(255,255,255,.06);
-      --card2: rgba(255,255,255,.10);
-      --border: rgba(255,255,255,.10);
-
-      --text:#f2f2f7;
-      --muted: rgba(242,242,247,.72);
-
-      --purple:#7c3aed;      /* primary */
-      --purple2:#a855f7;     /* glow */
-      --teal:#22c55e;        /* accent (can switch to green theme) */
-      --teal2:#2dd4bf;       /* secondary accent */
-
+      --border: rgba(255,255,255,.12);
       --shadow: 0 18px 60px rgba(0,0,0,.55);
       --radius: 18px;
-      --radius2: 26px;
-
-      --max: 1120px;
+      --max: 1080px;
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: "Tajawal", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(900px 500px at 20% 15%, rgba(124,58,237,.35), transparent 60%),
-        radial-gradient(900px 500px at 80% 20%, rgba(45,212,191,.20), transparent 60%),
-        radial-gradient(900px 500px at 55% 85%, rgba(168,85,247,.18), transparent 60%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
+      font-family:"Tajawal", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--text);
+      background: var(--bg);
       overflow-x:hidden;
     }
 
-    a{ color:inherit; text-decoration:none; }
-    .wrap{ max-width: var(--max); margin:0 auto; padding: 22px 18px 70px; }
-
-    /* Top nav */
-    header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 16px;
-      position: sticky;
-      top: 0;
-      padding: 14px 0;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(180deg, rgba(7,6,11,.75), rgba(7,6,11,.35));
-      z-index: 20;
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      font-weight: 800;
-      letter-spacing: .2px;
-    }
-    .logo{
-      width:38px; height:38px; border-radius: 12px;
+    /* ===== Background posters (ضع صورة كولاج بوسترات) ===== */
+    .bg{
+      position:fixed;
+      inset:0;
       background:
-        radial-gradient(circle at 30% 25%, rgba(255,255,255,.32), transparent 55%),
-        linear-gradient(135deg, rgba(124,58,237,1), rgba(45,212,191,.85));
-      box-shadow: 0 12px 40px rgba(124,58,237,.25);
-      border: 1px solid rgba(255,255,255,.18);
+        radial-gradient(900px 500px at 20% 10%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 60%),
+        radial-gradient(700px 500px at 80% 25%, rgba(255,255,255,.06), transparent 65%),
+        url("assets/posters-collage.jpg") center/cover no-repeat;
+      filter: blur(10px) saturate(1.1);
+      transform: scale(1.08);
+      opacity:.55;
+      z-index:-3;
     }
-    nav{
-      display:flex; gap: 14px; align-items:center;
-      color: var(--muted);
-      font-weight: 600;
+    .overlay{
+      position:fixed; inset:0;
+      background:
+        linear-gradient(180deg, rgba(7,6,11,.92), rgba(7,6,11,.78)),
+        radial-gradient(900px 600px at 50% 30%, rgba(255,255,255,.06), transparent 60%);
+      z-index:-2;
     }
-    nav a{ padding:10px 12px; border-radius: 12px; }
-    nav a:hover{ background: rgba(255,255,255,.06); color: var(--text); }
+    .grain{
+      position:fixed; inset:0;
+      background-image:url("assets/grain.png"); /* اختياري */
+      opacity:.08;
+      mix-blend-mode: overlay;
+      z-index:-1;
+      pointer-events:none;
+    }
 
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 70px;}
+
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      padding:10px 0 24px;
+    }
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800;}
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background: linear-gradient(135deg, var(--accent), rgba(255,255,255,.15));
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 16px 45px color-mix(in srgb, var(--accent) 22%, transparent);
+    }
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding: 12px 16px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.14);
+      padding:12px 16px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
-      color: var(--text);
-      font-weight: 800;
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-      cursor:pointer;
+      color:var(--text);
+      font-weight:800;
+      text-decoration:none;
+      transition:.15s ease;
     }
-    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.22); }
+    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.09)}
     .btn.primary{
-      background: linear-gradient(135deg, rgba(124,58,237,1), rgba(168,85,247,1));
+      background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 60%, white));
       border-color: rgba(255,255,255,.18);
-      box-shadow: 0 18px 60px rgba(124,58,237,.22);
-    }
-    .btn.primary:hover{ filter: brightness(1.04); }
-    .btn.ghost{
-      background: transparent;
-      border-color: rgba(255,255,255,.14);
+      box-shadow:0 18px 60px color-mix(in srgb, var(--accent) 20%, transparent);
     }
 
-    /* Hero */
+    /* ===== Hero layout ===== */
     .hero{
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 26px;
+      grid-template-columns: 1.05fr .95fr;
+      gap:22px;
       align-items:center;
-      padding: 30px 0 10px;
+      padding-top:10px;
     }
     .kicker{
       display:inline-flex; gap:10px; align-items:center;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
       color: var(--muted);
-      font-weight: 700;
+      font-weight:700;
+      margin-bottom:12px;
     }
-    .dot{
-      width:10px; height:10px; border-radius:999px;
-      background: var(--teal2);
-      box-shadow: 0 0 0 6px rgba(45,212,191,.14);
+    .dot{width:10px;height:10px;border-radius:999px;background:var(--accent);
+      box-shadow:0 0 0 6px color-mix(in srgb, var(--accent) 18%, transparent);
     }
     h1{
-      margin: 14px 0 10px;
-      font-size: clamp(32px, 4.2vw, 54px);
-      line-height: 1.05;
-      letter-spacing: -0.3px;
+      margin:0 0 10px;
+      font-size: clamp(30px, 4.2vw, 52px);
+      line-height:1.05;
+      letter-spacing:-.2px;
     }
     .lead{
-      margin: 0 0 16px;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.8;
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.9;
       max-width: 52ch;
     }
-    .ctaRow{ display:flex; gap: 12px; flex-wrap:wrap; margin: 16px 0 16px; }
+    .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:12px;}
     .mini{
-      display:flex; gap: 12px; flex-wrap:wrap;
-      margin-top: 14px;
-      color: rgba(242,242,247,.70);
-      font-weight: 600;
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:16px; color: rgba(245,245,251,.70); font-weight:700;
     }
-    .mini span{
-      display:inline-flex; gap:8px; align-items:center;
-      padding: 8px 10px; border-radius: 12px;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.10);
-    }
-    .check{
-      width:18px; height:18px; border-radius: 7px;
-      background: rgba(34,197,94,.18);
-      border: 1px solid rgba(34,197,94,.35);
-      display:inline-flex; align-items:center; justify-content:center;
-      font-size: 12px;
-      color: rgba(34,197,94,1);
+    .tag{
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
     }
 
-    /* Mock */
-    .mock{
-      position: relative;
-      border-radius: var(--radius2);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border: 1px solid rgba(255,255,255,.12);
+    /* ===== Device area ===== */
+    .deviceCard{
+      border-radius: 26px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
       box-shadow: var(--shadow);
       overflow:hidden;
-      min-height: 380px;
-    }
-    .mock::before{
-      content:"";
-      position:absolute; inset:-40px;
-      background:
-        radial-gradient(260px 260px at 25% 25%, rgba(124,58,237,.30), transparent 60%),
-        radial-gradient(260px 260px at 70% 30%, rgba(45,212,191,.22), transparent 60%),
-        radial-gradient(320px 320px at 55% 85%, rgba(168,85,247,.20), transparent 60%);
-      filter: blur(18px);
-      opacity: .9;
-    }
-    .mockInner{
       position:relative;
-      padding: 22px;
-      display:grid;
-      gap: 14px;
+      min-height: 420px;
     }
-    .mockTop{
-      display:flex; justify-content:space-between; align-items:center;
-      color: rgba(242,242,247,.78);
-      font-weight: 700;
-    }
-    .pill{
-      padding: 8px 12px; border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
-      font-size: 13px;
-    }
-    .posterGrid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 6px;
-    }
-    .poster{
-      aspect-ratio: 16/9;
-      border-radius: 16px;
-      background:
-        linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.04)),
-        radial-gradient(160px 120px at 30% 35%, rgba(124,58,237,.35), transparent 55%),
-        radial-gradient(160px 120px at 70% 60%, rgba(45,212,191,.22), transparent 55%);
-      border: 1px solid rgba(255,255,255,.12);
-      overflow:hidden;
-      position:relative;
-    }
-    .poster b{
-      position:absolute;
-      right: 14px;
-      bottom: 12px;
-      font-size: 14px;
-      color: rgba(242,242,247,.90);
-    }
-    .poster small{
-      position:absolute;
-      right: 14px;
-      bottom: 32px;
-      font-size: 12px;
-      color: rgba(242,242,247,.65);
-      font-weight: 700;
-    }
-
-    /* Sections */
-    section{ padding: 34px 0 0; }
-    .grid3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    .card{
-      padding: 18px 18px;
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
-      box-shadow: 0 14px 40px rgba(0,0,0,.25);
-      position:relative;
-      overflow:hidden;
-    }
-    .card::after{
-      content:"";
+    .deviceGlow{
       position:absolute; inset:-80px;
-      background: radial-gradient(220px 220px at 20% 15%, rgba(124,58,237,.18), transparent 60%);
-      opacity:.7;
+      background:
+        radial-gradient(260px 260px at 30% 20%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 60%),
+        radial-gradient(260px 260px at 75% 40%, rgba(255,255,255,.09), transparent 60%);
       filter: blur(18px);
+      opacity:.9;
       pointer-events:none;
     }
-    .card h3{ margin: 10px 0 6px; font-size: 18px; position:relative; }
-    .card p{ margin:0; color: var(--muted); line-height: 1.85; position:relative; }
-    .icon{
-      width:42px; height:42px; border-radius: 14px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.14);
-      display:flex; align-items:center; justify-content:center;
-      font-size: 18px;
+    .deviceInner{
       position:relative;
-    }
-    .icon.p{ box-shadow: 0 18px 50px rgba(124,58,237,.18); }
-    .icon.t{ box-shadow: 0 18px 50px rgba(45,212,191,.12); }
-
-    .band{
-      margin-top: 18px;
-      padding: 22px;
-      border-radius: 22px;
-      background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow: var(--shadow);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap: 16px;
-      flex-wrap:wrap;
-    }
-    .band h2{ margin:0; font-size: 22px; }
-    .band p{ margin:6px 0 0; color: var(--muted); line-height:1.8; max-width: 70ch; }
-
-    /* Contact */
-    .contact{
+      padding:18px;
+      height:100%;
       display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 14px;
+      place-items:center;
     }
-    .field{
-      display:flex; flex-direction:column; gap:8px;
+    /* ضع صورة PNG للـ TV/Phone فيها اللقطة (شفافة إن أمكن) */
+    .deviceImg{
+      width:min(520px, 92%);
+      height:auto;
+      display:block;
+      filter: drop-shadow(0 30px 70px rgba(0,0,0,.65));
+      border-radius: 18px;
     }
-    label{ color: rgba(242,242,247,.78); font-weight: 700; font-size: 13px; }
-    input, textarea{
-      width:100%;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.18);
-      color: var(--text);
-      outline:none;
-      font-family: inherit;
-      font-size: 15px;
+    .note{
+      margin-top:12px;
+      color: rgba(245,245,251,.60);
+      font-weight:700;
+      font-size: 13px;
+      text-align:center;
     }
-    textarea{ min-height: 110px; resize: vertical; }
-    input:focus, textarea:focus{ border-color: rgba(168,85,247,.55); box-shadow: 0 0 0 4px rgba(168,85,247,.12); }
 
-    footer{
-      margin-top: 36px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255,255,255,.10);
-      color: rgba(242,242,247,.65);
-      display:flex;
-      justify-content:space-between;
-      gap: 10px;
-      flex-wrap:wrap;
-      font-weight: 600;
-    }
-    .links{ display:flex; gap: 14px; flex-wrap:wrap; }
-    .links a:hover{ color: var(--text); }
-
-    /* Responsive */
+    /* ===== Responsive ===== */
     @media (max-width: 920px){
-      .hero{ grid-template-columns: 1fr; }
-      nav{ display:none; }
-      .grid3{ grid-template-columns: 1fr; }
-      .contact{ grid-template-columns: 1fr; }
+      .hero{grid-template-columns:1fr;}
+      header{padding-bottom:14px}
+      .deviceCard{min-height: 360px;}
     }
   </style>
 </head>
-
 <body>
+  <!-- خلفية البوسترات -->
+  <div class="bg"></div>
+  <div class="overlay"></div>
+  <!-- اختياري -->
+  <!-- <div class="grain"></div> -->
+
   <div class="wrap">
     <header>
       <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div>
-          <div style="font-size:18px;">اسم منصتك هنا</div>
-          <div style="font-size:12px;color:rgba(242,242,247,.65);font-weight:700;">OTT Platform</div>
-        </div>
+        <div class="logo"></div>
+        <div>اسم منصتك</div>
       </div>
-
-      <nav>
-        <a href="#home">الرئيسية</a>
-        <a href="#about">عن المنصة</a>
-        <a href="#content">المحتوى</a>
-        <a href="#partners">شركاء المحتوى</a>
-        <a href="#contact">تواصل</a>
-      </nav>
-
-      <a class="btn ghost" href="#partners">للشركاء</a>
+      <a class="btn" href="#contact">تواصل</a>
     </header>
 
-    <!-- HERO -->
-    <main id="home" class="hero">
-      <div>
-        <div class="kicker"><span class="dot"></span> إطلاق قريباً — نسخة تجريبية</div>
-        <h1>منصة OTT جديدة<br/>قيد الإطلاق قريباً</h1>
+    <main class="hero">
+      <section>
+        <div class="kicker"><span class="dot"></span> منصة بث جديدة — الإطلاق قريباً</div>
+        <h1>تجربة مشاهدة سينمائية<br>للجمهور العربي والعبري</h1>
         <p class="lead">
-          بث أفلام مستقلة عالمية + دراما تركية مترجمة للجمهور العربي/العبري في منطقة MENA،
-          مع توسّع لاحقاً لقنوات مباشرة.
+          أفلام مستقلة مختارة + دراما تركية مترجمة.  
+          نطلق تدريجياً وبشكل احترافي، مع باب شراكات محتوى بنظام تقاسم أرباح.
         </p>
 
-        <div class="ctaRow">
+        <div class="cta">
           <a class="btn primary" href="#contact">سجّل اهتمامك</a>
-          <a class="btn" href="#partners">شراكات المحتوى (RevShare)</a>
+          <a class="btn" href="#partners">شركاء المحتوى</a>
         </div>
 
         <div class="mini">
-          <span><span class="check">✓</span> SVOD / AVOD خيارات</span>
-          <span><span class="check">✓</span> تركيز على محتوى مستقل</span>
-          <span><span class="check">✓</span> إطلاق تدريجي ومنظم</span>
+          <span class="tag">SVOD / AVOD</span>
+          <span class="tag">MENA أولاً</span>
+          <span class="tag">قنوات مباشرة لاحقاً</span>
         </div>
-      </div>
+      </section>
 
-      <div class="mock" aria-label="Preview">
-        <div class="mockInner">
-          <div class="mockTop">
-            <span class="pill">واجهة تطبيق — مثال</span>
-            <span class="pill">Dark • Premium</span>
-          </div>
-
-          <div class="posterGrid">
-            <div class="poster"><small>Indie Films</small><b>أفضل الأفلام</b></div>
-            <div class="poster"><small>Turkish Series</small><b>دراما تركية</b></div>
-            <div class="poster"><small>Coming Soon</small><b>قنوات مباشرة</b></div>
-            <div class="poster"><small>Partners</small><b>RevShare</b></div>
-          </div>
+      <aside class="deviceCard" aria-label="Device preview">
+        <div class="deviceGlow"></div>
+        <div class="deviceInner">
+          <!-- ضع صورة tv/phone -->
+          <img class="deviceImg" src="assets/device-mock.png" alt="لقطة للتطبيق على TV/Phone">
+          <div class="note">ضع صورتك هنا: assets/device-mock.png</div>
         </div>
-      </div>
+      </aside>
     </main>
 
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="band">
-        <div>
-          <h2>عن المنصة</h2>
-          <p>
-            نحن منصة بث ناشئة تستهدف جمهور MENA. هدفنا تقديم تجربة مشاهدة “بريميوم”
-            مع مكتبة محتوى مستقلة تُبنى بالشراكة مع موزعين ومنتجين بنظام تقاسم أرباح عادل.
-          </p>
+    <section id="partners" style="margin-top:22px;">
+      <div style="
+        border:1px solid rgba(255,255,255,.12);
+        background: rgba(255,255,255,.05);
+        border-radius: 18px;
+        padding: 18px;
+        box-shadow: 0 14px 40px rgba(0,0,0,.25);
+      ">
+        <div style="font-weight:900; font-size:18px; margin-bottom:6px;">
+          شراكات المحتوى — Revenue Share
         </div>
-        <a class="btn primary" href="#partners">أنا موزّع محتوى</a>
-      </div>
-    </section>
-
-    <!-- CONTENT -->
-    <section id="content">
-      <div class="grid3">
-        <div class="card">
-          <div class="icon p">🎬</div>
-          <h3>أفلام مستقلة</h3>
-          <p>اختيارات قيّمة من أفلام عالمية مستقلة تُناسب جمهور المنطقة وتفتح نوافذ جديدة للمشاهدة.</p>
-        </div>
-
-        <div class="card">
-          <div class="icon t">🇹🇷</div>
-          <h3>دراما تركية مترجمة</h3>
-          <p>مسلسلات تركية مع ترجمة عربية (ومستقبلاً عبري) ضمن تجربة مشاهدة سلسة.</p>
-        </div>
-
-        <div class="card">
-          <div class="icon">📺</div>
-          <h3>قنوات مباشرة — قريباً</h3>
-          <p>توسّع لاحق نحو قنوات مباشرة مرخّصة (News/Entertainment) حسب الشراكات والميزانية.</p>
+        <div style="color: rgba(245,245,251,.74); line-height:1.9; font-weight:700;">
+          نبحث عن موزعين/منتجين لترخيص أفلام ومسلسلات بنظام تقاسم أرباح شفاف.
+          للتواصل كشريك محتوى: اكتب لنا بالبريد أو عبر النموذج.
         </div>
       </div>
     </section>
 
-    <!-- PARTNERS -->
-    <section id="partners">
-      <div class="band">
-        <div>
-          <h2>شركاء المحتوى — Revenue Share</h2>
-          <p>
-            نبحث عن موزعين، منتجين، ومالكي حقوق لتراخيص SVOD/AVOD بنظام تقاسم أرباح عادل.
-            هدفنا شراكة طويلة المدى مع تقارير شفافة وحقوق واضحة حسب المنطقة.
-          </p>
-        </div>
-        <a class="btn" href="#contact">تواصل كشريك محتوى</a>
-      </div>
-    </section>
+    <section id="contact" style="margin-top:14px;">
+      <div style="
+        border:1px solid rgba(255,255,255,.12);
+        background: rgba(255,255,255,.05);
+        border-radius: 18px;
+        padding: 18px;
+      ">
+        <div style="font-weight:900; font-size:18px; margin-bottom:10px;">تواصل</div>
 
-    <!-- CONTACT -->
-    <section id="contact">
-      <div class="card">
-        <h3 style="margin-top:0;">تواصل معنا</h3>
-        <p>اكتب بياناتك وسنرجع لك. (يمكن لاحقاً ربط النموذج بـ Email/CRM).</p>
+        <form onsubmit="return sendMsg(event)" style="display:grid; gap:10px; max-width:560px;">
+          <input required name="name" placeholder="الاسم"
+                 style="padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.18);color:#fff;font-family:inherit;font-weight:700;">
+          <input required type="email" name="email" placeholder="الإيميل"
+                 style="padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.18);color:#fff;font-family:inherit;font-weight:700;">
+          <textarea required name="message" placeholder="رسالتك"
+                 style="padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.18);color:#fff;font-family:inherit;font-weight:700;min-height:110px"></textarea>
 
-        <form class="contact" onsubmit="return handleSubmit(event)">
-          <div class="field">
-            <label>الاسم</label>
-            <input required placeholder="اسمك الكامل" name="name" />
-          </div>
-
-          <div class="field">
-            <label>البريد الإلكتروني</label>
-            <input required type="email" placeholder="name@email.com" name="email" />
-          </div>
-
-          <div class="field" style="grid-column: 1 / -1;">
-            <label>رسالتك</label>
-            <textarea required placeholder="هل أنت موزّع محتوى؟ منتج؟ أو مهتم بالاشتراك عند الإطلاق؟" name="message"></textarea>
-          </div>
-
-          <div style="grid-column: 1 / -1; display:flex; gap:12px; flex-wrap:wrap;">
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
             <button class="btn primary" type="submit">إرسال</button>
-            <a class="btn ghost" href="mailto:your@email.com">أرسل عبر البريد</a>
+            <a class="btn" href="mailto:your@email.com">your@email.com</a>
           </div>
         </form>
       </div>
     </section>
 
-    <footer>
-      <div>© <span id="year"></span> اسم منصتك — جميع الحقوق محفوظة</div>
-      <div class="links">
-        <a href="#">الشروط</a>
-        <a href="#">الخصوصية</a>
-        <a href="#home">أعلى الصفحة</a>
-      </div>
-    </footer>
+    <div style="margin-top:22px; color:rgba(245,245,251,.55); font-weight:700; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+      <span>© <span id="y"></span> اسم منصتك</span>
+      <span>Terms • Privacy</span>
+    </div>
   </div>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    function handleSubmit(e){
+    document.getElementById("y").textContent = new Date().getFullYear();
+    function sendMsg(e){
       e.preventDefault();
-      const fd = new FormData(e.target);
-      const data = Object.fromEntries(fd.entries());
-
-      // MVP: just show success message. Later you can connect to Formspree / backend.
-      alert("تم الإرسال ✅\\nسنعود لك قريباً.\\n\\n" + "الاسم: " + data.name + "\\nالإيميل: " + data.email);
+      alert("تم الإرسال ✅");
       e.target.reset();
       return false;
     }
