@@ -1,0 +1,6 @@
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/posters-collage.jpg
+    - assets/device-mock.png
+    - assets/noise.png
