@@ -11,7 +11,6 @@
 :root{
   --purple1:#d8b4fe;
   --purple2:#a855f7;
-  --purple3:#7c3aed;
   --purple4:#3b0764;
   --bg:#0b0f16;
   --bg2:#0f1520;
@@ -24,7 +23,6 @@ body{
   font-family:"Cairo",sans-serif;
   background:var(--bg);
   color:#fff;
-  overflow-x:hidden;
 }
 
 /* ================= HERO ================= */
@@ -40,6 +38,7 @@ body{
   overflow:hidden;
 }
 
+/* الخلفية */
 .hero::before{
   content:"";
   position:absolute;
@@ -48,44 +47,47 @@ body{
   background-size:cover;
   background-position:center;
   transform:scale(1.05);
+  z-index:0;
 }
 
+/* التعتيم */
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
   background:linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,.80));
+  z-index:0;
 }
 
 /* ================= TOP BAR ================= */
 
 .topBar{
   position:absolute;
-  top:35px;
-  left:50px;
-  right:50px;
+  top:40px;
+  left:60px;
+  right:60px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  z-index:5;
+  z-index:20; /* أهم شيء */
 }
 
-/* ===== Logo Animation (رجعناه كبير مثل قبل) ===== */
+/* ===== Logo Animation ===== */
 
 .logoTop{
   position:relative;
-  height:110px;   /* كبرنا الحاوية */
+  height:120px;
   display:flex;
   align-items:center;
-  overflow:hidden;
+  z-index:21;
 }
 
 .logoTop img{
   position:absolute;
-  height:100px;   /* الشعار كبير وواضح */
+  height:105px;
   width:auto;
   opacity:0;
-  transform:translateY(25px) scale(.96);
+  transform:translateY(30px) scale(.96);
   transition:all 1s cubic-bezier(.19,1,.22,1);
   filter: drop-shadow(0 0 28px rgba(168,85,247,.55));
 }
@@ -113,7 +115,7 @@ body{
 
 .content{
   position:relative;
-  z-index:2;
+  z-index:10;
   max-width:780px;
 }
 
@@ -168,34 +170,55 @@ h1{
 
 .pricing{
   background:var(--bg2);
-  padding:90px 20px 110px;
+  padding:90px 20px;
 }
 
 .planGrid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:22px;
+  gap:30px;
   max-width:900px;
   margin:0 auto;
 }
 
 .plan{
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.10);
-  border-radius:22px;
-  padding:28px 22px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:25px;
+  padding:40px;
   text-align:center;
+  transition:.3s;
+}
+
+.plan:hover{
+  transform:translateY(-8px);
+  border-color:var(--purple2);
 }
 
 .plan--featured{
-  border-color:rgba(168,85,247,.40);
-  box-shadow:0 30px 80px rgba(124,58,237,.22);
+  border:2px solid var(--purple2);
+  box-shadow:0 30px 70px rgba(124,58,237,.3);
+}
+
+.plan h3{
+  font-size:22px;
+  margin-bottom:15px;
+}
+
+.plan h2{
+  font-size:40px;
+  margin:10px 0 20px;
+}
+
+.plan p{
+  color:rgba(255,255,255,.8);
+  line-height:1.8;
 }
 
 .planBtn{
-  margin-top:15px;
-  display:block;
-  padding:14px;
+  margin-top:25px;
+  display:inline-block;
+  padding:14px 28px;
   border-radius:999px;
   font-weight:900;
   text-decoration:none;
@@ -203,10 +226,11 @@ h1{
   background:linear-gradient(90deg,var(--purple2),var(--purple4));
 }
 
-@media (max-width: 900px){
+@media (max-width:900px){
   .planGrid{ grid-template-columns:1fr; }
-  .logoTop img{ height:80px; }
+  .logoTop img{ height:85px; }
 }
+
 </style>
 </head>
 
