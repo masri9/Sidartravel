@@ -55,19 +55,11 @@ body{
 }
 
 /* تعتيم غامق */
-.hero{
-  position:relative;
-}
-
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
-  background:
-    linear-gradient(to bottom,
-      rgba(0,0,0,.35) 60%,
-      rgba(0,0,0,.95) 100%
-    );
+  background:linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,.80));
 }
 
 /* ================= TOP BAR ================= */
@@ -141,7 +133,7 @@ h1{
 
 .cta a{
   display:inline-block;
-  padding:20px 44px; /* كان 70 */
+  padding:20px 70px;
   border-radius:999px;
   font-size:20px;
   font-weight:900;
@@ -150,7 +142,6 @@ h1{
   background:linear-gradient(90deg,var(--purple2),var(--purple4));
   box-shadow:0 30px 70px rgba(124,58,237,.45);
   transition:.3s;
-
 }
 
 .cta a:hover{
