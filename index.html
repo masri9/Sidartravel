@@ -238,13 +238,67 @@ h1{
   cursor:pointer;
 }
 
+/* ================= FOOTER ================= */
+
+.footer{
+  background:linear-gradient(to bottom, rgba(168,85,247,.08), rgba(0,0,0,.35));
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:60px 20px 30px;
+}
+
+.footerWrap{
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  flex-wrap:wrap;
+  gap:30px;
+  justify-content:space-between;
+}
+
+.footerCol{
+  flex:1;
+  min-width:220px;
+}
+
+.footerTitle{
+  font-weight:900;
+  font-size:16px;
+  margin-bottom:15px;
+  color:var(--purple1);
+}
+
+.footerText{
+  font-size:14px;
+  line-height:1.8;
+  color:rgba(255,255,255,.75);
+}
+
+.footerLinks a{
+  display:block;
+  text-decoration:none;
+  color:rgba(255,255,255,.75);
+  margin-bottom:10px;
+  font-size:14px;
+  font-weight:700;
+}
+
+.footerLinks a:hover{
+  color:var(--purple2);
+}
+
+.footerBottom{
+  text-align:center;
+  margin-top:40px;
+  font-size:13px;
+  color:rgba(255,255,255,.55);
+}
+
 </style>
 </head>
 
 <body>
 
 <section class="hero">
-
   <div class="topBar">
     <div class="logoTop">MEEM TV</div>
     <div class="loginBtn">
@@ -266,7 +320,6 @@ h1{
       إلغاء في أي وقت • بدون التزام
     </div>
   </div>
-
 </section>
 
 <section class="ramadan">
@@ -279,6 +332,49 @@ h1{
     <p>مسلسلات حصرية • أفلام عربية وأجنبية • أجواء رمضانية</p>
   </div>
 </section>
+
+<footer class="footer">
+  <div class="footerWrap">
+
+    <div class="footerCol">
+      <div class="footerTitle">MEEM TV</div>
+      <div class="footerText">
+        منصة بث ترفيهية تقدم أحدث الأفلام والمسلسلات والرياضة
+        بجودة عالية وتجربة مشاهدة احترافية.
+      </div>
+    </div>
+
+    <div class="footerCol">
+      <div class="footerTitle">تواصل معنا</div>
+      <div class="footerText">
+        📞 050-000-0000<br>
+        📧 info@meem-tv.com
+      </div>
+    </div>
+
+    <div class="footerCol">
+      <div class="footerTitle">تابعنا</div>
+      <div class="footerLinks">
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">Facebook</a>
+        <a href="#">YouTube</a>
+      </div>
+    </div>
+
+    <div class="footerCol">
+      <div class="footerTitle">طرق الدفع</div>
+      <div class="footerText">
+        Visa • MasterCard • PayPal • Apple Pay
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footerBottom">
+    © 2026 MEEM TV - جميع الحقوق محفوظة
+  </div>
+</footer>
 
 <div class="bottomBar" id="bottomBar">
   <div>ابتداءً من ₪44.90 / شهر</div>
