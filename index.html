@@ -158,10 +158,109 @@
     .feat .t{font-weight:800;font-size:14px;margin-bottom:6px}
     .feat .d{font-size:12px;color:rgba(255,255,255,.65)}
 
+    /* ===== Pricing Section Dark (مثل FreeTV) ===== */
+    .pricing-dark{
+      padding: 70px 20px 160px;
+      background: linear-gradient(180deg, #0b1222 0%, #08101c 100%);
+      position: relative;
+    }
+    .pricing-dark .wrap2{
+      width:min(1100px, 95vw);
+      margin:0 auto;
+    }
+    .pricing-title{
+      text-align:center;
+      font-size:40px;
+      font-weight:900;
+      margin-bottom:10px;
+    }
+    .pricing-sub{
+      text-align:center;
+      color:rgba(255,255,255,.65);
+      margin-bottom:60px;
+      font-size:18px;
+    }
+    .pricing-grid{
+      display:grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      gap:40px;
+      align-items:end;
+    }
+    .plan-dark{
+      text-align:center;
+      color:#fff;
+    }
+    .plan-dark .box{
+      background:rgba(255,255,255,.06);
+      border-radius:30px;
+      padding:60px 30px;
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,.08);
+      transition:.3s;
+    }
+    .plan-dark.center .box{
+      background:rgba(192,132,252,.25);
+      border:1px solid rgba(255,255,255,.2);
+    }
+    .plan-dark h3{
+      font-size:20px;
+      margin-bottom:30px;
+      letter-spacing:2px;
+    }
+    .plan-dark .price{
+      font-size:52px;
+      font-weight:900;
+      margin-top:20px;
+    }
+    .plan-dark ul{
+      list-style:none;
+      padding:0;
+      margin:30px 0 0;
+      line-height:2;
+      font-weight:600;
+      color:rgba(255,255,255,.85);
+    }
+
+    .pricing-cta-bar{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      background:rgba(20,25,40,.95);
+      padding:18px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      backdrop-filter:blur(10px);
+      border-top:1px solid rgba(255,255,255,.1);
+      z-index:90;
+      gap:14px;
+    }
+    .pricing-cta-bar .info{
+      color:rgba(255,255,255,.75);
+      font-size:14px;
+      font-weight:800;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .pricing-cta-bar button{
+      background:#4ade80;
+      color:#0f172a;
+      border:none;
+      padding:14px 28px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:16px;
+      cursor:pointer;
+      box-shadow:0 10px 40px rgba(74,222,128,.5);
+      flex:0 0 auto;
+    }
+
     /* Cookie */
     .cookie{
       position:fixed;
-      bottom:15px; left:15px; right:15px;
+      bottom:85px; left:15px; right:15px; /* فوق شريط CTA */
       background:rgba(0,0,0,.75);
       border:1px solid rgba(255,255,255,.12);
       padding:12px;
@@ -170,7 +269,8 @@
       justify-content:space-between;
       align-items:center;
       backdrop-filter:blur(10px);
-      z-index:50;
+      z-index:95;
+      gap:12px;
     }
     .cookie p{margin:0;font-size:13px;color:rgba(255,255,255,.8)}
     .cookie button{
@@ -181,6 +281,15 @@
       color:#fff;
       font-weight:800;
       cursor:pointer;
+      flex:0 0 auto;
+    }
+
+    @media(max-width:900px){
+      .pricing-grid{grid-template-columns:1fr; gap:24px}
+      .pricing-title{font-size:34px}
+      .pricing-sub{margin-bottom:35px}
+      .plan-dark .box{padding:38px 22px}
+      .plan-dark .price{font-size:46px}
     }
 
     /* ---------- AUTH / CHECKOUT PAGES (white like screenshots) ---------- */
@@ -339,7 +448,7 @@
       margin-top: 10px;
     }
 
-    /* Pricing */
+    /* Pricing (white steps) */
     .pricing-top{
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -419,7 +528,6 @@
     }
     .plan h3{margin: 18px 0 0; font-size:22px; font-weight:900}
     .plan .meta{color:var(--muted);font-weight:800;margin-top:6px}
-    .plan .k{margin-top:16px; color:var(--ink2); font-weight:800}
     .plan .check{font-size:32px; font-weight:900; opacity:.75; margin-top:10px}
     .plan .amount{font-size:54px;font-weight:900;margin-top:18px}
     .plan .cur{font-weight:900}
@@ -526,6 +634,62 @@
       </div>
     </section>
 
+    <!-- ====== Pricing block under hero (مثل الصورة) ====== -->
+    <section class="pricing-dark">
+      <div class="wrap2">
+        <div class="pricing-title">المسارات لدينا</div>
+        <div class="pricing-sub">أي مسار مناسب لك؟</div>
+
+        <div class="pricing-grid">
+          <!-- FREE 2 -->
+          <div class="plan-dark">
+            <h3>FREE 2</h3>
+            <div class="box">
+              <ul>
+                <li>بدون تقييد</li>
+                <li>4K</li>
+                <li>حتى جهازين</li>
+              </ul>
+              <div class="price">₪44.90</div>
+            </div>
+          </div>
+
+          <!-- FREE 5 -->
+          <div class="plan-dark center">
+            <h3>FREE 5</h3>
+            <div class="box">
+              <ul>
+                <li>بدون تقييد</li>
+                <li>4K</li>
+                <li>حتى 5 أجهزة</li>
+              </ul>
+              <div class="price">₪59.90</div>
+            </div>
+          </div>
+
+          <!-- includes -->
+          <div class="plan-dark">
+            <h3>ماذا يشمل؟</h3>
+            <div class="box">
+              <ul>
+                <li>مكتبة محتوى كاملة</li>
+                <li>شهر مجاني</li>
+                <li>جودة 4K</li>
+                <li>مشاهدة عبر الجوال والتلفاز</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- sticky CTA bottom -->
+    <div class="pricing-cta-bar">
+      <button onclick="go('r-join')">احصل على شهر مجاني</button>
+      <div class="info">كل الترفيه الذي تحتاجه ابتداءً من ₪44.90 شهرياً</div>
+    </div>
+
+    <!-- cookie -->
     <div class="cookie" id="cookieBar">
       <p>نستخدم ملفات تعريف الارتباط لتحسين تجربتك.</p>
       <button onclick="document.getElementById('cookieBar').style.display='none'">موافق</button>
@@ -773,7 +937,7 @@
     window.scrollTo({top:0, behavior:'instant'});
   }
 
-  // Landing -> Join
+  // Landing -> Join (both top button and bottom CTA)
   document.getElementById('startBtn').addEventListener('click', () => go('r-join'));
 
   // Phone validation
@@ -784,16 +948,13 @@
 
   phone.addEventListener('input', () => {
     const v = cleanPhone(phone.value);
-    // enable if >= 8 digits (basic)
     const digits = v.replace(/[^\d]/g,'');
     phoneNext.disabled = digits.length < 8;
   });
 
   phoneNext.addEventListener('click', () => {
-    // simulate sending OTP
     startTimer(60);
     go('r-otp');
-    // focus first OTP
     setTimeout(() => document.querySelector('.otpDigit')?.focus(), 50);
   });
 
@@ -844,7 +1005,6 @@
   }
 
   window.resend = function(){
-    // simulate resend
     otpDigits.forEach(i => i.value = '');
     otpNext.disabled = true;
     startTimer(60);
@@ -859,7 +1019,6 @@
   window.selectPlan = function(plan){
     selectedPlan = plan;
 
-    // mark selected (both tiles and cards)
     document.querySelectorAll('[data-plan]').forEach(el => el.classList.remove('selected'));
     document.querySelectorAll('[data-plan="'+plan+'"]').forEach(el => el.classList.add('selected'));
 
