@@ -21,79 +21,74 @@
 body{
   margin:0;
   font-family:"Cairo",sans-serif;
-  background:#0b061f;
-  overflow:hidden;
+  background:linear-gradient(180deg,#140033,#1c003f 60%,#1a0035);
+  color:#fff;
+  overflow-x:hidden;
 }
 
-/* HERO */
-.hero{
+/* الجزء العلوي - الصور */
+.top-movies{
   position:relative;
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+  height:35vh;              /* تقريباً ربع الشاشة */
   overflow:hidden;
 }
 
-/* الشبكة المائلة */
-.movies-bg{
+.movies-grid{
   position:absolute;
-  width:140%;
-  height:140%;
+  width:130%;
+  height:130%;
   top:-20%;
-  left:-20%;
+  left:-15%;
   display:grid;
   grid-template-columns:repeat(8,1fr);
-  gap:12px;
+  gap:10px;
   transform:rotate(-18deg);
 }
 
-.movies-bg img{
+.movies-grid img{
   width:100%;
-  height:180px;
+  height:140px;
   object-fit:cover;
-  border-radius:12px;
-  filter:brightness(.65);
+  border-radius:10px;
+  filter:brightness(.7);
 }
 
-/* الطبقة البنفسجية */
-.hero::after{
+/* طبقة بنفسجية خفيفة فوق الصور */
+.top-movies::after{
   content:"";
   position:absolute;
   inset:0;
-  background:
-    radial-gradient(circle at center, rgba(124,58,237,.5), rgba(20,0,50,.95)),
-    linear-gradient(to bottom, rgba(40,0,80,.6), rgba(10,0,30,.95));
-  z-index:1;
+  background:linear-gradient(
+    to bottom,
+    rgba(124,58,237,.4),
+    rgba(20,0,50,.95)
+  );
 }
 
 /* المحتوى */
-.hero-content{
-  position:relative;
-  z-index:2;
-  max-width:750px;
-  color:#fff;
-  padding:20px;
+.content{
+  padding:40px 20px 80px;
+  text-align:center;
+  max-width:700px;
+  margin:auto;
 }
 
 .logo{
-  font-size:22px;
   font-weight:900;
-  margin-bottom:30px;
-  letter-spacing:1px;
+  font-size:22px;
+  margin-bottom:20px;
 }
 
-.hero-content h1{
-  font-size:clamp(34px,5vw,56px);
+h1{
+  font-size:clamp(30px,5vw,48px);
   font-weight:900;
   line-height:1.2;
   margin:0;
 }
 
 .highlight{
-  margin-top:18px;
-  font-size:26px;
+  margin-top:15px;
+  font-size:22px;
   background:linear-gradient(90deg,var(--purple1),var(--purple2));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -102,42 +97,42 @@ body{
 
 .sub{
   margin-top:25px;
-  font-size:18px;
+  font-size:17px;
   color:rgba(255,255,255,.85);
   line-height:1.8;
 }
 
 /* زر */
 .cta{
-  margin-top:40px;
+  margin-top:35px;
 }
 
 .cta a{
   display:inline-block;
-  padding:22px 70px;
+  padding:18px 60px;
   border-radius:999px;
-  font-size:20px;
+  font-size:18px;
   font-weight:900;
   text-decoration:none;
   color:#fff;
   background:linear-gradient(90deg,var(--purple2),var(--purple4));
-  box-shadow:0 30px 70px rgba(124,58,237,.5);
+  box-shadow:0 25px 60px rgba(124,58,237,.4);
   transition:.3s;
 }
 
 .cta a:hover{
   transform:translateY(-4px);
-  box-shadow:0 40px 90px rgba(124,58,237,.7);
+  box-shadow:0 35px 80px rgba(124,58,237,.6);
 }
 
 .fine{
-  margin-top:18px;
+  margin-top:15px;
   font-size:14px;
   color:rgba(255,255,255,.6);
 }
 
 @media(max-width:768px){
-  .movies-bg{
+  .movies-grid{
     grid-template-columns:repeat(5,1fr);
   }
 }
@@ -147,10 +142,9 @@ body{
 
 <body>
 
-<section class="hero">
-
-  <!-- خلفية البوسترات -->
-  <div class="movies-bg">
+<!-- الصور بالأعلى فقط -->
+<section class="top-movies">
+  <div class="movies-grid">
     <img src="movies/1.jpg">
     <img src="movies/2.jpg">
     <img src="movies/3.jpg">
@@ -163,32 +157,29 @@ body{
     <img src="movies/10.jpg">
     <img src="movies/11.jpg">
     <img src="movies/12.jpg">
-    <img src="movies/13.jpg">
-    <img src="movies/14.jpg">
-    <img src="movies/15.jpg">
-    <img src="movies/16.jpg">
+  </div>
+</section>
+
+<!-- النص تحت الصور مباشرة -->
+<section class="content">
+
+  <div class="logo">MEEM TV</div>
+
+  <h1>كل الترفيه اللي بدك ياه</h1>
+
+  <div class="highlight">شهر مجاني لأول مرة</div>
+
+  <div class="sub">
+    قنوات مباشرة، رياضة، أفلام ومسلسلات بجودة عالية
+    وتجربة مشاهدة احترافية على الهاتف والتلفاز.
   </div>
 
-  <!-- النص -->
-  <div class="hero-content">
-    <div class="logo">MEEM TV</div>
+  <div class="cta">
+    <a href="join.html">ابدأ الشهر المجاني</a>
+  </div>
 
-    <h1>كل الترفيه اللي بدك ياه</h1>
-
-    <div class="highlight">شهر مجاني لأول مرة</div>
-
-    <div class="sub">
-      قنوات مباشرة، رياضة، أفلام ومسلسلات بجودة عالية
-      وتجربة مشاهدة احترافية على الهاتف والتلفاز.
-    </div>
-
-    <div class="cta">
-      <a href="join.html">ابدأ الشهر المجاني</a>
-    </div>
-
-    <div class="fine">
-      إلغاء في أي وقت • بدون التزام
-    </div>
+  <div class="fine">
+    إلغاء في أي وقت • بدون التزام
   </div>
 
 </section>
