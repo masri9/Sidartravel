@@ -48,7 +48,6 @@ body{
   background-image:url("https://plain-eeur-prod-public.komododecks.com/202602/26/DS5JHAyGBmDJzW1ERH1Z/image.png");
   background-size:cover;
   background-position:center;
-  filter:brightness(.95) contrast(1.1);
   transform:scale(1.05);
 }
 
@@ -85,7 +84,6 @@ body{
   padding:10px 18px;
   border-radius:999px;
   border:1px solid rgba(255,255,255,.25);
-  transition:.25s;
 }
 
 .loginBtn a:hover{
@@ -137,7 +135,6 @@ h1{
   color:#fff;
   background:linear-gradient(90deg,var(--purple2),var(--purple4));
   box-shadow:0 25px 60px rgba(124,58,237,.45);
-  transition:.3s;
 }
 
 .cta a:hover{
@@ -150,43 +147,44 @@ h1{
   color:rgba(255,255,255,.6);
 }
 
-/* ================= RAMADAN SECTION ================= */
+/* ================= RAMADAN IMAGE ================= */
 
 .ramadan{
-  padding:100px 20px 60px;
+  padding:100px 0;
   background:var(--bg2);
   text-align:center;
 }
 
 .ramadan img{
-  width:min(1100px,95vw);
+  width:100%;
+  max-width:1200px;
   border-radius:20px;
   box-shadow:0 40px 80px rgba(0,0,0,.6);
 }
 
-/* ================= BIG VISUAL SECTION ================= */
+/* ================= FULL SCREEN LANTERN ================= */
 
-.bigVisual{
+.lanternFull{
   position:relative;
   width:100%;
-  height:75vh;
-  background-image:url("https://plain-eeur-prod-public.komododecks.com/202602/26/Ajfrfd4BaYOD3j8X1ItX/image.jpg");
+  height:100vh;
+  background-image:url("https://plain-eeur-prod-public.komododecks.com/202602/26/gR4dMPmtniYNIa9W0HPx/image.png");
   background-size:cover;
   background-position:center;
+  background-attachment:fixed;
   display:flex;
   align-items:center;
   justify-content:center;
-  overflow:hidden;
 }
 
-.bigVisual::after{
+.lanternFull::after{
   content:"";
   position:absolute;
   inset:0;
   background:linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.80));
 }
 
-.bigOverlay{
+.lanternOverlay{
   position:relative;
   z-index:2;
   text-align:center;
@@ -194,13 +192,13 @@ h1{
   padding:20px;
 }
 
-.bigOverlay h2{
-  font-size:clamp(32px,5vw,50px);
+.lanternOverlay h2{
+  font-size:clamp(34px,5vw,55px);
   font-weight:900;
-  margin:0 0 15px;
+  margin-bottom:20px;
 }
 
-.bigOverlay p{
+.lanternOverlay p{
   font-size:20px;
   color:rgba(255,255,255,.85);
 }
@@ -272,13 +270,13 @@ h1{
 </section>
 
 <section class="ramadan">
-  <img src="https://plain-eeur-prod-public.komododecks.com/202602/26/gR4dMPmtniYNIa9W0HPx/image.png">
+  <img src="https://plain-eeur-prod-public.komododecks.com/202602/26/Ajfrfd4BaYOD3j8X1ItX/image.jpg">
 </section>
 
-<section class="bigVisual">
-  <div class="bigOverlay">
-    <h2>أكثر من 60 قناة تلفزيونية</h2>
-    <p>رياضة • أطفال • أفلام • مسلسلات • VOD</p>
+<section class="lanternFull">
+  <div class="lanternOverlay">
+    <h2>رمضان مع MEEM TV</h2>
+    <p>مسلسلات حصرية • أفلام عربية وأجنبية • أجواء رمضانية</p>
   </div>
 </section>
 
