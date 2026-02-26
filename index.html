@@ -1,262 +1,194 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Landing</title>
-  <style>
-    :root{
-      --bg:#070a18;
-      --text:#ffffff;
-      --muted: rgba(255,255,255,.75);
-      --muted2: rgba(255,255,255,.55);
-      --accent1:#B9FF2A;
-      --accent2:#12D67A;
-      --card: rgba(255,255,255,.06);
-      --stroke: rgba(255,255,255,.12);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial;
-      background: var(--bg);
-      color: var(--text);
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MEEM TV</title>
 
-    /* hero */
-    .hero{
-      min-height: 100vh;
-      position: relative;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 28px 18px 120px;
-      overflow:hidden;
-      background: #070a18;
-    }
+<style>
+:root{
+  --bg:#0c0820;
+  --purple1:#C084FC;   /* بنفسجي فاتح */
+  --purple2:#8B5CF6;   /* بنفسجي متوسط */
+  --purple3:#6D28D9;   /* بنفسجي أغمق */
+  --text:#ffffff;
+  --muted:rgba(255,255,255,.75);
+  --muted2:rgba(255,255,255,.55);
+}
 
-    /* background collage image */
-    .hero::before{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        url("bg-collage.jpg") center/cover no-repeat;
-      transform: scale(1.08);
-      filter: saturate(1.05) contrast(1.05);
-      opacity: .9;
-    }
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, "Segoe UI", Tahoma;
+  background: var(--bg);
+  color: var(--text);
+}
 
-    /* dark overlay like screenshot */
-    .hero::after{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(900px 600px at 50% 20%, rgba(0,0,0,.15), rgba(0,0,0,.85)),
-        linear-gradient(to bottom, rgba(7,10,24,.25), rgba(7,10,24,.92));
-      pointer-events:none;
-    }
+/* HERO */
+.hero{
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:30px 20px 120px;
+  overflow:hidden;
+}
 
-    .wrap{
-      position:relative;
-      width:min(560px, 92vw);
-      text-align:center;
-    }
+/* collage background */
+.hero::before{
+  content:"";
+  position:absolute; inset:0;
+  background:url("bg-collage.jpg") center/cover no-repeat;
+  transform:scale(1.05);
+  opacity:.85;
+}
 
-    .brand{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom: 16px;
-      opacity:.95;
-    }
-    .brand .logo{
-      font-weight:800;
-      letter-spacing:.3px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-    .brand .pill{
-      font-size:12px;
-      padding:6px 10px;
-      border:1px solid var(--stroke);
-      background: rgba(0,0,0,.25);
-      border-radius:999px;
-      color: var(--muted);
-    }
+/* purple overlay */
+.hero::after{
+  content:"";
+  position:absolute; inset:0;
+  background:
+  linear-gradient(to bottom,
+    rgba(12,8,32,.4),
+    rgba(12,8,32,.9)
+  );
+}
 
-    h1{
-      margin: 10px 0 10px;
-      font-size: clamp(32px, 5vw, 44px);
-      line-height:1.1;
-      font-weight:900;
-    }
-    .subline{
-      margin: 0 0 14px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height:1.6;
-    }
-    .highlight{
-      display:block;
-      margin-top: 10px;
-      font-size: clamp(22px, 3.6vw, 30px);
-      font-weight:900;
-      color: #B9FF2A;
-      text-shadow: 0 8px 30px rgba(185,255,42,.22);
-    }
+/* content */
+.wrap{
+  position:relative;
+  width:min(560px,92vw);
+  text-align:center;
+}
 
-    .cta{
-      margin: 22px auto 14px;
-      width: min(520px, 100%);
-      display:flex;
-      justify-content:center;
-    }
-    .cta button{
-      width:100%;
-      border:0;
-      padding: 18px 18px;
-      border-radius: 999px;
-      font-weight:900;
-      font-size: 18px;
-      color:#06110b;
-      cursor:pointer;
-      background: linear-gradient(90deg, var(--accent1), var(--accent2));
-      box-shadow: 0 18px 45px rgba(18,214,122,.22);
-      transition: transform .08s ease;
-    }
-    .cta button:active{ transform: scale(.99); }
+.logo{
+  font-weight:900;
+  font-size:20px;
+  margin-bottom:20px;
+  letter-spacing:.5px;
+}
 
-    .fine{
-      margin: 0 0 22px;
-      color: var(--muted2);
-      font-size: 13px;
-    }
+h1{
+  font-size:clamp(32px,5vw,44px);
+  line-height:1.1;
+  margin:0 0 10px;
+  font-weight:900;
+}
 
-    .features{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 18px;
-    }
-    .feat{
-      padding: 14px 12px;
-      border: 1px solid var(--stroke);
-      background: var(--card);
-      border-radius: 14px;
-      text-align:center;
-      backdrop-filter: blur(6px);
-    }
-    .feat .icon{
-      font-size: 22px;
-      opacity:.95;
-      margin-bottom: 8px;
-      display:block;
-    }
-    .feat .t{
-      font-weight:800;
-      font-size: 13px;
-      margin-bottom: 4px;
-    }
-    .feat .d{
-      color: var(--muted2);
-      font-size: 12px;
-      line-height:1.4;
-    }
+.highlight{
+  display:block;
+  margin-top:12px;
+  font-size:clamp(22px,3.5vw,30px);
+  font-weight:900;
+  color:var(--purple1);
+  text-shadow:0 0 25px rgba(192,132,252,.4);
+}
 
-    /* cookie bar */
-    .cookie{
-      position: fixed;
-      left: 12px; right: 12px; bottom: 12px;
-      background: rgba(0,0,0,.72);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      padding: 12px 12px;
-      display:flex;
-      gap: 10px;
-      align-items:center;
-      justify-content:space-between;
-      backdrop-filter: blur(10px);
-      z-index: 10;
-    }
-    .cookie p{
-      margin:0;
-      color: rgba(255,255,255,.8);
-      font-size: 13px;
-      line-height:1.35;
-    }
-    .cookie a{ color: #B9FF2A; text-decoration:none; font-weight:700; }
-    .cookie button{
-      border:0;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(255,255,255,.12);
-      color:#fff;
-      cursor:pointer;
-      font-weight:800;
-      white-space:nowrap;
-    }
+.sub{
+  color:var(--muted);
+  margin:15px 0 25px;
+  font-size:15px;
+  line-height:1.6;
+}
 
-    @media (max-width: 520px){
-      .features{ grid-template-columns: 1fr; }
-      .brand{ justify-content:center; }
-      .brand .pill{ display:none; }
-    }
-  </style>
+/* CTA */
+.cta button{
+  width:100%;
+  padding:18px;
+  border:0;
+  border-radius:999px;
+  font-size:18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#fff;
+  background:linear-gradient(90deg,var(--purple1),var(--purple3));
+  box-shadow:0 20px 45px rgba(139,92,246,.35);
+  transition:.2s;
+}
+.cta button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 25px 60px rgba(139,92,246,.45);
+}
+
+.fine{
+  margin-top:12px;
+  font-size:13px;
+  color:var(--muted2);
+}
+
+/* features */
+.features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:30px;
+}
+
+.feat{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  padding:14px;
+  backdrop-filter:blur(6px);
+}
+
+.feat .t{
+  font-weight:800;
+  font-size:13px;
+  margin-bottom:4px;
+}
+
+.feat .d{
+  font-size:12px;
+  color:var(--muted2);
+}
+
+@media(max-width:520px){
+  .features{grid-template-columns:1fr;}
+}
+</style>
 </head>
 
 <body>
-  <section class="hero">
-    <div class="wrap">
 
-      <div class="brand">
-        <div class="logo">MEEM <span style="opacity:.65;font-weight:700">TV</span></div>
-        <div class="pill">نسخة تجريبية</div>
-      </div>
+<section class="hero">
+  <div class="wrap">
 
-      <h1>
-        كل الترفيه اللي بدّك ياه
-        <span class="highlight">شهر مجاني لأول مرة</span>
-      </h1>
+    <div class="logo">MEEM TV</div>
 
-      <p class="subline">
-        قنوات مباشرة، رياضة، أفلام ومسلسلات — بجودة عالية وتجربة سلسة على الهاتف والتلفاز.
-      </p>
+    <h1>
+      كل الترفيه اللي بدك ياه
+      <span class="highlight">شهر مجاني لأول مرة</span>
+    </h1>
 
-      <div class="cta">
-        <button onclick="location.href='#pricing'">ابدأ الشهر المجاني</button>
-      </div>
-
-      <div class="fine">إلغاء الاشتراك بأي وقت • بدون التزام</div>
-
-      <div class="features" id="pricing">
-        <div class="feat">
-          <span class="icon">📺</span>
-          <div class="t">قنوات مباشرة</div>
-          <div class="d">باقات متنوعة + رياضة</div>
-        </div>
-        <div class="feat">
-          <span class="icon">🎬</span>
-          <div class="t">مكتبة VOD</div>
-          <div class="d">أفلام ومسلسلات محدثة</div>
-        </div>
-        <div class="feat">
-          <span class="icon">💳</span>
-          <div class="t">اشتراك شهري</div>
-          <div class="d">سهل وسريع الدفع</div>
-        </div>
-      </div>
-
+    <div class="sub">
+      قنوات مباشرة، رياضة، أفلام ومسلسلات بجودة عالية وتجربة احترافية.
     </div>
-  </section>
 
-  <div class="cookie" id="cookieBar">
-    <p>
-      نستخدم ملفات تعريف الارتباط (cookies) لتحسين تجربتك.
-      <a href="#">سياسة الخصوصية</a>
-    </p>
-    <button onclick="document.getElementById('cookieBar').style.display='none'">موافق</button>
+    <div class="cta">
+      <button>ابدأ الشهر المجاني</button>
+    </div>
+
+    <div class="fine">إلغاء في أي وقت • بدون التزام</div>
+
+    <div class="features">
+      <div class="feat">
+        <div class="t">قنوات مباشرة</div>
+        <div class="d">رياضة + أخبار + ترفيه</div>
+      </div>
+      <div class="feat">
+        <div class="t">مكتبة أفلام</div>
+        <div class="d">أحدث الإصدارات</div>
+      </div>
+      <div class="feat">
+        <div class="t">اشتراك شهري</div>
+        <div class="d">سريع وآمن</div>
+      </div>
+    </div>
+
   </div>
+</section>
+
 </body>
 </html>
