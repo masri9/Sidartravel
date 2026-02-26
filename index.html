@@ -3,15 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MEEM TV</title>
+<title>RIWAY</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;900&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --purple1:#d8b4fe;
   --purple2:#a855f7;
-  --purple3:#7c3aed;
   --purple4:#3b0764;
   --bg:#0b0f16;
 }
@@ -56,8 +54,6 @@ body{
   background:linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,.80));
 }
 
-/* ================= TOP BAR ================= */
-
 .topBar{
   position:absolute;
   top:25px;
@@ -69,45 +65,32 @@ body{
   z-index:5;
 }
 
-/* ===== Logo Animation ===== */
+/* ===== Premium Logo Animation ===== */
 
 .logoTop{
   position:relative;
-  height:78px;
+  height:90px;
   display:flex;
   align-items:center;
+  overflow:hidden;
 }
 
-.logoTop .logo{
+.logoTop img{
   position:absolute;
-  height:70px;
+  height:85px; /* نفس الحجم للعربي والانجليزي */
   width:auto;
   opacity:0;
-  transition:opacity .7s ease-in-out, transform .7s ease-in-out;
-  transform:translateY(2px) scale(.985);
-  filter: drop-shadow(0 0 18px rgba(168,85,247,.5));
+  transform:translateY(20px) scale(0.95);
+  transition:all 1s cubic-bezier(.19,1,.22,1);
+  filter: drop-shadow(0 0 22px rgba(168,85,247,.45));
 }
 
-.logoTop .logo.active{
+.logoTop img.active{
   opacity:1;
   transform:translateY(0) scale(1);
 }
 
-.loginBtn a{
-  text-decoration:none;
-  font-weight:800;
-  font-size:14px;
-  color:#fff;
-  padding:10px 18px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.25);
-}
-
-.loginBtn a:hover{
-  background:rgba(255,255,255,.1);
-}
-
-/* ================= HERO CONTENT ================= */
+/* ================= CONTENT ================= */
 
 .content{
   position:relative;
@@ -119,51 +102,8 @@ h1{
   font-size:clamp(34px,5vw,52px);
   font-weight:900;
   margin:0;
-  line-height:1.2;
 }
 
-.highlight{
-  margin-top:18px;
-  font-size:26px;
-  font-weight:900;
-  background:linear-gradient(90deg,var(--purple1),var(--purple2));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-.sub{
-  margin-top:28px;
-  font-size:18px;
-  line-height:1.8;
-  color:rgba(255,255,255,.9);
-}
-
-.cta{
-  margin-top:45px;
-}
-
-.cta a{
-  display:inline-block;
-  padding:18px 44px;
-  border-radius:999px;
-  font-size:20px;
-  font-weight:900;
-  text-decoration:none;
-  color:#fff;
-  background:linear-gradient(90deg,var(--purple2),var(--purple4));
-  box-shadow:0 25px 60px rgba(124,58,237,.45);
-  transition:.25s;
-}
-
-.cta a:hover{
-  transform:translateY(-4px);
-}
-
-.fine{
-  margin-top:18px;
-  font-size:14px;
-  color:rgba(255,255,255,.6);
-}
 </style>
 </head>
 
@@ -171,39 +111,30 @@ h1{
 
 <section class="hero">
   <div class="topBar">
+
     <div class="logoTop">
       <img class="logo logo-ar active"
            src="https://image2url.com/r2/default/images/1772135007677-7f7fd4b7-f200-4984-9f3b-a81d51cf2361.png"
            alt="RIWAY عربي">
+
       <img class="logo logo-en"
            src="https://image2url.com/r2/default/images/1772139329030-82b504d7-43a0-4a45-89ed-4de73b26fab4.png"
            alt="RIWAY English">
     </div>
 
-    <div class="loginBtn"><a href="#">تسجيل الدخول</a></div>
   </div>
 
   <div class="content">
     <h1>كل الترفيه اللي بدك ياه</h1>
-    <div class="highlight">شهر مجاني لأول مرة</div>
-    <div class="sub">
-      قنوات مباشرة، رياضة، أفلام ومسلسلات بجودة عالية
-      وتجربة مشاهدة احترافية على الهاتف والتلفاز.
-    </div>
-    <div class="cta">
-      <a href="#">ابدأ الشهر المجاني</a>
-    </div>
-    <div class="fine">إلغاء في أي وقت • بدون التزام</div>
   </div>
 </section>
 
 <script>
-/* ===== Logo Switch (Arabic longer) ===== */
 const logoAr = document.querySelector(".logo-ar");
 const logoEn = document.querySelector(".logo-en");
 
-const AR_DURATION = 6000;
-const EN_DURATION = 2500;
+const AR_DURATION = 7000;  // العربي أطول
+const EN_DURATION = 3000;  // الإنجليزي أقصر
 
 function showArabic(){
   logoEn.classList.remove("active");
