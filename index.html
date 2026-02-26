@@ -55,11 +55,19 @@ body{
 }
 
 /* تعتيم غامق */
+.hero{
+  position:relative;
+}
+
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,.80));
+  background:
+    linear-gradient(to bottom,
+      rgba(0,0,0,.35) 60%,
+      rgba(0,0,0,.95) 100%
+    );
 }
 
 /* ================= TOP BAR ================= */
