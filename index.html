@@ -70,11 +70,27 @@ body{
   z-index:5;
 }
 
-.logoTop img{
-  height:75px;
+/* ===== Logo Animation (Arabic <-> English) ===== */
+.logoTop{
+  position:relative;
+  height:78px;
+  display:flex;
+  align-items:center;
+}
+
+.logoTop .logo{
+  position:absolute;
+  height:70px;      /* كبرته */
   width:auto;
-  display:block;
+  opacity:0;
+  transition:opacity .6s ease-in-out, transform .6s ease-in-out;
+  transform:scale(.96);
   filter: drop-shadow(0 0 18px rgba(168,85,247,.5));
+}
+
+.logoTop .logo.active{
+  opacity:1;
+  transform:scale(1);
 }
 
 .loginBtn a{
@@ -149,7 +165,7 @@ h1{
   color:rgba(255,255,255,.6);
 }
 
-/* ================= RAMADAN IMAGE ================= */
+/* ================= RAMADAN IMAGE (banner) ================= */
 
 .ramadan{
   padding:100px 0;
@@ -164,7 +180,7 @@ h1{
   box-shadow:0 40px 80px rgba(0,0,0,.6);
 }
 
-/* ================= FULL SCREEN IMAGE ================= */
+/* ================= FULL SCREEN IMAGE (NO TEXT) ================= */
 
 .lanternFull{
   position:relative;
@@ -177,6 +193,7 @@ h1{
   overflow:hidden;
 }
 
+/* تعتيم بسيط فقط (بدون كلام) */
 .lanternFull::after{
   content:"";
   position:absolute;
@@ -227,8 +244,14 @@ h1{
 <section class="hero">
   <div class="topBar">
     <div class="logoTop">
-      <img src="https://image2url.com/r2/default/images/1772135007677-7f7fd4b7-f200-4984-9f3b-a81d51cf2361.png" alt="MEEM TV">
+      <img class="logo logo-ar active"
+           src="https://image2url.com/r2/default/images/1772135007677-7f7fd4b7-f200-4984-9f3b-a81d51cf2361.png"
+           alt="RIWAY عربي">
+      <img class="logo logo-en"
+           src="https://image2url.com/r2/default/images/1772139329030-82b504d7-43a0-4a45-89ed-4de73b26fab4.png"
+           alt="RIWAY English">
     </div>
+
     <div class="loginBtn"><a href="#">تسجيل الدخول</a></div>
   </div>
 
@@ -250,6 +273,7 @@ h1{
   <img src="https://plain-eeur-prod-public.komododecks.com/202602/26/Ajfrfd4BaYOD3j8X1ItX/image.jpg" alt="">
 </section>
 
+<!-- الصورة الكبيرة بدون أي كلام -->
 <section class="lanternFull"></section>
 
 <div class="bottomBar" id="bottomBar">
@@ -268,6 +292,18 @@ window.addEventListener("scroll", () => {
     bottomBar.classList.remove("show");
   }
 });
+
+/* ===== Logo Switch Animation ===== */
+const logos = document.querySelectorAll(".logo");
+let current = 0;
+
+function switchLogo(){
+  logos.forEach(l => l.classList.remove("active"));
+  logos[current].classList.add("active");
+  current = (current + 1) % logos.length;
+}
+
+setInterval(switchLogo, 3000); // كل 3 ثواني
 </script>
 
 </body>
