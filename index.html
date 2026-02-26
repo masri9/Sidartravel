@@ -23,6 +23,7 @@
 }
 
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:"Cairo", system-ui, -apple-system;
@@ -85,18 +86,23 @@ h1{
   line-height:1.1;
   margin:0;
   font-weight:900;
-  background:linear-gradient(90deg,var(--purple1),var(--purple3));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  text-shadow:0 0 40px rgba(192,132,252,.35);
 }
 
-/* Highlight */
+/* White main title */
+.main-title{
+  display:block;
+  color:#ffffff;
+  text-shadow:0 0 25px rgba(255,255,255,.15);
+}
+
+/* Purple highlight line */
 .highlight{
   display:block;
   margin-top:14px;
   font-size:clamp(22px,3.5vw,30px);
-  color:var(--purple2);
+  background:linear-gradient(90deg,var(--purple1),var(--purple3));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
   text-shadow:0 0 30px rgba(192,132,252,.45);
 }
 
@@ -202,7 +208,7 @@ h1{
   cursor:pointer;
 }
 
-/* Animations */
+/* Animation */
 @keyframes slowZoom{
   from{transform:scale(1.1);}
   to{transform:scale(1.18);}
@@ -222,9 +228,9 @@ h1{
     <div class="logo">MEEM TV</div>
 
     <h1>
-  <span class="main-title">كل الترفيه اللي بدك ياه</span>
-  <span class="highlight">شهر مجاني لأول مرة</span>
-</h1>
+      <span class="main-title">كل الترفيه اللي بدك ياه</span>
+      <span class="highlight">شهر مجاني لأول مرة</span>
+    </h1>
 
     <div class="sub">
       قنوات مباشرة، رياضة، أفلام ومسلسلات بجودة عالية وتجربة مشاهدة احترافية على الهاتف والتلفاز.
