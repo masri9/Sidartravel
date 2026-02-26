@@ -8,24 +8,35 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;900&display=swap" rel="stylesheet">
 
 <style>
-
 :root{
   --purple1:#d8b4fe;
   --purple2:#a855f7;
   --purple3:#7c3aed;
   --purple4:#3b0764;
+
+  /* خلفيات غامقة (مش بنفسجي قوي) */
+  --bg:#0b0f16;
+  --bg2:#0f1520;
+  --line: rgba(255,255,255,.10);
+
+  --text: rgba(255,255,255,.95);
+  --muted: rgba(255,255,255,.75);
+  --muted2: rgba(255,255,255,.60);
 }
 
 *{box-sizing:border-box}
 
+html,body{height:100%}
+
 body{
   margin:0;
   font-family:"Cairo",sans-serif;
-  background:#140028;
-  color:#fff;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
 }
 
-/* HERO */
+/* ===================== HERO (كما هو) ===================== */
 .hero{
   position:relative;
   min-height:100vh;
@@ -35,6 +46,7 @@ body{
   text-align:center;
   padding:40px 20px;
   overflow:hidden;
+  background:var(--bg);
 }
 
 /* الخلفية */
@@ -45,17 +57,18 @@ body{
   background-image:url("https://plain-eeur-prod-public.komododecks.com/202602/26/DS5JHAyGBmDJzW1ERH1Z/image.png");
   background-size:cover;
   background-position:center;
-  filter:brightness(.95) contrast(1.1);
-  transform:scale(1.05);
+  filter:brightness(.98) contrast(1.12);
+  transform:scale(1.06);
 }
 
-/* التعتيم الأسود فقط */
+/* تعتيم غامق + لمسة بسيطة */
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
   background:
-    linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.75));
+    radial-gradient(900px 520px at 50% 15%, rgba(124,58,237,.18), rgba(0,0,0,0) 60%),
+    linear-gradient(to bottom, rgba(0,0,0,.40), rgba(0,0,0,.78));
 }
 
 /* المحتوى */
@@ -70,6 +83,7 @@ body{
   font-size:20px;
   margin-bottom:25px;
   letter-spacing:1px;
+  text-shadow:0 10px 40px rgba(0,0,0,.6);
 }
 
 h1{
@@ -88,14 +102,14 @@ h1{
   background:linear-gradient(90deg,var(--purple1),var(--purple2));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  text-shadow:0 5px 25px rgba(168,85,247,.6);
+  text-shadow:0 6px 26px rgba(168,85,247,.55);
 }
 
 .sub{
   margin-top:28px;
   font-size:18px;
   line-height:1.8;
-  color:rgba(255,255,255,.9);
+  color:rgba(255,255,255,.90);
   text-shadow:0 5px 25px rgba(0,0,0,.6);
 }
 
@@ -114,12 +128,12 @@ h1{
   color:#fff;
   background:linear-gradient(90deg,var(--purple2),var(--purple4));
   box-shadow:0 30px 70px rgba(124,58,237,.45);
-  transition:.3s;
+  transition:.25s;
 }
 
 .cta a:hover{
   transform:translateY(-4px);
-  box-shadow:0 40px 90px rgba(124,58,237,.7);
+  box-shadow:0 40px 90px rgba(124,58,237,.65);
 }
 
 .fine{
@@ -128,11 +142,202 @@ h1{
   color:rgba(255,255,255,.65);
 }
 
+/* Anchor used to detect when CTA is out of view */
+#ctaSentinel{
+  display:block;
+  height:1px;
+}
+
+/* ===================== SECTIONS BELOW ===================== */
+.sections{
+  background: linear-gradient(to bottom, rgba(11,15,22,1), rgba(15,21,32,1));
+  padding: 28px 0 140px; /* مساحة للبوتوم بار */
+}
+
+.sec{
+  padding: 34px 18px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+.secInner{
+  width:min(980px, 92vw);
+  margin: 0 auto;
+  display:grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 22px;
+  align-items:center;
+}
+
+.secTitle{
+  margin:0 0 10px;
+  font-size: clamp(26px, 4.3vw, 40px);
+  font-weight:900;
+  line-height:1.15;
+}
+
+.secDesc{
+  margin:0 0 16px;
+  color: var(--muted);
+  line-height:1.9;
+  font-weight:700;
+  font-size:15px;
+}
+
+.secList{
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap: 12px;
+}
+
+.secList li{
+  display:flex;
+  align-items:flex-start;
+  gap: 12px;
+  color: rgba(255,255,255,.82);
+  font-weight:800;
+  line-height:1.8;
+}
+
+.checkIcon{
+  width:22px;height:22px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(168,85,247,.18);
+  color: var(--purple1);
+  flex: 0 0 auto;
+  margin-top: 4px;
+  font-weight: 900;
+}
+
+.mock{
+  height: 230px;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,.10);
+  background:
+    radial-gradient(900px 360px at 30% 10%, rgba(124,58,237,.25), rgba(0,0,0,0) 60%),
+    rgba(255,255,255,.04);
+  box-shadow: 0 22px 70px rgba(0,0,0,.38);
+  position:relative;
+  overflow:hidden;
+}
+
+.mock::before{
+  content:"";
+  position:absolute;
+  inset:-40px;
+  background:
+    radial-gradient(circle at 25% 35%, rgba(216,180,254,.20), transparent 55%),
+    radial-gradient(circle at 70% 65%, rgba(124,58,237,.18), transparent 60%);
+  filter: blur(8px);
+}
+
+.mock .label{
+  position:absolute;
+  top: 14px;
+  inset-inline-start: 14px;
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.12);
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 900;
+  color: rgba(255,255,255,.92);
+}
+
+/* زر/رابط مثل "اعرف المزيد" */
+.secLink{
+  display:inline-block;
+  margin-top: 14px;
+  color: var(--purple1);
+  text-decoration:none;
+  font-weight:900;
+  border-bottom: 2px solid rgba(216,180,254,.55);
+  padding-bottom: 2px;
+}
+
+/* ===================== BOTTOM STICKY BAR (يظهر بعد النزول) ===================== */
+.bottomBar{
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 18px;
+  padding: 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  backdrop-filter: blur(12px);
+  z-index: 60;
+
+  /* hidden by default */
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: .22s ease;
+}
+
+.bottomBar.show{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.bbInfo{
+  display:flex;
+  flex-direction:column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.bbInfo .big{
+  color: rgba(255,255,255,.92);
+  font-weight: 900;
+  font-size: 14px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.bbInfo .small{
+  color: rgba(255,255,255,.65);
+  font-weight: 800;
+  font-size: 13px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.bbBtn{
+  border:0;
+  cursor:pointer;
+  padding: 14px 18px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 16px;
+  color:#fff;
+  background: linear-gradient(90deg, var(--purple2), var(--purple4));
+  box-shadow: 0 18px 55px rgba(124,58,237,.35);
+  flex: 0 0 auto;
+}
+
+@media (max-width: 820px){
+  .secInner{grid-template-columns:1fr}
+  .mock{height: 210px}
+  .cta a{padding:18px 52px}
+}
 </style>
 </head>
 
 <body>
 
+<!-- ===================== HERO (ثابت مثل ما هو) ===================== -->
 <section class="hero">
   <div class="content">
 
@@ -147,9 +352,12 @@ h1{
       وتجربة مشاهدة احترافية على الهاتف والتلفاز.
     </div>
 
-    <div class="cta">
-      <a href="#">ابدأ الشهر المجاني</a>
+    <div class="cta" id="heroCta">
+      <a href="#plans">ابدأ الشهر المجاني</a>
     </div>
+
+    <!-- Sentinel: بمجرد ما يطلع من الشاشة، نظهر الـ bottom bar -->
+    <span id="ctaSentinel"></span>
 
     <div class="fine">
       إلغاء في أي وقت • بدون التزام
@@ -157,6 +365,97 @@ h1{
 
   </div>
 </section>
+
+<!-- ===================== SECTIONS (تحت) ===================== -->
+<section class="sections" id="plans">
+
+  <div class="sec">
+    <div class="secInner">
+      <div>
+        <h2 class="secTitle">قنوات مباشرة + مكتبة VOD</h2>
+        <p class="secDesc">
+          محتوى متجدد، تجربة سلسة، وواجهة بسيطة — كل شيء بمكان واحد.
+        </p>
+        <ul class="secList">
+          <li><span class="checkIcon">✓</span>قنوات عربية وتركية وعالمية</li>
+          <li><span class="checkIcon">✓</span>مكتبة أفلام ومسلسلات تُحدّث باستمرار</li>
+          <li><span class="checkIcon">✓</span>تشغيل على الهاتف + Android TV + Smart TV</li>
+        </ul>
+        <a class="secLink" href="#more">اعرف المزيد</a>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="label">LIVE • VOD</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" id="more">
+    <div class="secInner">
+      <div>
+        <h2 class="secTitle">رياضة لعشاق المباريات</h2>
+        <p class="secDesc">
+          بث مباشر، متابعة سهلة، وجودة قوية حسب سرعة الإنترنت.
+        </p>
+        <ul class="secList">
+          <li><span class="checkIcon">✓</span>قنوات رياضية مختارة</li>
+          <li><span class="checkIcon">✓</span>ملخصات وبرامج رياضية</li>
+          <li><span class="checkIcon">✓</span>جودة HD/4K حسب الباقة</li>
+        </ul>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="label">SPORT • 4K</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="secInner">
+      <div>
+        <h2 class="secTitle">اختَر باقتك بسهولة</h2>
+        <p class="secDesc">
+          شهر مجاني لأول مرة ثم اشتراك شهري — إلغاء بأي وقت.
+        </p>
+        <ul class="secList">
+          <li><span class="checkIcon">✓</span>FREE 2 (حتى جهازين)</li>
+          <li><span class="checkIcon">✓</span>FREE 5 (حتى 5 أجهزة)</li>
+          <li><span class="checkIcon">✓</span>دفع سريع وآمن</li>
+        </ul>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="label">PLANS</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ===================== BOTTOM STICKY BAR (مثل الصورة الثانية) ===================== -->
+<div class="bottomBar" id="bottomBar">
+  <button class="bbBtn" onclick="document.querySelector('#heroCta a')?.click()">ابدأ الشهر المجاني</button>
+  <div class="bbInfo">
+    <div class="big">MEEM TV • اشتراك شهري</div>
+    <div class="small">ابتداءً من ₪44.90 / شهر بعد التجربة</div>
+  </div>
+</div>
+
+<script>
+  // Show bottom bar when CTA is out of view
+  const sentinel = document.getElementById('ctaSentinel');
+  const bottomBar = document.getElementById('bottomBar');
+
+  const obs = new IntersectionObserver((entries) => {
+    const entry = entries[0];
+    // إذا السنـتنل ظاهر (يعني لسا ضمن HERO) -> اخفي البار
+    // إذا مش ظاهر (نزلنا لتحت) -> اظهر البار
+    if (entry.isIntersecting) {
+      bottomBar.classList.remove('show');
+    } else {
+      bottomBar.classList.add('show');
+    }
+  }, { threshold: 0.01 });
+
+  obs.observe(sentinel);
+</script>
 
 </body>
 </html>
