@@ -70,9 +70,10 @@ body{
   z-index:5;
 }
 
-.logoTop{
-  font-weight:900;
-  font-size:20px;
+.logoTop img{
+  height:32px;
+  width:auto;
+  display:block;
 }
 
 .loginBtn a{
@@ -147,7 +148,7 @@ h1{
   color:rgba(255,255,255,.6);
 }
 
-/* ================= RAMADAN IMAGE (banner) ================= */
+/* ================= RAMADAN IMAGE ================= */
 
 .ramadan{
   padding:100px 0;
@@ -162,7 +163,7 @@ h1{
   box-shadow:0 40px 80px rgba(0,0,0,.6);
 }
 
-/* ================= FULL SCREEN IMAGE (NO TEXT) ================= */
+/* ================= FULL SCREEN IMAGE ================= */
 
 .lanternFull{
   position:relative;
@@ -175,7 +176,6 @@ h1{
   overflow:hidden;
 }
 
-/* تعتيم بسيط فقط (بدون كلام) */
 .lanternFull::after{
   content:"";
   position:absolute;
@@ -225,7 +225,9 @@ h1{
 
 <section class="hero">
   <div class="topBar">
-    <div class="logoTop">MEEM TV</div>
+    <div class="logoTop">
+      <img src="https://image2url.com/r2/default/images/1772135007677-7f7fd4b7-f200-4984-9f3b-a81d51cf2361.png" alt="MEEM TV">
+    </div>
     <div class="loginBtn"><a href="#">تسجيل الدخول</a></div>
   </div>
 
@@ -247,7 +249,6 @@ h1{
   <img src="https://plain-eeur-prod-public.komododecks.com/202602/26/Ajfrfd4BaYOD3j8X1ItX/image.jpg" alt="">
 </section>
 
-<!-- الصورة الكبيرة بدون أي كلام -->
 <section class="lanternFull"></section>
 
 <div class="bottomBar" id="bottomBar">
