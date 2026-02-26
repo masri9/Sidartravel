@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MEEM TV - Plan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{ --purple2:#C084FC; --purple4:#5B21B6; --line:#e5e7eb; --ink:#111827; --ink2:#374151; --muted:#6b7280; }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"Cairo",system-ui;background:#fff;color:var(--ink)}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:18px 18px 8px;position:sticky;top:0;background:#fff;border-bottom:1px solid #f2f2f2}
+    .link{border:0;background:transparent;cursor:pointer;font-weight:900;color:var(--ink2);padding:8px 10px;border-radius:10px;text-decoration:none}
+    .brand{font-weight:900;font-size:20px}
+    .page{width:min(560px,92vw);margin:0 auto;padding:22px 0 120px}
+    .step{color:var(--muted);font-weight:900;font-size:13px;text-align:center;margin-top:6px}
+    .title{text-align:center;font-size:34px;line-height:1.2;font-weight:900;margin:14px 0 10px}
+    .desc{text-align:center;color:var(--ink2);margin:0 auto 22px;line-height:1.8}
+
+    .pricing-top{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0 22px}
+    .price-tile{
+      background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;
+      box-shadow:0 10px 25px rgba(17,24,39,.06);
+      cursor:pointer;position:relative;min-height:120px;transition:.2s;
+    }
+    .price-tile.selected{border-color:rgba(139,92,246,.7);outline:3px solid rgba(139,92,246,.12)}
+    .ribbon{
+      position:absolute;top:12px;inset-inline-start:12px;padding:6px 10px;border-radius:999px;
+      background:rgba(16,185,129,.12);color:#047857;font-weight:900;font-size:12px;border:1px solid rgba(16,185,129,.18);
+    }
+    .ptitle{font-weight:900;color:#111827}
+    .pprice{font-size:44px;font-weight:900;margin-top:10px}
+    .punit{color:var(--muted);font-weight:900}
+
+    .plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+    .plan{
+      border:1px solid var(--line);border-radius:18px;padding:16px;background:#fff;
+      box-shadow:0 10px 25px rgba(17,24,39,.06);
+      cursor:pointer;position:relative;transition:.2s;min-height:280px;
+      display:flex;flex-direction:column;justify-content:space-between;
+    }
+    .plan.selected{border-color:rgba(139,92,246,.75);outline:3px solid rgba(139,92,246,.12)}
+    .badge{
+      position:absolute;top:12px;inset-inline-start:12px;background:rgba(16,185,129,.12);color:#047857;border:1px solid rgba(16,185,129,.18);
+      padding:6px 10px;border-radius:999px;font-weight:900;font-size:12px
+    }
+    .plan h3{margin:18px 0 0;font-size:22px;font-weight:900}
+    .plan .meta{color:var(--muted);font-weight:900;margin-top:6px}
+    .plan .check{font-size:32px;font-weight:900;opacity:.75;margin-top:10px}
+    .plan .amount{font-size:54px;font-weight:900;margin-top:18px}
+
+    .bullets{margin:14px 0 18px;padding:0;list-style:none;color:var(--ink2);line-height:1.9}
+    .bullets li{display:flex;gap:10px;align-items:flex-start;margin:10px 0;font-weight:900}
+    .tick{width:22px;height:22px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:rgba(139,92,246,.12);color:var(--purple4);margin-top:2px;font-weight:900}
+
+    .footer-sticky{position:fixed;left:0;right:0;bottom:0;background:linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,.85));border-top:1px solid var(--line);padding:12px 16px 18px}
+    .inner{width:min(560px,92vw);margin:0 auto}
+    .btn{width:100%;padding:18px;border:0;border-radius:999px;font-weight:900;font-size:18px;cursor:pointer;color:#fff;background:linear-gradient(90deg,var(--purple2),var(--purple4));box-shadow:0 20px 55px rgba(139,92,246,.25)}
+    .btn:disabled{opacity:.55;cursor:not-allowed;box-shadow:none}
+
+    @media (max-width:520px){ .pricing-top,.plan-grid{grid-template-columns:1fr} .title{font-size:30px} }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="link" href="otp.html">رجوع</a>
+    <div class="brand">MEEM TV</div>
+    <button class="link" onclick="alert('تسجيل الدخول لاحقاً')">دخول</button>
+  </div>
+
+  <div class="page">
+    <div class="step">الخطوة 2 من 3</div>
+    <div class="title">اختر الباقة المناسبة لك</div>
+    <div class="desc">جرّب شهر مجاني ثم ادفع شهرياً حسب الباقة.</div>
+
+    <div class="pricing-top">
+      <div class="price-tile" data-plan="FREE5">
+        <div class="ribbon">الأكثر شيوعاً</div>
+        <div class="ptitle">FREE 5</div>
+        <div class="pprice">59.90 <span class="punit">₪ / شهر</span></div>
+      </div>
+      <div class="price-tile" data-plan="FREE2">
+        <div class="ptitle">FREE 2</div>
+        <div class="pprice">44.90 <span class="punit">₪ / شهر</span></div>
+      </div>
+    </div>
+
+    <div class="plan-grid">
+      <div class="plan" data-plan="FREE5">
+        <div class="badge">المفضلة</div>
+        <div>
+          <h3>حتى 5 أجهزة</h3>
+          <div class="meta">4K • شهر مجاني</div>
+          <div class="check">✓</div>
+        </div>
+        <div class="amount">₪59.9</div>
+      </div>
+
+      <div class="plan" data-plan="FREE2">
+        <div>
+          <h3>حتى جهازين</h3>
+          <div class="meta">4K • شهر مجاني</div>
+          <div class="check">✓</div>
+        </div>
+        <div class="amount">₪44.9</div>
+      </div>
+    </div>
+
+    <ul class="bullets">
+      <li><span class="tick">✓</span>شهر مجاني للمشتركين الجدد</li>
+      <li><span class="tick">✓</span>سعر ثابت شهرياً</li>
+      <li><span class="tick">✓</span>إلغاء في أي وقت</li>
+    </ul>
+  </div>
+
+  <div class="footer-sticky">
+    <div class="inner">
+      <button id="next" class="btn" disabled>متابعة للدفع</button>
+    </div>
+  </div>
+
+  <script>
+    const next = document.getElementById('next');
+    let selected = null;
+
+    function select(plan){
+      selected = plan;
+      document.querySelectorAll('[data-plan]').forEach(el => el.classList.remove('selected'));
+      document.querySelectorAll('[data-plan="'+plan+'"]').forEach(el => el.classList.add('selected'));
+      next.disabled = false;
+      try{ localStorage.setItem('meem_plan', plan); }catch(e){}
+    }
+
+    document.querySelectorAll('.price-tile, .plan').forEach(el=>{
+      el.addEventListener('click', ()=> select(el.getAttribute('data-plan')));
+    });
+
+    // preload
+    try{
+      const saved = localStorage.getItem('meem_plan');
+      if(saved) select(saved);
+    }catch(e){}
+
+    next.addEventListener('click', ()=> window.location.href='pay.html');
+  </script>
+</body>
+</html>
