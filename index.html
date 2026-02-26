@@ -9,9 +9,12 @@
 
 <style>
 :root{
+  --purple1:#d8b4fe;
   --purple2:#a855f7;
+  --purple3:#7c3aed;
   --purple4:#3b0764;
   --bg:#0b0f16;
+  --bg2:#0f1520;
 }
 
 *{box-sizing:border-box}
@@ -21,7 +24,7 @@ body{
   font-family:"Cairo",sans-serif;
   background:var(--bg);
   color:#fff;
-  overflow:hidden;
+  overflow-x:hidden;
 }
 
 /* ================= HERO ================= */
@@ -54,6 +57,8 @@ body{
   background:linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,.80));
 }
 
+/* ================= TOP BAR ================= */
+
 .topBar{
   position:absolute;
   top:25px;
@@ -65,11 +70,11 @@ body{
   z-index:5;
 }
 
-/* ===== Premium Logo Animation ===== */
+/* ===== Premium Logo Animation (Arabic <-> English images) ===== */
 
 .logoTop{
   position:relative;
-  height:90px;
+  height:92px;
   display:flex;
   align-items:center;
   overflow:hidden;
@@ -77,10 +82,10 @@ body{
 
 .logoTop img{
   position:absolute;
-  height:85px; /* نفس الحجم للعربي والانجليزي */
+  height:85px;              /* نفس الحجم للعربي والانجليزي */
   width:auto;
   opacity:0;
-  transform:translateY(20px) scale(0.95);
+  transform:translateY(18px) scale(.96);
   transition:all 1s cubic-bezier(.19,1,.22,1);
   filter: drop-shadow(0 0 22px rgba(168,85,247,.45));
 }
@@ -90,18 +95,228 @@ body{
   transform:translateY(0) scale(1);
 }
 
-/* ================= CONTENT ================= */
+.loginBtn a{
+  text-decoration:none;
+  font-weight:800;
+  font-size:14px;
+  color:#fff;
+  padding:10px 18px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.25);
+}
+
+.loginBtn a:hover{
+  background:rgba(255,255,255,.1);
+}
+
+/* ================= HERO CONTENT ================= */
 
 .content{
   position:relative;
   z-index:2;
-  max-width:750px;
+  max-width:780px;
 }
 
 h1{
   font-size:clamp(34px,5vw,52px);
   font-weight:900;
   margin:0;
+  line-height:1.2;
+}
+
+.highlight{
+  margin-top:18px;
+  font-size:26px;
+  font-weight:900;
+  background:linear-gradient(90deg,var(--purple1),var(--purple2));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.sub{
+  margin-top:28px;
+  font-size:18px;
+  line-height:1.8;
+  color:rgba(255,255,255,.9);
+}
+
+.cta{
+  margin-top:45px;
+}
+
+.cta a{
+  display:inline-block;
+  padding:18px 44px;
+  border-radius:999px;
+  font-size:20px;
+  font-weight:900;
+  text-decoration:none;
+  color:#fff;
+  background:linear-gradient(90deg,var(--purple2),var(--purple4));
+  box-shadow:0 25px 60px rgba(124,58,237,.45);
+  transition:.25s;
+}
+
+.cta a:hover{ transform:translateY(-4px); }
+
+.fine{
+  margin-top:18px;
+  font-size:14px;
+  color:rgba(255,255,255,.6);
+}
+
+/* ================= PRICING ================= */
+
+.pricing{
+  background:var(--bg2);
+  padding:90px 20px 110px;
+}
+
+.pricingWrap{
+  max-width:1100px;
+  margin:0 auto;
+}
+
+.pricingHeader{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.pricingHeader h2{
+  margin:0;
+  font-size:clamp(28px,4vw,40px);
+  font-weight:900;
+}
+
+.pricingHeader p{
+  margin:14px 0 0;
+  color:rgba(255,255,255,.75);
+  line-height:1.9;
+}
+
+.planGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+.plan{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:22px;
+  padding:26px 22px;
+  backdrop-filter: blur(10px);
+  position:relative;
+  overflow:hidden;
+}
+
+.plan::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background:radial-gradient(600px 200px at 50% 0%, rgba(168,85,247,.22), transparent 60%);
+  pointer-events:none;
+}
+
+.planTitle{
+  position:relative;
+  font-weight:900;
+  font-size:18px;
+  margin:0 0 10px;
+}
+
+.priceRow{
+  position:relative;
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+  margin:6px 0 10px;
+}
+
+.price{
+  font-size:36px;
+  font-weight:900;
+  letter-spacing:.3px;
+}
+
+.per{
+  color:rgba(255,255,255,.65);
+  font-weight:700;
+}
+
+.badge{
+  position:absolute;
+  top:18px;
+  left:18px;
+  background:linear-gradient(90deg,var(--purple2),var(--purple4));
+  padding:7px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+}
+
+.features{
+  position:relative;
+  margin:16px 0 18px;
+  padding:0;
+  list-style:none;
+  color:rgba(255,255,255,.78);
+  line-height:2.0;
+  font-size:14px;
+}
+
+.features li{ margin:6px 0; }
+
+.planBtn{
+  position:relative;
+  display:block;
+  text-align:center;
+  padding:14px 16px;
+  border-radius:999px;
+  font-weight:900;
+  text-decoration:none;
+  color:#fff;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  transition:.25s;
+}
+
+.planBtn:hover{
+  transform:translateY(-3px);
+  background:rgba(255,255,255,.12);
+}
+
+.plan.plan--featured{
+  border-color:rgba(168,85,247,.40);
+  box-shadow:0 30px 80px rgba(124,58,237,.25);
+}
+
+.plan.plan--featured .planBtn{
+  background:linear-gradient(90deg,var(--purple2),var(--purple4));
+  border:0;
+}
+
+.notePay{
+  margin-top:26px;
+  text-align:center;
+  color:rgba(255,255,255,.65);
+  font-size:14px;
+  line-height:1.9;
+}
+
+.payMethods{
+  margin-top:10px;
+  font-weight:800;
+  color:rgba(255,255,255,.75);
+}
+
+/* ================= Responsive ================= */
+
+@media (max-width: 980px){
+  .planGrid{ grid-template-columns:1fr; }
+  .topBar{ left:18px; right:18px; }
+  .logoTop{ height:82px; }
+  .logoTop img{ height:72px; }
 }
 
 </style>
@@ -122,14 +337,93 @@ h1{
            alt="RIWAY English">
     </div>
 
+    <div class="loginBtn"><a href="#">تسجيل الدخول</a></div>
   </div>
 
   <div class="content">
     <h1>كل الترفيه اللي بدك ياه</h1>
+    <div class="highlight">شهر مجاني لأول مرة</div>
+    <div class="sub">
+      قنوات مباشرة، رياضة، أفلام ومسلسلات بجودة عالية
+      وتجربة مشاهدة احترافية على الهاتف والتلفاز.
+    </div>
+    <div class="cta">
+      <a href="#pricing">ابدأ الشهر المجاني</a>
+    </div>
+    <div class="fine">إلغاء في أي وقت • بدون التزام</div>
+  </div>
+</section>
+
+<!-- ================= PRICING SECTION ================= -->
+<section class="pricing" id="pricing">
+  <div class="pricingWrap">
+
+    <div class="pricingHeader">
+      <h2>خطط الاشتراك والدفع</h2>
+      <p>اختر الخطة المناسبة وابدأ فوراً. كل الخطط تشمل تحديثات مستمرة وتجربة مشاهدة احترافية.</p>
+    </div>
+
+    <div class="planGrid">
+
+      <div class="plan">
+        <h3 class="planTitle">باقة أساسية</h3>
+        <div class="priceRow">
+          <div class="price">₪29.90</div>
+          <div class="per">/ شهر</div>
+        </div>
+        <ul class="features">
+          <li>قنوات مباشرة (أساسية)</li>
+          <li>جودة HD</li>
+          <li>جهاز واحد</li>
+          <li>دعم عبر واتساب</li>
+        </ul>
+        <a class="planBtn" href="#">اشترك الآن</a>
+      </div>
+
+      <div class="plan plan--featured">
+        <div class="badge">الأكثر طلباً</div>
+        <h3 class="planTitle">باقة بلس</h3>
+        <div class="priceRow">
+          <div class="price">₪44.90</div>
+          <div class="per">/ شهر</div>
+        </div>
+        <ul class="features">
+          <li>قنوات + رياضة</li>
+          <li>جودة HD &amp; 4K</li>
+          <li>جهازين</li>
+          <li>مشاهدة بدون تقطيع (حسب الاتصال)</li>
+        </ul>
+        <a class="planBtn" href="#">ابدأ الآن</a>
+      </div>
+
+      <div class="plan">
+        <h3 class="planTitle">باقة بريميوم</h3>
+        <div class="priceRow">
+          <div class="price">₪69.90</div>
+          <div class="per">/ شهر</div>
+        </div>
+        <ul class="features">
+          <li>كل المحتوى + باقات رياضية</li>
+          <li>أفضل جودة 4K</li>
+          <li>حتى 4 أجهزة</li>
+          <li>أولوية بالدعم</li>
+        </ul>
+        <a class="planBtn" href="#">اشترك بريميوم</a>
+      </div>
+
+    </div>
+
+    <div class="notePay">
+      <div>طرق الدفع المتاحة:</div>
+      <div class="payMethods">Visa • MasterCard • Apple Pay • PayPal</div>
+      <div style="margin-top:10px;">ملاحظة: الأسعار قابلة للتعديل حسب الباقات والمناطق.</div>
+    </div>
+
   </div>
 </section>
 
 <script>
+/* ===== Logo Switch (Arabic longer, English shorter) ===== */
 const logoAr = document.querySelector(".logo-ar");
 const logoEn = document.querySelector(".logo-en");
 
