@@ -165,7 +165,7 @@ h1{
   color:rgba(255,255,255,.6);
 }
 
-/* ================= PRICING ================= */
+/* ================= PRICING (2 PLANS) ================= */
 
 .pricing{
   background:var(--bg2);
@@ -173,13 +173,13 @@ h1{
 }
 
 .pricingWrap{
-  max-width:1100px;
+  max-width:980px;
   margin:0 auto;
 }
 
 .pricingHeader{
   text-align:center;
-  margin-bottom:40px;
+  margin-bottom:38px;
 }
 
 .pricingHeader h2{
@@ -196,7 +196,7 @@ h1{
 
 .planGrid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(2,1fr);
   gap:22px;
 }
 
@@ -204,17 +204,23 @@ h1{
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.10);
   border-radius:22px;
-  padding:26px 22px;
+  padding:28px 22px;
   backdrop-filter: blur(10px);
   position:relative;
   overflow:hidden;
+  transition:.25s;
+}
+
+.plan:hover{
+  transform:translateY(-6px);
+  border-color:rgba(168,85,247,.35);
 }
 
 .plan::before{
   content:"";
   position:absolute;
   inset:-2px;
-  background:radial-gradient(600px 200px at 50% 0%, rgba(168,85,247,.22), transparent 60%);
+  background:radial-gradient(600px 220px at 50% 0%, rgba(168,85,247,.22), transparent 60%);
   pointer-events:none;
 }
 
@@ -234,9 +240,10 @@ h1{
 }
 
 .price{
-  font-size:36px;
+  font-size:40px;
   font-weight:900;
   letter-spacing:.3px;
+  color:#fff;
 }
 
 .per{
@@ -286,12 +293,17 @@ h1{
   background:rgba(255,255,255,.12);
 }
 
-.plan.plan--featured{
+/* Featured plan style */
+.plan--featured{
   border-color:rgba(168,85,247,.40);
-  box-shadow:0 30px 80px rgba(124,58,237,.25);
+  box-shadow:0 30px 80px rgba(124,58,237,.22);
 }
 
-.plan.plan--featured .planBtn{
+.plan--featured .price{
+  color:var(--purple1);
+}
+
+.plan--featured .planBtn{
   background:linear-gradient(90deg,var(--purple2),var(--purple4));
   border:0;
 }
@@ -318,7 +330,6 @@ h1{
   .logoTop{ height:82px; }
   .logoTop img{ height:72px; }
 }
-
 </style>
 </head>
 
@@ -342,73 +353,60 @@ h1{
 
   <div class="content">
     <h1>كل الترفيه اللي بدك ياه</h1>
-    <div class="highlight">شهر مجاني لأول مرة</div>
+    <div class="highlight">جرب مجاناً لمدة 24 ساعة</div>
     <div class="sub">
       قنوات مباشرة، رياضة، أفلام ومسلسلات بجودة عالية
       وتجربة مشاهدة احترافية على الهاتف والتلفاز.
     </div>
     <div class="cta">
-      <a href="#pricing">ابدأ الشهر المجاني</a>
+      <a href="#pricing">ابدأ التجربة المجانية</a>
     </div>
     <div class="fine">إلغاء في أي وقت • بدون التزام</div>
   </div>
 </section>
 
-<!-- ================= PRICING SECTION ================= -->
+<!-- ================= PRICING SECTION (2 PLANS) ================= -->
 <section class="pricing" id="pricing">
   <div class="pricingWrap">
 
     <div class="pricingHeader">
-      <h2>خطط الاشتراك والدفع</h2>
-      <p>اختر الخطة المناسبة وابدأ فوراً. كل الخطط تشمل تحديثات مستمرة وتجربة مشاهدة احترافية.</p>
+      <h2>خطط الاشتراك</h2>
+      <p>خُذ تجربة مجانية 24 ساعة، أو اشترك بالخطة الشهرية بسعر ثابت.</p>
     </div>
 
     <div class="planGrid">
 
+      <!-- Free 24h -->
       <div class="plan">
-        <h3 class="planTitle">باقة أساسية</h3>
+        <h3 class="planTitle">تجربة مجانية</h3>
         <div class="priceRow">
-          <div class="price">₪29.90</div>
-          <div class="per">/ شهر</div>
+          <div class="price">₪0</div>
+          <div class="per">/ 24 ساعة</div>
         </div>
         <ul class="features">
-          <li>قنوات مباشرة (أساسية)</li>
+          <li>تفعيل فوري</li>
+          <li>تجربة القنوات والبث</li>
           <li>جودة HD</li>
           <li>جهاز واحد</li>
-          <li>دعم عبر واتساب</li>
+        </ul>
+        <a class="planBtn" href="#">ابدأ التجربة</a>
+      </div>
+
+      <!-- Monthly 25₪ -->
+      <div class="plan plan--featured">
+        <div class="badge">أفضل اختيار</div>
+        <h3 class="planTitle">اشتراك شهري</h3>
+        <div class="priceRow">
+          <div class="price">₪25</div>
+          <div class="per">/ شهر</div>
+        </div>
+        <ul class="features">
+          <li>قنوات مباشرة + رياضة</li>
+          <li>جودة HD &amp; 4K</li>
+          <li>حتى جهازين</li>
+          <li>دعم سريع</li>
         </ul>
         <a class="planBtn" href="#">اشترك الآن</a>
-      </div>
-
-      <div class="plan plan--featured">
-        <div class="badge">الأكثر طلباً</div>
-        <h3 class="planTitle">باقة بلس</h3>
-        <div class="priceRow">
-          <div class="price">₪44.90</div>
-          <div class="per">/ شهر</div>
-        </div>
-        <ul class="features">
-          <li>قنوات + رياضة</li>
-          <li>جودة HD &amp; 4K</li>
-          <li>جهازين</li>
-          <li>مشاهدة بدون تقطيع (حسب الاتصال)</li>
-        </ul>
-        <a class="planBtn" href="#">ابدأ الآن</a>
-      </div>
-
-      <div class="plan">
-        <h3 class="planTitle">باقة بريميوم</h3>
-        <div class="priceRow">
-          <div class="price">₪69.90</div>
-          <div class="per">/ شهر</div>
-        </div>
-        <ul class="features">
-          <li>كل المحتوى + باقات رياضية</li>
-          <li>أفضل جودة 4K</li>
-          <li>حتى 4 أجهزة</li>
-          <li>أولوية بالدعم</li>
-        </ul>
-        <a class="planBtn" href="#">اشترك بريميوم</a>
       </div>
 
     </div>
@@ -416,7 +414,6 @@ h1{
     <div class="notePay">
       <div>طرق الدفع المتاحة:</div>
       <div class="payMethods">Visa • MasterCard • Apple Pay • PayPal</div>
-      <div style="margin-top:10px;">ملاحظة: الأسعار قابلة للتعديل حسب الباقات والمناطق.</div>
     </div>
 
   </div>
