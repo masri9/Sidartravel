@@ -8,17 +8,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;900&display=swap" rel="stylesheet">
 
 <style>
+
 :root{
   --purple1:#d8b4fe;
   --purple2:#a855f7;
   --purple3:#7c3aed;
   --purple4:#3b0764;
-
   --bg:#0b0f16;
   --bg2:#0f1520;
 }
 
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:"Cairo",sans-serif;
@@ -27,39 +28,44 @@ body{
   overflow-x:hidden;
 }
 
-/* ================= HERO FIXED ================= */
+/* ================= HERO ================= */
 
-.heroFixed{
-  position:fixed;
-  inset:0;
-  z-index:0;
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:40px 20px;
+  overflow:hidden;
 }
 
-.heroFixed::before{
+.hero::before{
   content:"";
   position:absolute;
   inset:0;
   background-image:url("https://plain-eeur-prod-public.komododecks.com/202602/26/DS5JHAyGBmDJzW1ERH1Z/image.png");
   background-size:cover;
   background-position:center;
-  filter:brightness(.9) contrast(1.1);
+  filter:brightness(.95) contrast(1.1);
   transform:scale(1.05);
 }
 
-.heroFixed::after{
+.hero::after{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(to bottom, rgba(0,0,0,.4), rgba(0,0,0,.85));
+  background:linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,.80));
 }
 
 /* ================= TOP BAR ================= */
 
 .topBar{
-  position:fixed;
-  top:20px;
-  left:25px;
-  right:25px;
+  position:absolute;
+  top:25px;
+  left:40px;
+  right:40px;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -68,7 +74,7 @@ body{
 
 .logoTop{
   font-weight:900;
-  font-size:18px;
+  font-size:20px;
 }
 
 .loginBtn a{
@@ -76,32 +82,29 @@ body{
   font-weight:800;
   font-size:14px;
   color:#fff;
-  padding:10px 16px;
+  padding:10px 18px;
   border-radius:999px;
-  border:1px solid rgba(255,255,255,.2);
+  border:1px solid rgba(255,255,255,.25);
+  transition:.25s;
+}
+
+.loginBtn a:hover{
+  background:rgba(255,255,255,.1);
 }
 
 /* ================= HERO CONTENT ================= */
 
-.heroContent{
+.content{
   position:relative;
   z-index:2;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:40px 20px;
-}
-
-.content{
-  max-width:760px;
+  max-width:750px;
 }
 
 h1{
   font-size:clamp(34px,5vw,52px);
   font-weight:900;
   margin:0;
+  line-height:1.2;
 }
 
 .highlight{
@@ -114,19 +117,14 @@ h1{
 }
 
 .sub{
-  margin-top:25px;
+  margin-top:28px;
   font-size:18px;
-  line-height:1.9;
+  line-height:1.8;
+  color:rgba(255,255,255,.9);
 }
 
 .cta{
-  margin-top:40px;
-  transition:.3s;
-}
-
-.cta.hide{
-  opacity:0;
-  transform:translateY(10px);
+  margin-top:45px;
 }
 
 .cta a{
@@ -138,81 +136,76 @@ h1{
   text-decoration:none;
   color:#fff;
   background:linear-gradient(90deg,var(--purple2),var(--purple4));
+  box-shadow:0 25px 60px rgba(124,58,237,.45);
+  transition:.3s;
+}
+
+.cta a:hover{
+  transform:translateY(-4px);
 }
 
 .fine{
-  margin-top:15px;
+  margin-top:18px;
   font-size:14px;
   color:rgba(255,255,255,.6);
 }
 
-/* ================= PAGE ================= */
-
-.page{
-  position:relative;
-  z-index:2;
-}
-
-.heroSpacer{
-  height:75vh;
-}
-
-.softDivider{
-  height:60px;
-  background:linear-gradient(to bottom, rgba(0,0,0,0), var(--bg2));
-}
-
 /* ================= RAMADAN SECTION ================= */
 
-.ramadanSection{
-  position:relative;
-  min-height:80vh;
-  background-image:url("https://plain-eeur-prod-public.komododecks.com/202602/26/gR4dMPmtniYNIa9W0HPx/image.png");
-  background-size:cover;
-  background-position:center;
-}
-
-.ramadanSection::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to bottom, rgba(11,15,22,.9), rgba(11,15,22,.5), rgba(11,15,22,.95));
-}
-
-.ramadanInner{
-  position:relative;
-  z-index:2;
-  padding:80px 20px;
+.ramadan{
+  padding:100px 20px 60px;
+  background:var(--bg2);
   text-align:center;
 }
 
-.ramadanInner h2{
-  font-size:38px;
-  font-weight:900;
+.ramadan img{
+  width:min(1100px,95vw);
+  border-radius:20px;
+  box-shadow:0 40px 80px rgba(0,0,0,.6);
 }
 
-.ramadanInner p{
-  font-size:18px;
+/* ================= BIG VISUAL SECTION ================= */
+
+.bigVisual{
+  position:relative;
+  width:100%;
+  height:75vh;
+  background-image:url("https://plain-eeur-prod-public.komododecks.com/202602/26/Ajfrfd4BaYOD3j8X1ItX/image.jpg");
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.bigVisual::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.80));
+}
+
+.bigOverlay{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  max-width:800px;
+  padding:20px;
+}
+
+.bigOverlay h2{
+  font-size:clamp(32px,5vw,50px);
+  font-weight:900;
+  margin:0 0 15px;
+}
+
+.bigOverlay p{
+  font-size:20px;
   color:rgba(255,255,255,.85);
 }
 
-/* ================= NEW IMAGE SECTION ================= */
-
-.middleImage{
-  background:var(--bg2);
-  padding:70px 20px;
-}
-
-.middleImage img{
-  width:100%;
-  max-width:1100px;
-  margin:auto;
-  display:block;
-  border-radius:28px;
-  box-shadow:0 35px 90px rgba(0,0,0,.6);
-}
-
-/* ================= BOTTOM BAR ================= */
+/* ================= BOTTOM STICKY ================= */
 
 .bottomBar{
   position:fixed;
@@ -221,15 +214,15 @@ h1{
   right:15px;
   background:rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.1);
-  padding:12px;
+  backdrop-filter:blur(12px);
+  padding:15px;
   border-radius:20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   opacity:0;
   transform:translateY(10px);
-  transition:.3s;
-  z-index:10;
+  transition:.25s;
 }
 
 .bottomBar.show{
@@ -239,11 +232,12 @@ h1{
 
 .bottomBar button{
   border:0;
-  padding:12px 20px;
+  padding:14px 25px;
   border-radius:999px;
   font-weight:900;
   background:linear-gradient(90deg,var(--purple2),var(--purple4));
   color:#fff;
+  cursor:pointer;
 }
 
 </style>
@@ -251,14 +245,15 @@ h1{
 
 <body>
 
-<div class="heroFixed"></div>
+<section class="hero">
 
-<div class="topBar">
-  <div class="logoTop">MEEM TV</div>
-  <div class="loginBtn"><a href="#">تسجيل الدخول</a></div>
-</div>
+  <div class="topBar">
+    <div class="logoTop">MEEM TV</div>
+    <div class="loginBtn">
+      <a href="#">تسجيل الدخول</a>
+    </div>
+  </div>
 
-<section class="heroContent">
   <div class="content">
     <h1>كل الترفيه اللي بدك ياه</h1>
     <div class="highlight">شهر مجاني لأول مرة</div>
@@ -266,32 +261,26 @@ h1{
       قنوات مباشرة، رياضة، أفلام ومسلسلات بجودة عالية
       وتجربة مشاهدة احترافية على الهاتف والتلفاز.
     </div>
-    <div class="cta" id="heroCta">
+    <div class="cta">
       <a href="#">ابدأ الشهر المجاني</a>
     </div>
-    <div class="fine">إلغاء في أي وقت • بدون التزام</div>
+    <div class="fine">
+      إلغاء في أي وقت • بدون التزام
+    </div>
   </div>
+
 </section>
 
-<div class="page">
+<section class="ramadan">
+  <img src="https://plain-eeur-prod-public.komododecks.com/202602/26/gR4dMPmtniYNIa9W0HPx/image.png">
+</section>
 
-  <div class="heroSpacer"></div>
-  <div class="softDivider"></div>
-
-  <!-- رمضان أولاً -->
-  <section class="ramadanSection">
-    <div class="ramadanInner">
-      <h2>أجواء رمضان على MEEM TV</h2>
-      <p>مسلسلات رمضان • برامج وسهرات • قنوات مباشرة • رياضة</p>
-    </div>
-  </section>
-
-  <!-- الصورة الجديدة الآن تحت رمضان -->
-  <section class="middleImage">
-    <img src="https://plain-eeur-prod-public.komododecks.com/202602/26/Ajfrfd4BaYOD3j8X1ItX/image.jpg" alt="">
-  </section>
-
-</div>
+<section class="bigVisual">
+  <div class="bigOverlay">
+    <h2>أكثر من 60 قناة تلفزيونية</h2>
+    <p>رياضة • أطفال • أفلام • مسلسلات • VOD</p>
+  </div>
+</section>
 
 <div class="bottomBar" id="bottomBar">
   <div>ابتداءً من ₪44.90 / شهر</div>
@@ -300,15 +289,13 @@ h1{
 
 <script>
 const bottomBar = document.getElementById("bottomBar");
-const heroCta = document.getElementById("heroCta");
+const hero = document.querySelector(".hero");
 
 window.addEventListener("scroll", () => {
-  if(window.scrollY > window.innerHeight * 0.6){
+  if(window.scrollY > hero.offsetHeight - 300){
     bottomBar.classList.add("show");
-    heroCta.classList.add("hide");
   }else{
     bottomBar.classList.remove("show");
-    heroCta.classList.remove("hide");
   }
 });
 </script>
