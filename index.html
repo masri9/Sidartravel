@@ -61,20 +61,20 @@ body{
 
 .topBar{
   position:absolute;
-  top:25px;
-  left:40px;
-  right:40px;
+  top:35px;
+  left:50px;
+  right:50px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   z-index:5;
 }
 
-/* ===== Premium Logo Animation (Arabic <-> English images) ===== */
+/* ===== Logo Animation (رجعناه كبير مثل قبل) ===== */
 
 .logoTop{
   position:relative;
-  height:92px;
+  height:110px;   /* كبرنا الحاوية */
   display:flex;
   align-items:center;
   overflow:hidden;
@@ -82,12 +82,12 @@ body{
 
 .logoTop img{
   position:absolute;
-  height:85px;              /* نفس الحجم للعربي والانجليزي */
+  height:100px;   /* الشعار كبير وواضح */
   width:auto;
   opacity:0;
-  transform:translateY(18px) scale(.96);
+  transform:translateY(25px) scale(.96);
   transition:all 1s cubic-bezier(.19,1,.22,1);
-  filter: drop-shadow(0 0 22px rgba(168,85,247,.45));
+  filter: drop-shadow(0 0 28px rgba(168,85,247,.55));
 }
 
 .logoTop img.active{
@@ -121,7 +121,6 @@ h1{
   font-size:clamp(34px,5vw,52px);
   font-weight:900;
   margin:0;
-  line-height:1.2;
 }
 
 .highlight{
@@ -165,39 +164,19 @@ h1{
   color:rgba(255,255,255,.6);
 }
 
-/* ================= PRICING (2 PLANS) ================= */
+/* ================= PRICING ================= */
 
 .pricing{
   background:var(--bg2);
   padding:90px 20px 110px;
 }
 
-.pricingWrap{
-  max-width:980px;
-  margin:0 auto;
-}
-
-.pricingHeader{
-  text-align:center;
-  margin-bottom:38px;
-}
-
-.pricingHeader h2{
-  margin:0;
-  font-size:clamp(28px,4vw,40px);
-  font-weight:900;
-}
-
-.pricingHeader p{
-  margin:14px 0 0;
-  color:rgba(255,255,255,.75);
-  line-height:1.9;
-}
-
 .planGrid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:22px;
+  max-width:900px;
+  margin:0 auto;
 }
 
 .plan{
@@ -205,130 +184,28 @@ h1{
   border:1px solid rgba(255,255,255,.10);
   border-radius:22px;
   padding:28px 22px;
-  backdrop-filter: blur(10px);
-  position:relative;
-  overflow:hidden;
-  transition:.25s;
-}
-
-.plan:hover{
-  transform:translateY(-6px);
-  border-color:rgba(168,85,247,.35);
-}
-
-.plan::before{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  background:radial-gradient(600px 220px at 50% 0%, rgba(168,85,247,.22), transparent 60%);
-  pointer-events:none;
-}
-
-.planTitle{
-  position:relative;
-  font-weight:900;
-  font-size:18px;
-  margin:0 0 10px;
-}
-
-.priceRow{
-  position:relative;
-  display:flex;
-  align-items:baseline;
-  gap:8px;
-  margin:6px 0 10px;
-}
-
-.price{
-  font-size:40px;
-  font-weight:900;
-  letter-spacing:.3px;
-  color:#fff;
-}
-
-.per{
-  color:rgba(255,255,255,.65);
-  font-weight:700;
-}
-
-.badge{
-  position:absolute;
-  top:18px;
-  left:18px;
-  background:linear-gradient(90deg,var(--purple2),var(--purple4));
-  padding:7px 12px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:900;
-}
-
-.features{
-  position:relative;
-  margin:16px 0 18px;
-  padding:0;
-  list-style:none;
-  color:rgba(255,255,255,.78);
-  line-height:2.0;
-  font-size:14px;
-}
-
-.features li{ margin:6px 0; }
-
-.planBtn{
-  position:relative;
-  display:block;
   text-align:center;
-  padding:14px 16px;
-  border-radius:999px;
-  font-weight:900;
-  text-decoration:none;
-  color:#fff;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.12);
-  transition:.25s;
 }
 
-.planBtn:hover{
-  transform:translateY(-3px);
-  background:rgba(255,255,255,.12);
-}
-
-/* Featured plan style */
 .plan--featured{
   border-color:rgba(168,85,247,.40);
   box-shadow:0 30px 80px rgba(124,58,237,.22);
 }
 
-.plan--featured .price{
-  color:var(--purple1);
-}
-
-.plan--featured .planBtn{
+.planBtn{
+  margin-top:15px;
+  display:block;
+  padding:14px;
+  border-radius:999px;
+  font-weight:900;
+  text-decoration:none;
+  color:#fff;
   background:linear-gradient(90deg,var(--purple2),var(--purple4));
-  border:0;
 }
 
-.notePay{
-  margin-top:26px;
-  text-align:center;
-  color:rgba(255,255,255,.65);
-  font-size:14px;
-  line-height:1.9;
-}
-
-.payMethods{
-  margin-top:10px;
-  font-weight:800;
-  color:rgba(255,255,255,.75);
-}
-
-/* ================= Responsive ================= */
-
-@media (max-width: 980px){
+@media (max-width: 900px){
   .planGrid{ grid-template-columns:1fr; }
-  .topBar{ left:18px; right:18px; }
-  .logoTop{ height:82px; }
-  .logoTop img{ height:72px; }
+  .logoTop img{ height:80px; }
 }
 </style>
 </head>
@@ -365,67 +242,32 @@ h1{
   </div>
 </section>
 
-<!-- ================= PRICING SECTION (2 PLANS) ================= -->
 <section class="pricing" id="pricing">
-  <div class="pricingWrap">
+  <div class="planGrid">
 
-    <div class="pricingHeader">
-      <h2>خطط الاشتراك</h2>
-      <p>خُذ تجربة مجانية 24 ساعة، أو اشترك بالخطة الشهرية بسعر ثابت.</p>
+    <div class="plan">
+      <h3>تجربة مجانية</h3>
+      <h2>₪0 / 24 ساعة</h2>
+      <p>تجربة كاملة للمحتوى</p>
+      <a class="planBtn" href="#">ابدأ الآن</a>
     </div>
 
-    <div class="planGrid">
-
-      <!-- Free 24h -->
-      <div class="plan">
-        <h3 class="planTitle">تجربة مجانية</h3>
-        <div class="priceRow">
-          <div class="price">₪0</div>
-          <div class="per">/ 24 ساعة</div>
-        </div>
-        <ul class="features">
-          <li>تفعيل فوري</li>
-          <li>تجربة القنوات والبث</li>
-          <li>جودة HD</li>
-          <li>جهاز واحد</li>
-        </ul>
-        <a class="planBtn" href="#">ابدأ التجربة</a>
-      </div>
-
-      <!-- Monthly 25₪ -->
-      <div class="plan plan--featured">
-        <div class="badge">أفضل اختيار</div>
-        <h3 class="planTitle">اشتراك شهري</h3>
-        <div class="priceRow">
-          <div class="price">₪25</div>
-          <div class="per">/ شهر</div>
-        </div>
-        <ul class="features">
-          <li>قنوات مباشرة + رياضة</li>
-          <li>جودة HD &amp; 4K</li>
-          <li>حتى جهازين</li>
-          <li>دعم سريع</li>
-        </ul>
-        <a class="planBtn" href="#">اشترك الآن</a>
-      </div>
-
-    </div>
-
-    <div class="notePay">
-      <div>طرق الدفع المتاحة:</div>
-      <div class="payMethods">Visa • MasterCard • Apple Pay • PayPal</div>
+    <div class="plan plan--featured">
+      <h3>اشتراك شهري</h3>
+      <h2>₪25 / شهر</h2>
+      <p>قنوات + رياضة + جودة عالية</p>
+      <a class="planBtn" href="#">اشترك الآن</a>
     </div>
 
   </div>
 </section>
 
 <script>
-/* ===== Logo Switch (Arabic longer, English shorter) ===== */
 const logoAr = document.querySelector(".logo-ar");
 const logoEn = document.querySelector(".logo-en");
 
-const AR_DURATION = 7000;  // العربي أطول
-const EN_DURATION = 3000;  // الإنجليزي أقصر
+const AR_DURATION = 7000;
+const EN_DURATION = 3000;
 
 function showArabic(){
   logoEn.classList.remove("active");
