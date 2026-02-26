@@ -15,6 +15,7 @@
   --purple3:#7c3aed;
   --purple4:#3b0764;
   --bg:#0b0f16;
+  --bg2:#0f1520;
 }
 
 *{box-sizing:border-box}
@@ -85,6 +86,10 @@ body{
   border:1px solid rgba(255,255,255,.25);
 }
 
+.loginBtn a:hover{
+  background:rgba(255,255,255,.1);
+}
+
 /* ================= HERO CONTENT ================= */
 
 .content{
@@ -132,19 +137,38 @@ h1{
   box-shadow:0 25px 60px rgba(124,58,237,.45);
 }
 
+.cta a:hover{
+  transform:translateY(-4px);
+}
+
 .fine{
   margin-top:18px;
   font-size:14px;
   color:rgba(255,255,255,.6);
 }
 
-/* ================= CHANNELS SECTION ================= */
+/* ================= RAMADAN IMAGE ================= */
 
-.channelsFull{
+.ramadan{
+  padding:100px 0;
+  background:var(--bg2);
+  text-align:center;
+}
+
+.ramadan img{
+  width:100%;
+  max-width:1200px;
+  border-radius:20px;
+  box-shadow:0 40px 80px rgba(0,0,0,.6);
+}
+
+/* ================= FULL SCREEN IMAGE ================= */
+
+.lanternFull{
   position:relative;
   width:100%;
   height:100vh;
-  background-image:url("https://images.unsplash.com/photo-1593784991095-a205069470b6?q=80&w=2000&auto=format&fit=crop");
+  background-image:url("https://plain-eeur-prod-public.komododecks.com/202602/26/auRpYX7bKC0Yg5sIwtLt/image.png");
   background-size:cover;
   background-position:center;
   background-attachment:fixed;
@@ -153,14 +177,14 @@ h1{
   justify-content:center;
 }
 
-.channelsFull::after{
+.lanternFull::after{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.85));
+  background:linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.80));
 }
 
-.channelsOverlay{
+.lanternOverlay{
   position:relative;
   z-index:2;
   text-align:center;
@@ -168,15 +192,50 @@ h1{
   padding:20px;
 }
 
-.channelsOverlay h2{
+.lanternOverlay h2{
   font-size:clamp(34px,5vw,55px);
   font-weight:900;
   margin-bottom:20px;
 }
 
-.channelsOverlay p{
+.lanternOverlay p{
   font-size:20px;
   color:rgba(255,255,255,.85);
+}
+
+/* ================= BOTTOM STICKY ================= */
+
+.bottomBar{
+  position:fixed;
+  bottom:15px;
+  left:15px;
+  right:15px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  backdrop-filter:blur(12px);
+  padding:15px;
+  border-radius:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  opacity:0;
+  transform:translateY(10px);
+  transition:.25s;
+}
+
+.bottomBar.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.bottomBar button{
+  border:0;
+  padding:14px 25px;
+  border-radius:999px;
+  font-weight:900;
+  background:linear-gradient(90deg,var(--purple2),var(--purple4));
+  color:#fff;
+  cursor:pointer;
 }
 
 </style>
@@ -185,6 +244,7 @@ h1{
 <body>
 
 <section class="hero">
+
   <div class="topBar">
     <div class="logoTop">MEEM TV</div>
     <div class="loginBtn">
@@ -206,14 +266,37 @@ h1{
       إلغاء في أي وقت • بدون التزام
     </div>
   </div>
+
 </section>
 
-<section class="channelsFull">
-  <div class="channelsOverlay">
-    <h2>لا تفوّت أي مباراة بعد اليوم</h2>
-    <p>بث مباشر بدون تقطيع • كل البطولات • جودة فائقة HD & 4K</p>
+<section class="ramadan">
+  <img src="https://plain-eeur-prod-public.komododecks.com/202602/26/Ajfrfd4BaYOD3j8X1ItX/image.jpg">
+</section>
+
+<section class="lanternFull">
+  <div class="lanternOverlay">
+    <h2>استمتع بأفضل الأفلام والقنوات</h2>
+    <p>عربي • أجنبي • رياضة • مسلسلات • VOD</p>
   </div>
 </section>
+
+<div class="bottomBar" id="bottomBar">
+  <div>ابتداءً من ₪44.90 / شهر</div>
+  <button>ابدأ الشهر المجاني</button>
+</div>
+
+<script>
+const bottomBar = document.getElementById("bottomBar");
+const hero = document.querySelector(".hero");
+
+window.addEventListener("scroll", () => {
+  if(window.scrollY > hero.offsetHeight - 300){
+    bottomBar.classList.add("show");
+  }else{
+    bottomBar.classList.remove("show");
+  }
+});
+</script>
 
 </body>
 </html>
