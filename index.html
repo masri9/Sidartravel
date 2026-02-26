@@ -80,17 +80,17 @@ body{
 
 .logoTop .logo{
   position:absolute;
-  height:70px;      /* كبرته */
+  height:70px;
   width:auto;
   opacity:0;
-  transition:opacity .6s ease-in-out, transform .6s ease-in-out;
-  transform:scale(.96);
+  transition:opacity .7s ease-in-out, transform .7s ease-in-out;
+  transform:translateY(2px) scale(.985);
   filter: drop-shadow(0 0 18px rgba(168,85,247,.5));
 }
 
 .logoTop .logo.active{
   opacity:1;
-  transform:scale(1);
+  transform:translateY(0) scale(1);
 }
 
 .loginBtn a{
@@ -293,17 +293,26 @@ window.addEventListener("scroll", () => {
   }
 });
 
-/* ===== Logo Switch Animation ===== */
-const logos = document.querySelectorAll(".logo");
-let current = 0;
+/* ===== Logo Switch (Arabic longer, English shorter) ===== */
+const logoAr = document.querySelector(".logo-ar");
+const logoEn = document.querySelector(".logo-en");
 
-function switchLogo(){
-  logos.forEach(l => l.classList.remove("active"));
-  logos[current].classList.add("active");
-  current = (current + 1) % logos.length;
+const AR_DURATION = 6000; // العربي يطول (6 ثواني)
+const EN_DURATION = 2500; // الإنجليزي أقصر (2.5 ثانية)
+
+function showArabic(){
+  logoEn.classList.remove("active");
+  logoAr.classList.add("active");
+  setTimeout(showEnglish, AR_DURATION);
 }
 
-setInterval(switchLogo, 3000); // كل 3 ثواني
+function showEnglish(){
+  logoAr.classList.remove("active");
+  logoEn.classList.add("active");
+  setTimeout(showArabic, EN_DURATION);
+}
+
+showArabic();
 </script>
 
 </body>
