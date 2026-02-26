@@ -23,6 +23,7 @@ body{
   font-family:"Cairo",sans-serif;
   background:var(--bg);
   color:#fff;
+  overflow-x:hidden;
 }
 
 /* ================= HERO ================= */
@@ -57,6 +58,8 @@ body{
   z-index:0;
 }
 
+/* ================= TOP BAR ================= */
+
 .topBar{
   position:absolute;
   top:40px;
@@ -65,7 +68,7 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  z-index:20;
+  z-index:50; /* فوق كل شيء */
 }
 
 /* ===== Logo ===== */
@@ -90,6 +93,26 @@ body{
 .logoTop img.active{
   opacity:1;
   transform:translateY(0) scale(1);
+}
+
+/* ===== Login Button ===== */
+
+.loginBtn a{
+  text-decoration:none;
+  font-weight:800;
+  font-size:14px;
+  color:#fff;
+  padding:12px 22px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(8px);
+  transition:.3s;
+}
+
+.loginBtn a:hover{
+  background:linear-gradient(90deg,var(--purple2),var(--purple4));
+  border-color:transparent;
 }
 
 /* ================= HERO CONTENT ================= */
@@ -138,7 +161,7 @@ h1{
   box-shadow:0 25px 60px rgba(124,58,237,.45);
 }
 
-/* ================= CONTENT IMAGE SECTION ================= */
+/* ================= IMAGE SECTION ================= */
 
 .contentImage{
   padding:80px 20px;
@@ -147,10 +170,8 @@ h1{
 }
 
 .contentImage img{
-  width:85%;          /* أصغر من قبل */
-  max-width:900px;    /* حد أقصى */
-  border-radius:0;    /* بدون بطاقة */
-  box-shadow:none;    /* بدون ظل */
+  width:85%;
+  max-width:900px;
   display:block;
   margin:0 auto;
 }
@@ -189,6 +210,15 @@ h1{
   box-shadow:0 30px 70px rgba(124,58,237,.3);
 }
 
+.plan h3{
+  font-size:22px;
+}
+
+.plan h2{
+  font-size:40px;
+  margin:10px 0 20px;
+}
+
 .planBtn{
   margin-top:25px;
   display:inline-block;
@@ -202,9 +232,8 @@ h1{
 
 @media (max-width:900px){
   .planGrid{ grid-template-columns:1fr; }
-  .logoTop img{ height:85px; }
+  .logoTop img{ height:80px; }
 }
-
 </style>
 </head>
 
@@ -218,6 +247,10 @@ h1{
            src="https://image2url.com/r2/default/images/1772135007677-7f7fd4b7-f200-4984-9f3b-a81d51cf2361.png">
       <img class="logo logo-en"
            src="https://image2url.com/r2/default/images/1772139329030-82b504d7-43a0-4a45-89ed-4de73b26fab4.png">
+    </div>
+
+    <div class="loginBtn">
+      <a href="#">تسجيل الدخول</a>
     </div>
 
   </div>
@@ -234,9 +267,8 @@ h1{
   </div>
 </section>
 
-<!-- 🔥 الصورة بين الهيرو والخطط -->
 <section class="contentImage">
-  <img src="https://image2url.com/r2/default/images/1772144954428-7efde126-b016-44bb-ad5f-976b704d9cbf.png" alt="">
+  <img src="https://image2url.com/r2/default/images/1772144954428-7efde126-b016-44bb-ad5f-976b704d9cbf.png">
 </section>
 
 <section class="pricing" id="pricing">
