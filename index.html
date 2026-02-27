@@ -14,7 +14,6 @@
   --purple2:#a855f7;
   --purple4:#3b0764;
   --bg:#0b0f16;
-  --bg2:#0f1520;
   --gold1:#f6e7b2;
   --gold2:#d6b25e;
 }
@@ -64,38 +63,35 @@ body{
   z-index:1;
 }
 
-/* ===== TOP BAR ===== */
+/* ===== TOP BAR (بدون إطار) ===== */
 
 .topBar{
   position:absolute;
-  top:22px;
-  left:22px;
-  right:22px;
+  top:30px;
+  left:60px;
+  right:60px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:12px 14px;
-  border-radius:18px;
-  background:rgba(15,21,32,.25);
-  border:1px solid rgba(255,255,255,.14);
-  backdrop-filter:blur(10px);
   z-index:60;
 }
 
+/* ===== Logo ===== */
+
 .logoTop{
   position:relative;
-  height:86px;
+  height:90px;
   display:flex;
   align-items:center;
 }
 
 .logoTop img{
   position:absolute;
-  height:78px;
+  height:85px;
   opacity:0;
   transform:translateY(18px) scale(.98);
   transition:all 1s cubic-bezier(.19,1,.22,1);
-  filter: drop-shadow(0 0 28px rgba(168,85,247,.55));
+  filter: drop-shadow(0 0 28px rgba(168,85,247,.65));
 }
 
 .logoTop img.active{
@@ -103,21 +99,25 @@ body{
   transform:translateY(0) scale(1);
 }
 
+/* ===== Login Button ===== */
+
 .loginBtn a{
   text-decoration:none;
   font-weight:900;
-  font-size:14px;
+  font-size:15px;
   color:#fff;
-  padding:12px 18px;
+  padding:12px 22px;
   border-radius:999px;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(255,255,255,.10);
-  transition:.25s;
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(0,0,0,.35);
+  backdrop-filter:blur(6px);
+  transition:.3s;
 }
 
 .loginBtn a:hover{
   background:linear-gradient(90deg,var(--purple2),var(--purple4));
   border-color:transparent;
+  transform:translateY(-2px);
 }
 
 /* ===== HERO CONTENT ===== */
@@ -175,16 +175,13 @@ body{
   box-shadow:0 25px 60px rgba(124,58,237,.45);
 }
 
-/* ================= AFTER HERO ================= */
-
-.afterHero{
-  background:linear-gradient(180deg, rgba(15,21,32,1) 0%, rgba(11,15,22,1) 100%);
-  padding:90px 20px;
-}
-
 /* ===== Responsive ===== */
 
 @media (max-width:720px){
+  .topBar{
+    left:20px;
+    right:20px;
+  }
   .logoTop img{ height:60px; }
 }
 </style>
@@ -199,6 +196,7 @@ body{
       <img class="logo-ar active" src="https://image2url.com/r2/default/images/1772135007677-7f7fd4b7-f200-4984-9f3b-a81d51cf2361.png">
       <img class="logo-en" src="https://image2url.com/r2/default/images/1772139329030-82b504d7-43a0-4a45-89ed-4de73b26fab4.png">
     </div>
+
     <div class="loginBtn">
       <a href="#">تسجيل الدخول</a>
     </div>
@@ -216,9 +214,6 @@ body{
     </div>
   </div>
 
-</section>
-
-<section class="afterHero" id="about">
 </section>
 
 <script>
