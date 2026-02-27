@@ -15,7 +15,6 @@
   --purple4:#3b0764;
   --bg:#0b0f16;
   --bg2:#0f1520;
-
   --gold1:#f6e7b2;
   --gold2:#d6b25e;
 }
@@ -39,7 +38,7 @@ body{
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:40px 20px;
+  padding:120px 20px 70px;
   overflow:hidden;
 }
 
@@ -50,7 +49,8 @@ body{
   background-image:url("https://plain-eeur-prod-public.komododecks.com/202602/27/daUauQwIzYKsMChEXJDG/image.png");
   background-size:cover;
   background-position:center;
-  transform:scale(1.05);
+  transform:scale(1.06);
+  filter:saturate(1.05) contrast(1.05);
   z-index:0;
 }
 
@@ -58,38 +58,42 @@ body{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,.80));
-  z-index:0;
+  background:
+    radial-gradient(circle at 50% 15%, rgba(168,85,247,.22), transparent 55%),
+    linear-gradient(to bottom, rgba(0,0,0,.40), rgba(0,0,0,.85));
+  z-index:1;
 }
 
-/* ================= TOP BAR ================= */
+/* ===== TOP BAR ===== */
 
 .topBar{
   position:absolute;
-  top:40px;
-  left:60px;
-  right:60px;
+  top:22px;
+  left:22px;
+  right:22px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  z-index:50;
+  padding:12px 14px;
+  border-radius:18px;
+  background:rgba(15,21,32,.25);
+  border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(10px);
+  z-index:60;
 }
-
-/* ===== Logo ===== */
 
 .logoTop{
   position:relative;
-  height:120px;
+  height:86px;
   display:flex;
   align-items:center;
 }
 
 .logoTop img{
   position:absolute;
-  height:105px;
-  width:auto;
+  height:78px;
   opacity:0;
-  transform:translateY(30px) scale(.96);
+  transform:translateY(18px) scale(.98);
   transition:all 1s cubic-bezier(.19,1,.22,1);
   filter: drop-shadow(0 0 28px rgba(168,85,247,.55));
 }
@@ -99,19 +103,16 @@ body{
   transform:translateY(0) scale(1);
 }
 
-/* ===== Login Button ===== */
-
 .loginBtn a{
   text-decoration:none;
-  font-weight:800;
+  font-weight:900;
   font-size:14px;
   color:#fff;
-  padding:12px 22px;
+  padding:12px 18px;
   border-radius:999px;
-  border:1px solid rgba(255,255,255,.35);
-  background:rgba(255,255,255,.08);
-  backdrop-filter:blur(8px);
-  transition:.3s;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.10);
+  transition:.25s;
 }
 
 .loginBtn a:hover{
@@ -119,45 +120,54 @@ body{
   border-color:transparent;
 }
 
-/* ================= HERO CONTENT ================= */
+/* ===== HERO CONTENT ===== */
 
 .content{
   position:relative;
   z-index:10;
-  max-width:780px;
+  max-width:860px;
 }
 
-h1{
-  font-size:clamp(34px,5vw,52px);
-  font-weight:900;
+.heroKicker{
+  font-family:"Scheherazade New", serif;
+  font-size:22px;
+  margin-bottom:14px;
+}
+
+.hero h1{
+  font-family:"Amiri", serif;
+  font-size:clamp(36px,5.4vw,58px);
+  font-weight:700;
   margin:0;
+  line-height:1.2;
+  text-shadow:0 18px 40px rgba(0,0,0,.65);
 }
 
 .highlight{
   margin-top:18px;
-  font-size:26px;
+  font-size:clamp(18px,2.6vw,26px);
   font-weight:900;
-  background:linear-gradient(90deg,var(--purple1),var(--purple2));
+  background:linear-gradient(90deg,var(--gold1),var(--gold2));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
 .sub{
-  margin-top:28px;
+  margin-top:22px;
   font-size:18px;
-  line-height:1.8;
-  color:rgba(255,255,255,.9);
+  line-height:1.9;
+  color:rgba(255,255,255,.92);
 }
 
 .cta{
-  margin-top:45px;
+  margin-top:38px;
 }
 
 .cta a{
   display:inline-block;
-  padding:18px 44px;
+  padding:16px 40px;
   border-radius:999px;
-  font-size:20px;
+  font-size:18px;
   font-weight:900;
   text-decoration:none;
   color:#fff;
@@ -165,161 +175,15 @@ h1{
   box-shadow:0 25px 60px rgba(124,58,237,.45);
 }
 
-/* ================= AFTER HERO (NEW SECTIONS) ================= */
+/* ================= AFTER HERO ================= */
 
 .afterHero{
   background:linear-gradient(180deg, rgba(15,21,32,1) 0%, rgba(11,15,22,1) 100%);
   padding:90px 20px;
 }
 
-/* عنوان مزخرف */
-.ornTitle{
-  text-align:center;
-  max-width:980px;
-  margin:0 auto 40px;
-}
+/* ===== Poster Strip ===== */
 
-.kicker{
-  display:inline-block;
-  font-family:"Scheherazade New", serif;
-  font-size:22px;
-  letter-spacing:.5px;
-  color:rgba(255,255,255,.85);
-  position:relative;
-  padding:0 18px;
-}
-
-.kicker::before,
-.kicker::after{
-  content:"";
-  position:absolute;
-  top:50%;
-  width:55px;
-  height:1px;
-  background:linear-gradient(90deg, transparent, rgba(214,178,94,.9), transparent);
-}
-.kicker::before{ right:100%; margin-right:10px; }
-.kicker::after{ left:100%; margin-left:10px; }
-
-.bigTitle{
-  margin:14px 0 0;
-  font-family:"Amiri", serif;
-  font-size:clamp(34px,4.6vw,54px);
-  font-weight:700;
-  line-height:1.25;
-}
-
-.bigTitle span{
-  background:linear-gradient(90deg,var(--gold1),var(--gold2));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-.desc{
-  margin:18px auto 0;
-  max-width:860px;
-  font-size:18px;
-  line-height:1.9;
-  color:rgba(255,255,255,.88);
-}
-
-/* نقاط سريعة */
-.featureRow{
-  margin:45px auto 0;
-  max-width:1050px;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-}
-
-.pill{
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.10);
-  border-radius:999px;
-  padding:14px 18px;
-  text-align:center;
-  font-weight:800;
-  color:rgba(255,255,255,.92);
-  backdrop-filter:blur(8px);
-}
-
-.pill b{ color:#fff; }
-
-/* بطاقات المحتوى */
-.cardsWrap{
-  margin:70px auto 0;
-  max-width:1100px;
-}
-
-.sectionHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:16px;
-  margin-bottom:20px;
-}
-
-.sectionHead h2{
-  margin:0;
-  font-size:28px;
-  font-weight:900;
-}
-
-.sectionHead p{
-  margin:0;
-  color:rgba(255,255,255,.72);
-  line-height:1.7;
-  max-width:520px;
-}
-
-.cardGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-}
-
-.card{
-  position:relative;
-  overflow:hidden;
-  border-radius:22px;
-  min-height:170px;
-  padding:22px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.10);
-  transition:.35s;
-}
-
-.card::before{
-  content:"";
-  position:absolute;
-  inset:-20px;
-  background:
-    radial-gradient(circle at 20% 0%, rgba(168,85,247,.25), transparent 55%),
-    radial-gradient(circle at 80% 100%, rgba(214,178,94,.22), transparent 55%);
-  filter:blur(18px);
-}
-
-.card:hover{
-  transform:translateY(-8px);
-  border-color:rgba(214,178,94,.55);
-}
-
-.card h3{
-  position:relative;
-  margin:0 0 10px;
-  font-size:18px;
-  font-weight:900;
-}
-
-.card p{
-  position:relative;
-  margin:0;
-  color:rgba(255,255,255,.78);
-  line-height:1.8;
-  font-size:14px;
-}
-
-/* شريط بوسترات */
 .posterStrip{
   margin:70px auto 0;
   max-width:1100px;
@@ -338,96 +202,60 @@ h1{
   font-weight:900;
 }
 
-.stripHead a{
-  text-decoration:none;
-  color:rgba(255,255,255,.75);
-  font-weight:800;
-  border-bottom:1px dashed rgba(255,255,255,.35);
-  padding-bottom:4px;
-}
-
 .strip{
   display:flex;
   gap:14px;
   overflow:auto;
   padding-bottom:10px;
-  scroll-snap-type:x mandatory;
-}
-
-.strip::-webkit-scrollbar{ height:8px; }
-.strip::-webkit-scrollbar-thumb{
-  background:rgba(255,255,255,.15);
-  border-radius:999px;
 }
 
 .poster{
-  flex:0 0 auto;
   width:165px;
   height:235px;
   border-radius:18px;
   overflow:hidden;
   border:1px solid rgba(255,255,255,.12);
   background:rgba(255,255,255,.06);
-  scroll-snap-align:start;
   position:relative;
   transition:.3s;
 }
 
 .poster:hover{
   transform:translateY(-6px);
-  border-color:rgba(168,85,247,.45);
 }
 
 .poster img{
   width:100%;
   height:100%;
   object-fit:cover;
-  display:block;
-  filter:saturate(1.05) contrast(1.05);
 }
 
-.poster::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to top, rgba(0,0,0,.55), transparent 55%);
-  pointer-events:none;
+/* ===== Responsive ===== */
+
+@media (max-width:720px){
+  .logoTop img{ height:60px; }
+  .poster{ width:140px; height:200px; }
 }
 
-/* Responsive */
-@media (max-width:1000px){
-  .cardGrid{ grid-template-columns:repeat(2,1fr); }
-  .featureRow{ grid-template-columns:1fr; }
-}
-@media (max-width:900px){
-  .logoTop img{ height:80px; }
-}
-@media (max-width:520px){
-  .cardGrid{ grid-template-columns:1fr; }
-  .poster{ width:145px; height:210px; }
-}
 </style>
 </head>
 
 <body>
 
 <section class="hero">
+
   <div class="topBar">
-
     <div class="logoTop">
-      <img class="logo logo-ar active"
-           src="https://image2url.com/r2/default/images/1772135007677-7f7fd4b7-f200-4984-9f3b-a81d51cf2361.png">
-      <img class="logo logo-en"
-           src="https://image2url.com/r2/default/images/1772139329030-82b504d7-43a0-4a45-89ed-4de73b26fab4.png">
+      <img class="logo-ar active" src="https://image2url.com/r2/default/images/1772135007677-7f7fd4b7-f200-4984-9f3b-a81d51cf2361.png">
+      <img class="logo-en" src="https://image2url.com/r2/default/images/1772139329030-82b504d7-43a0-4a45-89ed-4de73b26fab4.png">
     </div>
-
     <div class="loginBtn">
       <a href="#">تسجيل الدخول</a>
     </div>
-
   </div>
 
   <div class="content">
+    <div class="heroKicker">رِواي — بين الماضي والحاضر</div>
     <h1>كل الترفيه اللي بدك ياه</h1>
     <div class="highlight">جرب مجاناً لمدة 24 ساعة</div>
     <div class="sub">
@@ -437,80 +265,21 @@ h1{
       <a href="#about">اكتشف رواي</a>
     </div>
   </div>
+
 </section>
 
-<!-- ===== NEW SECTIONS ===== -->
 <section class="afterHero" id="about">
 
-  <div class="ornTitle">
-    <div class="kicker">رِواي — بين الماضي والحاضر</div>
-    <h2 class="bigTitle">نروي التاريخ كما لو أنّك <span>تعيشه</span></h2>
-    <p class="desc">
-      من العصور الوسطى وما قبل الميلاد… إلى أحداث العصر الحديث.
-      قصصٌ مُصوّرة، وثائقيات قصيرة، سردٌ مشوّق، ولمحات بصرية تُعيد رسم الذاكرة.
-      واليوم نبدأ بالتاريخ… وغداً تتوسع “رواي+” لتضم البث المباشر والأفلام المتنوعة.
-    </p>
-  </div>
-
-  <div class="featureRow">
-    <div class="pill">🎥 <b>فيديوهات قصيرة</b> بأسلوب سينمائي</div>
-    <div class="pill">📜 <b>قصص مُروية</b> ومشاهد مُعاد بناؤها</div>
-    <div class="pill">🧭 <b>رحلات زمنية</b> من القديم إلى الحديث</div>
-  </div>
-
-  <div class="cardsWrap">
-    <div class="sectionHead">
-      <div>
-        <h2>ماذا ستجد في رواي؟</h2>
-        <p>أقسام واضحة… وبصمة تاريخية، مع مساحة للتوسع لمحتوى ترفيهي عام مستقبلاً.</p>
-      </div>
-    </div>
-
-    <div class="cardGrid">
-      <div class="card">
-        <h3>🏰 العصور الوسطى</h3>
-        <p>حكايات الممالك، السلاطين، الصراعات، والتحولات التي شكّلت خرائط العالم.</p>
-      </div>
-
-      <div class="card">
-        <h3>⚔️ إمبراطوريات وحروب</h3>
-        <p>قصص معارك، صعود وسقوط قوى عظمى، وقرارات غيّرت مجرى التاريخ.</p>
-      </div>
-
-      <div class="card">
-        <h3>🏛️ ما قبل الميلاد</h3>
-        <p>حضارات قديمة، أساطير، وثقافات… نقدمها بشكل مبسط ومشوق.</p>
-      </div>
-
-      <div class="card">
-        <h3>📰 التاريخ الحديث</h3>
-        <p>أحداث القرن الأخير… روايات موثقة مع سرد جذاب ولقطات بصرية.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="posterStrip" id="highlights">
+  <div class="posterStrip">
     <div class="stripHead">
       <h2>لمحات من المحتوى</h2>
-      <a href="#highlights">قريباً: رواي+</a>
     </div>
 
     <div class="strip">
-      <div class="poster">
-        <img alt="Poster 1" src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=900&q=60">
-      </div>
-      <div class="poster">
-        <img alt="Poster 2" src="https://images.unsplash.com/photo-1549893074-7baf566750d7?auto=format&fit=crop&w=900&q=60">
-      </div>
-      <div class="poster">
-        <img alt="Poster 3" src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=900&q=60">
-      </div>
-      <div class="poster">
-        <img alt="Poster 4" src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=60">
-      </div>
-      <div class="poster">
-        <img alt="Poster 5" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=60">
-      </div>
+      <div class="poster"><img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=900&q=60"></div>
+      <div class="poster"><img src="https://images.unsplash.com/photo-1549893074-7baf566750d7?auto=format&fit=crop&w=900&q=60"></div>
+      <div class="poster"><img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=900&q=60"></div>
+      <div class="poster"><img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=60"></div>
     </div>
   </div>
 
