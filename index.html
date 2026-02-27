@@ -182,61 +182,11 @@ body{
   padding:90px 20px;
 }
 
-/* ===== Poster Strip ===== */
-
-.posterStrip{
-  margin:70px auto 0;
-  max-width:1100px;
-}
-
-.stripHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:18px;
-}
-
-.stripHead h2{
-  margin:0;
-  font-size:26px;
-  font-weight:900;
-}
-
-.strip{
-  display:flex;
-  gap:14px;
-  overflow:auto;
-  padding-bottom:10px;
-}
-
-.poster{
-  width:165px;
-  height:235px;
-  border-radius:18px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.06);
-  position:relative;
-  transition:.3s;
-}
-
-.poster:hover{
-  transform:translateY(-6px);
-}
-
-.poster img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
 /* ===== Responsive ===== */
 
 @media (max-width:720px){
   .logoTop img{ height:60px; }
-  .poster{ width:140px; height:200px; }
 }
-
 </style>
 </head>
 
@@ -269,20 +219,6 @@ body{
 </section>
 
 <section class="afterHero" id="about">
-
-  <div class="posterStrip">
-    <div class="stripHead">
-      <h2>لمحات من المحتوى</h2>
-    </div>
-
-    <div class="strip">
-      <div class="poster"><img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=900&q=60"></div>
-      <div class="poster"><img src="https://images.unsplash.com/photo-1549893074-7baf566750d7?auto=format&fit=crop&w=900&q=60"></div>
-      <div class="poster"><img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=900&q=60"></div>
-      <div class="poster"><img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=60"></div>
-    </div>
-  </div>
-
 </section>
 
 <script>
